@@ -14,11 +14,22 @@ def _float(name: str, default: float) -> float:
 
 
 CLAUDE_MODEL = os.environ.get("SKILLPOOL_MODEL", "claude-haiku-5-5")
-EMBED_MODEL = "text-embedding-3-small"
-EMBED_DIM = 1536
+
+# Embeddings: provider -> (model, vector dimensions, USD per million tokens).
+# Vectors from different models cannot be compared. After changing EMBED_PROVIDER on a database
+# that already holds vectors, run `skillpool reembed`.
+EMBEDDERS = {
+    "openai": ("text-embedding-3-small", 1536, 0.02),
+    # The first 200M tokens are free per account; the spend counter still counts the list price.
+    "voyage": ("voyage-4-lite", 1024, 0.02),
+}
+EMBED_PROVIDER = os.environ.get("EMBED_PROVIDER", "openai")
+if EMBED_PROVIDER not in EMBEDDERS:
+    raise RuntimeError(f"EMBED_PROVIDER must be one of {sorted(EMBEDDERS)}, not {EMBED_PROVIDER!r}")
+EMBED_MODEL, EMBED_DIM, PRICE_EMBED = EMBEDDERS[EMBED_PROVIDER]
 
 # USD per million tokens, for the spend counter. Update when prices change.
-PRICE_IN, PRICE_OUT, PRICE_EMBED = 0.10, 0.50, 0.02
+PRICE_IN, PRICE_OUT = 0.10, 0.50
 DAILY_MODEL_BUDGET_USD = _float("DAILY_MODEL_BUDGET_USD", 5.0)
 SEARCH_RATE_PER_MIN = int(os.environ.get("SEARCH_RATE_PER_MIN", "20"))
 

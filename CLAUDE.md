@@ -7,13 +7,14 @@ Run, test, deploy: README.md. Read those before planning; don't duplicate them h
 
 ## Layout
 - service/ — FastAPI + CLI (Python 3.12, uv). Models: Claude Haiku 5.5 (`claude-haiku-5-5`) for
-  extraction/answers, OpenAI text-embedding-3-small (1536-d) for embeddings.
+  extraction/answers. Embeddings: `EMBED_PROVIDER` = `openai` (text-embedding-3-small, 1536-d,
+  default) or `voyage` (voyage-4-lite, 1024-d); run `skillpool reembed` after switching.
 - web/ — Next.js 16 (App Router, cacheComponents) UI + signed proxy (`app/api/[...path]`).
   Read web/AGENTS.md and current Next.js docs before writing web code.
 - corpus/ — 680 resumes, 159 generated docs (`generate.py`, seed 7), ground truth in truth/.
 
 ## Commands
-- Tests: `cd service && uv run pytest` (65 pass). Pipeline tests need
+- Tests: `cd service && uv run pytest` (69 pass). Pipeline tests need
   `SKILLPOOL_TEST_NEO4J_URI=bolt://127.0.0.1:17687 SKILLPOOL_TEST_NEO4J_PASSWORD=skillpool-dev` and
   wipe that database.
 - Local Neo4j: `docker compose up -d neo4j` (ports 17474/17687, auth neo4j/skillpool-dev).

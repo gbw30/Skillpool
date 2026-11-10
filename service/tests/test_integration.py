@@ -12,7 +12,7 @@ import re
 import pytest
 
 from skillpool import config, graph, llm
-from skillpool.cli import ingest_dir
+from skillpool.cli import ingest_dir, reembed
 from skillpool.ingest.extract import (
     Extraction, PersonFacts, PersonProject, ProjectDef, ProjectSkill, RoleFact, SkillFact,
 )
@@ -37,13 +37,13 @@ DOCS = {
 KNOWN_SKILLS = ["Kafka", "Kubernetes", "Docker", "Python", "COBOL"]
 
 
-def fake_embed(texts):
+def fake_embed(texts, query=False):
     """Bag-of-words vectors: texts that share words are close."""
     out = []
     for text in texts:
-        v = [0.0] * 1536
+        v = [0.0] * config.EMBED_DIM
         for word in re.findall(r"[a-z0-9]+", text.lower()):
-            v[int(hashlib.md5(word.encode()).hexdigest(), 16) % 1536] += 1.0
+            v[int(hashlib.md5(word.encode()).hexdigest(), 16) % config.EMBED_DIM] += 1.0
         norm = math.sqrt(sum(x * x for x in v)) or 1.0
         out.append([x / norm for x in v])
     return out
@@ -86,7 +86,7 @@ def corpus(tmp_path_factory):
     os.environ["NEO4J_PASSWORD"] = os.environ.get("SKILLPOOL_TEST_NEO4J_PASSWORD", "")
     graph._driver = None
     graph.run("MATCH (n) DETACH DELETE n")
-    graph.init_db()
+    graph.reset_vectors()  # whatever embedding model this database last held, start at the configured one
     root = tmp_path_factory.mktemp("corpus")
     for path, text in DOCS.items():
         (root / path).parent.mkdir(parents=True, exist_ok=True)
@@ -220,3 +220,26 @@ def test_daily_spend_survives_a_restart(corpus, monkeypatch):
             llm._check_budget()
     finally:
         graph.run("MATCH (s:Spend) DELETE s")  # do not leave test spend counted against a real day
+
+
+def test_switching_the_embedding_model_needs_a_reembed(corpus, calls, monkeypatch):
+    size = lambda: graph.run("MATCH (c:Chunk) RETURN DISTINCT size(c.embedding) AS n")
+    assert size() == [{"n": config.EMBED_DIM}]
+    try:
+        with monkeypatch.context() as other:
+            other.setattr(config, "EMBED_MODEL", "another-model")
+            other.setattr(config, "EMBED_DIM", 8)
+            with pytest.raises(graph.EmbeddingMismatch, match="skillpool reembed"):
+                graph.check_embedding_model()
+            graph.run("MATCH (m:Meta) DELETE m")  # an emptied database forgets the model but keeps its indexes
+            with pytest.raises(graph.EmbeddingMismatch, match="1536"):
+                graph.check_embedding_model()
+            done = reembed()
+            assert done["model"] == "another-model" and done["chunks"] > 0 and done["people"] == 3
+            graph.check_embedding_model()
+            assert size() == [{"n": 8}]
+            assert graph.run("MATCH (n) WHERE n:Person OR n:Skill RETURN DISTINCT size(coalesce(n.profileEmbedding, n.embedding)) AS n") == [{"n": 8}]
+            # The rebuilt indexes answer at the new size. (Eight-wide fake vectors say nothing about ranking.)
+            assert {"Bea Wu", "Aaron Brown"} <= {p["name"] for p in search("Who knows Python?", "hybrid")["people"]}
+    finally:
+        graph.reset_vectors()  # back to the configured model, so the next run starts from a matching database

@@ -5,7 +5,7 @@ Companion: [PRD.md](PRD.md) (requirement IDs R1–R21 refer to it)
 
 ## 0. Implementation status
 
-Built: sections 3 to 10 and 12 to 13. Verified by 65 automated tests, including the full
+Built: sections 3 to 10 and 12 to 13. Verified by 69 automated tests, including the full
 pipeline against Neo4j 5.26 and 2026.10 with model calls faked. The four screens were driven in
 headless Chromium (desktop and phone width) against the service with faked model calls and a
 local S3 emulator: search with a streamed, cited answer, the person page, the no-match case,
@@ -34,6 +34,10 @@ Changes from the first draft of this spec, made during implementation:
   process per day, so a restart does not reset the cap. It was in memory only.
 - PDF text extraction stops at the size a text file may have (10 MB of text), and the web
   proxy stops reading a request body at its limit instead of checking after buffering it.
+- Embeddings can come from OpenAI or Voyage AI (`EMBED_PROVIDER`). The graph records which
+  model its vectors came from and the service refuses to mix them; `skillpool reembed`
+  recomputes all vectors from stored text without calling Claude. Voyage is called over plain
+  HTTP, and search questions are embedded as queries, stored text as documents.
 - Milestone M5's deployment is not done; it needs the owner's accounts.
 
 ## 1. Decisions
@@ -45,7 +49,7 @@ Changes from the first draft of this spec, made during implementation:
 | Service | One FastAPI app owns all graph and model logic: ingestion, identity resolution, search, person lookup. | The original split Cypher and prompts across TypeScript and Python. One language means one copy, and the eval harness calls the same functions the API does. |
 | Graph + vectors | Neo4j AuraDB with native vector indexes. No separate vector store. | As original. |
 | Extraction and answers | Claude Haiku 5.5 (`claude-haiku-5-5`). | Owner asked for the most cost-effective option. See section 11. |
-| Embeddings | OpenAI `text-embedding-3-small`, 1536 dimensions. | As original; cost is negligible at this size. |
+| Embeddings | `EMBED_PROVIDER`: OpenAI `text-embedding-3-small` (1536 dimensions, default) or Voyage `voyage-4-lite` (1024). | OpenAI as in the original; Voyage has a free allowance that covers the corpus many times over. A database holds one model's vectors; `skillpool reembed` converts it. |
 | Extraction approach | One structured-output call per document, hand-written upserts. `neo4j-graphrag`'s generic pipeline considered and not used. | Per-fact provenance (R5, R6) is the core requirement and needs exact control over what is written. |
 | Retrieval | Fixed Cypher templates fused with reciprocal rank fusion. No LLM-generated Cypher. | Safe against injection, testable, no weights to tune. |
 | Job queue | None. In-process background task with bounded concurrency; safe to re-send because every step is idempotent. | `shortcut:` a restart drops in-flight work until the job is re-sent. Add a queue when ingest batches exceed what one request can re-drive. |
@@ -178,7 +182,8 @@ Rules
 Constraints and indexes
 - Uniqueness on `id` for all six labels.
 - Range index on `Person.surnameKey` and `Document.jobId`.
-- Vector indexes (1536, cosine): `chunk_embedding_idx`, `person_profile_idx`, `skill_embedding_idx`.
+- Vector indexes (cosine, sized for the embedding model: 1536 or 1024): `chunk_embedding_idx`,
+  `person_profile_idx`, `skill_embedding_idx`. A `Meta` node records which model they hold.
 
 ## 6. Ingestion pipeline
 
@@ -346,7 +351,8 @@ Haiku 5.5 constraints that affect the code:
 | Variable | Used by | Note |
 |---|---|---|
 | `ANTHROPIC_API_KEY` | service | |
-| `OPENAI_API_KEY` | service | embeddings only |
+| `EMBED_PROVIDER` | service | `openai` (default) or `voyage` |
+| `OPENAI_API_KEY` or `VOYAGE_API_KEY` | service | embeddings only; the one for the chosen provider |
 | `NEO4J_URI`, `NEO4J_USERNAME`, `NEO4J_PASSWORD` | service | `neo4j+s://` |
 | `S3_BUCKET`, `S3_REGION`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` | service | needs put, get, and list on the bucket; the web app holds no storage credentials |
 | `S3_ENDPOINT_URL` | service | optional, for an S3-compatible provider that supports POST policy uploads |

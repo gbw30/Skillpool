@@ -1,9 +1,11 @@
 """Claude and embedding calls, with a daily spend counter (PRD R19)."""
 import datetime
 import threading
+import time
 from collections.abc import Iterator
 
 import anthropic
+import httpx
 import openai
 
 from . import config, graph
@@ -69,13 +71,49 @@ def _charge_claude(usage) -> None:
     _charge((usage.input_tokens * config.PRICE_IN + usage.output_tokens * config.PRICE_OUT) / 1e6)
 
 
-def embed(texts: list[str]) -> list[list[float]]:
+def _embed_openai(texts: list[str], query: bool) -> tuple[list[list[float]], int]:
+    resp = _openai().embeddings.create(model=config.EMBED_MODEL, input=texts)
+    return [d.embedding for d in sorted(resp.data, key=lambda d: d.index)], resp.usage.total_tokens
+
+
+def _embed_voyage(texts: list[str], query: bool) -> tuple[list[list[float]], int]:
+    # Voyage embeds a search question differently from the text it is matched against.
+    body = {"model": config.EMBED_MODEL, "input": texts, "input_type": "query" if query else "document"}
+    headers = {"Authorization": f"Bearer {config.require('VOYAGE_API_KEY')}"}
+    for attempt in range(5):  # 5 tries with backoff on rate limits and server errors, like the SDK clients
+        try:
+            resp = httpx.post("https://api.voyageai.com/v1/embeddings", json=body, headers=headers, timeout=60)
+            again = resp.status_code == 429 or resp.status_code >= 500
+        except httpx.TransportError:
+            if attempt == 4:
+                raise
+            again = True
+        if not again or attempt == 4:
+            break
+        time.sleep(2**attempt)
+    resp.raise_for_status()
+    data = resp.json()
+    return [d["embedding"] for d in sorted(data["data"], key=lambda d: d["index"])], data["usage"]["total_tokens"]
+
+
+_EMBED = {"openai": _embed_openai, "voyage": _embed_voyage}
+_model_checked = False
+
+
+def embed(texts: list[str], query: bool = False) -> list[list[float]]:
+    """Vectors for `texts`. `query` marks a search question, as opposed to stored text."""
+    global _model_checked
+    if not texts:
+        return []
+    if not _model_checked:  # once per process: the stored vectors must come from the same model
+        graph.check_embedding_model()
+        _model_checked = True
     out: list[list[float]] = []
     for i in range(0, len(texts), 64):
         _check_budget()
-        resp = _openai().embeddings.create(model=config.EMBED_MODEL, input=texts[i : i + 64])
-        _charge(resp.usage.total_tokens * config.PRICE_EMBED / 1e6)
-        out.extend(d.embedding for d in sorted(resp.data, key=lambda d: d.index))
+        vectors, tokens = _EMBED[config.EMBED_PROVIDER](texts[i : i + 64], query)
+        _charge(tokens * config.PRICE_EMBED / 1e6)
+        out.extend(vectors)
     return out
 
 

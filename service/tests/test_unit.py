@@ -1,10 +1,11 @@
 """Pure logic. No network, no database."""
 import time
 
+import httpx
 import pymupdf
 import pytest
 
-from skillpool import config, signing, storage
+from skillpool import config, llm, signing, storage
 from skillpool.cli import identity_scores
 from skillpool.ingest.chunk import chunk
 from skillpool.ingest.extract import Extraction, PersonFacts, ProjectDef, ProjectSkill, SkillFact
@@ -275,3 +276,43 @@ def test_object_keys_cannot_escape_the_job_prefix():
     assert storage.display_path("jobs/job/000/a/b.pdf") == "a/b.pdf"
     with pytest.raises(ValueError):
         storage.object_key("job", 0, "../..")
+
+
+# --- embedding providers -----------------------------------------------------
+
+def test_voyage_embeddings_retry_keep_order_and_mark_questions(monkeypatch):
+    sent, replies = [], [
+        httpx.Response(429, request=httpx.Request("POST", "https://x")),
+        httpx.Response(200, request=httpx.Request("POST", "https://x"), json={
+            "data": [{"index": 1, "embedding": [2.0]}, {"index": 0, "embedding": [1.0]}], "usage": {"total_tokens": 7},
+        }),
+    ]
+
+    def post(url, json, headers, timeout):
+        sent.append((url, json, headers))
+        return replies[len(sent) - 1]
+
+    monkeypatch.setenv("VOYAGE_API_KEY", "key")
+    monkeypatch.setattr(config, "EMBED_MODEL", "voyage-4-lite")
+    monkeypatch.setattr(llm.httpx, "post", post)
+    monkeypatch.setattr(llm.time, "sleep", lambda seconds: None)
+    assert llm._embed_voyage(["a", "b"], query=True) == ([[1.0], [2.0]], 7)
+    url, body, headers = sent[1]
+    assert len(sent) == 2 and url == "https://api.voyageai.com/v1/embeddings" and headers == {"Authorization": "Bearer key"}
+    assert body == {"model": "voyage-4-lite", "input": ["a", "b"], "input_type": "query"}
+
+
+def test_embed_charges_the_selected_provider_and_batches(monkeypatch):
+    calls, charged = [], []
+    monkeypatch.setattr(llm, "_model_checked", True)
+    monkeypatch.setattr(llm, "_check_budget", lambda: None)
+    monkeypatch.setattr(llm, "_charge", charged.append)
+    monkeypatch.setattr(config, "EMBED_PROVIDER", "voyage")
+    monkeypatch.setitem(llm._EMBED, "voyage", lambda texts, query: (calls.append((len(texts), query)) or [[0.0]] * len(texts), 1_000_000))
+    assert len(llm.embed(["t"] * 70)) == 70 and llm.embed([]) == []
+    assert calls == [(64, False), (6, False)] and charged == [config.PRICE_EMBED] * 2
+
+
+def test_each_embedding_provider_is_fully_described():
+    assert set(config.EMBEDDERS) == set(llm._EMBED)
+    assert config.EMBEDDERS[config.EMBED_PROVIDER] == (config.EMBED_MODEL, config.EMBED_DIM, config.PRICE_EMBED)

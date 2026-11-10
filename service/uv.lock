@@ -849,6 +849,7 @@ dependencies = [
     { name = "anthropic" },
     { name = "boto3" },
     { name = "fastapi" },
+    { name = "httpx" },
     { name = "neo4j" },
     { name = "openai" },
     { name = "pymupdf" },
@@ -857,7 +858,6 @@ dependencies = [
 
 [package.dev-dependencies]
 dev = [
-    { name = "httpx" },
     { name = "pytest" },
 ]
 
@@ -866,6 +866,7 @@ requires-dist = [
     { name = "anthropic" },
     { name = "boto3" },
     { name = "fastapi" },
+    { name = "httpx" },
     { name = "neo4j" },
     { name = "openai" },
     { name = "pymupdf" },
@@ -873,10 +874,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [
-    { name = "httpx" },
-    { name = "pytest" },
-]
+dev = [{ name = "pytest" }]
 
 [[package]]
 name = "sniffio"

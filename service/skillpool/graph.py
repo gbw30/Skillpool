@@ -38,24 +38,65 @@ def _vector_index(name: str, label: str, prop: str) -> str:
     )
 
 
+_VECTOR_INDEXES = (
+    ("chunk_embedding_idx", "Chunk", "embedding"),
+    ("person_profile_idx", "Person", "profileEmbedding"),
+    ("skill_embedding_idx", "Skill", "embedding"),
+)
+
 SCHEMA = [
     *(
         f"CREATE CONSTRAINT {label.lower()}_id IF NOT EXISTS FOR (n:{label}) REQUIRE n.id IS UNIQUE"
-        for label in ("Person", "Skill", "Project", "Organization", "Document", "Chunk")
+        for label in ("Person", "Skill", "Project", "Organization", "Document", "Chunk", "Meta")
     ),
     "CREATE CONSTRAINT spend_day IF NOT EXISTS FOR (n:Spend) REQUIRE n.day IS UNIQUE",
     "CREATE INDEX person_surname IF NOT EXISTS FOR (n:Person) ON (n.surnameKey)",
     "CREATE INDEX document_job IF NOT EXISTS FOR (n:Document) ON (n.jobId)",
-    _vector_index("chunk_embedding_idx", "Chunk", "embedding"),
-    _vector_index("person_profile_idx", "Person", "profileEmbedding"),
-    _vector_index("skill_embedding_idx", "Skill", "embedding"),
 ]
+
+# The embedding model the stored vectors and index sizes belong to, recorded on first use.
+EMBEDDING_MODEL = "MERGE (m:Meta {id: 'embedding'}) ON CREATE SET m.model = $model RETURN m.model AS model"
+
+SET_EMBEDDING_MODEL = "MERGE (m:Meta {id: 'embedding'}) SET m.model = $model"
+
+VECTOR_INDEX_SIZES = """
+SHOW INDEXES YIELD type, options WHERE type = 'VECTOR'
+RETURN DISTINCT options.indexConfig['vector.dimensions'] AS size
+"""
+
+CLEAR_VECTORS = "MATCH (n) WHERE n:Chunk OR n:Person OR n:Skill REMOVE n.embedding, n.profileEmbedding"
+
+
+class EmbeddingMismatch(Exception):
+    pass
+
+
+def check_embedding_model() -> None:
+    """Refuse to mix vectors from two embedding models: they cannot be compared with each other."""
+    stored = run(EMBEDDING_MODEL, model=config.EMBED_MODEL)[0]["model"]
+    # The index sizes are checked too: emptying the graph removes the record but keeps the indexes.
+    sizes = [r["size"] for r in run(VECTOR_INDEX_SIZES)]
+    if stored != config.EMBED_MODEL or any(size != config.EMBED_DIM for size in sizes):
+        raise EmbeddingMismatch(
+            f"this database is set up for {stored} vectors (index sizes {sizes}) but EMBED_PROVIDER selects "
+            f"{config.EMBED_MODEL} ({config.EMBED_DIM}). Run `skillpool reembed` to convert it, or set EMBED_PROVIDER back."
+        )
 
 
 def init_db() -> None:
-    for statement in SCHEMA:
+    for statement in (*SCHEMA, *(_vector_index(*index) for index in _VECTOR_INDEXES)):
         run(statement)
     run("CALL db.awaitIndexes(120)")
+    check_embedding_model()
+
+
+def reset_vectors() -> None:
+    """Drop every stored vector and rebuild the indexes at the configured model's size."""
+    for name, _, _ in _VECTOR_INDEXES:
+        run(f"DROP INDEX {name} IF EXISTS")
+    run(CLEAR_VECTORS)
+    run(SET_EMBEDDING_MODEL, model=config.EMBED_MODEL)
+    init_db()
 
 
 # Appends new chunk ids to a relationship's `sources` without duplicates.
@@ -213,6 +254,14 @@ SET p.profileText = row.text, p.profileEmbedding = row.embedding
 SKILLS_WITHOUT_EMBEDDING = "MATCH (s:Skill) WHERE s.embedding IS NULL RETURN s.id AS id, s.name AS name"
 
 SET_SKILL_EMBEDDINGS = "UNWIND $rows AS row MATCH (s:Skill {id: row.id}) SET s.embedding = row.embedding"
+
+# --- re-embedding after a change of embedding model -------------------------
+
+ALL_CHUNKS = "MATCH (c:Chunk) RETURN c.id AS id, c.text AS text ORDER BY c.id"
+
+SET_CHUNK_EMBEDDINGS = "UNWIND $rows AS row MATCH (c:Chunk {id: row.id}) SET c.embedding = row.embedding"
+
+ALL_PERSON_IDS = "MATCH (p:Person) RETURN p.id AS id"
 
 # --- search ---------------------------------------------------------------
 

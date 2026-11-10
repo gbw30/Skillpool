@@ -10,6 +10,7 @@ from pathlib import Path
 
 from . import config, graph, llm, storage
 from .ingest import job
+from .ingest.upsert import refresh_embeddings
 from .search import synthesize
 from .search.retrieve import search
 from .text import skill_id
@@ -24,6 +25,22 @@ def ingest_dir(root: Path, only: tuple[str, ...] = ("",)) -> dict:
     job_id = uuid.uuid4().hex
     job.run_job(job_id, [job.Item(p.relative_to(root).as_posix(), None, p.read_bytes) for p in files])
     return job.status(job_id)
+
+
+def reembed() -> dict:
+    """Recompute every stored vector with the configured embedding model. No Claude calls.
+
+    Run after changing EMBED_PROVIDER. Searches fail while it runs; if it stops part-way, run it again.
+    """
+    graph.reset_vectors()
+    chunks = graph.run(graph.ALL_CHUNKS)
+    for i in range(0, len(chunks), 256):
+        part = chunks[i : i + 256]
+        vectors = llm.embed([c["text"] for c in part])
+        graph.run(graph.SET_CHUNK_EMBEDDINGS, rows=[{"id": c["id"], "embedding": v} for c, v in zip(part, vectors)])
+    people = [r["id"] for r in graph.run(graph.ALL_PERSON_IDS)]
+    refresh_embeddings(people)  # also embeds every skill, whose vectors were just cleared
+    return {"model": config.EMBED_MODEL, "chunks": len(chunks), "people": len(people)}
 
 
 def _pairs(n: int) -> int:
@@ -76,6 +93,7 @@ def evaluate(corpus: Path) -> dict:
     report: dict = {
         "date": datetime.date.today().isoformat(),
         "model": config.CLAUDE_MODEL,
+        "embedModel": config.EMBED_MODEL,
         "ingest": {"counts": ingest["counts"], "modelSpendUsd": round(ingest_spend, 4)},
         "totals": graph.run(graph.EVAL_TOTALS)[0],
         "identity": identity_scores(json.loads((truth / "people.json").read_text()), subjects, mentions),
@@ -138,6 +156,7 @@ def main() -> None:
     p.add_argument("dir", type=Path)
     p = sub.add_parser("eval", help="ingest a corpus and score it against corpus/truth")
     p.add_argument("corpus", type=Path)
+    sub.add_parser("reembed", help="recompute all vectors after changing EMBED_PROVIDER")
     p = sub.add_parser("delete-document", help="remove a document and the facts only it supported")
     p.add_argument("id")
     args = parser.parse_args()
@@ -156,6 +175,8 @@ def main() -> None:
                 print(f"failed: {doc['path']}: {doc['error']}")
     elif args.command == "eval":
         print(json.dumps(evaluate(args.corpus), indent=2))
+    elif args.command == "reembed":
+        print(json.dumps({**reembed(), "modelSpendUsd": round(llm.spent_today(), 4)}))
     elif args.command == "delete-document":
         print("deleted" if graph.delete_document(args.id) else "no such document")
 

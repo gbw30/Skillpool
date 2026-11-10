@@ -13,7 +13,7 @@ the design in [docs/SPEC.md](docs/SPEC.md).
 Built and tested without live model calls:
 
 - Service (`service/`): ingestion, quote verification, identity resolution, hybrid search,
-  cited answers, signed API. 65 tests pass, including the whole pipeline against a real Neo4j
+  cited answers, signed API. 69 tests pass, including the whole pipeline against a real Neo4j
   (5.26 and 2026.10) with the model calls replaced by fakes.
 - Web app (`web/`): landing, search, person, and upload screens plus the signed proxy. Builds
   and lints clean. All four screens were checked in headless Chromium, at desktop and phone
@@ -42,7 +42,8 @@ docs/      PRD.md, SPEC.md
 
 ## Run it locally
 
-Needs Docker, [uv](https://docs.astral.sh/uv/), Node 20+, an Anthropic key, and an OpenAI key.
+Needs Docker, [uv](https://docs.astral.sh/uv/), Node 20+, an Anthropic key, and an embeddings key
+(OpenAI or Voyage AI, see [Embedding provider](#embedding-provider)).
 
 ```bash
 docker compose up -d neo4j
@@ -52,7 +53,8 @@ docker compose up -d neo4j
 cp service/.env.example service/.env && cp web/.env.example web/.env.local
 ```
 
-Fill in the two API keys and one shared `SERVICE_SIGNING_SECRET` in both files. Then, from
+Fill in the Anthropic key, the key of the embedding provider you chose, and one shared
+`SERVICE_SIGNING_SECRET` in both files. Then, from
 `service/`:
 
 ```bash
@@ -79,6 +81,28 @@ cd web && npm install && npm run dev
 ```
 
 Open http://localhost:3000.
+
+### Embedding provider
+
+`EMBED_PROVIDER` in `service/.env` picks who turns text into vectors:
+
+| Value | Model | Vector size | Key | Price |
+|---|---|---|---|---|
+| `openai` (default) | `text-embedding-3-small` | 1536 | `OPENAI_API_KEY` | $0.02 per million tokens |
+| `voyage` | `voyage-4-lite` | 1024 | `VOYAGE_API_KEY` | first 200 million tokens free, then $0.02 per million |
+
+Vectors from the two cannot be compared, so a database belongs to one provider at a time. The
+service refuses to search or ingest when the setting does not match the database. To switch a
+database that already holds documents, change `EMBED_PROVIDER` and run:
+
+```bash
+uv run --env-file .env skillpool reembed
+```
+
+It recomputes every vector from the stored text and makes no Claude calls, so for the corpus it
+costs about a cent on OpenAI and nothing on Voyage. Restart the service afterwards. The search
+thresholds (`VECTOR_FLOOR` and the skill-match floor) are similarity scores, which differ
+between models: re-run `skillpool eval` after switching.
 
 ### Browser uploads
 
