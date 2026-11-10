@@ -13,7 +13,7 @@ Run, test, deploy: README.md. Read those before planning; don't duplicate them h
 - corpus/ — 680 resumes, 159 generated docs (`generate.py`, seed 7), ground truth in truth/.
 
 ## Commands
-- Tests: `cd service && uv run pytest` (63 pass). Pipeline tests need
+- Tests: `cd service && uv run pytest` (65 pass). Pipeline tests need
   `SKILLPOOL_TEST_NEO4J_URI=bolt://127.0.0.1:17687 SKILLPOOL_TEST_NEO4J_PASSWORD=skillpool-dev` and
   wipe that database.
 - Local Neo4j: `docker compose up -d neo4j` (ports 17474/17687, auth neo4j/skillpool-dev).
@@ -30,6 +30,7 @@ Run, test, deploy: README.md. Read those before planning; don't duplicate them h
 ## Not done yet (needs the owner)
 - No live model call made; thresholds (merge scores, VECTOR_FLOOR) untuned. Next step: API keys in
   service/.env, then `uv run --env-file .env skillpool eval ../corpus` (~$1, $5 daily cap).
-- Browser upload untested against a real S3 bucket (MinIO image pull was denied).
-- Not deployed; screens not checked in a browser. Not a git repo yet.
+- Browser upload passed against a local S3 emulator (LocalStack); untested against real AWS S3.
+- Not deployed. Screens were checked in headless Chromium with faked model calls only.
+- No git remote yet; CI (`.github/workflows/ci.yml`) has never run.
 - Open questions: resume licence/origin, public vs code-gated demo, crediting the original team.

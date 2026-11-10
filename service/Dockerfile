@@ -7,5 +7,5 @@ COPY skillpool ./skillpool
 RUN uv sync --frozen --no-dev
 ENV PATH="/app/.venv/bin:$PATH"
 USER nobody
-# One process: batch progress, rate limits, and the spend counter live in its memory.
+# One process: batch progress and rate limits live in its memory.
 CMD ["sh", "-c", "uvicorn skillpool.api:app --host 0.0.0.0 --port ${PORT:-8000}"]

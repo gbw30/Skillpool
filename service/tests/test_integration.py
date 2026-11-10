@@ -91,7 +91,8 @@ def corpus(tmp_path_factory):
     for path, text in DOCS.items():
         (root / path).parent.mkdir(parents=True, exist_ok=True)
         (root / path).write_text(text)
-    return root
+    yield root
+    graph.run("MATCH (n) DETACH DELETE n")  # leave no fixture people behind for a real ingest to mix with
 
 
 @pytest.fixture

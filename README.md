@@ -13,10 +13,14 @@ the design in [docs/SPEC.md](docs/SPEC.md).
 Built and tested without live model calls:
 
 - Service (`service/`): ingestion, quote verification, identity resolution, hybrid search,
-  cited answers, signed API. 63 tests pass, including the whole pipeline against a real Neo4j
-  with the model calls replaced by fakes.
+  cited answers, signed API. 65 tests pass, including the whole pipeline against a real Neo4j
+  (5.26 and 2026.10) with the model calls replaced by fakes.
 - Web app (`web/`): landing, search, person, and upload screens plus the signed proxy. Builds
-  and lints clean; the proxy, streaming, and upload gate were exercised over HTTP.
+  and lints clean. All four screens were checked in headless Chromium, at desktop and phone
+  width, against the service with faked model calls, including a folder upload that then
+  showed up in search.
+- Uploads: the upload policy was run against a local S3 emulator (LocalStack 4.4), which
+  rejected a wrong size, key, or content type and accepted the exact file.
 - Corpus (`corpus/`): 680 resumes, 159 generated project documents, and ground truth.
 
 Not yet done, because it needs your API keys and accounts:
@@ -24,8 +28,8 @@ Not yet done, because it needs your API keys and accounts:
 - No real Claude or OpenAI call has been made. Extraction quality, the identity-resolution
   thresholds, and the search floor are untuned defaults. Run the evaluation below to get real
   numbers against the PRD targets.
-- Browser upload has not been run against a real bucket.
-- Nothing is deployed, and the screens have not been checked in a browser.
+- Browser upload has not been run against a real AWS bucket, only the emulator.
+- Nothing is deployed.
 
 ## Layout
 
@@ -96,13 +100,18 @@ The pipeline tests are skipped unless pointed at a database, because they wipe i
 SKILLPOOL_TEST_NEO4J_URI=bolt://127.0.0.1:17687 SKILLPOOL_TEST_NEO4J_PASSWORD=skillpool-dev uv run pytest
 ```
 
-Do not point that at a database you care about.
+Do not point that at a database you care about. `.github/workflows/ci.yml` runs the same
+tests against a throwaway Neo4j, plus the web lint and build, on every push and pull request.
 
 ## Deploy
 
 - Database: Neo4j AuraDB. Set `NEO4J_URI` to the `neo4j+s://` address and run `init-db` once.
-- Service: `service/Dockerfile` on any container host. Run a single instance: batch progress,
-  rate limits, and the spend counter are held in memory.
+  The Free tier allows 200,000 nodes, 400,000 relationships, and 1 GB, far more than the corpus
+  needs. It pauses after 72 hours without activity and is deleted after 30 days paused, so
+  resume it in the Aura console before a demo.
+- Service: `service/Dockerfile` on any container host. Run a single instance: batch progress
+  and rate limits are held in memory. The daily spend total is stored in the graph, so a
+  restart does not reset the cap. Set a spend limit with each model provider as well.
 - Web: Vercel or any Node host, with the four variables from `web/.env.example`. The rate
   limit trusts the first `x-forwarded-for` entry, which is only reliable behind a platform
   proxy that sets it.

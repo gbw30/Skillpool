@@ -5,11 +5,13 @@ Companion: [PRD.md](PRD.md) (requirement IDs R1–R21 refer to it)
 
 ## 0. Implementation status
 
-Built: sections 3 to 10 and 12 to 13. Verified by 63 automated tests, including the full
-pipeline against Neo4j 5.26 with model calls faked, and by running the web app and service
-together over HTTP.
+Built: sections 3 to 10 and 12 to 13. Verified by 65 automated tests, including the full
+pipeline against Neo4j 5.26 and 2026.10 with model calls faked. The four screens were driven in
+headless Chromium (desktop and phone width) against the service with faked model calls and a
+local S3 emulator: search with a streamed, cited answer, the person page, the no-match case,
+and a folder upload that became searchable.
 
-Not verified: anything that needs a live model, a real bucket, or a browser. No Claude or OpenAI
+Not verified: anything that needs a live model or a real AWS bucket. No Claude or OpenAI
 call has been made, so the PRD section 8 targets are unmeasured and the thresholds in
 `service/skillpool/config.py` (identity merge scores, vector floor) are untuned defaults.
 `skillpool eval` produces the numbers.
@@ -28,6 +30,10 @@ Changes from the first draft of this spec, made during implementation:
 - Identity resolution gained three rules found by the pipeline test: two people a document lists
   separately are never merged with each other; a differing email on both records counts against
   a merge; the same stated role on a shared project counts for one.
+- The daily spend total is stored in the graph (a `Spend` node per day) and read once per
+  process per day, so a restart does not reset the cap. It was in memory only.
+- PDF text extraction stops at the size a text file may have (10 MB of text), and the web
+  proxy stops reading a request body at its limit instead of checking after buffering it.
 - Milestone M5's deployment is not done; it needs the owner's accounts.
 
 ## 1. Decisions
@@ -360,9 +366,12 @@ Haiku 5.5 constraints that affect the code:
 - Model input: document text delimited as data; extraction constrained to a schema; facts need a
   verified quote; search uses fixed Cypher with parameters only.
 - Model output: rendered as text. Citations are validated server-side before they reach the UI.
-- Spend: per-IP rate limit and a daily budget counter in the service. `shortcut:` both are
-  in-memory and reset on restart; move to a shared store if the service runs more than one
-  instance.
+- Spend: per-IP rate limit and a daily budget counter in the service. The budget total is
+  stored in the graph and survives restarts. `shortcut:` the rate limit is in memory, and each
+  process reads the stored total once a day; use a shared store and read the total on every
+  check if the service runs more than one instance. The client address is the first
+  `x-forwarded-for` entry, which Vercel overwrites itself; behind any other proxy, confirm it
+  does the same or the per-IP limit can be bypassed (the daily budget still holds).
 - TLS: strict certificate verification to Neo4j. The original's fallback to relaxed verification
   (`+ssc`) is not carried over.
 - Data: synthetic only. Real resumes are personal data and would need the non-goals in the PRD
@@ -371,15 +380,23 @@ Haiku 5.5 constraints that affect the code:
 ## 14. To confirm at implementation
 
 1. Neo4j vector index DDL and `db.index.vector.queryNodes(index, k, vector)`: confirmed by the
-   pipeline test on Neo4j 5.26 Community. Still to confirm on the AuraDB version in use.
-2. AuraDB Free limits (node and relationship caps, pause-after-inactivity) against an estimated
-   graph of roughly 5k nodes and 40k relationships: still to confirm.
+   pipeline test on Neo4j 5.26 and 2026.10.2 Community. `db.index.vector.queryNodes` is
+   deprecated since 2026.04 in favour of the Cypher `SEARCH` clause but still works; move to
+   `SEARCH` once the local and Aura versions both support it. Not yet run on AuraDB itself.
+2. AuraDB Free limits, from the Aura docs (checked 2026-11-10): 200,000 nodes, 400,000
+   relationships, 1 GB storage, one database. The estimated graph (roughly 5k nodes and 40k
+   relationships) fits with room to spare. An instance pauses after 72 hours of inactivity and
+   is deleted after 30 days paused. The docs do not say whether vector indexes are available
+   on Free, nor which Neo4j version it runs: confirm with `init-db` on the first connection.
 3. Anthropic Python SDK structured-output call shape: confirmed against SDK 2.7 with a mock
    transport (`messages.parse` with `output_format` and `output_config.effort`). Whether the live
    API accepts every field for `claude-haiku-5-5` is confirmed only by the first real call.
-4. OpenAI embedding price and batch size limits: still to confirm.
+4. OpenAI embedding limits, from the API reference (checked 2026-11-10): $0.02 per million
+   tokens for `text-embedding-3-small`, at most 8,192 tokens per input, 2,048 inputs and
+   300,000 tokens per request. The service sends 64 inputs of about 600 tokens, well inside.
 5. Pinning upload size: resolved by using POST policy uploads with `content-length-range`.
-   Not yet run against a real bucket.
+   Run against LocalStack 4.4's S3: a wrong size, key, or content type is rejected, the
+   exact file is accepted, and CORS allows only the web origin. Not yet run against AWS S3.
 
 ## 15. Milestones
 
