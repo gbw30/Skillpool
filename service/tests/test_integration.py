@@ -11,7 +11,7 @@ import re
 
 import pytest
 
-from skillpool import graph, llm
+from skillpool import config, graph, llm
 from skillpool.cli import ingest_dir
 from skillpool.ingest.extract import (
     Extraction, PersonFacts, PersonProject, ProjectDef, ProjectSkill, RoleFact, SkillFact,
@@ -205,3 +205,17 @@ def test_deleting_a_document_removes_what_only_it_supported(corpus, calls):
     assert graph.run("MATCH (s:Skill {id: 'kafka'}) RETURN count(s) AS n")[0]["n"] == 0
     assert graph.run("MATCH (pr:Project {id: 'atlas-migration'}) RETURN count(pr) AS n")[0]["n"] == 1  # still has people
     assert not graph.delete_document(doc)
+
+
+def test_daily_spend_survives_a_restart(corpus, monkeypatch):
+    monkeypatch.setattr(llm, "_spend", {})
+    try:
+        before = llm.spent_today()
+        llm._charge(0.25)
+        monkeypatch.setattr(llm, "_spend", {})  # what a restarted process starts with
+        assert llm.spent_today() == pytest.approx(before + 0.25)
+        monkeypatch.setattr(config, "DAILY_MODEL_BUDGET_USD", before + 0.25)
+        with pytest.raises(llm.BudgetExceeded):
+            llm._check_budget()
+    finally:
+        graph.run("MATCH (s:Spend) DELETE s")  # do not leave test spend counted against a real day

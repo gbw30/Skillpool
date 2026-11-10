@@ -72,6 +72,12 @@ def test_parse_rejects_bad_input(data, ext, reason):
         parse(data, ext)
 
 
+def test_pdf_text_is_capped_like_a_text_file(monkeypatch):
+    monkeypatch.setattr(config, "MAX_FILE_BYTES", 5)
+    with pytest.raises(ParseError, match="too_large"):
+        parse(_pdf("Hello resume"), ".pdf")
+
+
 # --- quote verification -----------------------------------------------------
 
 def _facts(text, people=(), projects=()):

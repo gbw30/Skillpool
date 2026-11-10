@@ -6,12 +6,14 @@ from collections.abc import Iterator
 import anthropic
 import openai
 
-from . import config
+from . import config, graph
 
 _lock = threading.Lock()
 _clients: dict = {}
-# shortcut: in-memory, resets on restart and is per process; move to a shared store
-# when the service runs more than one instance.
+# Today's spend: read from the graph on first use, then kept here and written through, so a
+# restart does not reset the cap.
+# shortcut: a process only sees its own charges after that first read; with several instances
+# the cap can be overshot. Read the stored total on every check when running more than one.
 _spend: dict[str, float] = {}
 
 
@@ -39,8 +41,15 @@ def _today() -> str:
     return datetime.date.today().isoformat()
 
 
+def _spent(day: str) -> float:
+    with _lock:
+        if day not in _spend:
+            _spend[day] = float(graph.run(graph.SPEND_ON, day=day)[0]["usd"])
+        return _spend[day]
+
+
 def spent_today() -> float:
-    return _spend.get(_today(), 0.0)
+    return _spent(_today())
 
 
 def _check_budget() -> None:
@@ -49,8 +58,11 @@ def _check_budget() -> None:
 
 
 def _charge(usd: float) -> None:
+    day = _today()
+    _spent(day)  # load the stored total before adding to it
     with _lock:
-        _spend[_today()] = _spend.get(_today(), 0.0) + usd
+        _spend[day] += usd
+    graph.run(graph.ADD_SPEND, day=day, usd=usd)
 
 
 def _charge_claude(usage) -> None:

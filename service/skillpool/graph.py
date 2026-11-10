@@ -43,6 +43,7 @@ SCHEMA = [
         f"CREATE CONSTRAINT {label.lower()}_id IF NOT EXISTS FOR (n:{label}) REQUIRE n.id IS UNIQUE"
         for label in ("Person", "Skill", "Project", "Organization", "Document", "Chunk")
     ),
+    "CREATE CONSTRAINT spend_day IF NOT EXISTS FOR (n:Spend) REQUIRE n.day IS UNIQUE",
     "CREATE INDEX person_surname IF NOT EXISTS FOR (n:Person) ON (n.surnameKey)",
     "CREATE INDEX document_job IF NOT EXISTS FOR (n:Document) ON (n.jobId)",
     _vector_index("chunk_embedding_idx", "Chunk", "embedding"),
@@ -292,6 +293,13 @@ RETURN COUNT { (:Document) } AS documents, COUNT { (:Chunk) } AS chunks,
        COUNT { (:Project) } AS projects, COUNT { (:Organization) } AS organizations,
        COUNT { (:Person)-[:POSSIBLE_SAME_AS]->(:Person) } AS flaggedPairs
 """
+
+# --- model spend (PRD R19) ---------------------------------------------------
+# Kept in the graph so the daily cap survives a restart of the service.
+
+SPEND_ON = "MATCH (s:Spend {day: $day}) RETURN sum(s.usd) AS usd"
+
+ADD_SPEND = "MERGE (s:Spend {day: $day}) ON CREATE SET s.usd = $usd ON MATCH SET s.usd = s.usd + $usd"
 
 # --- evaluation ------------------------------------------------------------
 
