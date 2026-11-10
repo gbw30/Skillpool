@@ -1,0 +1,2798 @@
+[
+ {
+  "person": "ghost:alex-armstrong-4",
+  "resume": false,
+  "mentions": [
+   {
+    "doc": "generated/ember-partner-api/staffing-note.md",
+    "surface": "Alex Armstrong"
+   },
+   {
+    "doc": "generated/ember-partner-api/status-1.md",
+    "surface": "Alex Armstrong"
+   }
+  ]
+ },
+ {
+  "person": "ghost:alexis-morris-5",
+  "resume": false,
+  "mentions": [
+   {
+    "doc": "generated/falcon-migration/staffing-note.md",
+    "surface": "Alexis Morris"
+   }
+  ]
+ },
+ {
+  "person": "ghost:alvin-conner-7",
+  "resume": false,
+  "mentions": [
+   {
+    "doc": "generated/harbor-partner-api/staffing-note.md",
+    "surface": "Alvin Conner"
+   },
+   {
+    "doc": "generated/harbor-partner-api/status-1.md",
+    "surface": "Alvin Conner"
+   }
+  ]
+ },
+ {
+  "person": "ghost:amber-lee-1",
+  "resume": false,
+  "mentions": [
+   {
+    "doc": "generated/borealis-partner-api/staffing-note.md",
+    "surface": "Amber Lee"
+   },
+   {
+    "doc": "generated/borealis-partner-api/status-1.md",
+    "surface": "Amber Lee"
+   }
+  ]
+ },
+ {
+  "person": "ghost:april-burgess-0",
+  "resume": false,
+  "mentions": [
+   {
+    "doc": "generated/atlas-migration/staffing-note.md",
+    "surface": "April Burgess"
+   },
+   {
+    "doc": "generated/atlas-migration/status-2.md",
+    "surface": "April Burgess"
+   }
+  ]
+ },
+ {
+  "person": "ghost:ashley-sullivan-8",
+  "resume": false,
+  "mentions": [
+   {
+    "doc": "generated/ion-mobile-relaunch/staffing-note.md",
+    "surface": "Ashley Sullivan"
+   },
+   {
+    "doc": "generated/ion-mobile-relaunch/status-1.md",
+    "surface": "Ashley Sullivan"
+   }
+  ]
+ },
+ {
+  "person": "ghost:barbara-mills-2",
+  "resume": false,
+  "mentions": [
+   {
+    "doc": "generated/cinder-billing-rewrite/staffing-note.md",
+    "surface": "Barbara Mills"
+   }
+  ]
+ },
+ {
+  "person": "ghost:brian-hernandez-6",
+  "resume": false,
+  "mentions": [
+   {
+    "doc": "generated/granite-partner-api/staffing-note.md",
+    "surface": "Brian Hernandez"
+   },
+   {
+    "doc": "generated/granite-partner-api/status-1.md",
+    "surface": "Brian Hernandez"
+   }
+  ]
+ },
+ {
+  "person": "ghost:bryan-mcclure-9",
+  "resume": false,
+  "mentions": [
+   {
+    "doc": "generated/juniper-migration/staffing-note.md",
+    "surface": "Bryan Mcclure"
+   },
+   {
+    "doc": "generated/juniper-migration/status-1.md",
+    "surface": "Bryan Mcclure"
+   }
+  ]
+ },
+ {
+  "person": "ghost:casey-anderson-3",
+  "resume": false,
+  "mentions": [
+   {
+    "doc": "generated/dynamo-checkout-redesign/staffing-note.md",
+    "surface": "Casey Anderson"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Aaron_Foster.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/tundra-partner-api/staffing-note.md",
+    "surface": "Aaron Foster"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Aaron_Herrera.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/raven-observability-rollout/staffing-note.md",
+    "surface": "Aaron Herrera"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Aaron_Williams.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/meridian-observability-rollout/staffing-note.md",
+    "surface": "Aaron Williams"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Adam_Franklin.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/granite-partner-api/staffing-note.md",
+    "surface": "Franklin, Adam"
+   },
+   {
+    "doc": "generated/granite-partner-api/status-1.md",
+    "surface": "A. Franklin"
+   },
+   {
+    "doc": "generated/granite-partner-api/postmortem.md",
+    "surface": "A. Franklin"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Adam_Smith.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/indigo-checkout-redesign/staffing-note.md",
+    "surface": "Adam Smith"
+   },
+   {
+    "doc": "generated/indigo-checkout-redesign/status-1.md",
+    "surface": "Smith, Adam"
+   },
+   {
+    "doc": "generated/indigo-checkout-redesign/status-2.md",
+    "surface": "A. Smith"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Adam_Wells.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/northwind-search-upgrade/staffing-note.md",
+    "surface": "Wells, Adam"
+   },
+   {
+    "doc": "generated/northwind-search-upgrade/status-2.md",
+    "surface": "Adam Wells"
+   },
+   {
+    "doc": "generated/northwind-search-upgrade/status-2.md",
+    "surface": "Adam"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Adrian_Anderson.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/anchor-checkout-redesign/staffing-note.md",
+    "surface": "Anderson, Adrian"
+   },
+   {
+    "doc": "generated/anchor-checkout-redesign/status-1.md",
+    "surface": "Adrian Anderson"
+   },
+   {
+    "doc": "generated/anchor-checkout-redesign/status-2.md",
+    "surface": "Anderson, Adrian"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Alan_Harris.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/ion-mobile-relaunch/staffing-note.md",
+    "surface": "Alan Harris"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Alan_Peters.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/tundra-partner-api/staffing-note.md",
+    "surface": "A. Peters"
+   },
+   {
+    "doc": "generated/tundra-partner-api/status-1.md",
+    "surface": "baldwinjames@example.org"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Albert_Haley.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/jasper-search-upgrade/staffing-note.md",
+    "surface": "Albert Haley"
+   },
+   {
+    "doc": "generated/jasper-search-upgrade/status-1.md",
+    "surface": "Albert Haley"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Alejandro_Campbell.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/umbra-identity-service/staffing-note.md",
+    "surface": "Campbell, Alejandro"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Alexander_Espinoza.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/yarrow-partner-api/staffing-note.md",
+    "surface": "Alexander Espinoza"
+   },
+   {
+    "doc": "generated/yarrow-partner-api/status-2.md",
+    "surface": "Espinoza, Alexander"
+   },
+   {
+    "doc": "generated/yarrow-partner-api/postmortem.md",
+    "surface": "ryan15@example.net"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Alexander_Winters.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/vertex-observability-rollout/staffing-note.md",
+    "surface": "Alexander Winters"
+   },
+   {
+    "doc": "generated/vertex-observability-rollout/postmortem.md",
+    "surface": "A. Winters"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Alexandra_Elliott.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/harbor-partner-api/staffing-note.md",
+    "surface": "Alexandra Elliott"
+   },
+   {
+    "doc": "generated/harbor-partner-api/staffing-note.md",
+    "surface": "Alexandra"
+   },
+   {
+    "doc": "generated/harbor-partner-api/status-1.md",
+    "surface": "Alexandra Elliott"
+   },
+   {
+    "doc": "generated/harbor-partner-api/status-2.md",
+    "surface": "Alexandra Elliott"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Alexandra_Johnson.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/atlas-migration/staffing-note.md",
+    "surface": "Alexandra Johnson"
+   },
+   {
+    "doc": "generated/atlas-migration/status-2.md",
+    "surface": "Alexandra Johnson"
+   },
+   {
+    "doc": "generated/atlas-migration/postmortem.md",
+    "surface": "Alexandra Johnson"
+   },
+   {
+    "doc": "generated/falcon-migration/staffing-note.md",
+    "surface": "Alexandra Johnson"
+   },
+   {
+    "doc": "generated/falcon-migration/status-1.md",
+    "surface": "Alexandra Johnson"
+   },
+   {
+    "doc": "generated/falcon-migration/status-1.md",
+    "surface": "Alexandra"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Alexis_Harris.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/willow-data-platform/staffing-note.md",
+    "surface": "A. Harris"
+   },
+   {
+    "doc": "generated/willow-data-platform/status-1.md",
+    "surface": "Alexis Harris"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Alexis_Martin.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/anchor-checkout-redesign/staffing-note.md",
+    "surface": "Alexis Martin"
+   },
+   {
+    "doc": "generated/anchor-checkout-redesign/status-1.md",
+    "surface": "Martin, Alexis"
+   },
+   {
+    "doc": "generated/anchor-checkout-redesign/status-2.md",
+    "surface": "Alexis Martin"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Alexis_Morris.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/cobalt-billing-rewrite/staffing-note.md",
+    "surface": "Alexis Morris"
+   },
+   {
+    "doc": "generated/cobalt-billing-rewrite/staffing-note.md",
+    "surface": "Alexis"
+   },
+   {
+    "doc": "generated/cobalt-billing-rewrite/status-1.md",
+    "surface": "Alexis Morris"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Alexis_Nelson.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/zephyr-partner-api/staffing-note.md",
+    "surface": "rtrujillo@example.org"
+   },
+   {
+    "doc": "generated/zephyr-partner-api/status-1.md",
+    "surface": "A. Nelson"
+   },
+   {
+    "doc": "generated/zephyr-partner-api/status-2.md",
+    "surface": "Alexis Nelson"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Alicia_Bentley.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/juniper-migration/staffing-note.md",
+    "surface": "A. Bentley"
+   },
+   {
+    "doc": "generated/juniper-migration/status-1.md",
+    "surface": "Bentley, Alicia"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Alison_Dickerson.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/fathom-partner-api/staffing-note.md",
+    "surface": "Alison Dickerson"
+   },
+   {
+    "doc": "generated/fathom-partner-api/staffing-note.md",
+    "surface": "Alison"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Allison_Gomez.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/willow-data-platform/staffing-note.md",
+    "surface": "Allison Gomez"
+   },
+   {
+    "doc": "generated/willow-data-platform/status-1.md",
+    "surface": "Allison Gomez"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Allison_Powell_DVM.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/yarrow-partner-api/staffing-note.md",
+    "surface": "Allison Powell DVM"
+   },
+   {
+    "doc": "generated/yarrow-partner-api/status-2.md",
+    "surface": "A. Powell"
+   },
+   {
+    "doc": "generated/yarrow-partner-api/postmortem.md",
+    "surface": "Allison Powell DVM"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Allison_Price.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/delta-observability-rollout/staffing-note.md",
+    "surface": "Allison Price"
+   },
+   {
+    "doc": "generated/delta-observability-rollout/status-1.md",
+    "surface": "A. Price"
+   },
+   {
+    "doc": "generated/delta-observability-rollout/status-2.md",
+    "surface": "msullivan@example.net"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Alyssa_Martin.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/pioneer-mobile-relaunch/staffing-note.md",
+    "surface": "Alyssa Martin"
+   },
+   {
+    "doc": "generated/pioneer-mobile-relaunch/status-1.md",
+    "surface": "Alyssa Martin"
+   },
+   {
+    "doc": "generated/pioneer-mobile-relaunch/status-2.md",
+    "surface": "A. Martin"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Alyssa_Olsen.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/jasper-search-upgrade/staffing-note.md",
+    "surface": "Alyssa Olsen"
+   },
+   {
+    "doc": "generated/jasper-search-upgrade/status-1.md",
+    "surface": "A. Olsen"
+   },
+   {
+    "doc": "generated/jasper-search-upgrade/status-2.md",
+    "surface": "Alyssa Olsen"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Amanda_Bailey.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/ion-mobile-relaunch/staffing-note.md",
+    "surface": "Bailey, Amanda"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Amanda_Bridges.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/zephyr-partner-api/staffing-note.md",
+    "surface": "Amanda Bridges"
+   },
+   {
+    "doc": "generated/zephyr-partner-api/status-1.md",
+    "surface": "Amanda Bridges"
+   },
+   {
+    "doc": "generated/zephyr-partner-api/status-2.md",
+    "surface": "Amanda Bridges"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Amanda_Campbell.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/falcon-migration/staffing-note.md",
+    "surface": "Amanda Campbell"
+   },
+   {
+    "doc": "generated/falcon-migration/staffing-note.md",
+    "surface": "Amanda"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Amanda_Flores.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/glacier-migration/staffing-note.md",
+    "surface": "Amanda Flores"
+   },
+   {
+    "doc": "generated/glacier-migration/staffing-note.md",
+    "surface": "Amanda"
+   },
+   {
+    "doc": "generated/glacier-migration/status-1.md",
+    "surface": "Amanda Flores"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Amanda_Johnson.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/keystone-observability-rollout/staffing-note.md",
+    "surface": "Johnson, Amanda"
+   },
+   {
+    "doc": "generated/keystone-observability-rollout/status-1.md",
+    "surface": "A. Johnson"
+   },
+   {
+    "doc": "generated/keystone-observability-rollout/status-2.md",
+    "surface": "Johnson, Amanda"
+   },
+   {
+    "doc": "generated/keystone-observability-rollout/postmortem.md",
+    "surface": "Amanda Johnson"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Amanda_Osborne.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/onyx-identity-service/staffing-note.md",
+    "surface": "Amanda Osborne"
+   },
+   {
+    "doc": "generated/onyx-identity-service/status-2.md",
+    "surface": "Amanda Osborne"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Amanda_Owens.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/ion-mobile-relaunch/staffing-note.md",
+    "surface": "Owens, Amanda"
+   },
+   {
+    "doc": "generated/indigo-checkout-redesign/staffing-note.md",
+    "surface": "Owens, Amanda"
+   },
+   {
+    "doc": "generated/indigo-checkout-redesign/status-2.md",
+    "surface": "Amanda Owens"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Amanda_Phillips.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/tundra-partner-api/staffing-note.md",
+    "surface": "Amanda Phillips"
+   },
+   {
+    "doc": "generated/tundra-partner-api/status-1.md",
+    "surface": "Amanda Phillips"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Amanda_Rogers.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/kestrel-checkout-redesign/staffing-note.md",
+    "surface": "A. Rogers"
+   },
+   {
+    "doc": "generated/kestrel-checkout-redesign/status-1.md",
+    "surface": "Amanda Rogers"
+   },
+   {
+    "doc": "generated/kestrel-checkout-redesign/status-1.md",
+    "surface": "Amanda"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Amanda_Velazquez.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/pioneer-mobile-relaunch/staffing-note.md",
+    "surface": "Amanda Velazquez"
+   },
+   {
+    "doc": "generated/pioneer-mobile-relaunch/status-1.md",
+    "surface": "Velazquez, Amanda"
+   },
+   {
+    "doc": "generated/pioneer-mobile-relaunch/postmortem.md",
+    "surface": "Velazquez, Amanda"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Amanda_Williams.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/pioneer-mobile-relaunch/staffing-note.md",
+    "surface": "Amanda Williams"
+   },
+   {
+    "doc": "generated/pioneer-mobile-relaunch/status-1.md",
+    "surface": "Amanda Williams"
+   },
+   {
+    "doc": "generated/pioneer-mobile-relaunch/status-2.md",
+    "surface": "Amanda Williams"
+   },
+   {
+    "doc": "generated/summit-billing-rewrite/staffing-note.md",
+    "surface": "Amanda Williams"
+   },
+   {
+    "doc": "generated/summit-billing-rewrite/status-1.md",
+    "surface": "Amanda Williams"
+   },
+   {
+    "doc": "generated/summit-billing-rewrite/postmortem.md",
+    "surface": "Amanda Williams"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Amanda_Wood.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/cinder-billing-rewrite/staffing-note.md",
+    "surface": "Amanda Wood"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Amanda_Wright.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/lumen-migration/staffing-note.md",
+    "surface": "Wright, Amanda"
+   },
+   {
+    "doc": "generated/lumen-migration/status-2.md",
+    "surface": "Amanda Wright"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Amber_Jenkins.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/dynamo-checkout-redesign/staffing-note.md",
+    "surface": "Amber Jenkins"
+   },
+   {
+    "doc": "generated/dynamo-checkout-redesign/status-1.md",
+    "surface": "Jenkins, Amber"
+   },
+   {
+    "doc": "generated/dynamo-checkout-redesign/status-2.md",
+    "surface": "Jenkins, Amber"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Amber_Kelley.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/raven-observability-rollout/staffing-note.md",
+    "surface": "Amber Kelley"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Amy_Blackwell.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/lumen-migration/staffing-note.md",
+    "surface": "Blackwell, Amy"
+   },
+   {
+    "doc": "generated/lumen-migration/status-1.md",
+    "surface": "Blackwell, Amy"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Amy_Crosby.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/onyx-identity-service/staffing-note.md",
+    "surface": "Amy Crosby"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Amy_Green.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/fathom-partner-api/staffing-note.md",
+    "surface": "Amy Green"
+   },
+   {
+    "doc": "generated/fathom-partner-api/status-1.md",
+    "surface": "Green, Amy"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Amy_Greene.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/yarrow-partner-api/staffing-note.md",
+    "surface": "A. Greene"
+   },
+   {
+    "doc": "generated/yarrow-partner-api/status-1.md",
+    "surface": "Amy Greene"
+   },
+   {
+    "doc": "generated/yarrow-partner-api/status-2.md",
+    "surface": "A. Greene"
+   },
+   {
+    "doc": "generated/zephyr-partner-api/staffing-note.md",
+    "surface": "Amy Greene"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Amy_Hamilton.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/delta-observability-rollout/staffing-note.md",
+    "surface": "A. Hamilton"
+   },
+   {
+    "doc": "generated/delta-observability-rollout/status-1.md",
+    "surface": "Amy Hamilton"
+   },
+   {
+    "doc": "generated/delta-observability-rollout/status-2.md",
+    "surface": "A. Hamilton"
+   },
+   {
+    "doc": "generated/jasper-search-upgrade/staffing-note.md",
+    "surface": "Amy Hamilton"
+   },
+   {
+    "doc": "generated/jasper-search-upgrade/status-2.md",
+    "surface": "Amy Hamilton"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Amy_Hughes.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/borealis-partner-api/staffing-note.md",
+    "surface": "Amy Hughes"
+   },
+   {
+    "doc": "generated/borealis-partner-api/status-1.md",
+    "surface": "Amy Hughes"
+   },
+   {
+    "doc": "generated/borealis-partner-api/status-1.md",
+    "surface": "Amy"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Amy_Mcbride.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/onyx-identity-service/staffing-note.md",
+    "surface": "A. Mcbride"
+   },
+   {
+    "doc": "generated/onyx-identity-service/status-1.md",
+    "surface": "Amy Mcbride"
+   },
+   {
+    "doc": "generated/onyx-identity-service/status-2.md",
+    "surface": "Mcbride, Amy"
+   },
+   {
+    "doc": "generated/helix-partner-api/staffing-note.md",
+    "surface": "Mcbride, Amy"
+   },
+   {
+    "doc": "generated/helix-partner-api/status-1.md",
+    "surface": "Mcbride, Amy"
+   },
+   {
+    "doc": "generated/helix-partner-api/postmortem.md",
+    "surface": "A. Mcbride"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Amy_Vasquez.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/atlas-migration/staffing-note.md",
+    "surface": "Vasquez, Amy"
+   },
+   {
+    "doc": "generated/atlas-migration/status-1.md",
+    "surface": "Amy Vasquez"
+   },
+   {
+    "doc": "generated/atlas-migration/status-2.md",
+    "surface": "Amy Vasquez"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Andre_Ortiz.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/ion-mobile-relaunch/staffing-note.md",
+    "surface": "A. Ortiz"
+   },
+   {
+    "doc": "generated/ion-mobile-relaunch/status-1.md",
+    "surface": "trevorrowe@example.org"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Andrea_Becker.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/harbor-partner-api/staffing-note.md",
+    "surface": "Becker, Andrea"
+   },
+   {
+    "doc": "generated/harbor-partner-api/status-1.md",
+    "surface": "Andrea Becker"
+   },
+   {
+    "doc": "generated/harbor-partner-api/status-1.md",
+    "surface": "Andrea"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Andrea_Bond.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/dynamo-checkout-redesign/staffing-note.md",
+    "surface": "Bond, Andrea"
+   },
+   {
+    "doc": "generated/dynamo-checkout-redesign/status-1.md",
+    "surface": "olivia44@example.org"
+   },
+   {
+    "doc": "generated/dynamo-checkout-redesign/status-2.md",
+    "surface": "Andrea Bond"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Andrea_Francis.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/juniper-migration/staffing-note.md",
+    "surface": "A. Francis"
+   },
+   {
+    "doc": "generated/juniper-migration/status-1.md",
+    "surface": "Andrea Francis"
+   },
+   {
+    "doc": "generated/juniper-migration/postmortem.md",
+    "surface": "Andrea Francis"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Andrea_Rodriguez.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/falcon-migration/staffing-note.md",
+    "surface": "Andrea Rodriguez"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Andres_Franco.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/fathom-partner-api/staffing-note.md",
+    "surface": "Andres Franco"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Andrew_Barber.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/quartz-data-platform/staffing-note.md",
+    "surface": "Andrew Barber"
+   },
+   {
+    "doc": "generated/quartz-data-platform/status-1.md",
+    "surface": "Barber, Andrew"
+   },
+   {
+    "doc": "generated/delta-observability-rollout/staffing-note.md",
+    "surface": "Andrew Barber"
+   },
+   {
+    "doc": "generated/delta-observability-rollout/status-1.md",
+    "surface": "Andrew Barber"
+   },
+   {
+    "doc": "generated/delta-observability-rollout/status-2.md",
+    "surface": "A. Barber"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Andrew_Bullock.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/fathom-partner-api/staffing-note.md",
+    "surface": "Andrew Bullock"
+   },
+   {
+    "doc": "generated/fathom-partner-api/status-1.md",
+    "surface": "Andrew Bullock"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Andrew_Grimes.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/umbra-identity-service/staffing-note.md",
+    "surface": "A. Grimes"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Andrew_Hill.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/zephyr-partner-api/staffing-note.md",
+    "surface": "Andrew Hill"
+   },
+   {
+    "doc": "generated/zephyr-partner-api/staffing-note.md",
+    "surface": "Andrew"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Andrew_Hutchinson.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/raven-observability-rollout/staffing-note.md",
+    "surface": "Andrew Hutchinson"
+   },
+   {
+    "doc": "generated/raven-observability-rollout/status-1.md",
+    "surface": "Andrew Hutchinson"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Angela_Donaldson.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/beacon-reporting-pipeline/staffing-note.md",
+    "surface": "Angela Donaldson"
+   },
+   {
+    "doc": "generated/beacon-reporting-pipeline/status-1.md",
+    "surface": "Angela Donaldson"
+   },
+   {
+    "doc": "generated/beacon-reporting-pipeline/status-1.md",
+    "surface": "Angela"
+   },
+   {
+    "doc": "generated/beacon-reporting-pipeline/postmortem.md",
+    "surface": "Angela Donaldson"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Angela_Harris.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/glacier-migration/staffing-note.md",
+    "surface": "A. Harris"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Angela_Jennings.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/tundra-partner-api/staffing-note.md",
+    "surface": "Angela Jennings"
+   },
+   {
+    "doc": "generated/tundra-partner-api/status-1.md",
+    "surface": "A. Jennings"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Angela_Kelly.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/jasper-search-upgrade/staffing-note.md",
+    "surface": "Kelly, Angela"
+   },
+   {
+    "doc": "generated/jasper-search-upgrade/status-2.md",
+    "surface": "Angela Kelly"
+   },
+   {
+    "doc": "generated/jasper-search-upgrade/status-2.md",
+    "surface": "Angela"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Angela_Lin.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/onyx-identity-service/staffing-note.md",
+    "surface": "A. Lin"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Angela_Lutz.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/northwind-search-upgrade/staffing-note.md",
+    "surface": "Angela Lutz"
+   },
+   {
+    "doc": "generated/northwind-search-upgrade/status-1.md",
+    "surface": "Angela Lutz"
+   },
+   {
+    "doc": "generated/northwind-search-upgrade/postmortem.md",
+    "surface": "Angela Lutz"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Angela_Robinson.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/falcon-migration/staffing-note.md",
+    "surface": "Angela Robinson"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Angela_Roy.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/nimbus-data-platform/staffing-note.md",
+    "surface": "Angela Roy"
+   },
+   {
+    "doc": "generated/zephyr-partner-api/staffing-note.md",
+    "surface": "Angela Roy"
+   },
+   {
+    "doc": "generated/zephyr-partner-api/status-1.md",
+    "surface": "Roy, Angela"
+   },
+   {
+    "doc": "generated/zephyr-partner-api/status-2.md",
+    "surface": "Roy, Angela"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Ann_Moore.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/cobalt-billing-rewrite/staffing-note.md",
+    "surface": "A. Moore"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Ann_Stone.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/mosaic-reporting-pipeline/staffing-note.md",
+    "surface": "Ann Stone"
+   },
+   {
+    "doc": "generated/mosaic-reporting-pipeline/status-1.md",
+    "surface": "Ann Stone"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Ann_Willis.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/cobalt-billing-rewrite/staffing-note.md",
+    "surface": "Ann Willis"
+   },
+   {
+    "doc": "generated/cobalt-billing-rewrite/status-1.md",
+    "surface": "A. Willis"
+   },
+   {
+    "doc": "generated/cobalt-billing-rewrite/status-2.md",
+    "surface": "Willis, Ann"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Anna_Lowe.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/helix-partner-api/staffing-note.md",
+    "surface": "A. Lowe"
+   },
+   {
+    "doc": "generated/helix-partner-api/status-1.md",
+    "surface": "A. Lowe"
+   },
+   {
+    "doc": "generated/helix-partner-api/status-2.md",
+    "surface": "Anna Lowe"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Anna_Wong.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/echo-billing-rewrite/staffing-note.md",
+    "surface": "Anna Wong"
+   },
+   {
+    "doc": "generated/echo-billing-rewrite/status-1.md",
+    "surface": "Anna Wong"
+   },
+   {
+    "doc": "generated/echo-billing-rewrite/postmortem.md",
+    "surface": "Wong, Anna"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Anne_Arnold.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/falcon-migration/staffing-note.md",
+    "surface": "Anne Arnold"
+   },
+   {
+    "doc": "generated/falcon-migration/status-2.md",
+    "surface": "Anne Arnold"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Anthony_Blackburn_III.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/xenon-billing-rewrite/staffing-note.md",
+    "surface": "Anthony Blackburn III"
+   },
+   {
+    "doc": "generated/xenon-billing-rewrite/status-1.md",
+    "surface": "Anthony Blackburn III"
+   },
+   {
+    "doc": "generated/xenon-billing-rewrite/status-2.md",
+    "surface": "A. Blackburn"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Anthony_Foster.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/dynamo-checkout-redesign/staffing-note.md",
+    "surface": "Anthony Foster"
+   },
+   {
+    "doc": "generated/dynamo-checkout-redesign/status-2.md",
+    "surface": "A. Foster"
+   },
+   {
+    "doc": "generated/dynamo-checkout-redesign/postmortem.md",
+    "surface": "A. Foster"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Anthony_Hamilton.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/lantern-mobile-relaunch/staffing-note.md",
+    "surface": "stephaniesimon@example.org"
+   },
+   {
+    "doc": "generated/lantern-mobile-relaunch/status-1.md",
+    "surface": "Hamilton, Anthony"
+   },
+   {
+    "doc": "generated/lantern-mobile-relaunch/status-2.md",
+    "surface": "Hamilton, Anthony"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Anthony_Jones.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/kestrel-checkout-redesign/staffing-note.md",
+    "surface": "Anthony Jones"
+   },
+   {
+    "doc": "generated/kestrel-checkout-redesign/status-1.md",
+    "surface": "Anthony Jones"
+   },
+   {
+    "doc": "generated/kestrel-checkout-redesign/status-1.md",
+    "surface": "Anthony"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Anthony_Lara.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/northwind-search-upgrade/staffing-note.md",
+    "surface": "A. Lara"
+   },
+   {
+    "doc": "generated/northwind-search-upgrade/status-1.md",
+    "surface": "Anthony Lara"
+   },
+   {
+    "doc": "generated/northwind-search-upgrade/status-1.md",
+    "surface": "Anthony"
+   },
+   {
+    "doc": "generated/northwind-search-upgrade/postmortem.md",
+    "surface": "Anthony Lara"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Anthony_Lewis.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/harbor-partner-api/staffing-note.md",
+    "surface": "Anthony Lewis"
+   },
+   {
+    "doc": "generated/harbor-partner-api/status-1.md",
+    "surface": "Anthony Lewis"
+   },
+   {
+    "doc": "generated/harbor-partner-api/status-2.md",
+    "surface": "A. Lewis"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Anthony_Petersen.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/keystone-observability-rollout/staffing-note.md",
+    "surface": "Anthony Petersen"
+   },
+   {
+    "doc": "generated/keystone-observability-rollout/status-1.md",
+    "surface": "Anthony Petersen"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Anthony_Strickland.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/beacon-reporting-pipeline/staffing-note.md",
+    "surface": "Anthony Strickland"
+   },
+   {
+    "doc": "generated/beacon-reporting-pipeline/status-1.md",
+    "surface": "Anthony Strickland"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Ashley_Andrews.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/ion-mobile-relaunch/staffing-note.md",
+    "surface": "A. Andrews"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Ashley_Atkins.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/indigo-checkout-redesign/staffing-note.md",
+    "surface": "A. Atkins"
+   },
+   {
+    "doc": "generated/indigo-checkout-redesign/status-1.md",
+    "surface": "Ashley Atkins"
+   },
+   {
+    "doc": "generated/indigo-checkout-redesign/status-2.md",
+    "surface": "Ashley Atkins"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Ashley_Lewis.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/nimbus-data-platform/staffing-note.md",
+    "surface": "Ashley Lewis"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Ashley_Murphy.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/mosaic-reporting-pipeline/staffing-note.md",
+    "surface": "Murphy, Ashley"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Ashley_Pugh.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/pioneer-mobile-relaunch/staffing-note.md",
+    "surface": "Ashley Pugh"
+   },
+   {
+    "doc": "generated/pioneer-mobile-relaunch/status-1.md",
+    "surface": "Pugh, Ashley"
+   },
+   {
+    "doc": "generated/pioneer-mobile-relaunch/status-2.md",
+    "surface": "Ashley Pugh"
+   },
+   {
+    "doc": "generated/pioneer-mobile-relaunch/postmortem.md",
+    "surface": "Ashley Pugh"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Ashley_Robinson.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/lumen-migration/staffing-note.md",
+    "surface": "Ashley Robinson"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Ashley_Singleton.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/onyx-identity-service/staffing-note.md",
+    "surface": "wsims@example.net"
+   },
+   {
+    "doc": "generated/onyx-identity-service/status-1.md",
+    "surface": "A. Singleton"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Ashley_Todd_DDS.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/ember-partner-api/staffing-note.md",
+    "surface": "Todd, Ashley"
+   },
+   {
+    "doc": "generated/ember-partner-api/status-1.md",
+    "surface": "Ashley Todd DDS"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Ashley_Tyler.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/summit-billing-rewrite/staffing-note.md",
+    "surface": "A. Tyler"
+   },
+   {
+    "doc": "generated/summit-billing-rewrite/status-1.md",
+    "surface": "Ashley Tyler"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Ashley_Werner.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/umbra-identity-service/staffing-note.md",
+    "surface": "Ashley Werner"
+   },
+   {
+    "doc": "generated/umbra-identity-service/status-1.md",
+    "surface": "Ashley Werner"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Audrey_Delgado.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/quartz-data-platform/staffing-note.md",
+    "surface": "Audrey Delgado"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Austin_Black.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/borealis-partner-api/staffing-note.md",
+    "surface": "Austin Black"
+   },
+   {
+    "doc": "generated/borealis-partner-api/staffing-note.md",
+    "surface": "Austin"
+   },
+   {
+    "doc": "generated/borealis-partner-api/status-2.md",
+    "surface": "Austin Black"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Austin_Brown.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/summit-billing-rewrite/staffing-note.md",
+    "surface": "Austin Brown"
+   },
+   {
+    "doc": "generated/summit-billing-rewrite/status-1.md",
+    "surface": "Austin Brown"
+   },
+   {
+    "doc": "generated/summit-billing-rewrite/postmortem.md",
+    "surface": "A. Brown"
+   },
+   {
+    "doc": "generated/tundra-partner-api/staffing-note.md",
+    "surface": "A. Brown"
+   },
+   {
+    "doc": "generated/tundra-partner-api/status-1.md",
+    "surface": "Austin Brown"
+   },
+   {
+    "doc": "generated/tundra-partner-api/status-1.md",
+    "surface": "Austin"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Austin_Petty.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/mosaic-reporting-pipeline/staffing-note.md",
+    "surface": "Austin Petty"
+   },
+   {
+    "doc": "generated/mosaic-reporting-pipeline/staffing-note.md",
+    "surface": "Austin"
+   },
+   {
+    "doc": "generated/mosaic-reporting-pipeline/status-1.md",
+    "surface": "Austin Petty"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Austin_Smith.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/northwind-search-upgrade/staffing-note.md",
+    "surface": "Austin Smith"
+   },
+   {
+    "doc": "generated/northwind-search-upgrade/status-2.md",
+    "surface": "Austin Smith"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Barbara_Roman.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/juniper-migration/staffing-note.md",
+    "surface": "Roman, Barbara"
+   },
+   {
+    "doc": "generated/juniper-migration/status-1.md",
+    "surface": "Roman, Barbara"
+   },
+   {
+    "doc": "generated/willow-data-platform/staffing-note.md",
+    "surface": "Barbara Roman"
+   },
+   {
+    "doc": "generated/willow-data-platform/staffing-note.md",
+    "surface": "Barbara"
+   },
+   {
+    "doc": "generated/willow-data-platform/status-1.md",
+    "surface": "Barbara Roman"
+   },
+   {
+    "doc": "generated/willow-data-platform/status-2.md",
+    "surface": "B. Roman"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Barry_Castro.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/umbra-identity-service/staffing-note.md",
+    "surface": "Castro, Barry"
+   },
+   {
+    "doc": "generated/umbra-identity-service/status-1.md",
+    "surface": "Barry Castro"
+   },
+   {
+    "doc": "generated/xenon-billing-rewrite/staffing-note.md",
+    "surface": "Barry Castro"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Becky_Wright.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/kestrel-checkout-redesign/staffing-note.md",
+    "surface": "Becky Wright"
+   },
+   {
+    "doc": "generated/kestrel-checkout-redesign/status-1.md",
+    "surface": "Becky Wright"
+   },
+   {
+    "doc": "generated/glacier-migration/staffing-note.md",
+    "surface": "Becky Wright"
+   },
+   {
+    "doc": "generated/glacier-migration/status-1.md",
+    "surface": "B. Wright"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Benjamin_Wagner_DDS.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/vertex-observability-rollout/staffing-note.md",
+    "surface": "Wagner, Benjamin"
+   },
+   {
+    "doc": "generated/vertex-observability-rollout/status-1.md",
+    "surface": "Benjamin Wagner DDS"
+   },
+   {
+    "doc": "generated/vertex-observability-rollout/status-2.md",
+    "surface": "Benjamin Wagner DDS"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Bethany_Mccarthy.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/xenon-billing-rewrite/staffing-note.md",
+    "surface": "B. Mccarthy"
+   },
+   {
+    "doc": "generated/xenon-billing-rewrite/status-1.md",
+    "surface": "B. Mccarthy"
+   },
+   {
+    "doc": "generated/xenon-billing-rewrite/status-2.md",
+    "surface": "B. Mccarthy"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Betty_Solis.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/granite-partner-api/staffing-note.md",
+    "surface": "Solis, Betty"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Bianca_Mcdonald.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/cinder-billing-rewrite/staffing-note.md",
+    "surface": "Mcdonald, Bianca"
+   },
+   {
+    "doc": "generated/cinder-billing-rewrite/status-1.md",
+    "surface": "B. Mcdonald"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Bianca_Romero.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/echo-billing-rewrite/staffing-note.md",
+    "surface": "Romero, Bianca"
+   },
+   {
+    "doc": "generated/echo-billing-rewrite/postmortem.md",
+    "surface": "B. Romero"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Billy_Zuniga.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/quartz-data-platform/staffing-note.md",
+    "surface": "Zuniga, Billy"
+   },
+   {
+    "doc": "generated/quartz-data-platform/status-1.md",
+    "surface": "Billy Zuniga"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Brad_Brown_DVM.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/nimbus-data-platform/staffing-note.md",
+    "surface": "Brad Brown DVM"
+   },
+   {
+    "doc": "generated/nimbus-data-platform/staffing-note.md",
+    "surface": "Brad"
+   },
+   {
+    "doc": "generated/nimbus-data-platform/status-1.md",
+    "surface": "Brad Brown DVM"
+   },
+   {
+    "doc": "generated/nimbus-data-platform/status-1.md",
+    "surface": "Brad"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Bradley_Lowery.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/glacier-migration/staffing-note.md",
+    "surface": "ztyler@example.com"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Bradley_Wood.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/dynamo-checkout-redesign/staffing-note.md",
+    "surface": "Bradley Wood"
+   },
+   {
+    "doc": "generated/dynamo-checkout-redesign/staffing-note.md",
+    "surface": "Bradley"
+   },
+   {
+    "doc": "generated/dynamo-checkout-redesign/status-1.md",
+    "surface": "Bradley Wood"
+   },
+   {
+    "doc": "generated/dynamo-checkout-redesign/status-1.md",
+    "surface": "Bradley"
+   },
+   {
+    "doc": "generated/dynamo-checkout-redesign/status-2.md",
+    "surface": "Bradley Wood"
+   },
+   {
+    "doc": "generated/dynamo-checkout-redesign/status-2.md",
+    "surface": "Bradley"
+   },
+   {
+    "doc": "generated/dynamo-checkout-redesign/postmortem.md",
+    "surface": "Bradley Wood"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Brandon_Bell.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/zephyr-partner-api/staffing-note.md",
+    "surface": "Brandon Bell"
+   },
+   {
+    "doc": "generated/zephyr-partner-api/status-2.md",
+    "surface": "Brandon Bell"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Brandon_Bishop.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/vertex-observability-rollout/staffing-note.md",
+    "surface": "Bishop, Brandon"
+   },
+   {
+    "doc": "generated/vertex-observability-rollout/status-2.md",
+    "surface": "Brandon Bishop"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Brandon_Brown.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/lantern-mobile-relaunch/staffing-note.md",
+    "surface": "Brown, Brandon"
+   },
+   {
+    "doc": "generated/lantern-mobile-relaunch/status-1.md",
+    "surface": "Brown, Brandon"
+   },
+   {
+    "doc": "generated/lantern-mobile-relaunch/status-2.md",
+    "surface": "B. Brown"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Brandon_Garza.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/echo-billing-rewrite/staffing-note.md",
+    "surface": "shepherdbrittany@example.com"
+   },
+   {
+    "doc": "generated/echo-billing-rewrite/status-1.md",
+    "surface": "B. Garza"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Brandon_Holloway.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/dynamo-checkout-redesign/staffing-note.md",
+    "surface": "Brandon Holloway"
+   },
+   {
+    "doc": "generated/dynamo-checkout-redesign/status-1.md",
+    "surface": "Brandon Holloway"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Brandon_Jackson.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/borealis-partner-api/staffing-note.md",
+    "surface": "B. Jackson"
+   },
+   {
+    "doc": "generated/borealis-partner-api/status-2.md",
+    "surface": "B. Jackson"
+   },
+   {
+    "doc": "generated/lantern-mobile-relaunch/staffing-note.md",
+    "surface": "B. Jackson"
+   },
+   {
+    "doc": "generated/lantern-mobile-relaunch/status-1.md",
+    "surface": "Brandon Jackson"
+   },
+   {
+    "doc": "generated/lantern-mobile-relaunch/status-2.md",
+    "surface": "Jackson, Brandon"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Brandon_Lam.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/lumen-migration/staffing-note.md",
+    "surface": "Brandon Lam"
+   },
+   {
+    "doc": "generated/lumen-migration/status-1.md",
+    "surface": "Brandon Lam"
+   },
+   {
+    "doc": "generated/lumen-migration/status-2.md",
+    "surface": "Brandon Lam"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Brandy_Melendez.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/granite-partner-api/staffing-note.md",
+    "surface": "Brandy Melendez"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Breanna_Lee.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/onyx-identity-service/staffing-note.md",
+    "surface": "Breanna Lee"
+   },
+   {
+    "doc": "generated/vertex-observability-rollout/staffing-note.md",
+    "surface": "Breanna Lee"
+   },
+   {
+    "doc": "generated/vertex-observability-rollout/status-1.md",
+    "surface": "Breanna Lee"
+   },
+   {
+    "doc": "generated/vertex-observability-rollout/postmortem.md",
+    "surface": "Lee, Breanna"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Brenda_Adams.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/atlas-migration/staffing-note.md",
+    "surface": "Brenda Adams"
+   },
+   {
+    "doc": "generated/atlas-migration/status-1.md",
+    "surface": "Brenda Adams"
+   },
+   {
+    "doc": "generated/raven-observability-rollout/staffing-note.md",
+    "surface": "Brenda Adams"
+   },
+   {
+    "doc": "generated/raven-observability-rollout/status-1.md",
+    "surface": "Brenda Adams"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Brenda_Nguyen.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/meridian-observability-rollout/staffing-note.md",
+    "surface": "B. Nguyen"
+   },
+   {
+    "doc": "generated/meridian-observability-rollout/status-1.md",
+    "surface": "Brenda Nguyen"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Brendan_Johnson.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/nimbus-data-platform/staffing-note.md",
+    "surface": "Brendan Johnson"
+   },
+   {
+    "doc": "generated/nimbus-data-platform/status-1.md",
+    "surface": "Brendan Johnson"
+   },
+   {
+    "doc": "generated/nimbus-data-platform/status-2.md",
+    "surface": "B. Johnson"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Brent_Hopkins.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/beacon-reporting-pipeline/staffing-note.md",
+    "surface": "Brent Hopkins"
+   },
+   {
+    "doc": "generated/beacon-reporting-pipeline/status-1.md",
+    "surface": "B. Hopkins"
+   },
+   {
+    "doc": "generated/beacon-reporting-pipeline/postmortem.md",
+    "surface": "Hopkins, Brent"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Brent_Mullen.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/ember-partner-api/staffing-note.md",
+    "surface": "Mullen, Brent"
+   },
+   {
+    "doc": "generated/ember-partner-api/status-1.md",
+    "surface": "Mullen, Brent"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Brian_Brewer.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/willow-data-platform/staffing-note.md",
+    "surface": "Brian Brewer"
+   },
+   {
+    "doc": "generated/willow-data-platform/status-1.md",
+    "surface": "B. Brewer"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Brian_Campbell.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/willow-data-platform/staffing-note.md",
+    "surface": "Campbell, Brian"
+   },
+   {
+    "doc": "generated/willow-data-platform/status-2.md",
+    "surface": "Brian Campbell"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Brian_Cuevas.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/glacier-migration/staffing-note.md",
+    "surface": "Brian Cuevas"
+   },
+   {
+    "doc": "generated/glacier-migration/status-1.md",
+    "surface": "B. Cuevas"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Brian_Henderson.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/nimbus-data-platform/staffing-note.md",
+    "surface": "matthewpayne@example.com"
+   },
+   {
+    "doc": "generated/nimbus-data-platform/status-1.md",
+    "surface": "Brian Henderson"
+   },
+   {
+    "doc": "generated/nimbus-data-platform/status-2.md",
+    "surface": "B. Henderson"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Brian_Holmes.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/keystone-observability-rollout/staffing-note.md",
+    "surface": "B. Holmes"
+   },
+   {
+    "doc": "generated/keystone-observability-rollout/status-1.md",
+    "surface": "Brian Holmes"
+   },
+   {
+    "doc": "generated/keystone-observability-rollout/status-2.md",
+    "surface": "Brian Holmes"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Brian_Lawrence.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/keystone-observability-rollout/staffing-note.md",
+    "surface": "Brian Lawrence"
+   },
+   {
+    "doc": "generated/keystone-observability-rollout/status-1.md",
+    "surface": "Brian Lawrence"
+   },
+   {
+    "doc": "generated/keystone-observability-rollout/status-2.md",
+    "surface": "Brian Lawrence"
+   },
+   {
+    "doc": "generated/keystone-observability-rollout/postmortem.md",
+    "surface": "Lawrence, Brian"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Brian_Parrish.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/meridian-observability-rollout/staffing-note.md",
+    "surface": "Brian Parrish"
+   },
+   {
+    "doc": "generated/meridian-observability-rollout/status-1.md",
+    "surface": "Brian Parrish"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Brian_Perez.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/lantern-mobile-relaunch/staffing-note.md",
+    "surface": "Perez, Brian"
+   },
+   {
+    "doc": "generated/lantern-mobile-relaunch/status-2.md",
+    "surface": "B. Perez"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Brian_Torres.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/borealis-partner-api/staffing-note.md",
+    "surface": "B. Torres"
+   },
+   {
+    "doc": "generated/borealis-partner-api/status-1.md",
+    "surface": "Brian Torres"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Brian_White.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/atlas-migration/staffing-note.md",
+    "surface": "Brian White"
+   },
+   {
+    "doc": "generated/atlas-migration/status-2.md",
+    "surface": "Brian White"
+   },
+   {
+    "doc": "generated/atlas-migration/postmortem.md",
+    "surface": "Brian White"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Brianna_Salas.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/meridian-observability-rollout/staffing-note.md",
+    "surface": "B. Salas"
+   },
+   {
+    "doc": "generated/meridian-observability-rollout/status-1.md",
+    "surface": "Brianna Salas"
+   },
+   {
+    "doc": "generated/meridian-observability-rollout/status-1.md",
+    "surface": "Brianna"
+   },
+   {
+    "doc": "generated/umbra-identity-service/staffing-note.md",
+    "surface": "Brianna Salas"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Brittany_Jones.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/xenon-billing-rewrite/staffing-note.md",
+    "surface": "Jones, Brittany"
+   },
+   {
+    "doc": "generated/xenon-billing-rewrite/status-1.md",
+    "surface": "Brittany Jones"
+   },
+   {
+    "doc": "generated/xenon-billing-rewrite/status-2.md",
+    "surface": "Brittany Jones"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Brittany_Martinez.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/quartz-data-platform/staffing-note.md",
+    "surface": "Brittany Martinez"
+   },
+   {
+    "doc": "generated/quartz-data-platform/staffing-note.md",
+    "surface": "Brittany"
+   },
+   {
+    "doc": "generated/quartz-data-platform/status-1.md",
+    "surface": "Brittany Martinez"
+   },
+   {
+    "doc": "generated/quartz-data-platform/status-1.md",
+    "surface": "Brittany"
+   },
+   {
+    "doc": "generated/anchor-checkout-redesign/staffing-note.md",
+    "surface": "Martinez, Brittany"
+   },
+   {
+    "doc": "generated/anchor-checkout-redesign/status-1.md",
+    "surface": "Brittany Martinez"
+   },
+   {
+    "doc": "generated/anchor-checkout-redesign/status-2.md",
+    "surface": "Brittany Martinez"
+   },
+   {
+    "doc": "generated/anchor-checkout-redesign/status-2.md",
+    "surface": "Brittany"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Bruce_Cardenas.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/indigo-checkout-redesign/staffing-note.md",
+    "surface": "Cardenas, Bruce"
+   },
+   {
+    "doc": "generated/indigo-checkout-redesign/status-2.md",
+    "surface": "Cardenas, Bruce"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Bruce_Garcia.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/borealis-partner-api/staffing-note.md",
+    "surface": "Bruce Garcia"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Bruce_Smith.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/fathom-partner-api/staffing-note.md",
+    "surface": "Bruce Smith"
+   },
+   {
+    "doc": "generated/fathom-partner-api/status-1.md",
+    "surface": "Bruce Smith"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Bryan_Anderson.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/helix-partner-api/staffing-note.md",
+    "surface": "Bryan Anderson"
+   },
+   {
+    "doc": "generated/helix-partner-api/status-1.md",
+    "surface": "Bryan Anderson"
+   },
+   {
+    "doc": "generated/helix-partner-api/status-2.md",
+    "surface": "Anderson, Bryan"
+   },
+   {
+    "doc": "generated/helix-partner-api/postmortem.md",
+    "surface": "B. Anderson"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Bryan_Brown.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/raven-observability-rollout/staffing-note.md",
+    "surface": "Bryan Brown"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Bryan_Greene.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/mosaic-reporting-pipeline/staffing-note.md",
+    "surface": "Bryan Greene"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Caitlin_Higgins.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/granite-partner-api/staffing-note.md",
+    "surface": "C. Higgins"
+   },
+   {
+    "doc": "generated/granite-partner-api/postmortem.md",
+    "surface": "Caitlin Higgins"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Caitlyn_Cruz.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/yarrow-partner-api/staffing-note.md",
+    "surface": "Caitlyn Cruz"
+   },
+   {
+    "doc": "generated/yarrow-partner-api/staffing-note.md",
+    "surface": "Caitlyn"
+   },
+   {
+    "doc": "generated/yarrow-partner-api/status-1.md",
+    "surface": "Caitlyn Cruz"
+   },
+   {
+    "doc": "generated/yarrow-partner-api/status-2.md",
+    "surface": "C. Cruz"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Caleb_Ingram.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/vertex-observability-rollout/staffing-note.md",
+    "surface": "C. Ingram"
+   },
+   {
+    "doc": "generated/vertex-observability-rollout/status-1.md",
+    "surface": "C. Ingram"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Calvin_Bond.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/falcon-migration/staffing-note.md",
+    "surface": "Calvin Bond"
+   },
+   {
+    "doc": "generated/falcon-migration/status-1.md",
+    "surface": "Calvin Bond"
+   },
+   {
+    "doc": "generated/falcon-migration/status-2.md",
+    "surface": "Calvin Bond"
+   },
+   {
+    "doc": "generated/falcon-migration/status-2.md",
+    "surface": "Calvin"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Carla_Rodriguez.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/cobalt-billing-rewrite/staffing-note.md",
+    "surface": "C. Rodriguez"
+   },
+   {
+    "doc": "generated/cobalt-billing-rewrite/status-1.md",
+    "surface": "Carla Rodriguez"
+   },
+   {
+    "doc": "generated/cobalt-billing-rewrite/status-2.md",
+    "surface": "Carla Rodriguez"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Carlos_Clark.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/meridian-observability-rollout/staffing-note.md",
+    "surface": "Carlos Clark"
+   },
+   {
+    "doc": "generated/meridian-observability-rollout/status-1.md",
+    "surface": "Carlos Clark"
+   },
+   {
+    "doc": "generated/meridian-observability-rollout/postmortem.md",
+    "surface": "Clark, Carlos"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Carlos_Green.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/granite-partner-api/staffing-note.md",
+    "surface": "Carlos Green"
+   },
+   {
+    "doc": "generated/granite-partner-api/staffing-note.md",
+    "surface": "Carlos"
+   },
+   {
+    "doc": "generated/granite-partner-api/status-1.md",
+    "surface": "Carlos Green"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Carmen_Arnold.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/juniper-migration/staffing-note.md",
+    "surface": "Carmen Arnold"
+   },
+   {
+    "doc": "generated/juniper-migration/postmortem.md",
+    "surface": "Carmen Arnold"
+   },
+   {
+    "doc": "generated/nimbus-data-platform/staffing-note.md",
+    "surface": "Arnold, Carmen"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Carol_Riley.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/cobalt-billing-rewrite/staffing-note.md",
+    "surface": "C. Riley"
+   },
+   {
+    "doc": "generated/cobalt-billing-rewrite/status-1.md",
+    "surface": "C. Riley"
+   },
+   {
+    "doc": "generated/cobalt-billing-rewrite/status-2.md",
+    "surface": "C. Riley"
+   },
+   {
+    "doc": "generated/mosaic-reporting-pipeline/staffing-note.md",
+    "surface": "Carol Riley"
+   },
+   {
+    "doc": "generated/mosaic-reporting-pipeline/status-1.md",
+    "surface": "Carol Riley"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Carol_Smith.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/glacier-migration/staffing-note.md",
+    "surface": "Carol Smith"
+   },
+   {
+    "doc": "generated/glacier-migration/status-1.md",
+    "surface": "Carol Smith"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Carolyn_Wilcox_DDS.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/summit-billing-rewrite/staffing-note.md",
+    "surface": "Carolyn Wilcox DDS"
+   },
+   {
+    "doc": "generated/summit-billing-rewrite/status-1.md",
+    "surface": "Wilcox, Carolyn"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Carrie_Clark.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/cinder-billing-rewrite/staffing-note.md",
+    "surface": "Carrie Clark"
+   },
+   {
+    "doc": "generated/cinder-billing-rewrite/status-1.md",
+    "surface": "Clark, Carrie"
+   },
+   {
+    "doc": "generated/meridian-observability-rollout/staffing-note.md",
+    "surface": "Carrie Clark"
+   },
+   {
+    "doc": "generated/meridian-observability-rollout/staffing-note.md",
+    "surface": "Carrie"
+   },
+   {
+    "doc": "generated/meridian-observability-rollout/postmortem.md",
+    "surface": "Carrie Clark"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Carrie_Horn.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/vertex-observability-rollout/staffing-note.md",
+    "surface": "Horn, Carrie"
+   },
+   {
+    "doc": "generated/vertex-observability-rollout/status-1.md",
+    "surface": "Carrie Horn"
+   },
+   {
+    "doc": "generated/vertex-observability-rollout/status-2.md",
+    "surface": "Horn, Carrie"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Casey_Anderson.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/jasper-search-upgrade/staffing-note.md",
+    "surface": "C. Anderson"
+   },
+   {
+    "doc": "generated/jasper-search-upgrade/status-2.md",
+    "surface": "patriciabrown@example.com"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Casey_Pittman.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/ember-partner-api/staffing-note.md",
+    "surface": "C. Pittman"
+   },
+   {
+    "doc": "generated/ember-partner-api/status-1.md",
+    "surface": "Casey Pittman"
+   },
+   {
+    "doc": "generated/xenon-billing-rewrite/staffing-note.md",
+    "surface": "C. Pittman"
+   },
+   {
+    "doc": "generated/xenon-billing-rewrite/status-2.md",
+    "surface": "C. Pittman"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Casey_Wright.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/lumen-migration/staffing-note.md",
+    "surface": "Wright, Casey"
+   },
+   {
+    "doc": "generated/lumen-migration/status-1.md",
+    "surface": "Casey Wright"
+   },
+   {
+    "doc": "generated/lumen-migration/status-2.md",
+    "surface": "Casey Wright"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Cassandra_Cross.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/jasper-search-upgrade/staffing-note.md",
+    "surface": "Cassandra Cross"
+   },
+   {
+    "doc": "generated/jasper-search-upgrade/status-1.md",
+    "surface": "C. Cross"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Cassandra_Hunter.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/helix-partner-api/staffing-note.md",
+    "surface": "ubanks@example.com"
+   },
+   {
+    "doc": "generated/helix-partner-api/status-1.md",
+    "surface": "Cassandra Hunter"
+   },
+   {
+    "doc": "generated/helix-partner-api/status-2.md",
+    "surface": "Cassandra Hunter"
+   }
+  ]
+ }
+]
