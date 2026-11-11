@@ -167,6 +167,7 @@ def test_multi_hop_search_finds_a_person_whose_resume_lacks_the_skill(corpus, ca
     hybrid = search("Who has hands-on experience with Kafka?", "hybrid")
     aaron = next(p for p in hybrid["people"] if p["name"] == "Aaron Brown" and p["title"] == "Security Analyst")
     assert aaron["paths"] == ["Aaron Brown → worked on → Atlas Migration → used → Kafka"]
+    assert aaron["links"] == [{"project": "Atlas Migration", "skills": ["Kafka"]}]
     assert aaron["evidence"] and all(e["text"] for e in aaron["evidence"])
     assert "Bea Wu" not in [p["name"] for p in hybrid["people"]]
     # Text similarity alone reaches the design summary, which names nobody.

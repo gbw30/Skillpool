@@ -22,6 +22,7 @@ const RESULTS: SearchResults = {
       title: "Automation Engineer",
       matchedSkills: [{ name: "Kafka", level: "expert" }, { name: "Kubernetes", level: "intermediate" }],
       paths: ["Brenda Adams → worked on → Atlas Migration → used → Kafka, Kubernetes"],
+      links: [{ project: "Atlas Migration", skills: ["Kafka", "Kubernetes"] }],
       evidence: [
         { n: 1, chunkId: "c-1", docId: "d-atlas-status-2", path: "atlas-migration/status-2.md", text: "Brenda Adams, release manager on Atlas Migration, moved the order events from the nightly batch onto Kafka and ran the cutover with no lost messages." },
         { n: 2, chunkId: "c-2", docId: "d-brenda-resume", path: "resumes/Brenda_Adams.pdf", text: "Skills: Python, intermediate, Kafka, expert, Kubernetes, intermediate, Terraform, beginner, English, fluent" },
@@ -37,6 +38,10 @@ const RESULTS: SearchResults = {
         "Amy Vasquez → worked on → Beacon Reporting Pipeline → used → Kafka, Spark",
         "Amy Vasquez → worked on → Atlas Migration → used → Kafka, Kubernetes",
       ],
+      links: [
+        { project: "Beacon Reporting Pipeline", skills: ["Kafka", "Spark"] },
+        { project: "Atlas Migration", skills: ["Kafka", "Kubernetes"] },
+      ],
       evidence: [
         { n: 4, chunkId: "c-4", docId: "d-beacon-postmortem", path: "beacon-reporting-pipeline/postmortem.md", text: "The reporting pipeline read clickstream events from Kafka into Spark. Amy Vasquez, QA lead, traced the duplicate rows to a consumer that committed offsets before writing." },
         { n: 5, chunkId: "c-5", docId: "d-atlas-status-1", path: "atlas-migration/status-1.md", text: "Amy Vasquez, QA lead on Atlas Migration, finished the access audit." },
@@ -48,6 +53,7 @@ const RESULTS: SearchResults = {
       title: null,
       matchedSkills: [{ name: "Kafka", level: null }],
       paths: [],
+      links: [],
       evidence: [
         { n: 6, chunkId: "c-6", docId: "d-christopher-resume", path: "resumes/uploads/2026-batch/Christopher_Montgomery-Abernathy_Senior_Platform_Engineer_final_v3.pdf", text: "Skills: Kafka, Go, PostgreSQL, gRPC, Prometheus, Grafana, Helm, Argo CD, AWS, GCP, Linux, Bash" },
       ],

@@ -8,6 +8,8 @@ export type PersonResult = {
   title: string | null;
   matchedSkills: { name: string; level: string | null }[];
   paths: string[];
+  /** The same paths as data: each project the person worked on and the matching skills it used. */
+  links: { project: string; skills: string[] }[];
   evidence: Evidence[];
 };
 
