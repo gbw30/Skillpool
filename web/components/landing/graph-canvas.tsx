@@ -10,7 +10,11 @@ import {
   AdditiveBlending, AmbientLight, BoxGeometry, BufferAttribute, BufferGeometry, Color, DirectionalLight, Fog, Group,
   InstancedMesh, LineBasicMaterial, LineSegments, MeshLambertMaterial, NormalBlending, Object3D, OctahedronGeometry,
   PerspectiveCamera, Points, Scene, ShaderMaterial, SphereGeometry, Vector3, WebGLRenderer,
+  type InterleavedBufferAttribute,
 } from "three";
+import { LineMaterial } from "three/addons/lines/LineMaterial.js";
+import { LineSegments2 } from "three/addons/lines/LineSegments2.js";
+import { LineSegmentsGeometry } from "three/addons/lines/LineSegmentsGeometry.js";
 import { brainPoints, nearestLinks } from "@/lib/brain";
 import { createLayout, RADIUS, type Graph, type GraphNode, type Kind } from "@/lib/graph";
 import { Spring } from "@/lib/spring";
@@ -156,6 +160,14 @@ export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onO
     const dots = new Points(dotGeometry, dotMat), pulses = new Points(pulseGeometry, pulseMat);
     const meshLines = new LineSegments(meshGeometry, meshMat), linkLines = new LineSegments(linkGeometry, linkMat);
     const traceLines = new LineSegments(traceGeometry, traceMat);
+    // The hero's traced path is drawn as a thick line, which plain WebGL lines cannot be. Room for four segments.
+    const pathGeometry = new LineSegmentsGeometry().setPositions(new Float32Array(24));
+    const pathMat = new LineMaterial({ linewidth: 3, transparent: true, depthWrite: false });
+    const pathLines = new LineSegments2(pathGeometry, pathMat);
+    const pathArray = pathGeometry.attributes.instanceStart.array as Float32Array;
+    pathLines.frustumCulled = false;
+    pathLines.visible = false;
+    inner.add(pathLines);
     for (const object of [meshLines, linkLines, traceLines, dots, pulses]) {
       object.frustumCulled = false;
       object.visible = false; // until the layout is ready
@@ -259,17 +271,18 @@ export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onO
       }
       dotMat.uniforms.boost.value = pulseMat.uniforms.boost.value = dark ? 1 : 0;
       traceMat.color.copy(ink);
+      pathMat.color.copy(token("--color-accent"));
       if (ready) paint();
     }
 
     // --- the hero's traced path: a person, their project, its skill, lit one after the other -
     let path: number[] = [];
-    let reach = new Spring(0, 0.9); // how far along the path the light has travelled
+    let reach = new Spring(0, 2.8); // how far along the path the light has travelled; slow enough to follow
     function setTrace(next: number[] | null) {
       const wanted = (next ?? []).filter((i) => i >= 0 && i < n);
       if (wanted.join() === path.join()) return;
       path = wanted;
-      reach = new Spring(0, 0.9);
+      reach = new Spring(0, 2.8);
       reach.to(Math.max(path.length - 1, 0), performance.now() / 1000);
       if (ready) label();
     }
@@ -428,7 +441,7 @@ export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onO
     function hover(i: number) {
       if (i === hovered) return;
       hovered = i;
-      stageEl!.style.cursor = i !== -1 && nodes[i].kind === "person" ? "pointer" : "";
+      stageEl!.style.cursor = i !== -1 && nodes[i].kind === "person" ? "var(--cursor-link)" : "";
       paint();
       label();
     }
@@ -498,7 +511,14 @@ export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onO
     let frame = 0, last = performance.now() / 1000;
     const scrolled = new Spring(0, 0.7); // follows the page from the hero (0) to the graph view (1)
     const grow = new Spring(0, 1.3, 0.12); // the shape swelling into place when it first appears
-    let drift = 0, view = 0, veil = 1, wasFormed = false, drawn = -1;
+    let drift = 0, view = 0, veil = 1, wasFormed = false, drawn = -1, posed = "";
+    // Writing a style the element already has still costs a style pass, so remember what was written.
+    const written = new Map<HTMLElement, string>();
+    const style = (el: HTMLElement, key: "opacity" | "transform" | "maskImage", value: string) => {
+      if (written.get(el) === key + value) return;
+      written.set(el, key + value);
+      el.style[key] = value;
+    };
 
     function tick(stamp: number) {
       frame = requestAnimationFrame(tick);
@@ -528,6 +548,7 @@ export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onO
         renderer.setSize(w, h, false);
         camera.aspect = w / h;
         camera.updateProjectionMatrix();
+        pathMat.resolution.set(w, h);
       }
 
       const range = box.height - innerHeight;
@@ -600,21 +621,25 @@ export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onO
             here[k] = i < n ? mix(home[k], graphAt[k], go) : home[k] * (1 + 0.3 * e);
           }
         }
-        links.forEach(([a, b], k) => {
-          linkPositions.set(here.subarray(a * 3, a * 3 + 3), k * 6);
-          linkPositions.set(here.subarray(b * 3, b * 3 + 3), k * 6 + 3);
-        });
-        mesh.forEach(([a, b], k) => {
-          meshPositions.set(here.subarray(a * 3, a * 3 + 3), k * 6);
-          meshPositions.set(here.subarray(b * 3, b * 3 + 3), k * 6 + 3);
-        });
+        // Plain loops: this runs every frame of the scroll, and making small arrays here stutters.
+        for (const [list, positions] of [[links, linkPositions], [mesh, meshPositions]] as const) {
+          for (let k = 0; k < list.length; k++) {
+            const a = list[k][0] * 3, b = list[k][1] * 3, o = k * 6;
+            positions[o] = here[a]; positions[o + 1] = here[a + 1]; positions[o + 2] = here[a + 2];
+            positions[o + 3] = here[b]; positions[o + 4] = here[b + 1]; positions[o + 5] = here[b + 2];
+          }
+        }
         dotGeometry.attributes.position.needsUpdate = true;
         linkGeometry.attributes.position.needsUpdate = true;
         meshGeometry.attributes.position.needsUpdate = true;
       }
       const solidity = smooth(clamp((e - 0.55) / 0.45)); // the solid shapes arrive in the second half
       const beside = hovered === -1 ? null : nodes[hovered].neighbours;
-      for (let i = 0; i < n && solidity > 0; i++) {
+      // The shapes only need placing again when something about them changed.
+      const pose = `${e}|${hovered}|${zoomed}`;
+      const placeAgain = pose !== posed && solidity > 0;
+      posed = pose;
+      for (let i = 0; i < n && placeAgain; i++) {
         dummy.position.set(here[i * 3], here[i * 3 + 1], here[i * 3 + 2]);
         dummy.rotation.set(i, i * 2, 0); // so the cubes and diamonds do not all face the same way
         // Zooming in spreads the nodes apart faster than it enlarges them, which is what thins out a dense graph.
@@ -624,7 +649,7 @@ export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onO
       }
       for (const item of solids) {
         item.visible = solidity > 0;
-        item.instanceMatrix.needsUpdate = true;
+        if (placeAgain) item.instanceMatrix.needsUpdate = true;
       }
 
       const meshShow = (1 - e) ** 2, linkShow = smooth(clamp((e - 0.3) / 0.7));
@@ -671,24 +696,29 @@ export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onO
           if (a === hovered || b === hovered) tracePositions.set(linkPositions.subarray(k * 6, k * 6 + 6), segments++ * 6);
         });
         traceMat.opacity = 0.7;
-      } else if (path.length > 1 && brainShow > 0) {
-        for (let s = 0; s < path.length - 1; s++) {
+      }
+      let strokes = 0;
+      if (hovered === -1 && path.length > 1 && brainShow > 0) {
+        for (let s = 0; s < Math.min(path.length - 1, 4); s++) {
           const part = clamp(far - s);
           if (part <= 0) break;
           const a = path[s] * 3, b = path[s + 1] * 3;
           for (let axis = 0; axis < 3; axis++) {
-            tracePositions[segments * 6 + axis] = here[a + axis];
-            tracePositions[segments * 6 + 3 + axis] = mix(here[a + axis], here[b + axis], part);
+            pathArray[strokes * 6 + axis] = here[a + axis];
+            pathArray[strokes * 6 + 3 + axis] = mix(here[a + axis], here[b + axis], part);
           }
-          segments++;
+          strokes++;
         }
         path.forEach((i, s) => {
           if (far < s - 0.05) return;
           warmth[i] = 1; // the nodes the light has reached stay warm, steadily
           scale[i] = dotSize[i] * 1.7;
         });
-        traceMat.opacity = 0.6 * brainShow;
+        pathMat.opacity = 0.9 * brainShow;
+        (pathGeometry.attributes.instanceStart as InterleavedBufferAttribute).data.needsUpdate = true;
       }
+      pathLines.visible = strokes > 0;
+      pathGeometry.instanceCount = strokes;
       traceGeometry.setDrawRange(0, segments * 2);
       traceGeometry.attributes.position.needsUpdate = true;
 
@@ -702,17 +732,18 @@ export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onO
 
       renderer.render(world, camera);
       // Behind the text the brain is dimmed: all of it on a narrow screen, its left side on a wide one.
-      canvas!.style.opacity = String(clamp((t - startedAt) / 0.8) * Math.max(0, veil) * (wide ? 1 : mix(0.4, 1, e)));
+      const seen = (clamp((t - startedAt) / 0.8) * Math.max(0, veil) * (wide ? 1 : mix(0.4, 1, e))).toFixed(3);
+      if (canvas!.style.opacity !== seen) canvas!.style.opacity = seen;
       const mask = wide && e < 0.999 ? `linear-gradient(to right, rgb(0 0 0 / ${mix(0.25, 1, e).toFixed(3)}) 34%, #000 60%)` : "";
       if (canvas!.style.maskImage !== mask) canvas!.style.maskImage = mask;
 
-      labelLayer!.style.opacity = String(Math.max(brainShow, smooth(clamp((e - 0.75) / 0.25))));
+      style(labelLayer!, "opacity", Math.max(brainShow, smooth(clamp((e - 0.75) / 0.25))).toFixed(3));
       labels.forEach((el, k) => {
         const waiting = e < 0.5 && far < k - 0.05; // the light has not reached this node yet
         const p = labelled[k] === undefined || waiting ? null : onScreen(labelled[k]);
         const shown = p !== null && p.z < 1;
-        el.classList.toggle("hidden", !shown);
-        if (shown) el.style.transform = `translate(${(p.x * 0.5 + 0.5) * width}px, ${(-p.y * 0.5 + 0.5) * height}px) translate(-50%, -170%)`;
+        if (el.classList.contains("hidden") === shown) el.classList.toggle("hidden", !shown);
+        if (shown) style(el, "transform", `translate(${((p.x * 0.5 + 0.5) * width).toFixed(1)}px, ${((-p.y * 0.5 + 0.5) * height).toFixed(1)}px) translate(-50%, -170%)`);
       });
     }
     frame = requestAnimationFrame(tick);
@@ -734,7 +765,7 @@ export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onO
       probe.remove();
       for (const el of labels) el.remove();
       for (const item of [...Object.values(shapes), dotGeometry, meshGeometry, linkGeometry, traceGeometry, pulseGeometry,
-        dotMat, pulseMat, meshMat, linkMat, traceMat, solid]) item.dispose();
+        dotMat, pulseMat, meshMat, linkMat, traceMat, pathGeometry, pathMat, solid]) item.dispose();
       for (const item of solids) item.dispose();
       renderer.dispose();
     };

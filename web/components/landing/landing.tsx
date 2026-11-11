@@ -138,7 +138,7 @@ export function Landing() {
   // Move to the next example every few seconds, unless the visitor is typing or wants no motion.
   useEffect(() => {
     if (still || typing) return;
-    const timer = setInterval(() => !document.hidden && setTurn((n) => n + 1), 5200);
+    const timer = setInterval(() => !document.hidden && setTurn((n) => n + 1), 9000);
     return () => clearInterval(timer);
   }, [still, typing]);
 
@@ -199,7 +199,7 @@ export function Landing() {
                     key={example.skill} className="flex flex-wrap items-center gap-x-2 gap-y-1.5 font-mono text-sm text-muted"
                     initial={still ? { opacity: 0 } : { opacity: 0, transform: "translateY(10px)" }}
                     animate={still ? { opacity: 1 } : { opacity: 1, transform: "translateY(0px)" }}
-                    exit={{ opacity: 0, transition: { duration: 0.12 } }} transition={{ ...SPRING, delay: 0.9 }}
+                    exit={{ opacity: 0, transition: { duration: 0.12 } }} transition={{ ...SPRING, delay: 2.2 }}
                   >
                     <span aria-hidden>↳</span>
                     <Link className="chip" href={`/person/${example.person.id}`}><Glyph kind="person" /> {example.person.name}</Link>
@@ -234,7 +234,8 @@ export function Landing() {
               names, and quotes the lines that back each one. <Link href="/upload">Add documents</Link>
             </motion.p>
           </div>
-          <p className="label absolute bottom-6 max-lg:hidden">Scroll to watch it become the graph ↓</p>
+          {/* The cue to scroll: a track with a bead sliding down it. Also a link to the graph. */}
+          <a href="#graph-title" aria-label="Go to the graph" className="scroll-cue absolute bottom-4 left-1/2 -translate-x-1/2 max-sm:hidden" />
         </section>
 
         <section className="mx-auto flex min-h-svh max-w-6xl flex-col px-4 py-8 sm:px-6" aria-labelledby="graph-title">

@@ -103,6 +103,29 @@
 @keyframes fade-in { from { opacity: 0; } }
 @keyframes fade-in-up { from { opacity: 0; translate: 0 12px; filter: blur(4px); } }
 @keyframes blink { 50% { opacity: 0; } }
+@keyframes slide-down { 0% { translate: 0 0; opacity: 0; } 25% { opacity: 1; } 75% { opacity: 1; } 100% { translate: 0 22px; opacity: 0; } }
+
+/* The landing page's scroll cue: a thin track with a bead that slides down it, slowly. */
+.scroll-cue { width: 22px; height: 38px; border: 1px solid var(--color-edge); border-radius: 999px; }
+.scroll-cue::after {
+  content: ""; position: absolute; left: 50%; top: 6px; width: 4px; height: 4px; margin-left: -2px; border-radius: 999px; background: var(--color-accent);
+}
+@media (prefers-reduced-motion: no-preference) { .scroll-cue::after { animation: slide-down 2.4s ease-in-out infinite; } }
+@media (hover: hover) { .scroll-cue:hover { border-color: var(--color-accent); } }
+
+/* The pointer, in the page's colours and the system arrow's size. Colours cannot come from the
+   tokens inside an image, so each theme has its own pair. Unlayered, so it wins over utilities. */
+:root {
+  --cursor-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M4 2v17l4.5-4 3 7 2.5-1-3-7h6z' fill='%230a0d0c' stroke='%234ade80' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 4 2, auto;
+  --cursor-link: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M4 2v17l4.5-4 3 7 2.5-1-3-7h6z' fill='%234ade80' stroke='%230a0d0c' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 4 2, pointer;
+  --cursor-arrow-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M4 2v17l4.5-4 3 7 2.5-1-3-7h6z' fill='%23e9ede8' stroke='%230a6233' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 4 2, auto;
+  --cursor-link-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M4 2v17l4.5-4 3 7 2.5-1-3-7h6z' fill='%230a6233' stroke='%23e9ede8' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 4 2, pointer;
+}
+:root[data-theme="light"] { --cursor-arrow: var(--cursor-arrow-light); --cursor-link: var(--cursor-link-light); }
+@media (prefers-color-scheme: light) { :root[data-theme="system"] { --cursor-arrow: var(--cursor-arrow-light); --cursor-link: var(--cursor-link-light); } }
+html { cursor: var(--cursor-arrow); }
+a, button, summary, label[for], .cursor-pointer { cursor: var(--cursor-link); }
+:disabled, :disabled + label[for] { cursor: not-allowed; }
 @keyframes pulse { 50% { opacity: 0.45; } }
 
 @utility enter {
