@@ -167,8 +167,7 @@ export function Landing() {
       </div>
 
       <div className="relative -mt-[100svh]">
-        {/* The hero stops short of the bottom of the window, so the top of the next section shows there and invites the scroll. */}
-        <section className="relative mx-auto flex min-h-[calc(100svh-3.5rem-6.5rem)] max-w-6xl flex-col px-4 pb-6 pt-8 sm:px-6 lg:justify-center lg:pt-0">
+        <section className="relative mx-auto flex min-h-[calc(100svh-3.5rem)] max-w-6xl flex-col px-4 pb-16 pt-8 sm:px-6 lg:justify-center lg:pt-0">
           {/* Beside the brain on a wide screen, over it on a narrow one. Type sizes follow this column's width. */}
           <div className="@container max-w-2xl lg:max-w-[54%]">
             <motion.p {...rise(0)} className="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-xs text-muted">
@@ -186,14 +185,14 @@ export function Landing() {
             </motion.p>
 
             {/* The headline is the question the product answers, asked about a real skill from the index. */}
-            <motion.h1 {...rise(1)} aria-label="Who here has used the skill you need?" className="mt-6 text-[clamp(2.5rem,min(15cqw,11.5svh),6.5rem)] leading-[0.94] tracking-[-0.045em]">
+            <motion.h1 {...rise(1)} aria-label="Who here has used the skill you need?" className="mt-6 text-[clamp(2.5rem,min(15cqw,13svh),6.5rem)] leading-[0.94] tracking-[-0.045em]">
               <span aria-hidden className="block font-light text-ink/80">Who here</span>
               <span aria-hidden className="block font-light text-ink/80">has used</span>
               <span aria-hidden className="block min-h-[0.94em] font-semibold text-accent"><Word text={`${skill}?`} /></span>
             </motion.h1>
 
             {/* The answer, read off the graph: someone on a project that used the skill. */}
-            <div className="mt-6 min-h-16 sm:min-h-9 [@media(max-height:720px)]:mt-4">
+            <div className="mt-6 min-h-16 sm:min-h-9">
               <AnimatePresence mode="wait" initial={false}>
                 {example && (
                   <motion.p
@@ -213,7 +212,7 @@ export function Landing() {
               </AnimatePresence>
             </div>
 
-            <motion.form {...rise(2)} className="mt-8 flex max-w-xl gap-2 [@media(max-height:720px)]:mt-4" onSubmit={submit}>
+            <motion.form {...rise(2)} className="mt-8 flex max-w-xl gap-2" onSubmit={submit}>
               <div className="relative min-w-0 flex-1">
                 <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 font-mono text-accent" aria-hidden>&gt;</span>
                 <input
@@ -230,16 +229,15 @@ export function Landing() {
               {others.map((name) => <Link key={name} className="chip" href={`/search?q=${encodeURIComponent(asking(name))}`}>{name}</Link>)}
             </motion.p>
 
-            {/* Dropped in a short window, so the next section still shows below. */}
-            <motion.p {...rise(4)} className="mt-6 max-w-md text-sm text-muted [@media(max-height:720px)]:hidden">
+            <motion.p {...rise(4)} className="mt-6 max-w-md text-sm text-muted">
               SkillPool reads resumes and project reports into one graph. Ask in plain words and it answers with
               names, and quotes the lines that back each one. <Link href="/upload">Add documents</Link>
             </motion.p>
           </div>
         </section>
 
-        <section className="border-t border-line" aria-labelledby="graph-title">
-          <div className="mx-auto flex min-h-svh max-w-6xl flex-col px-4 pb-8 pt-6 sm:px-6">
+        <section aria-labelledby="graph-title">
+          <div className="mx-auto flex min-h-svh max-w-6xl flex-col px-4 py-8 sm:px-6">
           {/* A soft panel behind the text, so it stays readable when the graph is zoomed in underneath it. */}
           <div className="-m-3 max-w-md rounded-[10px] bg-bg/65 p-3 backdrop-blur-[3px]">
             <h2 id="graph-title" className="label text-accent">The graph behind the answers</h2>
