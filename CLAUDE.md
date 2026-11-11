@@ -36,5 +36,6 @@ Run, test, deploy: README.md. Read those before planning; don't duplicate them h
   service/.env, then `uv run --env-file .env skillpool eval ../corpus` (~$1, $5 daily cap).
 - Browser upload passed against a local S3 emulator (LocalStack); untested against real AWS S3.
 - Not deployed. Screens were checked in headless Chromium with faked model calls only.
-- No git remote yet; CI (`.github/workflows/ci.yml`) has never run.
+- Remote: github.com/gbw30/Skillpool (private). CI passes on `main`; it runs on pushes to `main`
+  and on pull requests only.
 - Open questions: resume licence/origin, public vs code-gated demo, crediting the original team.
