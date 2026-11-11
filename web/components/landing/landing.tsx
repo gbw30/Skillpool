@@ -45,7 +45,7 @@ function examples({ data, graph }: View): Example[] {
 }
 
 /** The same graph as text: each project with its people and skills. For keyboards, screen readers, and browsers without WebGL. */
-function GraphList({ data }: { data: GraphData }) {
+function GraphList({ data, linked }: { data: GraphData; linked: boolean }) {
   const name = (list: { id: string; name: string }[], id: string) => list.find((item) => item.id === id)?.name ?? id;
   return (
     <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -54,7 +54,7 @@ function GraphList({ data }: { data: GraphData }) {
           <p className="flex items-center gap-1.5 font-medium"><Glyph kind="project" /> {project.name}</p>
           <ul className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5 text-sm">
             {data.workedOn.filter(([, id]) => id === project.id).map(([person]) => (
-              <li key={person}><Link href={`/person/${person}`}>{name(data.people, person)}</Link></li>
+              <li key={person}>{linked ? <Link href={`/person/${person}`}>{name(data.people, person)}</Link> : name(data.people, person)}</li>
             ))}
           </ul>
           <p className="mt-1 font-mono text-xs text-muted">
@@ -123,17 +123,18 @@ export function Landing() {
   }, []);
 
   const indexed = view?.source === "indexed";
-  const shown = useMemo(() => (view && indexed ? examples(view) : []), [view, indexed]);
+  // With nothing indexed the hero still plays, on the sample graph, and says it is a sample.
+  const shown = useMemo(() => (view ? examples(view) : []), [view]);
   const example = shown.length ? shown[turn % shown.length] : null;
   const skill = example?.skill ?? FALLBACK_SKILLS[turn % FALLBACK_SKILLS.length];
   const asking = (about: string) => `Who has hands-on experience with ${about}?`;
   const ask = asking(skill);
   // More to try: a spread of the other indexed skills, or the examples when nothing is indexed.
   const others = useMemo(() => {
-    if (!view || !indexed) return FALLBACK_SKILLS.slice(2);
+    if (!view) return FALLBACK_SKILLS.slice(2);
     const rest = view.data.skills.map((s) => s.name).filter((name) => !shown.some((example) => example.skill === name));
     return Array.from({ length: Math.min(6, rest.length) }, (_, i) => rest[Math.floor((i * rest.length) / Math.min(6, rest.length))]);
-  }, [view, indexed, shown]);
+  }, [view, shown]);
 
   // Move to the next example every few seconds, unless the visitor is typing or wants no motion.
   useEffect(() => {
@@ -160,8 +161,8 @@ export function Landing() {
         <div className="absolute inset-0 bg-[radial-gradient(55%_55%_at_72%_42%,color-mix(in_oklab,var(--color-accent)_7%,transparent),transparent)]" />
         {view && drawable && (
           <GraphCanvas
-            graph={view.graph} interactive={indexed} stage={stage} trace={example?.path ?? null} controlsRef={graphControls}
-            onOpen={(person) => router.push(`/person/${person.id}`)} onUnsupported={() => setDrawable(false)}
+            graph={view.graph} interactive stage={stage} trace={example?.path ?? null} controlsRef={graphControls}
+            onOpen={(person) => indexed && router.push(`/person/${person.id}`)} onUnsupported={() => setDrawable(false)}
           />
         )}
       </div>
@@ -173,9 +174,9 @@ export function Landing() {
             <motion.p {...rise(0)} className="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-xs text-muted">
               <span className="flex items-center gap-2 text-ink">
                 <span className={`size-1.5 rounded-full ${indexed ? "pulse bg-accent" : "bg-edge"}`} />
-                {!view ? "Reading the index" : indexed ? "Indexed" : view.source === "empty" ? "Nothing indexed yet" : "Index unreachable"}
+                {!view ? "Reading the index" : indexed ? "Indexed" : view.source === "empty" ? "Nothing indexed yet · showing a sample" : "Index unreachable · showing a sample"}
               </span>
-              {view && indexed && (
+              {view && (
                 <>
                   <span className="flex items-center gap-1.5"><Glyph kind="person" /> {view.data.people.length} people</span>
                   <span className="flex items-center gap-1.5"><Glyph kind="project" /> {view.data.projects.length} projects</span>
@@ -202,7 +203,8 @@ export function Landing() {
                     exit={{ opacity: 0, transition: { duration: 0.12 } }} transition={{ ...SPRING, delay: 2.2 }}
                   >
                     <span aria-hidden>↳</span>
-                    <Link className="chip" href={`/person/${example.person.id}`}><Glyph kind="person" /> {example.person.name}</Link>
+                    {indexed ? <Link className="chip" href={`/person/${example.person.id}`}><Glyph kind="person" /> {example.person.name}</Link>
+                      : <span className="chip"><Glyph kind="person" /> {example.person.name}</span>}
                     worked on
                     <span className="chip"><Glyph kind="project" /> {example.project}</span>
                     which used
@@ -241,7 +243,7 @@ export function Landing() {
           {/* A soft panel behind the text, so it stays readable when the graph is zoomed in underneath it. */}
           <div className="-m-3 max-w-md rounded-[10px] bg-bg/65 p-3 backdrop-blur-[3px]">
             <h2 id="graph-title" className="label text-accent">The graph behind the answers</h2>
-            {view && indexed && (
+            {view && (
               <dl className="mt-4 flex gap-6 font-mono">
                 {([["person", "people", view.data.people.length], ["project", "projects", view.data.projects.length], ["skill", "skills", view.data.skills.length]] as const).map(([kind, name, count]) => (
                   <div key={kind}>
@@ -254,17 +256,17 @@ export function Landing() {
             {view && !indexed && <p className="mt-3 font-mono text-sm">{view.source === "empty" ? "Nothing is indexed yet" : "The graph could not be loaded"}</p>}
             <p className="mt-4 text-sm text-muted">
               {!view ? "Loading the graph…"
-                : !indexed ? <>The shape shown here is a placeholder. <Link href="/upload">Add documents</Link> to see the real graph.</>
+                : !indexed ? <>The graph shown here is a made-up sample. <Link href="/upload">Add documents</Link> to see the real graph. Point at a node to trace its links, and drag to move around.</>
                 : drawable ? "Every answer walks these links: a person worked on a project, and the project used a skill. Point at a node to trace its links, and click a person to open their page. Drag to move around."
                 : "This browser cannot draw the 3D graph, so here it is as a list."}
             </p>
           </div>
-          {view && indexed && (
+          {view && (
             <div className="mt-auto flex flex-wrap items-end justify-between gap-x-6 gap-y-3">
               <details className="min-w-0 flex-1 basis-64" open={!drawable}>
                 <summary className="link inline-block text-sm">Browse the graph as a list</summary>
                 <div className="panel mt-3 max-h-[45svh] overflow-auto overscroll-contain p-4">
-                  <GraphList data={view.data} />
+                  <GraphList data={view.data} linked={indexed} />
                 </div>
               </details>
               {drawable && (
