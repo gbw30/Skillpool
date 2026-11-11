@@ -76,6 +76,11 @@ def search(question: str, mode: str = "hybrid") -> dict:
                 + (f" → used → {', '.join(sorted(u['skill'] for u in r['used']))}" if r["used"] else "")
                 for r in paths.get(pid, [])[:3]
             ],
+            # The same paths as data, for the graph on each result card.
+            "links": [
+                {"project": r["project"], "skills": sorted(u["skill"] for u in r["used"])}
+                for r in paths.get(pid, [])[:3]
+            ],
             "evidence": evidence,
         })
     return {"confidence": "ok", "skills": skills, "projects": projects, "people": people}

@@ -10,11 +10,13 @@ Run, test, deploy: README.md. Read those before planning; don't duplicate them h
   extraction/answers. Embeddings: `EMBED_PROVIDER` = `openai` (text-embedding-3-small, 1536-d,
   default) or `voyage` (voyage-4-lite, 1024-d); run `skillpool reembed` after switching.
 - web/ — Next.js 16 (App Router, cacheComponents) UI + signed proxy (`app/api/[...path]`).
+  Tailwind 4 with tokens in `app/globals.css`, Motion springs, three.js only on the landing page.
+  Design decisions: `.plans/frontend-revamp-spec.md`.
   Read web/AGENTS.md and current Next.js docs before writing web code.
 - corpus/ — 680 resumes, 159 generated docs (`generate.py`, seed 7), ground truth in truth/.
 
 ## Commands
-- Tests: `cd service && uv run pytest` (69 pass). Pipeline tests need
+- Tests: `cd service && uv run pytest` (70 pass). Pipeline tests need
   `SKILLPOOL_TEST_NEO4J_URI=bolt://127.0.0.1:17687 SKILLPOOL_TEST_NEO4J_PASSWORD=skillpool-dev` and
   wipe that database.
 - Local Neo4j: `docker compose up -d neo4j` (ports 17474/17687, auth neo4j/skillpool-dev).
@@ -34,5 +36,6 @@ Run, test, deploy: README.md. Read those before planning; don't duplicate them h
   service/.env, then `uv run --env-file .env skillpool eval ../corpus` (~$1, $5 daily cap).
 - Browser upload passed against a local S3 emulator (LocalStack); untested against real AWS S3.
 - Not deployed. Screens were checked in headless Chromium with faked model calls only.
-- No git remote yet; CI (`.github/workflows/ci.yml`) has never run.
+- Remote: github.com/gbw30/Skillpool (private). CI passes on `main`; it runs on pushes to `main`
+  and on pull requests only.
 - Open questions: resume licence/origin, public vs code-gated demo, crediting the original team.

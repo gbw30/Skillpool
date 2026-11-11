@@ -56,5 +56,7 @@ RRF_K = 60
 TOP_PEOPLE = 10
 EVIDENCE_PER_PERSON = 3
 
+GRAPH_VIEW_LINKS = 600  # most links of each kind sent to the landing page's graph
+
 INGEST_CONCURRENCY = 4
 SIGNATURE_SKEW_SECONDS = 300

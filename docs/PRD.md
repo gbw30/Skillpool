@@ -59,7 +59,7 @@ Goals
 Non-goals (this version)
 - Accounts, roles, multiple organizations.
 - Connectors to HR systems, wikis, ticket trackers, or email.
-- Editing the graph by hand, or a graph visualization.
+- Editing the graph by hand.
 - Availability, scheduling, or anything that makes a staffing decision for the user.
 - LLM-written database queries. All Cypher is fixed and parameterized.
 - Real personal data. The demo corpus is synthetic.
@@ -100,13 +100,15 @@ Priority: P0 = needed for the demo to be honest, P1 = planned, P2 = later.
 | R19 | Search on a public deployment is rate limited, with a daily cap on model spend. | P0 |
 | R20 | Document text is never treated as instructions and model output is never rendered as HTML. | P0 |
 | R21 | A stats view shows counts of documents, chunks, people, skills, projects, and flagged identity pairs. | P1 |
+| R22 | The landing page draws the indexed graph of organisation projects, the people on them, and the skills they used. A node can be pointed at to trace its links, a person opens their page, the view can be zoomed and moved, and the same content is offered as a list. | P1 |
 
 ## 7. Experience
 
 Four screens, matching the original's Landing, Search, and Upload plus the person page it planned
 but never built.
 
-1. Landing. One line on what it does, two actions: search, add documents.
+1. Landing. One line on what it does, two actions: search, add documents. Beside them a 3D drawing
+   of the indexed graph, which flies in and becomes an explorable graph view as the page scrolls (R22).
 2. Search. A single question box with example questions. Results list on the left, written answer
    on the right (stacked on a phone). Each person card: name, current title, matched skills,
    relationship path if any, quoted evidence with source file names. States: empty, loading,

@@ -4,8 +4,10 @@
 // Search gives the same three people for any question, except questions containing
 // "cobol" (no confident match), "error" (the answer fails part-way), or "limit" (rate limited).
 // Uploads use the access code "mock"; every fourth file fails.
+// The landing page's graph is a made-up sample of projects from across a business (lib/graph.ts).
 import { randomUUID } from "node:crypto";
 import type { JobStatus, PersonProfile, SearchResults } from "./api";
+import { sampleGraph } from "./graph";
 
 // NODE_ENV is fixed at build time, so a production build can never answer from this file.
 export const MOCK = process.env.NODE_ENV === "development" && process.env.SKILLPOOL_MOCK === "1";
@@ -22,6 +24,7 @@ const RESULTS: SearchResults = {
       title: "Automation Engineer",
       matchedSkills: [{ name: "Kafka", level: "expert" }, { name: "Kubernetes", level: "intermediate" }],
       paths: ["Brenda Adams → worked on → Atlas Migration → used → Kafka, Kubernetes"],
+      links: [{ project: "Atlas Migration", skills: ["Kafka", "Kubernetes"] }],
       evidence: [
         { n: 1, chunkId: "c-1", docId: "d-atlas-status-2", path: "atlas-migration/status-2.md", text: "Brenda Adams, release manager on Atlas Migration, moved the order events from the nightly batch onto Kafka and ran the cutover with no lost messages." },
         { n: 2, chunkId: "c-2", docId: "d-brenda-resume", path: "resumes/Brenda_Adams.pdf", text: "Skills: Python, intermediate, Kafka, expert, Kubernetes, intermediate, Terraform, beginner, English, fluent" },
@@ -37,6 +40,10 @@ const RESULTS: SearchResults = {
         "Amy Vasquez → worked on → Beacon Reporting Pipeline → used → Kafka, Spark",
         "Amy Vasquez → worked on → Atlas Migration → used → Kafka, Kubernetes",
       ],
+      links: [
+        { project: "Beacon Reporting Pipeline", skills: ["Kafka", "Spark"] },
+        { project: "Atlas Migration", skills: ["Kafka", "Kubernetes"] },
+      ],
       evidence: [
         { n: 4, chunkId: "c-4", docId: "d-beacon-postmortem", path: "beacon-reporting-pipeline/postmortem.md", text: "The reporting pipeline read clickstream events from Kafka into Spark. Amy Vasquez, QA lead, traced the duplicate rows to a consumer that committed offsets before writing." },
         { n: 5, chunkId: "c-5", docId: "d-atlas-status-1", path: "atlas-migration/status-1.md", text: "Amy Vasquez, QA lead on Atlas Migration, finished the access audit." },
@@ -48,6 +55,7 @@ const RESULTS: SearchResults = {
       title: null,
       matchedSkills: [{ name: "Kafka", level: null }],
       paths: [],
+      links: [],
       evidence: [
         { n: 6, chunkId: "c-6", docId: "d-christopher-resume", path: "resumes/uploads/2026-batch/Christopher_Montgomery-Abernathy_Senior_Platform_Engineer_final_v3.pdf", text: "Skills: Kafka, Go, PostgreSQL, gRPC, Prometheus, Grafana, Helm, Argo CD, AWS, GCP, Linux, Bash" },
       ],
@@ -131,6 +139,23 @@ const PEOPLE: PersonProfile[] = [
   },
 ];
 
+const GRAPH = sampleGraph();
+
+/** A page for someone who exists only in the sample graph, built from their links in it. */
+function sampleProfile(id: string): PersonProfile | undefined {
+  const person = GRAPH.people.find((p) => p.id === id);
+  if (!person) return undefined;
+  const named = (list: { id: string; name: string }[], key: string) => list.find((x) => x.id === key)?.name ?? key;
+  return {
+    id, name: person.name, title: null, aliases: null, roles: [], education: [], possibleSame: [], evidence: [],
+    skills: GRAPH.has.filter(([p]) => p === id).map(([, skill]) => ({ name: named(GRAPH.skills, skill), level: null })),
+    projects: GRAPH.workedOn.filter(([p]) => p === id).map(([, project]) => ({
+      id: project, name: named(GRAPH.projects, project), scope: "org", role: null,
+      collaborators: GRAPH.workedOn.filter(([p, other]) => other === project && p !== id).map(([p]) => ({ id: p, name: named(GRAPH.people, p) })),
+    })),
+  };
+}
+
 // Upload batches, by job id. Lost when the dev server restarts.
 const jobs = new Map<string, { paths: string[]; started?: number }>();
 const FAILURES = ["no_text", "unreadable_pdf", "type_mismatch"];
@@ -206,9 +231,10 @@ export async function mockService(method: string, path: string, body: string): P
     return stream(searchEvents(q));
   }
   if (path.startsWith("/person/")) {
-    const person = PEOPLE.find((p) => p.id === id);
+    const person = PEOPLE.find((p) => p.id === id) ?? sampleProfile(id);
     return person ? Response.json(person) : fail(404, "not_found", "No such person.");
   }
+  if (path === "/graph") return Response.json(GRAPH);
   if (path === "/upload/session") {
     const files = (input.files ?? []) as { path: string }[];
     const jobId = randomUUID().replaceAll("-", "");

@@ -343,6 +343,27 @@ RETURN COUNT { (:Document) } AS documents, COUNT { (:Chunk) } AS chunks,
        COUNT { (:Person)-[:POSSIBLE_SAME_AS]->(:Person) } AS flaggedPairs
 """
 
+# --- graph view (landing page) ------------------------------------------------
+# Organisation projects, the people on them, and the skills those projects used. Bounded,
+# because the landing page draws every row it is given.
+
+OVERVIEW_WORKED_ON = """
+MATCH (p:Person)-[:WORKED_ON]->(pr:Project {scope: 'org'})
+RETURN p.id AS person, p.name AS personName, pr.id AS project, pr.name AS projectName
+ORDER BY project, person LIMIT $limit
+"""
+
+OVERVIEW_USED = """
+MATCH (pr:Project {scope: 'org'})-[:USED_SKILL]->(s:Skill)
+RETURN pr.id AS project, pr.name AS projectName, s.id AS skill, s.name AS skillName
+ORDER BY project, skill LIMIT $limit
+"""
+
+OVERVIEW_HAS = """
+MATCH (p:Person)-[:HAS_SKILL]->(s:Skill) WHERE p.id IN $people AND s.id IN $skills
+RETURN p.id AS person, s.id AS skill ORDER BY person, skill LIMIT $limit
+"""
+
 # --- model spend (PRD R19) ---------------------------------------------------
 # Kept in the graph so the daily cap survives a restart of the service.
 
@@ -407,3 +428,23 @@ def delete_document(doc_id: str) -> bool:
 
     with driver().session(database=os.environ.get("NEO4J_DATABASE", "neo4j")) as session:
         return session.execute_write(work)
+
+
+def overview(limit: int) -> dict:
+    """Nodes and links for the graph view: at most `limit` links of each kind."""
+    worked = run(OVERVIEW_WORKED_ON, limit=limit)
+    used = run(OVERVIEW_USED, limit=limit)
+    people = {r["person"]: r["personName"] for r in worked}
+    projects = {r["project"]: r["projectName"] for r in (*worked, *used)}
+    skills = {r["skill"]: r["skillName"] for r in used}
+    has = run(OVERVIEW_HAS, people=list(people), skills=list(skills), limit=limit)
+
+    def named(found: dict) -> list[dict]:
+        return [{"id": key, "name": name} for key, name in found.items()]
+
+    return {
+        "people": named(people), "projects": named(projects), "skills": named(skills),
+        "workedOn": [[r["person"], r["project"]] for r in worked],
+        "used": [[r["project"], r["skill"]] for r in used],
+        "has": [[r["person"], r["skill"]] for r in has],
+    }

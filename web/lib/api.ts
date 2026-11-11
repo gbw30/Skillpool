@@ -8,6 +8,8 @@ export type PersonResult = {
   title: string | null;
   matchedSkills: { name: string; level: string | null }[];
   paths: string[];
+  /** The same paths as data: each project the person worked on and the matching skills it used. */
+  links: { project: string; skills: string[] }[];
   evidence: Evidence[];
 };
 
@@ -24,6 +26,19 @@ export type PersonProfile = {
   projects: { id: string; name: string; scope: string; role: string | null; collaborators: { id: string; name: string }[] }[];
   possibleSame: { id: string; name: string }[];
   evidence: { chunkId: string; docId: string; path: string; text: string }[];
+};
+
+/** The landing page's graph: organisation projects, the people on them, and the skills they used. */
+export type GraphData = {
+  people: { id: string; name: string }[];
+  projects: { id: string; name: string }[];
+  skills: { id: string; name: string }[];
+  /** [person id, project id] */
+  workedOn: [string, string][];
+  /** [project id, skill id] */
+  used: [string, string][];
+  /** [person id, skill id] */
+  has: [string, string][];
 };
 
 export type JobStatus = {

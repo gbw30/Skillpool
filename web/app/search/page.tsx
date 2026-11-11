@@ -1,8 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, useState } from "react";
-import { openSource, type PersonResult, type SearchResults } from "@/lib/api";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { EvidenceList } from "@/components/evidence-list";
+import { Alert, Search } from "@/components/icons";
+import { PathGraph } from "@/components/path-graph";
+import type { PersonResult, SearchResults } from "@/lib/api";
 
 const EXAMPLES = [
   "Who has hands-on experience with Kafka?",
@@ -11,51 +14,43 @@ const EXAMPLES = [
 ];
 
 type Phase = "idle" | "searching" | "writing" | "done" | "error";
+type Cite = (n: number | null) => void;
 
 /** Answer text with each [n] turned into a link to that evidence passage. Never rendered as HTML. */
-function Answer({ text }: { text: string }) {
+function Answer({ text, onCite }: { text: string; onCite: Cite }) {
   return (
     <>
       {text.split(/(\[\d+\])/).map((part, i) => {
-        const n = part.match(/^\[(\d+)\]$/)?.[1];
-        return n ? <a key={i} className="cite" href={`#e-${n}`}>{part}</a> : part;
+        const n = Number(part.match(/^\[(\d+)\]$/)?.[1]);
+        return n ? (
+          <a
+            key={i} href={`#e-${n}`} className="font-mono text-[0.85em] font-medium no-underline hover:underline"
+            onMouseEnter={() => onCite(n)} onMouseLeave={() => onCite(null)}
+            onFocus={() => onCite(n)} onBlur={() => onCite(null)}
+          >
+            {part}
+          </a>
+        ) : part;
       })}
     </>
   );
 }
 
-function PersonCard({ person, rank }: { person: PersonResult; rank: number }) {
-  const [sourceError, setSourceError] = useState<string | null>(null);
+function PersonCard({ person, rank, cited }: { person: PersonResult; rank: number; cited: number | null }) {
   return (
-    <li className="card">
-      <div className="person-head">
-        <span className="rank">{rank}.</span>
-        <h3><Link href={`/person/${person.id}`}>{person.name}</Link></h3>
-        {person.title && <span className="muted">{person.title}</span>}
+    // Cards enter in sequence; --i caps the wait so a long list does not crawl in.
+    <li className="panel enter p-4 sm:p-5" style={{ "--i": Math.min(rank - 1, 5) } as CSSProperties}>
+      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+        <span className="font-mono text-xs tabular-nums text-muted">{String(rank).padStart(2, "0")}</span>
+        <h3 className="min-w-0 text-lg font-semibold tracking-tight wrap-anywhere">
+          <Link className="text-ink no-underline hover:underline" href={`/person/${person.id}`}>{person.name}</Link>
+        </h3>
+        {person.title && <span className="text-sm text-muted">{person.title}</span>}
       </div>
-      {person.matchedSkills.length > 0 && (
-        <ul className="tags" aria-label="Matched skills">
-          {person.matchedSkills.map((s) => (
-            <li key={s.name}>{s.name}{s.level ? ` · ${s.level}` : ""}</li>
-          ))}
-        </ul>
-      )}
-      {person.paths.map((path) => <p key={path} className="path">{path}</p>)}
-      <ul className="evidence" aria-label={`Evidence for ${person.name}`}>
-        {person.evidence.map((e) => (
-          <li key={e.n} id={`e-${e.n}`}>
-            <blockquote>{e.text}</blockquote>
-            <div className="source">
-              <span className="cite">[{e.n}]</span>
-              <span>{e.path}</span>
-              <button className="link small" type="button" onClick={async () => setSourceError(await openSource(e.docId))}>
-                Open source
-              </button>
-            </div>
-          </li>
-        ))}
-      </ul>
-      {sourceError && <p className="small muted" role="status">{sourceError}</p>}
+      <PathGraph name={person.name} links={person.links} matched={person.matchedSkills} />
+      <div className="mt-4">
+        <EvidenceList items={person.evidence} label={`Evidence for ${person.name}`} active={cited} />
+      </div>
     </li>
   );
 }
@@ -66,6 +61,7 @@ export default function SearchPage() {
   const [results, setResults] = useState<SearchResults | null>(null);
   const [answer, setAnswer] = useState("");
   const [error, setError] = useState("");
+  const [cited, setCited] = useState<number | null>(null);
   const inFlight = useRef<AbortController | null>(null);
 
   async function run(q: string) {
@@ -123,6 +119,15 @@ export default function SearchPage() {
     }
   }
 
+  // The landing page hands a question over as /search?q=...; ask it once on arrival.
+  const arrived = useRef(false);
+  useEffect(() => {
+    if (arrived.current) return;
+    arrived.current = true;
+    const asked = new URLSearchParams(location.search).get("q");
+    if (asked) queueMicrotask(() => run(asked)); // after this render, not during the effect
+  });
+
   const count = results?.people.length ?? 0;
   const status =
     phase === "searching" ? "Searching…"
@@ -131,50 +136,87 @@ export default function SearchPage() {
     : phase === "done" ? `${count} ${count === 1 ? "person" : "people"} found.`
     : "";
 
+  const busy = phase === "searching" || phase === "writing";
+
   return (
-    <>
-      <h1>Who should staff it?</h1>
-      <form className="search-form" onSubmit={(event) => { event.preventDefault(); run(question); }}>
-        <label htmlFor="q">Describe who you need</label>
-        <input
-          id="q" type="text" value={question} maxLength={500} autoComplete="off"
-          placeholder="e.g. two people who have run a Kubernetes migration"
-          onChange={(event) => setQuestion(event.target.value)}
-        />
-        <div><button type="submit" disabled={phase === "searching" || !question.trim()}>Search</button></div>
-      </form>
-      {phase === "idle" && (
-        <ul className="examples" aria-label="Example questions">
-          {EXAMPLES.map((example) => (
-            <li key={example}><button type="button" onClick={() => run(example)}>{example}</button></li>
-          ))}
-        </ul>
+    <div className="page">
+      <div className="max-w-3xl">
+        <h1>Who should staff it?</h1>
+        <form className="mt-6" onSubmit={(event) => { event.preventDefault(); run(question); }}>
+          <label className="label mb-2 block" htmlFor="q">Describe who you need</label>
+          <div className="flex gap-2">
+            <div className="relative min-w-0 flex-1">
+              <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 font-mono text-accent" aria-hidden>&gt;</span>
+              <input
+                id="q" type="text" className="input pl-8" value={question} maxLength={500} autoComplete="off"
+                placeholder="e.g. two people who have run a Kubernetes migration"
+                onChange={(event) => setQuestion(event.target.value)}
+              />
+            </div>
+            <button className="btn" type="submit" disabled={phase === "searching" || !question.trim()}>
+              <Search /> Search
+            </button>
+          </div>
+        </form>
+        {phase === "idle" && (
+          <ul className="mt-4 flex flex-wrap gap-2" aria-label="Example questions">
+            {EXAMPLES.map((example) => (
+              <li key={example}>
+                <button
+                  type="button" onClick={() => run(example)}
+                  className="cursor-pointer rounded-full border border-line bg-surface px-3 py-1 text-left text-sm text-muted hover:border-edge hover:text-ink"
+                >
+                  {example}
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+
+      <p className={`mt-6 min-h-5 font-mono text-xs text-muted${busy ? " pulse" : ""}`} role="status" aria-live="polite">{status}</p>
+      {phase === "error" && (
+        <p className="panel mt-3 flex items-start gap-2 border-danger/50 p-4 text-danger" role="alert">
+          <Alert className="mt-1 shrink-0" /> {error}
+        </p>
       )}
 
-      <p className={`status${phase === "searching" || phase === "writing" ? " pulse" : ""}`} role="status" aria-live="polite">{status}</p>
-      {phase === "error" && <p className="notice" role="alert">{error}</p>}
+      {phase === "searching" && (
+        <div className="mt-3 grid gap-4 lg:w-3/5" aria-hidden>
+          {[0, 1, 2].map((i) => (
+            <div key={i} className="panel pulse p-5">
+              <div className="h-5 w-48 rounded bg-raised" />
+              <div className="mt-4 h-20 rounded bg-raised" />
+              <div className="mt-4 h-3 w-4/5 rounded bg-raised" />
+            </div>
+          ))}
+        </div>
+      )}
 
       {results && (
-        <div className="results">
+        <div className="mt-3 grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
           <section aria-label="Candidates">
             {results.confidence === "none" ? (
-              <p className="card">
+              <p className="panel p-5 text-muted">
                 Nothing in the indexed documents clearly matches. Try naming a skill, a technology, or a project.
               </p>
             ) : (
-              <ol className="plain">
-                {results.people.map((person, i) => <PersonCard key={person.id} person={person} rank={i + 1} />)}
+              <ol className="grid grid-cols-1 gap-4">
+                {results.people.map((person, i) => <PersonCard key={person.id} person={person} rank={i + 1} cited={cited} />)}
               </ol>
             )}
           </section>
           {results.confidence !== "none" && (
-            <section className="card answer" aria-label="Recommendation">
-              <h2>Recommendation</h2>
-              {answer ? <Answer text={answer} /> : <span className="muted">Writing…</span>}
+            // On a phone the recommendation comes before the candidates.
+            <section className="panel p-5 max-lg:order-first lg:sticky lg:top-6" aria-label="Recommendation">
+              <h2 className="label mb-3">Recommendation</h2>
+              <p className={`whitespace-pre-wrap${phase === "writing" ? " caret" : ""}`}>
+                {answer ? <Answer text={answer} onCite={setCited} /> : <span className="text-muted">Writing</span>}
+              </p>
             </section>
           )}
         </div>
       )}
-    </>
+    </div>
   );
 }

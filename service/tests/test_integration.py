@@ -163,10 +163,22 @@ def test_embedded_instructions_create_no_facts(corpus, calls):
     assert graph.run(graph.EVAL_SKILL_HOLDERS, ids=["quantum-basket-weaving"])[0]["n"] == 0
 
 
+def test_graph_overview_links_people_to_projects_and_their_skills(corpus, calls):
+    view = graph.overview(600)
+    name = {kind: {x["id"]: x["name"] for x in view[kind]} for kind in ("people", "projects", "skills")}
+    assert name["projects"] == {"atlas-migration": "Atlas Migration"}
+    assert ("Aaron Brown", "Atlas Migration") in {(name["people"][p], name["projects"][pr]) for p, pr in view["workedOn"]}
+    assert ("Atlas Migration", "Kafka") in {(name["projects"][pr], name["skills"][s]) for pr, s in view["used"]}
+    # Only links between people and skills that are both in the view.
+    assert all(p in name["people"] and s in name["skills"] for p, s in view["has"])
+    assert graph.overview(1)["workedOn"] == view["workedOn"][:1]
+
+
 def test_multi_hop_search_finds_a_person_whose_resume_lacks_the_skill(corpus, calls):
     hybrid = search("Who has hands-on experience with Kafka?", "hybrid")
     aaron = next(p for p in hybrid["people"] if p["name"] == "Aaron Brown" and p["title"] == "Security Analyst")
     assert aaron["paths"] == ["Aaron Brown → worked on → Atlas Migration → used → Kafka"]
+    assert aaron["links"] == [{"project": "Atlas Migration", "skills": ["Kafka"]}]
     assert aaron["evidence"] and all(e["text"] for e in aaron["evidence"])
     assert "Bea Wu" not in [p["name"] for p in hybrid["people"]]
     # Text similarity alone reaches the design summary, which names nobody.
