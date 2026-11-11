@@ -1,7 +1,27 @@
 # Front-end revamp spec
 
 Status: approved 2026-11-10. Landing section revised 2026-11-11 at the owner's request.
-Steps 1 and 3 are built; step 2 (person and upload) and step 4 (polish) are not.
+Steps 1 to 3 are built. Step 4 (the polish pass against the `better-ui` checklist) is not.
+
+## Second revision, 2026-11-11 (owner's review of the first landing page)
+
+These replace the matching parts below where they differ.
+
+| Topic | Now |
+|---|---|
+| Hero graph | A brain-shaped neural mesh of about 900 small glowing points (520 on a phone), built in code (`web/lib/brain.ts`). The real nodes are some of its points; on scroll they travel to their places in the real graph and the rest dissolves |
+| Signals | A few slow signals run along the links. A point warms and cools over about a second. Nothing flashes: brightness is low and no change is abrupt (the owner raised photosensitivity) |
+| Hero text | The headline is the question itself, "Who here has used X?", cycling through real skills from the index. The scene traces skill, project and person, and the answer is spelled out in chips. A question box hands off to `/search?q=` |
+| Motion | Motion (motion.dev) springs for the page; exact closed-form springs (`web/lib/spring.ts`) inside the 3D scene; the same spring sampled as a CSS easing for small state changes |
+| Background | Site-wide: a faint wall of resumes and reports, with a soft light that follows the pointer and shows the matching line on each page it passes |
+| Light theme | Softer: a grey-green page (`#dfe4de`) instead of near-white, every pair still at WCAG AA |
+| Scrollbar | Slim, in the page's colours |
+| Graph view | Zoom with the buttons or Ctrl + scroll (towards the pointer), drag to move, Shift + drag to turn, Reset. Zooming spreads nodes faster than it enlarges them |
+| Window sizes | Two landing layouts, switching at 1024px: text beside the brain, or text over the dimmed brain. Type scales with its column. No sideways scroll from 360px to 1920px on any screen |
+| Add documents | Rebuilt: drop zone (folders too), the batch drawn as tiles grouped by folder with type and state, a bar of shares by type and by status, and a three-step indicator |
+| Person | Rebuilt in the new look (step 2 is done) |
+| Sample data | Mock mode's graph covers projects from across a business (sales, finance, design, people, operations, support, engineering) |
+| Libraries | Added `motion`. Not added: anime.js (does the same job as Motion), and the Kokonut UI and bklit UI component kits (not reviewed in detail; the components here are hand-built on the page's own tokens) |
 
 ## Goal
 

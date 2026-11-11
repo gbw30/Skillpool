@@ -1,23 +1,33 @@
 "use client";
 
-// The landing page's 3D graph, drawn with three.js. One scene plays two parts: far off and
-// turning beside the headline, then, as the page scrolls, flying in and settling into a graph
-// that can be hovered and opened. Everything here runs outside React, once per frame.
+// The landing page's 3D scene, drawn with three.js. In the hero it is a brain-shaped neural mesh:
+// the real people, projects and skills are some of its points, signals run along its links, and
+// a point flares when one arrives. As the page scrolls, the real nodes leave the brain for their
+// places in the real graph, the rest of the mesh dissolves, and the graph can be explored.
+// Everything here runs outside React, once per frame. Motion comes from exact springs (lib/spring).
 import { useEffect, useRef, type RefObject } from "react";
 import {
-  AdditiveBlending, AmbientLight, BoxGeometry, BufferAttribute, BufferGeometry, CanvasTexture, Color,
-  DirectionalLight, Fog, Group, InstancedMesh, LineBasicMaterial, LineSegments, MeshLambertMaterial,
-  NormalBlending, Object3D, OctahedronGeometry, PerspectiveCamera, Points, PointsMaterial, Scene,
-  SphereGeometry, Vector3, WebGLRenderer,
+  AdditiveBlending, AmbientLight, BoxGeometry, BufferAttribute, BufferGeometry, Color, DirectionalLight, Fog, Group,
+  InstancedMesh, LineBasicMaterial, LineSegments, MeshLambertMaterial, NormalBlending, Object3D, OctahedronGeometry,
+  PerspectiveCamera, Points, Scene, ShaderMaterial, SphereGeometry, Vector3, WebGLRenderer,
 } from "three";
+import { brainPoints, nearestLinks } from "@/lib/brain";
 import { createLayout, RADIUS, type Graph, type GraphNode, type Kind } from "@/lib/graph";
+import { Spring } from "@/lib/spring";
+
+/** What the page's own buttons can ask of the formed graph. */
+export type GraphControls = { zoomBy: (factor: number) => void; reset: () => void };
 
 type Props = {
   graph: Graph;
   /** Whether nodes can be hovered and opened. Off for the placeholder shape. */
   interactive: boolean;
-  /** The element whose scroll position drives the fly-in. It also receives the pointer events. */
+  /** The element whose scroll position drives the change from brain to graph. It also receives the pointer events. */
   stage: RefObject<HTMLElement | null>;
+  /** Node indexes to light up in order while the brain is showing, such as a person, their project and its skill. */
+  trace: number[] | null;
+  /** Filled in with the zoom controls while the scene exists. */
+  controlsRef: RefObject<GraphControls | null>;
   onOpen: (person: GraphNode) => void;
   onUnsupported: () => void;
 };
@@ -25,36 +35,66 @@ type Props = {
 const KINDS: Kind[] = ["person", "project", "skill"];
 const FOV = 40;
 const LABELS = 10;
-const PULSES = 48;
+const PULSES = 36; // few and slow: many quick signals read as flicker
 const PICK_RADIUS = 16; // px around the pointer that counts as on a node
+const ZOOM_MIN = 0.6, ZOOM_MAX = 10;
 const LABEL_CLASS = "absolute left-0 top-0 hidden whitespace-nowrap rounded border bg-surface/85 px-1.5 py-0.5 font-mono text-[11px] leading-4 text-ink";
 
-const clamp = (x: number, low: number, high: number) => Math.min(Math.max(x, low), high);
+const clamp = (x: number, low = 0, high = 1) => Math.min(Math.max(x, low), high);
 const mix = (a: number, b: number, t: number) => a + (b - a) * t;
 const smooth = (x: number) => x * x * (3 - 2 * x);
+const any = <T,>(list: T[]) => list[Math.floor(Math.random() * list.length)];
 
-/** A soft round dot, used for the glow behind each node and for the pulses on the links. */
-function glowTexture() {
-  const canvas = document.createElement("canvas");
-  canvas.width = canvas.height = 64;
-  const ctx = canvas.getContext("2d")!;
-  const fade = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
-  fade.addColorStop(0, "rgba(255,255,255,1)");
-  fade.addColorStop(0.35, "rgba(255,255,255,0.35)");
-  fade.addColorStop(1, "rgba(255,255,255,0)");
-  ctx.fillStyle = fade;
-  ctx.fillRect(0, 0, 64, 64);
-  return new CanvasTexture(canvas);
+// Round soft dots: a core and a faint halo. `energy` warms a dot a little after a signal arrives.
+// It changes slowly and by a small amount, so nothing on screen flashes.
+const DOT_VERTEX = `
+  attribute vec3 tint;
+  attribute float scale;
+  attribute float energy;
+  attribute float fade;
+  uniform float pixel;
+  uniform float fogNear;
+  uniform float fogFar;
+  uniform float boost;
+  varying vec3 vTint;
+  varying float vFade;
+  void main() {
+    vec4 eye = modelViewMatrix * vec4(position, 1.0);
+    float depth = -eye.z;
+    gl_PointSize = scale * (1.0 + energy * 0.22) * pixel / depth;
+    vTint = tint * (0.58 + energy * 0.3 * boost);
+    vFade = fade * (1.0 - 0.85 * smoothstep(fogNear, fogFar, depth));
+    gl_Position = projectionMatrix * eye;
+  }`;
+const DOT_FRAGMENT = `
+  varying vec3 vTint;
+  varying float vFade;
+  void main() {
+    float d = length(gl_PointCoord - 0.5) * 2.0;
+    if (d > 1.0) discard;
+    float core = smoothstep(0.42, 0.12, d);
+    float halo = pow(1.0 - d, 2.4);
+    gl_FragColor = vec4(vTint, (core * 0.9 + halo * 0.25) * vFade);
+    #include <colorspace_fragment>
+  }`;
+
+function dotMaterial() {
+  return new ShaderMaterial({
+    uniforms: { pixel: { value: 1 }, fogNear: { value: 1 }, fogFar: { value: 100 }, boost: { value: 1 } },
+    vertexShader: DOT_VERTEX, fragmentShader: DOT_FRAGMENT, transparent: true, depthWrite: false,
+  });
 }
 
-export function GraphCanvas({ graph, interactive, stage, onOpen, onUnsupported }: Props) {
+export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onOpen, onUnsupported }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const labelsRef = useRef<HTMLDivElement>(null);
-  // The latest callbacks, so a new function from the parent does not rebuild the scene.
-  const handlers = useRef({ onOpen, onUnsupported });
+  // The latest props the scene reads, so a change in them does not rebuild it.
+  const latest = useRef({ onOpen, onUnsupported, trace });
+  const scene = useRef<{ trace: (path: number[] | null) => void } | null>(null);
   useEffect(() => {
-    handlers.current = { onOpen, onUnsupported };
+    latest.current = { onOpen, onUnsupported, trace };
+    scene.current?.trace(trace);
   });
 
   useEffect(() => {
@@ -64,28 +104,31 @@ export function GraphCanvas({ graph, interactive, stage, onOpen, onUnsupported }
     try {
       renderer = new WebGLRenderer({ canvas, antialias: true, alpha: true });
     } catch {
-      handlers.current.onUnsupported();
+      latest.current.onUnsupported();
       return;
     }
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
     const { nodes, links } = graph;
     const n = nodes.length, m = links.length;
+    // The brain needs many more points than the graph has nodes; the rest are filler neurons.
+    const total = Math.max(container.clientWidth < 640 ? 520 : 900, Math.ceil(n * 1.4));
 
     // --- scene -----------------------------------------------------------------------------
-    const scene = new Scene();
+    const world = new Scene();
     const fog = new Fog(0x000000, 1, 100);
-    scene.fog = fog;
+    world.fog = fog;
     const camera = new PerspectiveCamera(FOV, 1, 0.1, 400);
-    scene.add(new AmbientLight(0xffffff, 1.5));
+    world.add(new AmbientLight(0xffffff, 1.5));
     const sun = new DirectionalLight(0xffffff, 2.4);
     sun.position.set(0.4, 1, 0.8);
-    scene.add(sun);
-    // `outer` places the graph and flattens it towards the viewer; `inner` turns and grows it.
+    world.add(sun);
+    // `outer` places the shape and flattens it towards the viewer; `inner` turns and grows it.
     const outer = new Group(), inner = new Group();
     outer.add(inner);
-    scene.add(outer);
+    world.add(outer);
 
-    const shapes = { person: new SphereGeometry(0.2, 16, 12), project: new OctahedronGeometry(0.46), skill: new BoxGeometry(0.36, 0.36, 0.36) };
+    // Solid shapes for the real nodes, shown once the graph has formed: sphere, diamond, cube.
+    const shapes = { person: new SphereGeometry(0.2, 16, 12), project: new OctahedronGeometry(0.44), skill: new BoxGeometry(0.34, 0.34, 0.34) };
     const meshOf: number[] = [], slotOf: number[] = [];
     const counts = [0, 0, 0];
     for (const node of nodes) {
@@ -94,37 +137,30 @@ export function GraphCanvas({ graph, interactive, stage, onOpen, onUnsupported }
       slotOf.push(counts[k]++);
     }
     const solid = new MeshLambertMaterial({ flatShading: true }); // each node's colour is set per instance
-    const meshes = KINDS.map((kind, k) => {
-      const mesh = new InstancedMesh(shapes[kind], solid, counts[k]);
-      mesh.frustumCulled = false;
-      inner.add(mesh);
-      return mesh;
+    const solids = KINDS.map((kind, k) => {
+      const item = new InstancedMesh(shapes[kind], solid, counts[k]);
+      item.frustumCulled = false;
+      item.visible = false;
+      inner.add(item);
+      return item;
     });
     // Busier projects and skills are drawn larger.
     const size = nodes.map((node) => (node.kind === "person" ? 1 : 1 + Math.min(node.neighbours.length, 12) * 0.05));
 
-    const glow = glowTexture();
-    const haloGeometry = new BufferGeometry(), linkGeometry = new BufferGeometry(), traceGeometry = new BufferGeometry(), pulseGeometry = new BufferGeometry();
-    const haloColors = new Float32Array(n * 3), linkColors = new Float32Array(m * 6);
-    const linkPositions = new Float32Array(m * 6), tracePositions = new Float32Array(m * 6);
-    const pulseCount = reduced ? 0 : Math.min(PULSES, m);
-    const pulsePositions = new Float32Array(pulseCount * 3);
-    const pulseLink = Array.from({ length: pulseCount }, () => Math.floor(Math.random() * m));
-    const pulsePhase = Array.from({ length: pulseCount }, () => Math.random());
-    const pulseSpeed = Array.from({ length: pulseCount }, () => 0.25 + Math.random() * 0.35);
-
-    const haloMaterial = new PointsMaterial({ size: 3.2, map: glow, vertexColors: true, transparent: true, depthWrite: false });
-    const linkMaterial = new LineBasicMaterial({ vertexColors: true, transparent: true, depthWrite: false });
-    const traceMaterial = new LineBasicMaterial({ transparent: true, opacity: 0.9, depthWrite: false });
-    const pulseMaterial = new PointsMaterial({ size: 0.7, map: glow, transparent: true, depthWrite: false });
-    const halos = new Points(haloGeometry, haloMaterial), lines = new LineSegments(linkGeometry, linkMaterial);
-    const trace = new LineSegments(traceGeometry, traceMaterial), pulses = new Points(pulseGeometry, pulseMaterial);
-    for (const object of [lines, trace, halos, pulses]) {
+    const dotGeometry = new BufferGeometry(), meshGeometry = new BufferGeometry(), linkGeometry = new BufferGeometry();
+    const traceGeometry = new BufferGeometry(), pulseGeometry = new BufferGeometry();
+    const dotMat = dotMaterial(), pulseMat = dotMaterial();
+    const meshMat = new LineBasicMaterial({ vertexColors: true, transparent: true, depthWrite: false });
+    const linkMat = new LineBasicMaterial({ vertexColors: true, transparent: true, depthWrite: false });
+    const traceMat = new LineBasicMaterial({ transparent: true, depthWrite: false });
+    const dots = new Points(dotGeometry, dotMat), pulses = new Points(pulseGeometry, pulseMat);
+    const meshLines = new LineSegments(meshGeometry, meshMat), linkLines = new LineSegments(linkGeometry, linkMat);
+    const traceLines = new LineSegments(traceGeometry, traceMat);
+    for (const object of [meshLines, linkLines, traceLines, dots, pulses]) {
       object.frustumCulled = false;
       object.visible = false; // until the layout is ready
       inner.add(object);
     }
-    for (const mesh of meshes) mesh.visible = false;
 
     // --- colours follow the page theme -----------------------------------------------------
     const probe = document.createElement("span");
@@ -135,84 +171,178 @@ export function GraphCanvas({ graph, interactive, stage, onOpen, onUnsupported }
       return new Color(getComputedStyle(probe).color);
     };
     const palette = { person: new Color(), project: new Color(), skill: new Color() };
-    const background = new Color();
+    const background = new Color(), ink = new Color();
+    let dark = true;
 
-    // --- layout, then the buffers that depend on it ----------------------------------------
+    // --- positions: the brain, the graph, and where each point is now ----------------------
     const layout = createLayout(graph);
-    const at = layout.positions;
-    const dummy = new Object3D(), colour = new Color(), point = new Vector3();
-    let ready = false, builtAt = 0;
-    let hovered = -1;
+    const graphAt = layout.positions; // the real nodes' places in the real graph
+    let home = new Float32Array(total * 3); // every point's place in the brain; the first n are the real nodes
+    const here = new Float32Array(total * 3); // where each point is this frame
+    let mesh: [number, number][] = [];
+    let meshNext: number[][] = [];
+    const kindOf = new Uint8Array(total), delay = new Float32Array(total), dotSize = new Float32Array(total);
+    const tint = new Float32Array(total * 3), scale = new Float32Array(total), energy = new Float32Array(total), fade = new Float32Array(total);
+    const warmth = new Float32Array(total); // what `energy` is easing towards; set when a signal arrives, then fades
+    let meshPositions = new Float32Array(0), meshColors = new Float32Array(0);
+    const linkPositions = new Float32Array(m * 6), linkColors = new Float32Array(m * 6);
+    const tracePositions = new Float32Array(Math.max(m, 8) * 6);
 
-    function place(i: number, scale: number) {
-      dummy.position.set(at[i * 3], at[i * 3 + 1], at[i * 3 + 2]);
-      dummy.rotation.set(i, i * 2, 0); // so the cubes and diamonds do not all face the same way
-      dummy.scale.setScalar(size[i] * scale);
-      dummy.updateMatrix();
-      meshes[meshOf[i]].setMatrixAt(slotOf[i], dummy.matrix);
+    const pulseCount = reduced ? 0 : PULSES;
+    const pulsePositions = new Float32Array(pulseCount * 3), pulseTint = new Float32Array(pulseCount * 3);
+    const pulseScale = new Float32Array(pulseCount).fill(0.32), pulseEnergy = new Float32Array(pulseCount), pulseFade = new Float32Array(pulseCount);
+    const pulseFrom = new Int32Array(pulseCount), pulseTo = new Int32Array(pulseCount);
+    const pulsePhase = new Float32Array(pulseCount), pulseSpeed = new Float32Array(pulseCount);
+    const pulseOnGraph = new Uint8Array(pulseCount);
+
+    const dummy = new Object3D(), colour = new Color(), point = new Vector3();
+    let ready = false, startedAt = Infinity;
+    let hovered = -1;
+    let formed = 0; // 0 while the brain shows, 1 once the graph has formed
+
+    /** Send a signal off from somewhere new: along the real links once the graph has formed, else along the mesh. */
+    function launch(k: number, onGraph: boolean) {
+      pulseOnGraph[k] = onGraph ? 1 : 0;
+      if (onGraph && m > 0) {
+        const [a, b] = any(links);
+        [pulseFrom[k], pulseTo[k]] = Math.random() < 0.5 ? [a, b] : [b, a];
+        pulseSpeed[k] = 0.22 + Math.random() * 0.22;
+      } else {
+        const a = Math.floor(Math.random() * total);
+        pulseFrom[k] = a;
+        pulseTo[k] = meshNext[a].length ? any(meshNext[a]) : a;
+        pulseSpeed[k] = 0.35 + Math.random() * 0.35;
+      }
+      pulsePhase[k] = 0;
     }
 
-    /** Colours and sizes for the current hover: the hovered node and its neighbours stay lit. */
+    /** Colours for the current theme and hover: the hovered node and its neighbours stay lit. */
     function paint() {
       const lit = hovered === -1 ? null : new Set([hovered, ...nodes[hovered].neighbours]);
-      for (let i = 0; i < n; i++) {
-        colour.copy(palette[nodes[i].kind]);
-        if (lit && !lit.has(i)) colour.lerp(background, 0.85);
-        meshes[meshOf[i]].setColorAt(slotOf[i], colour);
-        colour.toArray(haloColors, i * 3);
-        place(i, i === hovered ? 1.8 : lit?.has(i) ? 1.3 : 1);
+      for (let i = 0; i < total; i++) {
+        colour.copy(palette[KINDS[kindOf[i]]]);
+        if (i >= n) colour.lerp(background, dark ? 0.35 : 0.2); // filler neurons sit back a little
+        else if (lit && !lit.has(i)) colour.lerp(background, 0.85);
+        colour.toArray(tint, i * 3);
+        if (i < n) solids[meshOf[i]].setColorAt(slotOf[i], colour);
       }
-      let traced = 0;
       links.forEach(([a, b], k) => {
         for (const [end, offset] of [[a, 0], [b, 3]]) {
           colour.copy(palette[nodes[end].kind]);
           if (lit) colour.lerp(background, 0.75);
           colour.toArray(linkColors, k * 6 + offset);
         }
-        if (a === hovered || b === hovered) tracePositions.set(linkPositions.subarray(k * 6, k * 6 + 6), traced++ * 6);
       });
-      traceGeometry.setDrawRange(0, traced * 2);
-      traceGeometry.attributes.position.needsUpdate = true;
-      haloGeometry.attributes.color.needsUpdate = true;
+      mesh.forEach(([a, b], k) => {
+        meshColors.set(tint.subarray(a * 3, a * 3 + 3), k * 6);
+        meshColors.set(tint.subarray(b * 3, b * 3 + 3), k * 6 + 3);
+      });
+      colour.copy(palette.person).lerp(ink, dark ? 0.35 : 0);
+      for (let k = 0; k < pulseCount; k++) colour.toArray(pulseTint, k * 3);
+      dotGeometry.attributes.tint.needsUpdate = true;
       linkGeometry.attributes.color.needsUpdate = true;
-      for (const mesh of meshes) {
-        mesh.instanceMatrix.needsUpdate = true;
-        if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
-      }
+      meshGeometry.attributes.color.needsUpdate = true;
+      if (pulseCount) pulseGeometry.attributes.tint.needsUpdate = true;
+      for (const item of solids) if (item.instanceColor) item.instanceColor.needsUpdate = true;
     }
 
     function applyTheme() {
       background.copy(token("--color-bg"));
+      ink.copy(token("--color-ink"));
       for (const kind of KINDS) palette[kind].copy(token(`--color-${kind}`));
-      const dark = background.getHSL({ h: 0, s: 0, l: 0 }).l < 0.5;
+      dark = background.getHSL({ h: 0, s: 0, l: 0 }).l < 0.5;
       fog.color.copy(background);
       // Light adds up on a dark page and would wash out on a light one.
-      for (const material of [haloMaterial, linkMaterial, pulseMaterial]) {
+      for (const material of [dotMat, pulseMat, meshMat, linkMat]) {
         material.blending = dark ? AdditiveBlending : NormalBlending;
         material.needsUpdate = true;
       }
-      haloMaterial.opacity = dark ? 0.42 : 0.14;
-      linkMaterial.opacity = dark ? 0.38 : 0.5;
-      pulseMaterial.color.copy(dark ? token("--color-ink") : palette.person);
-      traceMaterial.color.copy(token("--color-ink"));
+      dotMat.uniforms.boost.value = pulseMat.uniforms.boost.value = dark ? 1 : 0;
+      traceMat.color.copy(ink);
       if (ready) paint();
     }
 
+    // --- the hero's traced path: a person, their project, its skill, lit one after the other -
+    let path: number[] = [];
+    let reach = new Spring(0, 0.9); // how far along the path the light has travelled
+    function setTrace(next: number[] | null) {
+      const wanted = (next ?? []).filter((i) => i >= 0 && i < n);
+      if (wanted.join() === path.join()) return;
+      path = wanted;
+      reach = new Spring(0, 0.9);
+      reach.to(Math.max(path.length - 1, 0), performance.now() / 1000);
+      if (ready) label();
+    }
+    scene.current = { trace: setTrace };
+
     function build() {
-      links.forEach(([a, b], k) => {
-        linkPositions.set(at.subarray(a * 3, a * 3 + 3), k * 6);
-        linkPositions.set(at.subarray(b * 3, b * 3 + 3), k * 6 + 3);
-      });
-      haloGeometry.setAttribute("position", new BufferAttribute(at, 3));
-      haloGeometry.setAttribute("color", new BufferAttribute(haloColors, 3));
+      // Give each real node the nearest free point of the brain, so its trip to the graph is short.
+      const cloud = brainPoints(total);
+      const taken = new Uint8Array(total);
+      const order: number[] = [];
+      for (let i = 0; i < n; i++) {
+        let best = 0, nearest = Infinity;
+        for (let j = 0; j < total; j++) {
+          if (taken[j]) continue;
+          const gap = (cloud[j * 3] - graphAt[i * 3]) ** 2 + (cloud[j * 3 + 1] - graphAt[i * 3 + 1]) ** 2 + (cloud[j * 3 + 2] - graphAt[i * 3 + 2]) ** 2;
+          if (gap < nearest) {
+            nearest = gap;
+            best = j;
+          }
+        }
+        taken[best] = 1;
+        order.push(best);
+      }
+      for (let j = 0; j < total; j++) if (!taken[j]) order.push(j);
+      home = new Float32Array(total * 3);
+      order.forEach((from, to) => home.set(cloud.subarray(from * 3, from * 3 + 3), to * 3));
+      here.set(home);
+
+      mesh = nearestLinks(home, 3);
+      meshNext = Array.from({ length: total }, () => []);
+      for (const [a, b] of mesh) {
+        meshNext[a].push(b);
+        meshNext[b].push(a);
+      }
+      meshPositions = new Float32Array(mesh.length * 6);
+      meshColors = new Float32Array(mesh.length * 6);
+
+      for (let i = 0; i < total; i++) {
+        // Filler neurons take the three kinds' colours too, mostly the people's.
+        const roll = Math.random();
+        kindOf[i] = i < n ? KINDS.indexOf(nodes[i].kind) : roll < 0.6 ? 0 : roll < 0.78 ? 1 : 2;
+        delay[i] = Math.random();
+        dotSize[i] = i < n ? [0.5, 0.78, 0.62][kindOf[i]] : 0.26 + Math.random() * 0.2;
+        fade[i] = 1;
+      }
+
+      dotGeometry.setAttribute("position", new BufferAttribute(here, 3));
+      dotGeometry.setAttribute("tint", new BufferAttribute(tint, 3));
+      dotGeometry.setAttribute("scale", new BufferAttribute(scale, 1));
+      dotGeometry.setAttribute("energy", new BufferAttribute(energy, 1));
+      dotGeometry.setAttribute("fade", new BufferAttribute(fade, 1));
+      meshGeometry.setAttribute("position", new BufferAttribute(meshPositions, 3));
+      meshGeometry.setAttribute("color", new BufferAttribute(meshColors, 3));
       linkGeometry.setAttribute("position", new BufferAttribute(linkPositions, 3));
       linkGeometry.setAttribute("color", new BufferAttribute(linkColors, 3));
       traceGeometry.setAttribute("position", new BufferAttribute(tracePositions, 3));
+      traceGeometry.setDrawRange(0, 0);
       pulseGeometry.setAttribute("position", new BufferAttribute(pulsePositions, 3));
-      for (const object of [...meshes, lines, trace, halos, pulses]) object.visible = true;
+      pulseGeometry.setAttribute("tint", new BufferAttribute(pulseTint, 3));
+      pulseGeometry.setAttribute("scale", new BufferAttribute(pulseScale, 1));
+      pulseGeometry.setAttribute("energy", new BufferAttribute(pulseEnergy, 1));
+      pulseGeometry.setAttribute("fade", new BufferAttribute(pulseFade, 1));
+      for (let k = 0; k < pulseCount; k++) {
+        launch(k, false);
+        pulsePhase[k] = Math.random();
+      }
+      for (const object of [dots, pulses, traceLines]) object.visible = true;
       ready = true;
-      builtAt = performance.now();
+      startedAt = performance.now() / 1000;
+      grow.to(1, startedAt);
       applyTheme();
+      path = [];
+      setTrace(latest.current.trace);
       label();
     }
 
@@ -226,26 +356,28 @@ export function GraphCanvas({ graph, interactive, stage, onOpen, onUnsupported }
       .sort((a, b) => b.node.neighbours.length - a.node.neighbours.length).map(({ i }) => i);
     let labelled: number[] = [];
 
-    /** Which nodes carry a label: the hovered one and its neighbours, else the busiest projects. */
+    /** Which nodes carry a label: in the brain, the traced path; in the graph, the hovered node and its neighbours, else the busiest projects. */
     function label() {
-      labelled = !interactive ? []
+      const inBrain = formed < 0.5;
+      labelled = inBrain ? path
+        : !interactive ? []
         : hovered !== -1 ? [hovered, ...nodes[hovered].neighbours].slice(0, LABELS)
         : busiest.slice(0, container!.clientWidth < 640 ? 3 : 6);
       labels.forEach((el, k) => {
         const node = nodes[labelled[k]];
-        el.className = `${LABEL_CLASS} ${labelled[k] === hovered ? "z-10 border-accent" : "border-line"}`;
+        el.className = `${LABEL_CLASS} ${inBrain || labelled[k] === hovered ? "z-10 border-accent" : "border-line"}`;
         el.textContent = node ? (labelled[k] === hovered ? `${node.name} · ${node.kind}` : node.name) : "";
       });
     }
 
-    const project = (i: number) => point.set(at[i * 3], at[i * 3 + 1], at[i * 3 + 2]).applyMatrix4(inner.matrixWorld).project(camera);
+    const onScreen = (i: number) => point.set(here[i * 3], here[i * 3 + 1], here[i * 3 + 2]).applyMatrix4(inner.matrixWorld).project(camera);
     let width = 0, height = 0;
 
-    /** The node under a point on the canvas, or -1. Works on screen positions, so small nodes are easy to hit. */
+    /** The real node under a point on the canvas, or -1. Works on screen positions, so small nodes are easy to hit. */
     function pick(x: number, y: number) {
       let best = -1, nearest = PICK_RADIUS * PICK_RADIUS;
       for (let i = 0; i < n; i++) {
-        const p = project(i);
+        const p = onScreen(i);
         if (p.z > 1) continue;
         const dx = (p.x * 0.5 + 0.5) * width - x, dy = (-p.y * 0.5 + 0.5) * height - y;
         if (dx * dx + dy * dy < nearest) {
@@ -257,15 +389,41 @@ export function GraphCanvas({ graph, interactive, stage, onOpen, onUnsupported }
     }
 
     // --- pointer ---------------------------------------------------------------------------
-    let settled = 0; // 0 in the hero, 1 once the graph has flown in; follows the scroll
-    let pointerX = 0, pointerY = 0, yaw = 0, pitch = 0;
-    let drag: { x: number; y: number; moved: number } | null = null;
-    const usable = () => interactive && ready && settled > 0.85;
-    const onControl = (event: Event) => event.target instanceof Element && event.target.closest("a, button, summary, details") !== null;
+    let yaw = 0, pitch = 0;
+    let drag: { x: number; y: number; moved: number; turn: boolean } | null = null;
+    const usable = () => interactive && ready && formed > 0.85;
+    const onControl = (event: Event) => event.target instanceof Element && event.target.closest("a, button, input, summary, details") !== null;
     const onCanvas = (event: MouseEvent) => {
       const box = canvas.getBoundingClientRect();
       return [event.clientX - box.left, event.clientY - box.top] as const;
     };
+    // The shape leans a little towards the pointer while the brain shows.
+    const leanX = new Spring(0, 0.9), leanY = new Spring(0, 0.9);
+
+    // --- zoom and pan, once the graph has formed --------------------------------------------
+    const zoom = new Spring(1, 0.35), panX = new Spring(0, 0.35), panY = new Spring(0, 0.35);
+    // Set each frame, in world units at the graph: where its middle rests, and half the view's size.
+    const rest = { x: 0, y: 0 }, half = { x: 1, y: 1 };
+
+    /** Zoom by `factor`, keeping the spot at (x, y) on the canvas where it is. With no spot given, the middle of the view. */
+    function zoomBy(factor: number, x = width / 2, y = height / 2) {
+      const from = zoom.target, to = clamp(from * factor, ZOOM_MIN, ZOOM_MAX);
+      if (to === from || width === 0) return;
+      const t = performance.now() / 1000;
+      // The spot, measured from the graph's resting middle. It stays put if pan' = spot - (spot - pan) * to / from.
+      const sx = ((x / width) * 2 - 1) * half.x - rest.x, sy = (1 - (y / height) * 2) * half.y - rest.y;
+      panX.to(sx - (sx - panX.target) * (to / from), t);
+      panY.to(sy - (sy - panY.target) * (to / from), t);
+      zoom.to(to, t);
+    }
+    function resetView() {
+      const t = performance.now() / 1000;
+      zoom.to(1, t);
+      panX.to(0, t);
+      panY.to(0, t);
+      yaw = pitch = 0;
+    }
+    controlsRef.current = { zoomBy: (factor) => { if (usable()) zoomBy(factor); }, reset: resetView };
 
     function hover(i: number) {
       if (i === hovered) return;
@@ -276,12 +434,20 @@ export function GraphCanvas({ graph, interactive, stage, onOpen, onUnsupported }
     }
 
     const onPointerMove = (event: PointerEvent) => {
-      pointerX = (event.clientX / innerWidth) * 2 - 1;
-      pointerY = (event.clientY / innerHeight) * 2 - 1;
+      const t = performance.now() / 1000;
+      leanX.to(((event.clientY / innerHeight) * 2 - 1) * 0.1, t);
+      leanY.to(((event.clientX / innerWidth) * 2 - 1) * 0.16, t);
       if (drag) {
-        yaw += (event.clientX - drag.x) * 0.006;
-        pitch = clamp(pitch + (event.clientY - drag.y) * 0.006, -1, 1);
-        drag.moved += Math.abs(event.clientX - drag.x) + Math.abs(event.clientY - drag.y);
+        const dx = event.clientX - drag.x, dy = event.clientY - drag.y;
+        if (drag.turn) {
+          yaw += dx * 0.006;
+          pitch = clamp(pitch + dy * 0.006, -1, 1);
+        } else {
+          // The graph follows the pointer exactly, so a drag has no spring.
+          panX.jump(panX.target + (dx / width) * 2 * half.x);
+          panY.jump(panY.target - (dy / height) * 2 * half.y);
+        }
+        drag.moved += Math.abs(dx) + Math.abs(dy);
         drag.x = event.clientX;
         drag.y = event.clientY;
         return;
@@ -289,9 +455,10 @@ export function GraphCanvas({ graph, interactive, stage, onOpen, onUnsupported }
       hover(usable() && !onControl(event) ? pick(...onCanvas(event)) : -1);
     };
     const onPointerDown = (event: PointerEvent) => {
-      // Dragging turns the graph. Mouse only: on a touch screen the same gesture scrolls the page.
+      // Dragging moves the graph, and turns it with Shift held. Mouse only: on a touch screen the
+      // same gesture scrolls the page.
       if (!usable() || event.pointerType !== "mouse" || event.button !== 0 || onControl(event)) return;
-      drag = { x: event.clientX, y: event.clientY, moved: 0 };
+      drag = { x: event.clientX, y: event.clientY, moved: 0, turn: event.shiftKey };
       stageEl.style.userSelect = "none";
     };
     let justDragged = false;
@@ -305,9 +472,17 @@ export function GraphCanvas({ graph, interactive, stage, onOpen, onUnsupported }
       const i = pick(...onCanvas(event));
       // A tap on a touch screen has no hover first: the first tap shows the node, the second opens it.
       if (i !== hovered) return hover(i);
-      if (i !== -1 && nodes[i].kind === "person") handlers.current.onOpen(nodes[i]);
+      if (i !== -1 && nodes[i].kind === "person") latest.current.onOpen(nodes[i]);
     };
     const onLeave = () => hover(-1);
+    const onWheel = (event: WheelEvent) => {
+      // Plain scrolling moves the page. Ctrl or Cmd with the wheel zooms the graph, and so does a
+      // pinch on a trackpad, which browsers report the same way.
+      if (!usable() || !(event.ctrlKey || event.metaKey)) return;
+      event.preventDefault();
+      zoomBy(Math.exp(-event.deltaY * 0.01), ...onCanvas(event));
+    };
+    stageEl.addEventListener("wheel", onWheel, { passive: false });
     stageEl.addEventListener("pointermove", onPointerMove);
     stageEl.addEventListener("pointerdown", onPointerDown);
     stageEl.addEventListener("pointerleave", onLeave);
@@ -320,13 +495,15 @@ export function GraphCanvas({ graph, interactive, stage, onOpen, onUnsupported }
     systemTheme.addEventListener("change", applyTheme);
 
     // --- one frame -------------------------------------------------------------------------
-    let frame = 0, last = performance.now();
-    let spin = 0, tiltX = 0, tiltY = 0, fade = 1;
+    let frame = 0, last = performance.now() / 1000;
+    const scrolled = new Spring(0, 0.7); // follows the page from the hero (0) to the graph view (1)
+    const grow = new Spring(0, 1.3, 0.12); // the shape swelling into place when it first appears
+    let drift = 0, view = 0, veil = 1, wasFormed = false, drawn = -1;
 
-    function tick(now: number) {
+    function tick(stamp: number) {
       frame = requestAnimationFrame(tick);
-      const dt = Math.min((now - last) / 1000, 0.1);
-      last = now;
+      const t = stamp / 1000, dt = clamp(t - last, 0, 0.1);
+      last = t;
 
       if (!ready) {
         // Lay the graph out a few milliseconds at a time, so the page never freezes.
@@ -353,70 +530,186 @@ export function GraphCanvas({ graph, interactive, stage, onOpen, onUnsupported }
         camera.updateProjectionMatrix();
       }
 
-      // How far the page has scrolled from the hero (0) to the graph view (1).
       const range = box.height - innerHeight;
-      const target = range > 0 ? clamp(-box.top / range, 0, 1) : 0;
+      const target = range > 0 ? clamp(-box.top / range) : 0;
       if (reduced) {
         // No fly-through: cross-fade between the two resting views instead.
-        const view = target < 0.5 ? 0 : 1;
-        if (view !== settled) {
-          fade -= dt / 0.15;
-          if (fade <= 0) settled = view;
+        const wanted = target < 0.5 ? 0 : 1;
+        if (wanted !== view) {
+          veil -= dt / 0.15;
+          if (veil <= 0) view = wanted;
         } else {
-          fade = Math.min(1, fade + dt / 0.15);
+          veil = Math.min(1, veil + dt / 0.15);
         }
+        formed = view;
       } else {
-        settled += (target - settled) * (1 - Math.exp(-dt * 5));
+        scrolled.to(target, t);
+        formed = smooth(clamp(scrolled.value(t)));
       }
-      const e = smooth(clamp(settled, 0, 1));
+      const e = formed;
       if (!usable() && hovered !== -1) hover(-1);
+      if (e >= 0.5 !== wasFormed) {
+        wasFormed = e >= 0.5;
+        label();
+      }
 
-      const aspect = width / height, wide = aspect > 1.1;
+      // --- where the camera and the shape are ---
+      // Two layouts, switching at the same width as the page's own (Tailwind's lg). Wide: the brain
+      // fills the right-hand side, beside the headline. Narrow: it sits behind the text, centred and
+      // dimmed. Formed, the graph is centred, lower on a narrow screen to clear the heading.
+      const aspect = width / height, wide = width >= 1024;
       const slope = Math.tan((FOV / 2) * (Math.PI / 180));
-      const fit = RADIUS / (slope * Math.min(1, aspect)); // the distance at which the graph fills the short side
-      const away = fit * (wide ? 1.22 : 1.3), close = fit * 1.12;
+      // The distance at which the shape, 2 * RADIUS across, takes up these shares of the view's width and height.
+      const distance = (ofWidth: number, ofHeight: number) => (RADIUS / slope) * Math.max(1 / (ofWidth * aspect), 1 / ofHeight);
+      const away = wide ? distance(0.6, 0.95) : distance(1.05, 0.8);
+      const close = wide ? distance(0.7, 0.92) : distance(0.96, 0.66);
       camera.position.z = mix(away, close, e);
-      // In the hero the graph sits beside the headline (or under it on a narrow screen). Settled,
-      // it leaves the left of a wide screen to the text.
       outer.position.set(
-        (wide ? slope * aspect : 0) * mix(away * 0.46, close * 0.14, e),
-        slope * mix(wide ? 0 : -away * 0.5, -close * 0.06, e),
+        wide ? slope * aspect * mix(away * 0.44, close * 0.1, e) : 0,
+        slope * mix(wide ? away * 0.02 : -away * 0.08, -close * (wide ? 0.04 : 0.16), e),
         0,
       );
-      outer.scale.z = mix(1, 0.45, e);
-      fog.near = camera.position.z - RADIUS * 0.4;
-      fog.far = camera.position.z + RADIUS * 1.7;
+      rest.x = outer.position.x;
+      rest.y = outer.position.y;
+      half.y = slope * camera.position.z;
+      half.x = half.y * aspect;
+      // Leaving the graph view puts the zoom back, so the brain always forms from the same place.
+      if (!usable() && (zoom.target !== 1 || panX.target !== 0 || panY.target !== 0)) resetView();
+      const zoomed = mix(1, zoom.value(t), e);
+      outer.position.x += panX.value(t) * e;
+      outer.position.y += panY.value(t) * e;
+      outer.scale.set(zoomed, zoomed, zoomed * mix(1, 0.45, e));
+      fog.near = camera.position.z - RADIUS * 0.3;
+      fog.far = camera.position.z + RADIUS * 1.5;
 
-      const grow = reduced ? 1 : 1 - Math.pow(1 - Math.min(1, (now - builtAt) / 1400), 3);
-      inner.scale.setScalar(mix(0.25, 1, grow));
-      if (!reduced) {
-        // Turns steadily in the hero, slows to a drift once settled, and holds still under the pointer.
-        if (!drag && hovered === -1) spin += dt * mix(0.12, 0.02, e);
-        tiltX += (pointerY * 0.1 * (1 - e) - tiltX) * (1 - Math.exp(-dt * 4));
-        tiltY += (pointerX * 0.14 * (1 - e) - tiltY) * (1 - Math.exp(-dt * 4));
+      inner.scale.setScalar(mix(0.7, 1, reduced ? 1 : grow.value(t)));
+      // The brain is seen from its side and sways; formed, the graph drifts round unless something is held.
+      if (!reduced && !drag && hovered === -1 && zoom.target === 1) drift += dt * 0.025 * e;
+      const sway = reduced ? 0 : Math.sin(t * 0.22) * 0.3;
+      inner.rotation.set(0.1 + pitch, (-Math.PI / 2 + 0.4 + sway) * (1 - e) + drift + yaw, 0);
+      outer.rotation.set(reduced ? 0 : leanX.value(t) * (1 - e), reduced ? 0 : leanY.value(t) * (1 - e), 0);
+
+      // Real nodes travel from the brain to the graph, each setting off at its own moment; filler
+      // neurons spread outwards as they fade.
+      if (e !== drawn) {
+        drawn = e;
+        for (let i = 0; i < total; i++) {
+          const go = i < n ? smooth(clamp(e * 1.4 - delay[i] * 0.4)) : 0;
+          for (let axis = 0; axis < 3; axis++) {
+            const k = i * 3 + axis;
+            here[k] = i < n ? mix(home[k], graphAt[k], go) : home[k] * (1 + 0.3 * e);
+          }
+        }
+        links.forEach(([a, b], k) => {
+          linkPositions.set(here.subarray(a * 3, a * 3 + 3), k * 6);
+          linkPositions.set(here.subarray(b * 3, b * 3 + 3), k * 6 + 3);
+        });
+        mesh.forEach(([a, b], k) => {
+          meshPositions.set(here.subarray(a * 3, a * 3 + 3), k * 6);
+          meshPositions.set(here.subarray(b * 3, b * 3 + 3), k * 6 + 3);
+        });
+        dotGeometry.attributes.position.needsUpdate = true;
+        linkGeometry.attributes.position.needsUpdate = true;
+        meshGeometry.attributes.position.needsUpdate = true;
       }
-      inner.rotation.set(mix(0.3, 0.12, e) + pitch, spin + yaw, 0);
-      outer.rotation.set(tiltX, tiltY, 0);
+      const solidity = smooth(clamp((e - 0.55) / 0.45)); // the solid shapes arrive in the second half
+      const beside = hovered === -1 ? null : nodes[hovered].neighbours;
+      for (let i = 0; i < n && solidity > 0; i++) {
+        dummy.position.set(here[i * 3], here[i * 3 + 1], here[i * 3 + 2]);
+        dummy.rotation.set(i, i * 2, 0); // so the cubes and diamonds do not all face the same way
+        // Zooming in spreads the nodes apart faster than it enlarges them, which is what thins out a dense graph.
+        dummy.scale.setScalar((size[i] * solidity * (i === hovered ? 1.8 : beside?.includes(i) ? 1.3 : 1)) / Math.sqrt(zoomed));
+        dummy.updateMatrix();
+        solids[meshOf[i]].setMatrixAt(slotOf[i], dummy.matrix);
+      }
+      for (const item of solids) {
+        item.visible = solidity > 0;
+        item.instanceMatrix.needsUpdate = true;
+      }
 
+      const meshShow = (1 - e) ** 2, linkShow = smooth(clamp((e - 0.3) / 0.7));
+      meshLines.visible = meshShow > 0.002;
+      linkLines.visible = linkShow > 0.002;
+      meshMat.opacity = (dark ? 0.15 : 0.32) * meshShow;
+      linkMat.opacity = (dark ? 0.28 : 0.45) * linkShow;
+
+      // --- signals ---
+      // A dot takes about half a second to warm and longer to cool: slow enough never to flash.
+      const ease = reduced ? 1 : 1 - Math.exp(-dt * 2.2), cool = Math.exp(-dt * 1.1);
+      for (let i = 0; i < total; i++) {
+        energy[i] += (warmth[i] - energy[i]) * ease;
+        warmth[i] *= cool;
+        scale[i] = dotSize[i] * (i < n ? mix(1, 2.8, e) * (i === hovered ? 1.6 : 1) : 1);
+        fade[i] = i < n ? 1 : meshShow;
+      }
+      const onGraph = e > 0.6;
       for (let k = 0; k < pulseCount; k++) {
+        if ((pulseOnGraph[k] === 1) !== onGraph) launch(k, onGraph);
         pulsePhase[k] += dt * pulseSpeed[k];
-        if (pulsePhase[k] > 1) {
-          pulsePhase[k] = 0;
-          pulseLink[k] = Math.floor(Math.random() * m);
+        if (pulsePhase[k] >= 1) {
+          warmth[pulseTo[k]] = 1; // the point it reaches warms up
+          const next = onGraph ? nodes[pulseTo[k]]?.neighbours ?? [] : meshNext[pulseTo[k]];
+          if (next.length === 0 || Math.random() < 0.3) {
+            launch(k, onGraph);
+          } else {
+            pulseFrom[k] = pulseTo[k];
+            pulseTo[k] = any(next);
+            pulsePhase[k] = 0;
+          }
         }
-        const from = pulseLink[k] * 6;
-        for (let axis = 0; axis < 3; axis++) {
-          pulsePositions[k * 3 + axis] = mix(linkPositions[from + axis], linkPositions[from + 3 + axis], pulsePhase[k]);
-        }
+        const a = pulseFrom[k] * 3, b = pulseTo[k] * 3;
+        for (let axis = 0; axis < 3; axis++) pulsePositions[k * 3 + axis] = mix(here[a + axis], here[b + axis], pulsePhase[k]);
+        pulseFade[k] = Math.sin(Math.PI * pulsePhase[k]) * 0.6 * (onGraph ? linkShow : meshShow);
       }
-      if (pulseCount) pulseGeometry.attributes.position.needsUpdate = true;
 
-      renderer.render(scene, camera);
-      canvas!.style.opacity = String(Math.min(1, (now - builtAt) / 600) * Math.max(0, fade));
+      // --- the bright lines: the hero's traced path, or the hovered node's links ---
+      let segments = 0;
+      const brainShow = 1 - smooth(clamp(e / 0.25));
+      const far = reduced ? path.length : reach.value(t);
+      if (hovered !== -1) {
+        links.forEach(([a, b], k) => {
+          if (a === hovered || b === hovered) tracePositions.set(linkPositions.subarray(k * 6, k * 6 + 6), segments++ * 6);
+        });
+        traceMat.opacity = 0.7;
+      } else if (path.length > 1 && brainShow > 0) {
+        for (let s = 0; s < path.length - 1; s++) {
+          const part = clamp(far - s);
+          if (part <= 0) break;
+          const a = path[s] * 3, b = path[s + 1] * 3;
+          for (let axis = 0; axis < 3; axis++) {
+            tracePositions[segments * 6 + axis] = here[a + axis];
+            tracePositions[segments * 6 + 3 + axis] = mix(here[a + axis], here[b + axis], part);
+          }
+          segments++;
+        }
+        path.forEach((i, s) => {
+          if (far < s - 0.05) return;
+          warmth[i] = 1; // the nodes the light has reached stay warm, steadily
+          scale[i] = dotSize[i] * 1.7;
+        });
+        traceMat.opacity = 0.6 * brainShow;
+      }
+      traceGeometry.setDrawRange(0, segments * 2);
+      traceGeometry.attributes.position.needsUpdate = true;
 
-      labelLayer!.style.opacity = String(smooth(clamp((settled - 0.75) / 0.25, 0, 1)));
+      for (const name of ["scale", "energy", "fade"]) dotGeometry.attributes[name].needsUpdate = true;
+      if (pulseCount) for (const name of ["position", "fade"]) pulseGeometry.attributes[name].needsUpdate = true;
+      for (const material of [dotMat, pulseMat]) {
+        material.uniforms.pixel.value = (height * renderer.getPixelRatio()) / (2 * slope);
+        material.uniforms.fogNear.value = fog.near;
+        material.uniforms.fogFar.value = fog.far;
+      }
+
+      renderer.render(world, camera);
+      // Behind the text the brain is dimmed: all of it on a narrow screen, its left side on a wide one.
+      canvas!.style.opacity = String(clamp((t - startedAt) / 0.8) * Math.max(0, veil) * (wide ? 1 : mix(0.4, 1, e)));
+      const mask = wide && e < 0.999 ? `linear-gradient(to right, rgb(0 0 0 / ${mix(0.25, 1, e).toFixed(3)}) 34%, #000 60%)` : "";
+      if (canvas!.style.maskImage !== mask) canvas!.style.maskImage = mask;
+
+      labelLayer!.style.opacity = String(Math.max(brainShow, smooth(clamp((e - 0.75) / 0.25))));
       labels.forEach((el, k) => {
-        const p = labelled[k] === undefined ? null : project(labelled[k]);
+        const waiting = e < 0.5 && far < k - 0.05; // the light has not reached this node yet
+        const p = labelled[k] === undefined || waiting ? null : onScreen(labelled[k]);
         const shown = p !== null && p.z < 1;
         el.classList.toggle("hidden", !shown);
         if (shown) el.style.transform = `translate(${(p.x * 0.5 + 0.5) * width}px, ${(-p.y * 0.5 + 0.5) * height}px) translate(-50%, -170%)`;
@@ -426,23 +719,26 @@ export function GraphCanvas({ graph, interactive, stage, onOpen, onUnsupported }
 
     return () => {
       cancelAnimationFrame(frame);
+      scene.current = null;
       themeWatcher.disconnect();
       systemTheme.removeEventListener("change", applyTheme);
       stageEl.removeEventListener("pointermove", onPointerMove);
       stageEl.removeEventListener("pointerdown", onPointerDown);
       stageEl.removeEventListener("pointerleave", onLeave);
       stageEl.removeEventListener("click", onClick);
+      stageEl.removeEventListener("wheel", onWheel);
       removeEventListener("pointerup", onPointerUp);
+      controlsRef.current = null;
       stageEl.style.cursor = "";
       stageEl.style.userSelect = "";
       probe.remove();
       for (const el of labels) el.remove();
-      for (const item of [...Object.values(shapes), haloGeometry, linkGeometry, traceGeometry, pulseGeometry,
-        haloMaterial, linkMaterial, traceMaterial, pulseMaterial, solid, glow]) item.dispose();
-      for (const mesh of meshes) mesh.dispose();
+      for (const item of [...Object.values(shapes), dotGeometry, meshGeometry, linkGeometry, traceGeometry, pulseGeometry,
+        dotMat, pulseMat, meshMat, linkMat, traceMat, solid]) item.dispose();
+      for (const item of solids) item.dispose();
       renderer.dispose();
     };
-  }, [graph, interactive, stage]);
+  }, [graph, interactive, stage, controlsRef]);
 
   return (
     <div ref={containerRef} className="absolute inset-0">

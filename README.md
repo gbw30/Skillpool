@@ -13,7 +13,7 @@ the design in [docs/SPEC.md](docs/SPEC.md).
 Built and tested without live model calls:
 
 - Service (`service/`): ingestion, quote verification, identity resolution, hybrid search,
-  cited answers, signed API. 69 tests pass, including the whole pipeline against a real Neo4j
+  cited answers, signed API. 70 tests pass, including the whole pipeline against a real Neo4j
   (5.26 and 2026.10) with the model calls replaced by fakes.
 - Web app (`web/`): landing, search, person, and upload screens plus the signed proxy. Builds
   and lints clean. All four screens were checked in headless Chromium, at desktop and phone
@@ -95,7 +95,8 @@ Search returns the same three people for any question, except that a question co
 gets no match, "error" fails part-way through the answer, and "limit" is rate limited. Uploads take
 the access code `mock`; the files are dropped, and the batch table steps through processing with
 every fourth file failing. "Open source" has no files to open. The landing page's graph is a
-made-up sample of 48 people, 12 projects and 24 skills. Mock mode only works under
+made-up sample of 48 people, 12 projects from across a business (sales, finance, design, people,
+operations, engineering and more) and the 26 tools they used. Mock mode only works under
 `next dev`, never in a production build.
 
 ### Embedding provider

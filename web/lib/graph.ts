@@ -36,7 +36,7 @@ export function buildGraph(data: GraphData): Graph {
 }
 
 /** A repeatable random source (mulberry32), so the layout and the sample never change between loads. */
-function random(seed: number) {
+export function random(seed: number) {
   return () => {
     seed = (seed + 0x6d2b79f5) | 0;
     let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
@@ -114,15 +114,26 @@ const FIRST = ["Aaron", "Alexandra", "April", "Brian", "Carla", "Daniel", "Elena
   "Ines", "Jamal", "Keiko", "Liam", "Maya", "Noah", "Omar", "Priya", "Quinn", "Rosa"];
 const LAST = ["Brown", "Johnson", "Burgess", "White", "Nguyen", "Okafor", "Petrov", "Silva",
   "Tanaka", "Walker", "Young", "Zhang", "Edwards", "Erickson", "Koch", "Rubio"];
-const PROJECTS = ["Atlas Migration", "Beacon Reporting Pipeline", "Borealis Partner API", "Cinder Billing Rewrite",
-  "Cobalt Billing Rewrite", "Delta Observability Rollout", "Dynamo Checkout Redesign", "Echo Billing Rewrite",
-  "Ember Partner API", "Falcon Migration", "Fathom Partner API", "Anchor Checkout Redesign"];
-const SKILLS = ["Kafka", "Kubernetes", "Spark", "Python", "Go", "PostgreSQL", "Redis", "Terraform", "Docker", "GraphQL",
-  "React", "TypeScript", "Java", "AWS", "Airflow", "dbt", "Prometheus", "Grafana", "gRPC", "Rust", "Android", "Swift",
-  "PyTorch", "Snowflake"];
+// Projects from different parts of a business, each with the tools it used. The first of each
+// pair of sectors comes early, so the landing page's examples are not all from one department.
+const PROJECTS: [string, string[]][] = [
+  ["Atlas Migration", ["Kafka", "Kubernetes", "Terraform"]], // engineering
+  ["CRM Consolidation", ["Salesforce", "HubSpot", "SQL"]], // sales
+  ["ERP Rollout", ["SAP", "NetSuite", "Excel"]], // finance and operations
+  ["Brand Refresh", ["Figma", "Photoshop", "Webflow"]], // design
+  ["Board Reporting Dashboard", ["Tableau", "Power BI", "SQL"]], // analytics
+  ["Payroll System Switch", ["Workday", "ADP", "Excel"]], // people
+  ["Beacon Reporting Pipeline", ["Kafka", "Spark", "Snowflake"]], // data
+  ["Demand Generation Relaunch", ["HubSpot", "Google Analytics", "Marketo"]], // marketing
+  ["Warehouse Automation Pilot", ["SAP", "AutoCAD", "Python"]], // operations
+  ["Support Desk Revamp", ["Zendesk", "Salesforce", "Jira"]], // customer support
+  ["Mobile Checkout Redesign", ["React", "Figma", "TypeScript"]], // product
+  ["Annual Audit Preparation", ["NetSuite", "Excel", "Power BI"]], // finance
+];
 
 /**
- * A made-up graph in the shape the service returns: 48 people, 12 projects, 24 skills.
+ * A made-up graph in the shape the service returns: 48 people, 12 projects from across a
+ * business, and the 26 tools those projects used.
  * The first two people match the mock search results, so their pages open in mock mode.
  */
 export function sampleGraph(): GraphData {
@@ -136,8 +147,8 @@ export function sampleGraph(): GraphData {
       name: `${FIRST[i % FIRST.length]} ${LAST[(i * 7 + Math.floor(i / FIRST.length)) % LAST.length]}`,
     })),
   ];
-  const projects = PROJECTS.map((name) => ({ id: slug(name), name }));
-  const skills = SKILLS.map((name) => ({ id: slug(name), name }));
+  const projects = PROJECTS.map(([name]) => ({ id: slug(name), name }));
+  const skills = [...new Set(PROJECTS.flatMap(([, tools]) => tools))].map((name) => ({ id: slug(name), name }));
 
   const seen = new Set<string>();
   const pairs = () => {
@@ -150,12 +161,11 @@ export function sampleGraph(): GraphData {
   workedOn.add("p-brenda-adams", "atlas-migration");
   workedOn.add("p-amy-vasquez", "beacon-reporting-pipeline");
   workedOn.add("p-amy-vasquez", "atlas-migration");
-  for (const skill of ["kafka", "kubernetes"]) { used.add("atlas-migration", skill); has.add("p-brenda-adams", skill); }
-  for (const skill of ["kafka", "spark"]) used.add("beacon-reporting-pipeline", skill);
+  for (const skill of ["kafka", "kubernetes"]) has.add("p-brenda-adams", skill);
 
-  for (const project of projects) {
-    for (let k = 3 + Math.floor(rand() * 4); k > 0; k--) workedOn.add(any(people.slice(2)).id, project.id);
-    for (let k = 2 + Math.floor(rand() * 3); k > 0; k--) used.add(project.id, any(skills).id);
+  for (const [name, tools] of PROJECTS) {
+    for (const tool of tools) used.add(slug(name), slug(tool));
+    for (let k = 3 + Math.floor(rand() * 4); k > 0; k--) workedOn.add(any(people.slice(2)).id, slug(name));
   }
   for (const person of people.slice(2)) {
     // The service only returns people who are on a project.

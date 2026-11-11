@@ -29,6 +29,12 @@ export const Alert = (p: Props) => (
   </Icon>
 );
 
+export const Plus = (p: Props) => <Icon {...p}><path d="M12 5v14M5 12h14" /></Icon>;
+export const Minus = (p: Props) => <Icon {...p}><path d="M5 12h14" /></Icon>;
+export const Upload = (p: Props) => <Icon {...p}><path d="M12 15V4M7.5 8.5 12 4l4.5 4.5M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" /></Icon>;
+export const Folder = (p: Props) => <Icon {...p}><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" /></Icon>;
+export const Check = (p: Props) => <Icon {...p}><path d="m5 12.5 4.5 4.5L19 7.5" /></Icon>;
+
 /** The SkillPool mark: one node linked to two. */
 export const Logo = (p: Props) => (
   <Icon strokeWidth={2} {...p}>

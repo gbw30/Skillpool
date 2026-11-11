@@ -13,24 +13,37 @@
 /* Every colour is light-dark(light, dark) and follows the color-scheme above, so components
    use these tokens and need no per-theme classes. */
 @theme {
-  --color-bg: light-dark(#f6f8f7, #0a0d0c);
-  --color-surface: light-dark(#ffffff, #111614);
-  --color-raised: light-dark(#eef2f0, #171d1a);
-  --color-line: light-dark(#d9e0dc, #232b27);
+  --color-bg: light-dark(#dfe4de, #0a0d0c);
+  --color-surface: light-dark(#e9ede8, #111614);
+  --color-raised: light-dark(#d3d9d2, #171d1a);
+  --color-line: light-dark(#bcc5bd, #232b27);
   /* Input borders and graph links: at least 3:1 against the surface. */
-  --color-edge: light-dark(#7f8a84, #5d6a63);
-  --color-ink: light-dark(#0f1513, #e6ebe8);
-  --color-muted: light-dark(#55605a, #8d9892);
-  --color-accent: light-dark(#0a7d3e, #4ade80);
+  --color-edge: light-dark(#6f7b73, #5d6a63);
+  --color-ink: light-dark(#18201b, #e6ebe8);
+  --color-muted: light-dark(#48534c, #8d9892);
+  --color-accent: light-dark(#0a6233, #4ade80);
   --color-accent-ink: light-dark(#ffffff, #04140b);
-  --color-danger: light-dark(#b42318, #f87171);
+  --color-danger: light-dark(#9b2318, #f87171);
   /* Graph node kinds. Shape and label carry the meaning too. */
-  --color-person: light-dark(#0a7d3e, #4ade80);
-  --color-project: light-dark(#0369a1, #38bdf8);
-  --color-skill: light-dark(#a16207, #fbbf24);
+  --color-person: light-dark(#0a6233, #4ade80);
+  --color-project: light-dark(#075a86, #38bdf8);
+  --color-skill: light-dark(#7d4c05, #fbbf24);
+}
+
+/* The spring from lib/spring.ts (0.3s, no bounce) sampled as a CSS easing, for the small state
+   changes that stay in CSS. Larger motion uses Motion's springs in the components. */
+:root {
+  --spring-time: 450ms;
+  --spring: linear(0, 0.118, 0.329, 0.527, 0.682, 0.793, 0.868, 0.917, 0.949, 0.969, 0.981, 0.989, 0.993, 0.996, 0.998, 0.999, 1);
 }
 
 @layer base {
+  /* A slim scrollbar in the page's own colours. */
+  html { scrollbar-width: thin; scrollbar-color: color-mix(in oklab, var(--color-accent) 45%, var(--color-line)) transparent; }
+  @supports not (scrollbar-color: auto) {
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-thumb { border: 3px solid transparent; border-radius: 999px; background: color-mix(in oklab, var(--color-accent) 45%, var(--color-line)) content-box; }
+  }
   body { background: var(--color-bg); color: var(--color-ink); font-family: var(--font-sans); line-height: 1.55; }
   h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); line-height: 1.1; letter-spacing: -0.03em; font-weight: 600; text-wrap: balance; }
   h2 { font-size: 1.125rem; font-weight: 600; letter-spacing: -0.01em; }
@@ -54,7 +67,7 @@
     height: 40px; padding: 0 16px; border: 1px solid transparent; border-radius: 6px;
     background: var(--color-accent); color: var(--color-accent-ink);
     font-size: 0.9375rem; font-weight: 500; text-decoration: none; white-space: nowrap; cursor: pointer;
-    transition: background-color 150ms ease-out, border-color 150ms ease-out;
+    transition: background-color var(--spring-time) var(--spring), border-color var(--spring-time) var(--spring);
     -webkit-tap-highlight-color: transparent;
   }
   .btn:disabled { opacity: 0.5; cursor: not-allowed; }
@@ -73,6 +86,13 @@
     background: var(--color-surface); color: var(--color-ink);
   }
   .input::placeholder { color: var(--color-muted); }
+
+  /* A named node in running text: a small framed tag with its shape. */
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px; padding: 3px 8px; border: 1px solid var(--color-line); border-radius: 6px;
+    background: color-mix(in oklab, var(--color-surface) 80%, transparent); color: var(--color-ink); text-decoration: none;
+  }
+  @media (hover: hover) { a.chip:hover { border-color: var(--color-accent); } }
 
   /* A button that reads as a link. */
   .link { color: var(--color-accent); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }

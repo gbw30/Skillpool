@@ -100,7 +100,7 @@ Priority: P0 = needed for the demo to be honest, P1 = planned, P2 = later.
 | R19 | Search on a public deployment is rate limited, with a daily cap on model spend. | P0 |
 | R20 | Document text is never treated as instructions and model output is never rendered as HTML. | P0 |
 | R21 | A stats view shows counts of documents, chunks, people, skills, projects, and flagged identity pairs. | P1 |
-| R22 | The landing page draws the indexed graph of organisation projects, the people on them, and the skills they used. A node can be pointed at to trace its links, a person opens their page, and the same content is offered as a list. | P1 |
+| R22 | The landing page draws the indexed graph of organisation projects, the people on them, and the skills they used. A node can be pointed at to trace its links, a person opens their page, the view can be zoomed and moved, and the same content is offered as a list. | P1 |
 
 ## 7. Experience
 

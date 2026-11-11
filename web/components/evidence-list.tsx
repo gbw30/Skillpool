@@ -11,7 +11,7 @@ export function EvidenceList({ items, label, active }: { items: Passage[]; label
   const [sourceError, setSourceError] = useState<string | null>(null);
   return (
     <>
-      <ul aria-label={label} className="grid gap-3">
+      <ul aria-label={label} className="grid grid-cols-1 gap-3">
         {items.map((e) => (
           <li
             key={e.chunkId} id={e.n ? `e-${e.n}` : undefined}

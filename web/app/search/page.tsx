@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { EvidenceList } from "@/components/evidence-list";
 import { Alert, Search } from "@/components/icons";
 import { PathGraph } from "@/components/path-graph";
@@ -119,6 +119,15 @@ export default function SearchPage() {
     }
   }
 
+  // The landing page hands a question over as /search?q=...; ask it once on arrival.
+  const arrived = useRef(false);
+  useEffect(() => {
+    if (arrived.current) return;
+    arrived.current = true;
+    const asked = new URLSearchParams(location.search).get("q");
+    if (asked) queueMicrotask(() => run(asked)); // after this render, not during the effect
+  });
+
   const count = results?.people.length ?? 0;
   const status =
     phase === "searching" ? "Searching…"
@@ -192,7 +201,7 @@ export default function SearchPage() {
                 Nothing in the indexed documents clearly matches. Try naming a skill, a technology, or a project.
               </p>
             ) : (
-              <ol className="grid gap-4">
+              <ol className="grid grid-cols-1 gap-4">
                 {results.people.map((person, i) => <PersonCard key={person.id} person={person} rank={i + 1} cited={cited} />)}
               </ol>
             )}

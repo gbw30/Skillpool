@@ -4,7 +4,7 @@
 // Search gives the same three people for any question, except questions containing
 // "cobol" (no confident match), "error" (the answer fails part-way), or "limit" (rate limited).
 // Uploads use the access code "mock"; every fourth file fails.
-// The landing page's graph is a made-up sample (lib/graph.ts).
+// The landing page's graph is a made-up sample of projects from across a business (lib/graph.ts).
 import { randomUUID } from "node:crypto";
 import type { JobStatus, PersonProfile, SearchResults } from "./api";
 import { sampleGraph } from "./graph";
