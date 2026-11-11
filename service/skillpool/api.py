@@ -210,6 +210,11 @@ def delete_document(doc_id: str) -> dict:
     return {"deleted": doc_id}
 
 
+@app.get("/graph", dependencies=[Depends(signed)])
+def graph_view() -> dict:
+    return graph.overview(config.GRAPH_VIEW_LINKS)
+
+
 @app.get("/stats", dependencies=[Depends(signed)])
 def stats() -> dict:
     return graph.run(graph.STATS)[0]

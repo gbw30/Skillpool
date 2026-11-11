@@ -190,8 +190,10 @@ function Upload() {
 
 export default function UploadPage() {
   return (
-    <Suspense fallback={<p className="status pulse" role="status">Loading…</p>}>
-      <Upload />
-    </Suspense>
+    <div className="page">
+      <Suspense fallback={<p className="status pulse" role="status">Loading…</p>}>
+        <Upload />
+      </Suspense>
+    </div>
   );
 }

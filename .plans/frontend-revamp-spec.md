@@ -1,6 +1,7 @@
 # Front-end revamp spec
 
-Status: draft, waiting for approval. Written 2026-11-10 from an interview with the owner.
+Status: approved 2026-11-10. Landing section revised 2026-11-11 at the owner's request.
+Steps 1 and 3 are built; step 2 (person and upload) and step 4 (polish) are not.
 
 ## Goal
 
@@ -19,7 +20,8 @@ landing page.
 | Themes | Dark by default, with a toggle: dark, light, or follow the system |
 | Accent | Signal green |
 | Relationship path | A mini node-and-link graph on each person card, hand-drawn SVG, branches per project |
-| Landing | Animated example: a canned question types, the graph draws in, the cited answer appears |
+| Landing | A 3D graph of the indexed data beside the headline, which flies in and settles into an explorable graph view as the page scrolls (replaces the animated example first chosen) |
+| 3D | Written in code with three.js, not a modelled scene |
 
 ## Defaults I chose (change any of these)
 
@@ -28,7 +30,7 @@ landing page.
 | Fonts | Geist for text, Geist Mono for labels, citations, file paths, status lines | Made for this kind of interface; loaded through `next/font`, so self-hosted with no layout shift |
 | Components | Hand-built with Tailwind, in `web/components/` | The app needs buttons, inputs, cards, tags and one table; a component library would be mostly unused |
 | Icons | About eight inline SVGs in one file, drawn with `currentColor` | Too few to justify an icon dependency |
-| Motion | CSS only, no animation library | Every motion here is a transition or a run-once sequence |
+| Motion | CSS only outside the landing's 3D scene, no animation library | Every other motion is a transition or a run-once sequence |
 | Motion level | Moderate: result cards enter in sequence, the answer shows a caret while streaming, buttons press | Follows the jmo-workflow `better-ui` and `animate` rules |
 | Citations | Hovering or focusing `[n]` in the answer highlights passage n; clicking still jumps to it | Makes the link between claim and evidence visible |
 | Graph data | The service returns the path as structured data, next to the existing sentence | Drawing from a parsed display sentence would break on names that contain commas or arrows |
@@ -61,11 +63,21 @@ theme toggle (three icon buttons, labelled for screen readers). Skip link and vi
 stay.
 
 ### Landing
-Headline, one line of explanation, two actions (Search people, Add documents). Below them, a framed
-console panel plays once on load: the question "Who has hands-on experience with Kafka?" types
-itself, the mini graph draws in (links first, then nodes), then two answer sentences with citations
-fade in. A Replay button restarts it. Canned content, no network calls. With reduced motion the
-panel shows its final state.
+Headline, one line of explanation, two actions (Search people, Add documents), and one three.js
+scene that plays two parts.
+- **Hero:** the graph of indexed data (people as green spheres, projects as cyan diamonds, skills
+  as amber cubes) turns slowly beside the headline, leans towards the pointer, and carries small
+  pulses along its links.
+- **Graph view:** as the page scrolls, the same graph flies in, flattens towards the viewer and
+  stops. It then shows names for the busiest projects; pointing at a node lights it and its
+  neighbours and names them; clicking a person opens their page; dragging turns the graph.
+- **Data:** `GET /api/graph`: organisation projects, the people on them and the skills they used,
+  at most 600 links of each kind. The layout is computed in the browser (`web/lib/graph.ts`).
+- **No data or no service:** a placeholder shape is drawn and the text says so.
+- **Without WebGL, a mouse, or sight:** the same content as a list of projects with their people
+  and skills. It opens by itself when the scene cannot be drawn.
+- **Reduced motion:** nothing turns or pulses, and the two views cross-fade instead of flying.
+- three.js loads only on this page (about 140 KB compressed, in its own file).
 
 ### Search
 - A prompt-style question box (mono `>` glyph, large input, Search button) and the example
@@ -115,7 +127,9 @@ per row (dot plus label: queued, processing, ingested, failed) and the failure r
 
 | Area | Change |
 |---|---|
-| `web/package.json` | Add `tailwindcss` and `@tailwindcss/postcss` (dev). No other new packages |
+| `web/package.json` | Add `tailwindcss` and `@tailwindcss/postcss` (dev), `three` and its types for the landing page |
+| `web/components/landing/`, `web/lib/graph.ts` | New: the 3D scene, the landing page, graph layout and sample data |
+| `service/skillpool/graph.py`, `api.py` | New `GET /graph` from three fixed queries (`overview`), with a test |
 | `web/postcss.config.mjs` | New: the Tailwind PostCSS plugin |
 | `web/app/globals.css` | Rewritten: Tailwind import, tokens in `@theme`, theme switching, base styles, keyframes |
 | `web/app/layout.tsx` | Fonts, header, theme toggle, and a tiny inline script that applies the saved theme before first paint |
@@ -130,16 +144,16 @@ Unchanged: the signed proxy, request signing, the upload flow, answer validation
 model output is never rendered as HTML.
 
 ## Out of scope
-- One graph for the whole result set (the PRD lists graph visualisation as a non-goal).
+- One graph for a search's result set. (The landing page's graph of indexed data is in scope: PRD R22.)
 - The stats view (PRD R21), drag-and-drop upload, and any new behaviour beyond citation highlight.
-- Component, icon or animation libraries.
+- Component, icon or animation libraries. three.js is the one drawing library, for the landing page.
 
 ## Order of work
 1. **Foundations and search.** Tailwind, tokens, fonts, header, theme toggle, `links` in the
    service and mock, `PathGraph`, the search screen. Checkpoint: screenshots at desktop and phone
    width in both themes, for the owner to approve the look before the rest is built.
 2. **Person and upload screens.**
-3. **Landing with the animated example.**
+3. **Landing with the 3D graph and graph view.** Built before step 2 at the owner's request.
 4. **Polish pass** against the `better-ui` checklist, then docs.
 
 ## How it is checked

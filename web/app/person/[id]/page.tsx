@@ -120,8 +120,10 @@ function Person() {
 // The id is only known at request time, so the page shell renders first and this streams in.
 export default function PersonPage() {
   return (
-    <Suspense fallback={<p className="status pulse" role="status">Loading…</p>}>
-      <Person />
-    </Suspense>
+    <div className="page">
+      <Suspense fallback={<p className="status pulse" role="status">Loading…</p>}>
+        <Person />
+      </Suspense>
+    </div>
   );
 }

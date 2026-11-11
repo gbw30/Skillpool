@@ -17,6 +17,7 @@ const ROUTES: Route[] = [
   { method: "POST", pattern: /^search$/, to: () => "/search" },
   { method: "GET", pattern: new RegExp(`^person/(${ID})$`), to: (m) => `/person/${m[1]}` },
   { method: "GET", pattern: new RegExp(`^documents/(${ID})/url$`), to: (m) => `/documents/${m[1]}/url` },
+  { method: "GET", pattern: /^graph$/, to: () => "/graph" },
   { method: "GET", pattern: /^stats$/, to: () => "/stats" },
 ];
 

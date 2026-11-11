@@ -130,7 +130,7 @@ export default function SearchPage() {
   const busy = phase === "searching" || phase === "writing";
 
   return (
-    <>
+    <div className="page">
       <div className="max-w-3xl">
         <h1>Who should staff it?</h1>
         <form className="mt-6" onSubmit={(event) => { event.preventDefault(); run(question); }}>
@@ -208,6 +208,6 @@ export default function SearchPage() {
           )}
         </div>
       )}
-    </>
+    </div>
   );
 }

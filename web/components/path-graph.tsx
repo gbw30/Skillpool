@@ -16,7 +16,8 @@ const SHAPES: Record<Kind, { color: string; shape: ReactNode }> = {
   skill: { color: "text-skill", shape: <rect x="1" y="1" width="8" height="8" rx="1" /> },
 };
 
-function Glyph({ kind }: { kind: Kind }) {
+/** The small shape that marks a kind of node: circle, diamond or square. */
+export function Glyph({ kind }: { kind: Kind }) {
   return <svg className={`size-2 shrink-0 ${SHAPES[kind].color}`} viewBox="0 0 10 10" fill="currentColor" aria-hidden>{SHAPES[kind].shape}</svg>;
 }
 

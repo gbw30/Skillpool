@@ -46,7 +46,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <ThemeToggle />
           </div>
         </header>
-        <main id="main" className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12">{children}</main>
+        <main id="main">{children}</main>
       </body>
     </html>
   );

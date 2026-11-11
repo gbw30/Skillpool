@@ -84,7 +84,9 @@ reject if the timestamp is more than 5 minutes off, constant-time compare. Defin
 web/                  Next.js 16 app
   app/                pages: /, /search, /person/[id], /upload
   app/api/[...path]/  one route handler: allowlisted, signed proxy to the service (BFF)
-  lib/                service.ts (signing, upload gate), api.ts (browser types and helpers)
+  components/         shared pieces; landing/ holds the 3D graph (three.js, loaded only on /)
+  lib/                service.ts (signing, upload gate), api.ts (browser types and helpers),
+                      graph.ts (graph layout), mock.ts (canned service for `npm run dev:mock`)
 service/
   skillpool/
     api.py            FastAPI routes, signature check, rate limit
@@ -285,13 +287,14 @@ generated if absent and passed through to the service and logs.
 | `POST /api/upload/session` | Header `x-access-code`; body: file manifest (path, size). Validates count (≤ 200), size (≤ 10 MB each), type by extension (PDF, TXT, MD). Returns a job id and one presigned POST form per file under `jobs/{jobId}/`, 15-minute expiry, with the key, content type, and exact size fixed by the policy. |
 | `POST /api/ingest/start` | Body: job id. Lists what actually landed in the bucket and sends the signed job to the service. Returns 202. |
 | `GET /api/jobs/:id` | Counts by status and per-document status and error. |
-| `POST /api/search` | Body: `{ q, mode? }`. Server-sent events: `results` (people, evidence, paths, confidence), `answer` deltas, `done`. |
+| `POST /api/search` | Body: `{ q, mode? }`. Server-sent events: `results` (people, evidence, paths, the same paths as `links` data, confidence), `answer` deltas, `done`. |
 | `GET /api/person/:id` | Profile, skills, roles, projects, collaborators, evidence. |
 | `GET /api/documents/:id/url` | Short-lived presigned GET for a citation click-through (R16). |
+| `GET /api/graph` | The landing page's graph (R22): organisation projects, the people on them, the skills they used, and which of those people list which of those skills. At most 600 links of each kind. |
 | `GET /api/stats` | Node and relationship counts, flagged identity pairs. |
 
 Service (FastAPI), all HMAC-protected except `/healthz`: `POST /ingest`, `GET /jobs/{id}`,
-`POST /search`, `GET /person/{id}`, `GET /stats`, `DELETE /documents/{id}`.
+`POST /search`, `GET /person/{id}`, `GET /graph`, `GET /stats`, `DELETE /documents/{id}`.
 
 The original's `/worker/finalize` only wrote a log line and is not carried over.
 

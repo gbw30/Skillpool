@@ -94,7 +94,8 @@ The web app then answers from canned data in `web/lib/mock.ts` instead of callin
 Search returns the same three people for any question, except that a question containing "cobol"
 gets no match, "error" fails part-way through the answer, and "limit" is rate limited. Uploads take
 the access code `mock`; the files are dropped, and the batch table steps through processing with
-every fourth file failing. "Open source" has no files to open. Mock mode only works under
+every fourth file failing. "Open source" has no files to open. The landing page's graph is a
+made-up sample of 48 people, 12 projects and 24 skills. Mock mode only works under
 `next dev`, never in a production build.
 
 ### Embedding provider

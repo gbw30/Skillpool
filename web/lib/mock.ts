@@ -4,8 +4,10 @@
 // Search gives the same three people for any question, except questions containing
 // "cobol" (no confident match), "error" (the answer fails part-way), or "limit" (rate limited).
 // Uploads use the access code "mock"; every fourth file fails.
+// The landing page's graph is a made-up sample (lib/graph.ts).
 import { randomUUID } from "node:crypto";
 import type { JobStatus, PersonProfile, SearchResults } from "./api";
+import { sampleGraph } from "./graph";
 
 // NODE_ENV is fixed at build time, so a production build can never answer from this file.
 export const MOCK = process.env.NODE_ENV === "development" && process.env.SKILLPOOL_MOCK === "1";
@@ -137,6 +139,23 @@ const PEOPLE: PersonProfile[] = [
   },
 ];
 
+const GRAPH = sampleGraph();
+
+/** A page for someone who exists only in the sample graph, built from their links in it. */
+function sampleProfile(id: string): PersonProfile | undefined {
+  const person = GRAPH.people.find((p) => p.id === id);
+  if (!person) return undefined;
+  const named = (list: { id: string; name: string }[], key: string) => list.find((x) => x.id === key)?.name ?? key;
+  return {
+    id, name: person.name, title: null, aliases: null, roles: [], education: [], possibleSame: [], evidence: [],
+    skills: GRAPH.has.filter(([p]) => p === id).map(([, skill]) => ({ name: named(GRAPH.skills, skill), level: null })),
+    projects: GRAPH.workedOn.filter(([p]) => p === id).map(([, project]) => ({
+      id: project, name: named(GRAPH.projects, project), scope: "org", role: null,
+      collaborators: GRAPH.workedOn.filter(([p, other]) => other === project && p !== id).map(([p]) => ({ id: p, name: named(GRAPH.people, p) })),
+    })),
+  };
+}
+
 // Upload batches, by job id. Lost when the dev server restarts.
 const jobs = new Map<string, { paths: string[]; started?: number }>();
 const FAILURES = ["no_text", "unreadable_pdf", "type_mismatch"];
@@ -212,9 +231,10 @@ export async function mockService(method: string, path: string, body: string): P
     return stream(searchEvents(q));
   }
   if (path.startsWith("/person/")) {
-    const person = PEOPLE.find((p) => p.id === id);
+    const person = PEOPLE.find((p) => p.id === id) ?? sampleProfile(id);
     return person ? Response.json(person) : fail(404, "not_found", "No such person.");
   }
+  if (path === "/graph") return Response.json(GRAPH);
   if (path === "/upload/session") {
     const files = (input.files ?? []) as { path: string }[];
     const jobId = randomUUID().replaceAll("-", "");
