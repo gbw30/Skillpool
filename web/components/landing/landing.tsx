@@ -66,6 +66,23 @@ function GraphList({ data, linked }: { data: GraphData; linked: boolean }) {
   );
 }
 
+const ANSWER = "flex flex-wrap items-center gap-x-2 gap-y-1.5 font-mono text-sm text-muted";
+
+/** The answer under the headline: someone on a project that used the skill. */
+function Answer({ example, linked = false }: { example: Example; linked?: boolean }) {
+  return (
+    <>
+      <span aria-hidden>↳</span>
+      {linked ? <Link className="chip" href={`/person/${example.person.id}`}><Glyph kind="person" /> {example.person.name}</Link>
+        : <span className="chip"><Glyph kind="person" /> {example.person.name}</span>}
+      worked on
+      <span className="chip"><Glyph kind="project" /> {example.project}</span>
+      which used
+      <span className="chip"><Glyph kind="skill" /> {example.skill}</span>
+    </>
+  );
+}
+
 /** The skill in the headline. Each letter springs up into place when the word changes. */
 function Word({ text }: { text: string }) {
   const still = useReducedMotion();
@@ -193,25 +210,26 @@ export function Landing() {
             </motion.h1>
 
             {/* The answer, read off the graph: someone on a project that used the skill. */}
-            <div className="mt-6 min-h-16 sm:min-h-9">
-              <AnimatePresence mode="wait" initial={false}>
-                {example && (
-                  <motion.p
-                    key={example.skill} className="flex flex-wrap items-center gap-x-2 gap-y-1.5 font-mono text-sm text-muted"
-                    initial={still ? { opacity: 0 } : { opacity: 0, transform: "translateY(10px)" }}
-                    animate={still ? { opacity: 1 } : { opacity: 1, transform: "translateY(0px)" }}
-                    exit={{ opacity: 0, transition: { duration: 0.12 } }} transition={{ ...SPRING, delay: 2.2 }}
-                  >
-                    <span aria-hidden>↳</span>
-                    {indexed ? <Link className="chip" href={`/person/${example.person.id}`}><Glyph kind="person" /> {example.person.name}</Link>
-                      : <span className="chip"><Glyph kind="person" /> {example.person.name}</span>}
-                    worked on
-                    <span className="chip"><Glyph kind="project" /> {example.project}</span>
-                    which used
-                    <span className="chip"><Glyph kind="skill" /> {example.skill}</span>
-                  </motion.p>
-                )}
-              </AnimatePresence>
+            {/* Every example's answer is laid out unseen in the same cell, so the row is always as tall as
+                the longest one and nothing below it moves when the example changes. */}
+            <div className="mt-6 grid min-h-9">
+              {shown.map((other) => (
+                <p key={other.skill} aria-hidden className={`invisible col-start-1 row-start-1 ${ANSWER}`}><Answer example={other} /></p>
+              ))}
+              <div className="col-start-1 row-start-1">
+                <AnimatePresence mode="wait" initial={false}>
+                  {example && (
+                    <motion.p
+                      key={example.skill} className={ANSWER}
+                      initial={still ? { opacity: 0 } : { opacity: 0, transform: "translateY(10px)" }}
+                      animate={still ? { opacity: 1 } : { opacity: 1, transform: "translateY(0px)" }}
+                      exit={{ opacity: 0, transition: { duration: 0.12 } }} transition={{ ...SPRING, delay: 2.2 }}
+                    >
+                      <Answer example={example} linked={indexed} />
+                    </motion.p>
+                  )}
+                </AnimatePresence>
+              </div>
             </div>
 
             <motion.form {...rise(2)} className="mt-8 flex max-w-xl gap-2" onSubmit={submit}>
