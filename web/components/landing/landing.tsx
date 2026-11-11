@@ -1,10 +1,10 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion, useMotionTemplate, useMotionValueEvent, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type FormEvent, type RefObject } from "react";
 import { Minus, Plus } from "@/components/icons";
 import { Glyph } from "@/components/path-graph";
 import { api, type GraphData } from "@/lib/api";
@@ -97,6 +97,47 @@ function Word({ text }: { text: string }) {
   );
 }
 
+const TRACK = 96; // px between the rail's two stops
+
+/** The rail on the right edge: this page's two views, a marker for how far the scroll has got, and a way to jump. */
+function Rail({ stage }: { stage: RefObject<HTMLDivElement | null> }) {
+  const still = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: stage, offset: ["start start", "end end"] });
+  const eased = useSpring(scrollYProgress, { stiffness: 140, damping: 26 });
+  const marker = useMotionTemplate`translateY(${useTransform(still ? scrollYProgress : eased, (v) => v * TRACK)}px)`;
+  const [atGraph, setAtGraph] = useState(false);
+  useMotionValueEvent(scrollYProgress, "change", (v) => setAtGraph(v > 0.5));
+
+  function go(toGraph: boolean) {
+    const box = stage.current?.getBoundingClientRect();
+    if (box) scrollTo({ top: toGraph ? box.bottom + scrollY - innerHeight : 0, behavior: still ? "auto" : "smooth" });
+  }
+
+  return (
+    // Pinned over the scene for as long as the scene is; only the rail itself takes clicks.
+    <nav aria-label="Views on this page" className="pointer-events-none sticky top-0 z-10 -mt-[100svh] flex h-svh items-center justify-end pr-2 sm:pr-4">
+      <div className="pointer-events-auto rounded-lg bg-bg/60 px-2 py-3 backdrop-blur-[3px]">
+      <div className="relative flex flex-col justify-between" style={{ height: TRACK + 8 }}>
+        <span className="absolute right-[3.5px] top-1 w-px bg-edge/70" style={{ height: TRACK }} aria-hidden />
+        {["Brain", "Graph"].map((name, i) => {
+          const here = atGraph === (i === 1);
+          return (
+            <button
+              key={name} type="button" aria-current={here ? "true" : undefined} onClick={() => go(i === 1)}
+              className="group -my-2 flex items-center justify-end gap-2.5 py-2 pl-3"
+            >
+              <span className={`label max-lg:sr-only group-hover:text-ink ${here ? "text-ink" : ""}`}>{name}</span>
+              <span className="relative size-2 rounded-full border border-edge bg-bg group-hover:border-accent" />
+            </button>
+          );
+        })}
+        <motion.span className="pointer-events-none absolute right-0 top-0 size-2 rounded-full bg-accent" style={{ transform: marker }} aria-hidden />
+      </div>
+      </div>
+    </nav>
+  );
+}
+
 export function Landing() {
   const stage = useRef<HTMLDivElement>(null);
   const graphControls = useRef<GraphControls | null>(null);
@@ -166,6 +207,8 @@ export function Landing() {
         )}
       </div>
 
+      <Rail stage={stage} />
+
       <div className="relative -mt-[100svh]">
         <section className="relative mx-auto flex min-h-[calc(100svh-3.5rem)] max-w-6xl flex-col px-4 pb-16 pt-8 sm:px-6 lg:justify-center lg:pt-0">
           {/* Beside the brain on a wide screen, over it on a narrow one. Type sizes follow this column's width. */}
@@ -234,8 +277,6 @@ export function Landing() {
               names, and quotes the lines that back each one. <Link href="/upload">Add documents</Link>
             </motion.p>
           </div>
-          {/* The cue to scroll: a track with a bead sliding down it. Also a link to the graph. */}
-          <a href="#graph-title" aria-label="Go to the graph" className="scroll-cue absolute bottom-4 left-1/2 -translate-x-1/2 max-sm:hidden" />
         </section>
 
         <section className="mx-auto flex min-h-svh max-w-6xl flex-col px-4 py-8 sm:px-6" aria-labelledby="graph-title">

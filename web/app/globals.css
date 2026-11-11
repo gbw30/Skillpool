@@ -103,16 +103,6 @@
 @keyframes fade-in { from { opacity: 0; } }
 @keyframes fade-in-up { from { opacity: 0; translate: 0 12px; filter: blur(4px); } }
 @keyframes blink { 50% { opacity: 0; } }
-@keyframes slide-down { 0% { translate: 0 0; opacity: 0; } 25% { opacity: 1; } 75% { opacity: 1; } 100% { translate: 0 22px; opacity: 0; } }
-
-/* The landing page's scroll cue: a thin track with a bead that slides down it, slowly. */
-.scroll-cue { width: 22px; height: 38px; border: 1px solid var(--color-edge); border-radius: 999px; }
-.scroll-cue::after {
-  content: ""; position: absolute; left: 50%; top: 6px; width: 4px; height: 4px; margin-left: -2px; border-radius: 999px; background: var(--color-accent);
-}
-@media (prefers-reduced-motion: no-preference) { .scroll-cue::after { animation: slide-down 2.4s ease-in-out infinite; } }
-@media (hover: hover) { .scroll-cue:hover { border-color: var(--color-accent); } }
-
 /* The pointer, in the page's colours and the system arrow's size. Colours cannot come from the
    tokens inside an image, so each theme has its own pair. Unlayered, so it wins over utilities. */
 :root {
