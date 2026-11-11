@@ -5,6 +5,7 @@
 // a point flares when one arrives. As the page scrolls, the real nodes leave the brain for their
 // places in the real graph, the rest of the mesh dissolves, and the graph can be explored.
 // Everything here runs outside React, once per frame. Motion comes from exact springs (lib/spring).
+// The scene is built unseen behind the loading screen, then starts where that screen drew the brain.
 import { useEffect, useRef, type RefObject } from "react";
 import {
   AdditiveBlending, AmbientLight, BoxGeometry, BufferAttribute, BufferGeometry, Color, DirectionalLight, Fog, Group,
@@ -34,6 +35,12 @@ type Props = {
   controlsRef: RefObject<GraphControls | null>;
   onOpen: (person: GraphNode) => void;
   onUnsupported: () => void;
+  /** While true the scene is built and drawn but stays unseen, so the page can bring everything in together. */
+  held: boolean;
+  /** The loading screen's drawing of the brain. The brain starts where it stands and travels to its own place. */
+  sketch: RefObject<HTMLElement | null>;
+  /** Called once the scene has drawn its first frame. */
+  onReady: () => void;
 };
 
 const KINDS: Kind[] = ["person", "project", "skill"];
@@ -89,15 +96,15 @@ function dotMaterial() {
   });
 }
 
-export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onOpen, onUnsupported }: Props) {
+export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onOpen, onUnsupported, held, sketch, onReady }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const labelsRef = useRef<HTMLDivElement>(null);
   // The latest props the scene reads, so a change in them does not rebuild it.
-  const latest = useRef({ onOpen, onUnsupported, trace });
+  const latest = useRef({ onOpen, onUnsupported, onReady, held, trace });
   const scene = useRef<{ trace: (path: number[] | null) => void } | null>(null);
   useEffect(() => {
-    latest.current = { onOpen, onUnsupported, trace };
+    latest.current = { onOpen, onUnsupported, onReady, held, trace };
     scene.current?.trace(trace);
   });
 
@@ -208,7 +215,8 @@ export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onO
     const pulseOnGraph = new Uint8Array(pulseCount);
 
     const dummy = new Object3D(), colour = new Color(), point = new Vector3();
-    let ready = false, startedAt = Infinity;
+    let ready = false, announced = false;
+    let shownAt = Infinity; // when the page let the scene be seen
     let hovered = -1;
     let formed = 0; // 0 while the brain shows, 1 once the graph has formed
 
@@ -351,8 +359,6 @@ export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onO
       }
       for (const object of [dots, pulses, traceLines]) object.visible = true;
       ready = true;
-      startedAt = performance.now() / 1000;
-      grow.to(1, startedAt);
       applyTheme();
       path = [];
       setTrace(latest.current.trace);
@@ -385,6 +391,46 @@ export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onO
 
     const onScreen = (i: number) => point.set(here[i * 3], here[i * 3 + 1], here[i * 3 + 2]).applyMatrix4(inner.matrixWorld).project(camera);
     let width = 0, height = 0;
+
+    // --- the entrance: the picture starts small, at `enter`, and grows into its place ----------
+    const arrive = new Spring(1, 1.15, 0.1); // 0 where the entrance starts, 1 in place
+    // The starting size (1 is life size) and middle, in canvas pixels. `drawn`: it starts on the loading screen's drawing.
+    let enter = { size: 1, x: 0, y: 0, drawn: false };
+    const place = { x: 0, y: 0 }; // the brain's middle on the canvas, at rest
+
+    /** The scene may now be seen. Start it on the loading screen's drawing if there is one, else a little smaller than life. */
+    function begin(t: number, e: number) {
+      // The trace starts over, so the visitor sees it from its first step.
+      reach = new Spring(0, 2.8);
+      reach.to(Math.max(path.length - 1, 0), t + 0.6);
+      if (reduced) return; // no movement: the scene fades in where it rests
+      // The brain's outline on the canvas, as it rests.
+      camera.clearViewOffset();
+      camera.updateMatrixWorld();
+      outer.updateMatrixWorld(true);
+      let left = Infinity, right = -Infinity, top = Infinity, bottom = -Infinity;
+      for (let i = 0; i < total; i++) {
+        const p = onScreen(i);
+        const x = (p.x * 0.5 + 0.5) * width, y = (-p.y * 0.5 + 0.5) * height;
+        left = Math.min(left, x); right = Math.max(right, x); top = Math.min(top, y); bottom = Math.max(bottom, y);
+      }
+      place.x = (left + right) / 2;
+      place.y = (top + bottom) / 2;
+      // Scrolled down, the brain is already on its way to being the graph, and the drawing is not of that.
+      const drawing = e < 0.02 ? sketch.current?.getBoundingClientRect() : undefined;
+      arrive.jump(0);
+      if (drawing && drawing.width > 0 && right > left) {
+        const box = canvas!.getBoundingClientRect();
+        enter = {
+          size: Math.min(drawing.width / (right - left), drawing.height / (bottom - top)),
+          x: drawing.left + drawing.width / 2 - box.left, y: drawing.top + drawing.height / 2 - box.top, drawn: true,
+        };
+        arrive.to(1, t + 0.3); // the drawing fades into the brain first, then the brain sets off
+      } else {
+        enter = { size: 0.7, x: place.x, y: place.y, drawn: false };
+        arrive.to(1, t);
+      }
+    }
 
     /** The real node under a point on the canvas, or -1. Works on screen positions, so small nodes are easy to hit. */
     function pick(x: number, y: number) {
@@ -510,7 +556,6 @@ export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onO
     // --- one frame -------------------------------------------------------------------------
     let frame = 0, last = performance.now() / 1000;
     const scrolled = new Spring(0, 0.7); // follows the page from the hero (0) to the graph view (1)
-    const grow = new Spring(0, 1.3, 0.12); // the shape swelling into place when it first appears
     let drift = 0, view = 0, veil = 1, wasFormed = false, drawn = -1, posed = "";
     // Writing a style the element already has still costs a style pass, so remember what was written.
     const written = new Map<HTMLElement, string>();
@@ -603,12 +648,28 @@ export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onO
       fog.near = camera.position.z - RADIUS * 0.3;
       fog.far = camera.position.z + RADIUS * 1.5;
 
-      inner.scale.setScalar(mix(0.7, 1, reduced ? 1 : grow.value(t)));
       // The brain is seen from its side and sways; formed, the graph drifts round unless something is held.
       if (!reduced && !drag && hovered === -1 && zoom.target === 1) drift += dt * 0.025 * e;
-      const sway = reduced ? 0 : Math.sin(t * 0.22) * 0.3;
+      // The sway starts from rest when the scene is shown, which is the pose the loading screen draws.
+      const sway = reduced || shownAt === Infinity ? 0 : Math.sin((t - shownAt) * 0.22) * 0.3;
       inner.rotation.set(0.1 + pitch, (-Math.PI / 2 + 0.4 + sway) * (1 - e) + drift + yaw, 0);
       outer.rotation.set(reduced ? 0 : leanX.value(t) * (1 - e), reduced ? 0 : leanY.value(t) * (1 - e), 0);
+
+      if (shownAt === Infinity && !latest.current.held) {
+        shownAt = t;
+        begin(t, e);
+      }
+      // The entrance moves and sizes the finished picture, not the shape, so the brain keeps its
+      // pose all the way: the camera looks at a larger window with the picture set inside it.
+      const along = arrive.value(t), shrink = mix(enter.size, 1, along);
+      if (Math.abs(1 - along) > 0.0005) {
+        const cx = mix(enter.x, place.x, along), cy = mix(enter.y, place.y, along);
+        camera.setViewOffset(width, height, place.x - cx / shrink, place.y - cy / shrink, width / shrink, height / shrink);
+      } else if (camera.view?.enabled) {
+        camera.clearViewOffset();
+      }
+      // 1 while the brain still stands on the loading screen's drawing, where nothing dims it yet.
+      const fresh = enter.drawn ? 1 - clamp(along) : 0;
 
       // Real nodes travel from the brain to the graph, each setting off at its own moment; filler
       // neurons spread outwards as they fade.
@@ -655,7 +716,7 @@ export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onO
       const meshShow = (1 - e) ** 2, linkShow = smooth(clamp((e - 0.3) / 0.7));
       meshLines.visible = meshShow > 0.002;
       linkLines.visible = linkShow > 0.002;
-      meshMat.opacity = (dark ? 0.15 : 0.32) * meshShow;
+      meshMat.opacity = (dark ? 0.15 : 0.32) * meshShow * Math.min(1, shrink ** 0.8); // lines stay 1px wide, so a small picture needs fainter ones
       linkMat.opacity = (dark ? 0.28 : 0.45) * linkShow;
 
       // --- signals ---
@@ -725,19 +786,25 @@ export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onO
       for (const name of ["scale", "energy", "fade"]) dotGeometry.attributes[name].needsUpdate = true;
       if (pulseCount) for (const name of ["position", "fade"]) pulseGeometry.attributes[name].needsUpdate = true;
       for (const material of [dotMat, pulseMat]) {
-        material.uniforms.pixel.value = (height * renderer.getPixelRatio()) / (2 * slope);
+        material.uniforms.pixel.value = ((height * renderer.getPixelRatio()) / (2 * slope)) * shrink;
         material.uniforms.fogNear.value = fog.near;
         material.uniforms.fogFar.value = fog.far;
       }
 
       renderer.render(world, camera);
+      if (!announced) {
+        announced = true;
+        latest.current.onReady();
+      }
       // Behind the text the brain is dimmed: all of it on a narrow screen, its left side on a wide one.
-      const seen = (clamp((t - startedAt) / 0.8) * Math.max(0, veil) * (wide ? 1 : mix(0.4, 1, e))).toFixed(3);
+      const seen = (clamp((t - shownAt) / (enter.drawn ? 0.3 : 0.8)) * Math.max(0, veil) * (wide ? 1 : mix(mix(0.4, 1, fresh), 1, e))).toFixed(3);
       if (canvas!.style.opacity !== seen) canvas!.style.opacity = seen;
-      const mask = wide && e < 0.999 ? `linear-gradient(to right, rgb(0 0 0 / ${mix(0.25, 1, e).toFixed(3)}) 34%, #000 60%)` : "";
+      const mask = wide && e < 0.999 ? `linear-gradient(to right, rgb(0 0 0 / ${mix(mix(0.25, 1, fresh), 1, e).toFixed(3)}) 34%, #000 60%)` : "";
       if (canvas!.style.maskImage !== mask) canvas!.style.maskImage = mask;
 
-      style(labelLayer!, "opacity", Math.max(brainShow, smooth(clamp((e - 0.75) / 0.25))).toFixed(3));
+      // No names on the small picture: they come in as the brain reaches its place.
+      const settled = shownAt === Infinity ? 0 : smooth(clamp((along - 0.75) / 0.25));
+      style(labelLayer!, "opacity", (Math.max(brainShow, smooth(clamp((e - 0.75) / 0.25))) * settled).toFixed(3));
       labels.forEach((el, k) => {
         const waiting = e < 0.5 && far < k - 0.05; // the light has not reached this node yet
         const p = labelled[k] === undefined || waiting ? null : onScreen(labelled[k]);
@@ -750,6 +817,7 @@ export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onO
 
     return () => {
       cancelAnimationFrame(frame);
+      canvas.style.opacity = "0"; // a page kept alive in the background comes back with its last picture; hide it until the new scene draws
       scene.current = null;
       themeWatcher.disconnect();
       systemTheme.removeEventListener("change", applyTheme);
@@ -769,7 +837,7 @@ export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onO
       for (const item of solids) item.dispose();
       renderer.dispose();
     };
-  }, [graph, interactive, stage, controlsRef]);
+  }, [graph, interactive, stage, controlsRef, sketch]);
 
   return (
     <div ref={containerRef} className="absolute inset-0">

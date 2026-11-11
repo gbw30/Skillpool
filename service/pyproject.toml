@@ -3,6 +3,7 @@ name = "skillpool"
 version = "0.1.0"
 description = "SkillPool service: ingestion, identity resolution, and search over a Neo4j graph"
 requires-python = ">=3.12"
+license = "MIT"
 dependencies = [
     "anthropic",
     "boto3",

@@ -100,3 +100,53 @@ export function nearestLinks(points: Float32Array, k = 3): [number, number][] {
   }
   return links;
 }
+
+/** One layer of the loading screen's drawing: the points and links that appear together. */
+export type SketchBand = {
+  nodes: { x: number; y: number; r: number; kind: 0 | 1 | 2; alpha: number }[];
+  links: { x1: number; y1: number; x2: number; y2: number; alpha: number }[];
+};
+
+/**
+ * A flat drawing of the brain as the hero first shows it, for the loading screen: a few of its
+ * points seen from the same side, each linked to its nearest neighbours. The points are grouped
+ * into bands outwards from the middle one, so the drawing can appear band by band as if growing.
+ * Sizes are in a box 100 wide; `origin` is the middle point, as percentages of the box.
+ */
+export function brainSketch(count = 72, bandCount = 8) {
+  const cloud = brainPoints(count, 5);
+  // The hero's starting pose (graph-canvas.tsx turns the brain by these angles), with a little perspective.
+  const yaw = -Math.PI / 2 + 0.4, pitch = 0.1, eye = RADIUS * 2.9;
+  const flat: { x: number; y: number; near: number }[] = [];
+  for (let i = 0; i < cloud.length / 3; i++) {
+    const x = cloud[i * 3], y = cloud[i * 3 + 1], z = cloud[i * 3 + 2];
+    const x1 = x * Math.cos(yaw) + z * Math.sin(yaw), z1 = -x * Math.sin(yaw) + z * Math.cos(yaw);
+    const y1 = y * Math.cos(pitch) - z1 * Math.sin(pitch), near = y * Math.sin(pitch) + z1 * Math.cos(pitch);
+    const grow = eye / (eye - near);
+    flat.push({ x: x1 * grow, y: -y1 * grow, near });
+  }
+  const span = (pick: (p: { x: number; y: number; near: number }) => number) => {
+    const values = flat.map(pick);
+    return [Math.min(...values), Math.max(...values)];
+  };
+  const [left, right] = span((p) => p.x), [top, bottom] = span((p) => p.y), [back, front] = span((p) => p.near);
+  const unit = 100 / (right - left), round = (v: number) => Math.round(v * 100) / 100;
+  const height = round((bottom - top) * unit);
+  const at = flat.map((p) => ({ x: round((p.x - left) * unit), y: round((p.y - top) * unit), near: (p.near - back) / (front - back) }));
+
+  // Bands of equal size, by distance from the point nearest the middle of the drawing.
+  const gap = (p: { x: number; y: number }, x: number, y: number) => (p.x - x) ** 2 + (p.y - y) ** 2;
+  const seed = at.reduce((best, p) => (gap(p, 50, height / 2) < gap(best, 50, height / 2) ? p : best));
+  const order = at.map((_, i) => i).sort((a, b) => gap(at[a], seed.x, seed.y) - gap(at[b], seed.x, seed.y));
+  const bandOf = new Array<number>(at.length);
+  order.forEach((i, rank) => { bandOf[i] = Math.floor((rank * bandCount) / at.length); });
+
+  const bands: SketchBand[] = Array.from({ length: bandCount }, () => ({ nodes: [], links: [] }));
+  // Points nearer the viewer are larger and clearer, which is what gives the flat drawing its depth.
+  at.forEach((p, i) => bands[bandOf[i]].nodes.push({ x: p.x, y: p.y, r: round(0.55 + 0.65 * p.near), kind: ([0, 0, 1, 0, 2] as const)[i % 5], alpha: round(0.4 + 0.6 * p.near) }));
+  for (const [a, b] of nearestLinks(cloud, 2)) {
+    // A link appears with the later of its two ends.
+    bands[Math.max(bandOf[a], bandOf[b])].links.push({ x1: at[a].x, y1: at[a].y, x2: at[b].x, y2: at[b].y, alpha: round(0.14 + 0.3 * ((at[a].near + at[b].near) / 2)) });
+  }
+  return { width: 100, height, origin: { x: seed.x, y: round((seed.y / height) * 100) }, bands };
+}

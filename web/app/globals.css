@@ -124,6 +124,27 @@ a, button, summary, label[for], .cursor-pointer { cursor: var(--cursor-link); }
   @media (prefers-reduced-motion: no-preference) { animation-name: fade-in-up; }
 }
 
+/* The loading screen (components/landing/brain-loader.tsx). Its drawing of the brain appears band
+   by band, outwards from the middle. Each band is a layer of its own and only its opacity and size
+   change, so the browser keeps it moving while the page's scripts are busy. Nothing here blinks. */
+@keyframes sketch-in { from { opacity: 0; scale: 0.8; } }
+@keyframes sketch-wait { 50% { opacity: 0.62; } }
+@keyframes loader-give-up { to { opacity: 0; visibility: hidden; } }
+@utility sketch-band {
+  animation: fade-in 300ms ease-out both;
+  @media (prefers-reduced-motion: no-preference) {
+    animation: sketch-in var(--spring-time) var(--spring) both;
+    animation-delay: calc(var(--i, 0) * 80ms);
+  }
+}
+/* Still waiting once the drawing is done: it breathes, slowly, to show the page is alive. */
+@utility sketch-wait {
+  @media (prefers-reduced-motion: no-preference) { animation: sketch-wait 2.8s ease-in-out 1.4s infinite; }
+}
+@utility sketch-label { animation: fade-in 300ms ease-out 700ms both; }
+/* If the page's script never runs, the loading screen still gets out of the way. */
+.loader { animation: loader-give-up 400ms ease-out 10s forwards; }
+
 /* A block cursor after streaming text. */
 @utility caret {
   &::after {

@@ -1,7 +1,22 @@
 # Front-end revamp spec
 
 Status: approved 2026-11-10. Landing section revised 2026-11-11 at the owner's request.
-Steps 1 to 3 are built. Step 4 (the polish pass against the `better-ui` checklist) is not.
+All four steps are done. The polish pass found three places that differ from the `better-ui`
+checklist (a slight spring bounce, the landing text's entrance timing, thinner icon strokes); the
+owner chose to keep all three.
+
+## Third revision, 2026-11-11 (loading screen, credit, sample)
+
+| Topic | Now |
+|---|---|
+| Loading screen | The landing page opens on a full-screen loading screen (`web/components/landing/brain-loader.tsx`): a flat drawing of the brain, about 70 points and their links, that appears band by band outwards from its middle over one second. Behind it the graph, the 3D scene's code and the fonts load, and the scene is built and drawn once unseen |
+| Hand-off | When everything is ready the screen fades out. The 3D brain starts exactly where the drawing stands, at the same size, then travels and grows to its place while the text comes in piece by piece |
+| How long | At least the one second the drawing takes. After 7 seconds without the graph the page shows anyway and the brain arrives when it can |
+| Once per visit | Coming back to the landing page from another page skips the loading screen. The text and the brain still wait for each other, so they arrive together |
+| Photosensitivity | Only slow fades and growth. Waiting longer than a second makes the drawing breathe at about a third of a cycle per second. Reduced motion: the drawing and the page fade, nothing moves |
+| Nothing indexed | The hero and the graph section play on the sample graph, labelled as a sample, with people who cannot be opened |
+| Credit | The original team is named in a footer at the bottom of the landing page |
+| Licence | MIT for the code (`LICENSE`) |
 
 ## Second revision, 2026-11-11 (owner's review of the first landing page)
 
@@ -97,6 +112,8 @@ scene that plays two parts.
 - **Without WebGL, a mouse, or sight:** the same content as a list of projects with their people
   and skills. It opens by itself when the scene cannot be drawn.
 - **Reduced motion:** nothing turns or pulses, and the two views cross-fade instead of flying.
+- **Loading:** see the third revision above. The scene has a `held` state, and its entrance is a
+  zoom of the finished picture (a camera view offset), so the brain keeps its pose throughout.
 - three.js loads only on this page (about 140 KB compressed, in its own file).
 
 ### Search
