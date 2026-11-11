@@ -2,6 +2,7 @@
   "name": "web",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "dev:mock": "SKILLPOOL_MOCK=1 UPLOADS_ENABLED=true UPLOAD_ACCESS_CODE=mock next dev",

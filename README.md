@@ -99,6 +99,9 @@ made-up sample of 48 people, 12 projects from across a business (sales, finance,
 operations, engineering and more) and the 26 tools they used. Mock mode only works under
 `next dev`, never in a production build.
 
+The real app shows the same sample graph, labelled as a sample, while nothing is indexed or the
+service cannot be reached.
+
 ### Embedding provider
 
 `EMBED_PROVIDER` in `service/.env` picks who turns text into vectors:
@@ -166,9 +169,16 @@ tests against a throwaway Neo4j, plus the web lint and build, on every push and 
 3. Search "Who has COBOL experience?" The answer is that no one matches.
 4. Upload a small folder and watch the batch table reach "ingested".
 
+## Licence
+
+The code is under the [MIT License](LICENSE). That does not cover the resumes in
+`corpus/resumes/`: they come from the original hackathon repository, and their origin and licence
+are not documented. Confirm both before publishing this repository (PRD section 11).
+
+The landing page credits the original team at the bottom.
+
 ## Notes
 
-- The resumes come from the original hackathon repository and are synthetic. Their origin and
-  licence are not documented; confirm before publishing this repository (PRD section 11).
+- The resumes are synthetic.
 - `corpus/generate.py` is deterministic for a seed. `--llm` has Claude rewrite the prose and
   costs model calls; that path has not been run.

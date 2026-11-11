@@ -4,15 +4,25 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type FormEvent } from "react";
 import { Minus, Plus } from "@/components/icons";
 import { Glyph } from "@/components/path-graph";
 import { api, type GraphData } from "@/lib/api";
 import { buildGraph, sampleGraph, type Graph, type Kind } from "@/lib/graph";
+import { BrainLoader } from "./brain-loader";
 import type { GraphControls } from "./graph-canvas";
 
 // three.js is large and only this page draws with it, so it loads on its own, in the browser.
-const GraphCanvas = dynamic(() => import("./graph-canvas").then((module) => module.GraphCanvas), { ssr: false });
+const loadCanvas = () => import("./graph-canvas").then((module) => module.GraphCanvas);
+const GraphCanvas = dynamic(loadCanvas, { ssr: false });
+
+// The loading screen stays until the graph, the 3D scene and the fonts are ready, and at least
+// until its own drawing has finished. After GIVE_UP_MS the page shows whatever it has.
+const DRAWN_MS = 1000, GIVE_UP_MS = 7000;
+// The loading screen plays once per visit. Coming back to this page from another one skips it:
+// the text and the brain still wait for each other, but under the page's header, not a full screen.
+let loaderPlayed = false;
+const never = () => () => {};
 
 type View = { data: GraphData; graph: Graph; source: "indexed" | "empty" | "failed" };
 /** One real path through the graph, shown in the hero: a skill, a project that used it, someone on that project. */
@@ -21,6 +31,9 @@ type Example = { skill: string; project: string; person: { id: string; name: str
 // Shown when nothing is indexed: tools from different parts of a business, as examples of what can be asked.
 const FALLBACK_SKILLS = ["Salesforce", "Kafka", "SAP", "Figma", "Tableau", "Workday", "HubSpot", "AutoCAD"];
 const SPRING = { type: "spring", duration: 0.6, bounce: 0.2 } as const;
+// With reduced motion a piece is put in place at once and only fades. Its start and end stay the
+// same either way, so the markup the server sends always matches what the browser draws first.
+const PLACED = { transform: { duration: 0 }, filter: { duration: 0 } } as const;
 
 /** Up to eight examples, each with a different skill and person, starting with the most used skills. */
 function examples({ data, graph }: View): Example[] {
@@ -99,9 +112,9 @@ function Word({ text }: { text: string }) {
             {[...word].map((char, i) => (
               <motion.span
                 key={i} className="inline-block"
-                initial={still ? { opacity: 0 } : { opacity: 0, transform: "translateY(0.35em)", filter: "blur(8px)" }}
-                animate={still ? { opacity: 1 } : { opacity: 1, transform: "translateY(0em)", filter: "blur(0px)" }}
-                transition={{ ...SPRING, delay: letter++ * 0.035 }}
+                initial={{ opacity: 0, transform: "translateY(0.35em)", filter: "blur(8px)" }}
+                animate={{ opacity: 1, transform: "translateY(0em)", filter: "blur(0px)" }}
+                transition={{ ...SPRING, delay: letter++ * 0.035, ...(still ? PLACED : null) }}
               >
                 {char}
               </motion.span>
@@ -124,9 +137,40 @@ export function Landing() {
   const [turn, setTurn] = useState(0);
   const [question, setQuestion] = useState("");
   const [typing, setTyping] = useState(false);
+  const sketch = useRef<HTMLDivElement>(null);
+  const played = useSyncExternalStore(never, () => loaderPlayed, () => false);
+  const [sceneReady, setSceneReady] = useState(false);
+  const [waited, setWaited] = useState(false);
+  const [gaveUp, setGaveUp] = useState(false);
+  // Everything is in place: the loading screen leaves, the brain sets off, and the text comes in.
+  const revealed = gaveUp || (waited && view !== null && (sceneReady || !drawable));
 
   useEffect(() => {
     let current = true;
+    // The drawing started when the page was first painted, which is before this script ran.
+    const painted = performance.getEntriesByName("first-contentful-paint")[0]?.startTime ?? performance.now();
+    const drawn = new Promise((done) => setTimeout(done, Math.max(0, painted + DRAWN_MS - performance.now())));
+    Promise.all([drawn, document.fonts.ready]).then(() => current && setWaited(true));
+    return () => {
+      current = false;
+      // Next keeps this page alive, hidden, while another is open, and the scene is torn down
+      // meanwhile. The next showing waits for the new scene.
+      setSceneReady(false);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (revealed) {
+      loaderPlayed = true;
+      return;
+    }
+    const limit = setTimeout(() => setGaveUp(true), GIVE_UP_MS);
+    return () => clearTimeout(limit);
+  }, [revealed]);
+
+  useEffect(() => {
+    let current = true;
+    void loadCanvas(); // fetch the scene's code while the graph is on its way
     api<GraphData>("graph")
       .then((data): View["source"] | GraphData => (data.people.length + data.projects.length > 0 ? data : "empty"))
       .catch((): View["source"] => "failed")
@@ -134,7 +178,9 @@ export function Landing() {
         if (!current) return;
         // With nothing to show, the scene still needs a shape: draw the sample, and say so below.
         const data = typeof result === "string" ? sampleGraph() : result;
-        setView({ data, graph: buildGraph(data), source: typeof result === "string" ? result : "indexed" });
+        const source = typeof result === "string" ? result : "indexed";
+        // Coming back to the page asks again. The same answer keeps the scene that is already drawn.
+        setView((old) => (old && old.source === source && JSON.stringify(old.data) === JSON.stringify(data) ? old : { data, graph: buildGraph(data), source }));
       });
     return () => { current = false; };
   }, []);
@@ -155,23 +201,29 @@ export function Landing() {
 
   // Move to the next example every few seconds, unless the visitor is typing or wants no motion.
   useEffect(() => {
-    if (still || typing) return;
+    if (still || typing || !revealed) return;
     const timer = setInterval(() => !document.hidden && setTurn((n) => n + 1), 9000);
     return () => clearInterval(timer);
-  }, [still, typing]);
+  }, [still, typing, revealed]);
 
   function submit(event: FormEvent) {
     event.preventDefault();
     router.push(`/search?q=${encodeURIComponent(question.trim() || ask)}`);
   }
 
-  const rise = (order: number) => ({
-    initial: still ? { opacity: 0 } : { opacity: 0, transform: "translateY(18px)" },
-    animate: still ? { opacity: 1 } : { opacity: 1, transform: "translateY(0px)" },
-    transition: { ...SPRING, bounce: 0.1, delay: 0.08 * order },
-  });
+  // The text waits for the loading screen, then comes in one piece after another, just behind the brain.
+  const rise = (order: number) => {
+    const hidden = { opacity: 0, transform: "translateY(18px)" };
+    return {
+      initial: hidden, animate: revealed ? { opacity: 1, transform: "translateY(0px)" } : hidden,
+      // Behind the loading screen the brain leads by a moment; without it the text need not wait.
+      transition: { ...SPRING, bounce: 0.1, delay: (played ? 0.1 : 0.45) + 0.08 * order, ...(still ? PLACED : null) },
+    };
+  };
 
   return (
+    <>
+    <AnimatePresence>{!revealed && !played && <BrainLoader key="loader" sketchRef={sketch} />}</AnimatePresence>
     <div ref={stage} className="relative">
       {/* The scene stays pinned while the hero and the graph section scroll over it. */}
       <div className="sticky top-0 h-svh overflow-hidden" aria-hidden>
@@ -180,6 +232,7 @@ export function Landing() {
           <GraphCanvas
             graph={view.graph} interactive stage={stage} trace={example?.path ?? null} controlsRef={graphControls}
             onOpen={(person) => indexed && router.push(`/person/${person.id}`)} onUnsupported={() => setDrawable(false)}
+            held={!revealed} sketch={sketch} onReady={() => setSceneReady(true)}
           />
         )}
       </div>
@@ -218,12 +271,13 @@ export function Landing() {
               ))}
               <div className="col-start-1 row-start-1">
                 <AnimatePresence mode="wait" initial={false}>
-                  {example && (
+                  {/* It arrives as the light in the scene reaches the person, which on the first example starts a little later. */}
+                  {revealed && example && (
                     <motion.p
                       key={example.skill} className={ANSWER}
                       initial={still ? { opacity: 0 } : { opacity: 0, transform: "translateY(10px)" }}
                       animate={still ? { opacity: 1 } : { opacity: 1, transform: "translateY(0px)" }}
-                      exit={{ opacity: 0, transition: { duration: 0.12 } }} transition={{ ...SPRING, delay: 2.2 }}
+                      exit={{ opacity: 0, transition: { duration: 0.12 } }} transition={{ ...SPRING, delay: turn === 0 ? 2.8 : 2.2 }}
                     >
                       <Answer example={example} linked={indexed} />
                     </motion.p>
@@ -303,5 +357,14 @@ export function Landing() {
         </section>
       </div>
     </div>
+
+    <footer className="border-t border-line">
+      <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6">
+        <p className="label">Original team</p>
+        <p className="mt-2 text-sm">Laurynas Lukas Kanopka · Yanka Deshkovski · Gabriel Wong · Lucas Gavrielides</p>
+        <p className="mt-1 text-sm text-muted">SkillPool is a rebuild of the project this team made at UF OSC MiniHacks in September 2025 built and maintained by Gabriel Wong.</p>
+      </div>
+    </footer>
+    </>
   );
 }

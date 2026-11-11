@@ -38,4 +38,5 @@ Run, test, deploy: README.md. Read those before planning; don't duplicate them h
 - Not deployed. Screens were checked in headless Chromium with faked model calls only.
 - Remote: github.com/gbw30/Skillpool (private). CI passes on `main`; it runs on pushes to `main`
   and on pull requests only.
-- Open questions: resume licence/origin, public vs code-gated demo, crediting the original team.
+- Code is MIT (`LICENSE`); the original team is credited in the landing page's footer.
+- Open questions: resume licence/origin (MIT does not cover `corpus/resumes/`), public vs code-gated demo.
