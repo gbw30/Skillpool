@@ -1,10 +1,10 @@
 "use client";
 
-import { AnimatePresence, motion, useMotionTemplate, useMotionValueEvent, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useRef, useState, type FormEvent, type RefObject } from "react";
+import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import { Minus, Plus } from "@/components/icons";
 import { Glyph } from "@/components/path-graph";
 import { api, type GraphData } from "@/lib/api";
@@ -97,47 +97,6 @@ function Word({ text }: { text: string }) {
   );
 }
 
-const TRACK = 96; // px between the rail's two stops
-
-/** The rail on the right edge: this page's two views, a marker for how far the scroll has got, and a way to jump. */
-function Rail({ stage }: { stage: RefObject<HTMLDivElement | null> }) {
-  const still = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: stage, offset: ["start start", "end end"] });
-  const eased = useSpring(scrollYProgress, { stiffness: 140, damping: 26 });
-  const marker = useMotionTemplate`translateY(${useTransform(still ? scrollYProgress : eased, (v) => v * TRACK)}px)`;
-  const [atGraph, setAtGraph] = useState(false);
-  useMotionValueEvent(scrollYProgress, "change", (v) => setAtGraph(v > 0.5));
-
-  function go(toGraph: boolean) {
-    const box = stage.current?.getBoundingClientRect();
-    if (box) scrollTo({ top: toGraph ? box.bottom + scrollY - innerHeight : 0, behavior: still ? "auto" : "smooth" });
-  }
-
-  return (
-    // Pinned over the scene for as long as the scene is; only the rail itself takes clicks.
-    <nav aria-label="Views on this page" className="pointer-events-none sticky top-0 z-10 -mt-[100svh] flex h-svh items-center justify-end pr-2 sm:pr-4">
-      <div className="pointer-events-auto rounded-lg bg-bg/60 px-2 py-3 backdrop-blur-[3px]">
-      <div className="relative flex flex-col justify-between" style={{ height: TRACK + 8 }}>
-        <span className="absolute right-[3.5px] top-1 w-px bg-edge/70" style={{ height: TRACK }} aria-hidden />
-        {["Brain", "Graph"].map((name, i) => {
-          const here = atGraph === (i === 1);
-          return (
-            <button
-              key={name} type="button" aria-current={here ? "true" : undefined} onClick={() => go(i === 1)}
-              className="group -my-2 flex items-center justify-end gap-2.5 py-2 pl-3"
-            >
-              <span className={`label max-lg:sr-only group-hover:text-ink ${here ? "text-ink" : ""}`}>{name}</span>
-              <span className="relative size-2 rounded-full border border-edge bg-bg group-hover:border-accent" />
-            </button>
-          );
-        })}
-        <motion.span className="pointer-events-none absolute right-0 top-0 size-2 rounded-full bg-accent" style={{ transform: marker }} aria-hidden />
-      </div>
-      </div>
-    </nav>
-  );
-}
-
 export function Landing() {
   const stage = useRef<HTMLDivElement>(null);
   const graphControls = useRef<GraphControls | null>(null);
@@ -207,10 +166,9 @@ export function Landing() {
         )}
       </div>
 
-      <Rail stage={stage} />
-
       <div className="relative -mt-[100svh]">
-        <section className="relative mx-auto flex min-h-[calc(100svh-3.5rem)] max-w-6xl flex-col px-4 pb-16 pt-8 sm:px-6 lg:justify-center lg:pt-0">
+        {/* The hero stops short of the bottom of the window, so the top of the next section shows there and invites the scroll. */}
+        <section className="relative mx-auto flex min-h-[calc(100svh-3.5rem-6.5rem)] max-w-6xl flex-col px-4 pb-6 pt-8 sm:px-6 lg:justify-center lg:pt-0">
           {/* Beside the brain on a wide screen, over it on a narrow one. Type sizes follow this column's width. */}
           <div className="@container max-w-2xl lg:max-w-[54%]">
             <motion.p {...rise(0)} className="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-xs text-muted">
@@ -228,14 +186,14 @@ export function Landing() {
             </motion.p>
 
             {/* The headline is the question the product answers, asked about a real skill from the index. */}
-            <motion.h1 {...rise(1)} aria-label="Who here has used the skill you need?" className="mt-6 text-[clamp(2.5rem,min(15cqw,13svh),6.5rem)] leading-[0.94] tracking-[-0.045em]">
+            <motion.h1 {...rise(1)} aria-label="Who here has used the skill you need?" className="mt-6 text-[clamp(2.5rem,min(15cqw,11.5svh),6.5rem)] leading-[0.94] tracking-[-0.045em]">
               <span aria-hidden className="block font-light text-ink/80">Who here</span>
               <span aria-hidden className="block font-light text-ink/80">has used</span>
               <span aria-hidden className="block min-h-[0.94em] font-semibold text-accent"><Word text={`${skill}?`} /></span>
             </motion.h1>
 
             {/* The answer, read off the graph: someone on a project that used the skill. */}
-            <div className="mt-6 min-h-16 sm:min-h-9">
+            <div className="mt-6 min-h-16 sm:min-h-9 [@media(max-height:720px)]:mt-4">
               <AnimatePresence mode="wait" initial={false}>
                 {example && (
                   <motion.p
@@ -255,7 +213,7 @@ export function Landing() {
               </AnimatePresence>
             </div>
 
-            <motion.form {...rise(2)} className="mt-8 flex max-w-xl gap-2" onSubmit={submit}>
+            <motion.form {...rise(2)} className="mt-8 flex max-w-xl gap-2 [@media(max-height:720px)]:mt-4" onSubmit={submit}>
               <div className="relative min-w-0 flex-1">
                 <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 font-mono text-accent" aria-hidden>&gt;</span>
                 <input
@@ -272,14 +230,16 @@ export function Landing() {
               {others.map((name) => <Link key={name} className="chip" href={`/search?q=${encodeURIComponent(asking(name))}`}>{name}</Link>)}
             </motion.p>
 
-            <motion.p {...rise(4)} className="mt-6 max-w-md text-sm text-muted">
+            {/* Dropped in a short window, so the next section still shows below. */}
+            <motion.p {...rise(4)} className="mt-6 max-w-md text-sm text-muted [@media(max-height:720px)]:hidden">
               SkillPool reads resumes and project reports into one graph. Ask in plain words and it answers with
               names, and quotes the lines that back each one. <Link href="/upload">Add documents</Link>
             </motion.p>
           </div>
         </section>
 
-        <section className="mx-auto flex min-h-svh max-w-6xl flex-col px-4 py-8 sm:px-6" aria-labelledby="graph-title">
+        <section className="border-t border-line" aria-labelledby="graph-title">
+          <div className="mx-auto flex min-h-svh max-w-6xl flex-col px-4 pb-8 pt-6 sm:px-6">
           {/* A soft panel behind the text, so it stays readable when the graph is zoomed in underneath it. */}
           <div className="-m-3 max-w-md rounded-[10px] bg-bg/65 p-3 backdrop-blur-[3px]">
             <h2 id="graph-title" className="label text-accent">The graph behind the answers</h2>
@@ -321,6 +281,7 @@ export function Landing() {
               )}
             </div>
           )}
+          </div>
         </section>
       </div>
     </div>
