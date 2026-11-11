@@ -19,6 +19,7 @@ Run, test, deploy: README.md. Read those before planning; don't duplicate them h
   wipe that database.
 - Local Neo4j: `docker compose up -d neo4j` (ports 17474/17687, auth neo4j/skillpool-dev).
 - Web: `cd web && npm run lint && npm run build`.
+- UI without keys or services: `cd web && npm run dev:mock` (canned data from `web/lib/mock.ts`).
 
 ## Invariants
 - Every extracted fact needs a verbatim quote; answers cite chunks and are validated per sentence.

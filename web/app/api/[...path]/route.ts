@@ -1,6 +1,7 @@
 // The only server code in the web app: a signed proxy to the Python service.
 // Browsers never reach the service directly, and only the routes listed here exist.
 import type { NextRequest } from "next/server";
+import { MOCK, MOCK_STORAGE } from "@/lib/mock";
 import { callService, uploadGate } from "@/lib/service";
 
 const ID = "[A-Za-z0-9-]{1,80}";
@@ -42,6 +43,7 @@ async function readBody(request: NextRequest): Promise<string | null> {
 
 async function handle(request: NextRequest, ctx: RouteContext<"/api/[...path]">) {
   const path = (await ctx.params).path.join("/");
+  if (MOCK && request.method === "POST" && path === MOCK_STORAGE) return new Response(null, { status: 204 }); // the bucket
   let target: string | undefined;
   let gated = false;
   for (const route of ROUTES) {

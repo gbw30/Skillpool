@@ -1,6 +1,7 @@
 // Server only: signs requests to the Python service and gates uploads.
 // The signature scheme is defined in service/skillpool/signing.py; keep the two in step.
 import { createHash, createHmac, randomUUID, timingSafeEqual } from "node:crypto";
+import { MOCK, mockService } from "./mock";
 
 function env(name: string): string {
   const value = process.env[name];
@@ -27,6 +28,7 @@ export async function callService(
   body: string,
   forward: { correlationId: string | null; clientIp: string },
 ): Promise<Response> {
+  if (MOCK) return mockService(method, path, body);
   const timestamp = Math.floor(Date.now() / 1000).toString();
   return fetch(env("SERVICE_URL").replace(/\/$/, "") + path, {
     method,

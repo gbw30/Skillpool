@@ -82,6 +82,21 @@ cd web && npm install && npm run dev
 
 Open http://localhost:3000.
 
+### Screens only, without keys
+
+To work on the UI with no API keys, database, or `.env` file:
+
+```bash
+cd web && npm install && npm run dev:mock
+```
+
+The web app then answers from canned data in `web/lib/mock.ts` instead of calling the service.
+Search returns the same three people for any question, except that a question containing "cobol"
+gets no match, "error" fails part-way through the answer, and "limit" is rate limited. Uploads take
+the access code `mock`; the files are dropped, and the batch table steps through processing with
+every fourth file failing. "Open source" has no files to open. Mock mode only works under
+`next dev`, never in a production build.
+
 ### Embedding provider
 
 `EMBED_PROVIDER` in `service/.env` picks who turns text into vectors:

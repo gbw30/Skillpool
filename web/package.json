@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:mock": "SKILLPOOL_MOCK=1 UPLOADS_ENABLED=true UPLOAD_ACCESS_CODE=mock next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
