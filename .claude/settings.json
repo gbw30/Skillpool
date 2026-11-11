@@ -1,0 +1,6 @@
+{
+  "enabledPlugins": {
+    "stack-web@devkit": true,
+    "jmo-workflow@jmo-skills": true
+  }
+}
