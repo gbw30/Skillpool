@@ -43,7 +43,7 @@ docs/      PRD.md, SPEC.md
 ## Run it locally
 
 Needs Docker, [uv](https://docs.astral.sh/uv/), Node 20+, an Anthropic key, and an embeddings key
-(OpenAI or Voyage AI, see [Embedding provider](#embedding-provider)).
+(Voyage AI by default, or OpenAI; see [Embedding provider](#embedding-provider)).
 
 ```bash
 docker compose up -d neo4j
@@ -108,8 +108,8 @@ service cannot be reached.
 
 | Value | Model | Vector size | Key | Price |
 |---|---|---|---|---|
-| `openai` (default) | `text-embedding-3-small` | 1536 | `OPENAI_API_KEY` | $0.02 per million tokens |
-| `voyage` | `voyage-4-lite` | 1024 | `VOYAGE_API_KEY` | first 200 million tokens free, then $0.02 per million |
+| `voyage` (default) | `voyage-4-lite` | 1024 | `VOYAGE_API_KEY` | first 200 million tokens free, then $0.02 per million |
+| `openai` | `text-embedding-3-small` | 1536 | `OPENAI_API_KEY` | $0.02 per million tokens |
 
 Vectors from the two cannot be compared, so a database belongs to one provider at a time. The
 service refuses to search or ingest when the setting does not match the database. To switch a

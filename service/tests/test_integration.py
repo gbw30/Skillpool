@@ -237,6 +237,7 @@ def test_daily_spend_survives_a_restart(corpus, monkeypatch):
 def test_switching_the_embedding_model_needs_a_reembed(corpus, calls, monkeypatch):
     size = lambda: graph.run("MATCH (c:Chunk) RETURN DISTINCT size(c.embedding) AS n")
     assert size() == [{"n": config.EMBED_DIM}]
+    built_at = str(config.EMBED_DIM)
     try:
         with monkeypatch.context() as other:
             other.setattr(config, "EMBED_MODEL", "another-model")
@@ -244,7 +245,7 @@ def test_switching_the_embedding_model_needs_a_reembed(corpus, calls, monkeypatc
             with pytest.raises(graph.EmbeddingMismatch, match="skillpool reembed"):
                 graph.check_embedding_model()
             graph.run("MATCH (m:Meta) DELETE m")  # an emptied database forgets the model but keeps its indexes
-            with pytest.raises(graph.EmbeddingMismatch, match="1536"):
+            with pytest.raises(graph.EmbeddingMismatch, match=built_at):
                 graph.check_embedding_model()
             done = reembed()
             assert done["model"] == "another-model" and done["chunks"] > 0 and done["people"] == 3

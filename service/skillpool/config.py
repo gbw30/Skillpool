@@ -23,7 +23,7 @@ EMBEDDERS = {
     # The first 200M tokens are free per account; the spend counter still counts the list price.
     "voyage": ("voyage-4-lite", 1024, 0.02),
 }
-EMBED_PROVIDER = os.environ.get("EMBED_PROVIDER", "openai")
+EMBED_PROVIDER = os.environ.get("EMBED_PROVIDER", "voyage")
 if EMBED_PROVIDER not in EMBEDDERS:
     raise RuntimeError(f"EMBED_PROVIDER must be one of {sorted(EMBEDDERS)}, not {EMBED_PROVIDER!r}")
 EMBED_MODEL, EMBED_DIM, PRICE_EMBED = EMBEDDERS[EMBED_PROVIDER]
