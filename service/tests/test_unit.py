@@ -300,6 +300,7 @@ def test_voyage_embeddings_retry_keep_order_and_mark_questions(monkeypatch):
     url, body, headers = sent[1]
     assert len(sent) == 2 and url == "https://api.voyageai.com/v1/embeddings" and headers == {"Authorization": "Bearer key"}
     assert body == {"model": "voyage-4-lite", "input": ["a", "b"], "input_type": "query"}
+    assert llm._voyage_url("al-abc") == "https://ai.mongodb.com/v1/embeddings"
 
 
 def test_embed_charges_the_selected_provider_and_batches(monkeypatch):

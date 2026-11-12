@@ -49,7 +49,7 @@ Changes from the first draft of this spec, made during implementation:
 | Service | One FastAPI app owns all graph and model logic: ingestion, identity resolution, search, person lookup. | The original split Cypher and prompts across TypeScript and Python. One language means one copy, and the eval harness calls the same functions the API does. |
 | Graph + vectors | Neo4j AuraDB with native vector indexes. No separate vector store. | As original. |
 | Extraction and answers | Claude Haiku 5.5 (`claude-haiku-5-5`). | Owner asked for the most cost-effective option. See section 11. |
-| Embeddings | `EMBED_PROVIDER`: OpenAI `text-embedding-3-small` (1536 dimensions, default) or Voyage `voyage-4-lite` (1024). | OpenAI as in the original; Voyage has a free allowance that covers the corpus many times over. A database holds one model's vectors; `skillpool reembed` converts it. |
+| Embeddings | `EMBED_PROVIDER`: Voyage `voyage-4-lite` (1024 dimensions, default) or OpenAI `text-embedding-3-small` (1536). | Voyage has a free allowance that covers the corpus many times over; OpenAI, as in the original, stays as a switch. A database holds one model's vectors; `skillpool reembed` converts it. |
 | Extraction approach | One structured-output call per document, hand-written upserts. `neo4j-graphrag`'s generic pipeline considered and not used. | Per-fact provenance (R5, R6) is the core requirement and needs exact control over what is written. |
 | Retrieval | Fixed Cypher templates fused with reciprocal rank fusion. No LLM-generated Cypher. | Safe against injection, testable, no weights to tune. |
 | Job queue | None. In-process background task with bounded concurrency; safe to re-send because every step is idempotent. | `shortcut:` a restart drops in-flight work until the job is re-sent. Add a queue when ingest batches exceed what one request can re-drive. |
@@ -354,7 +354,7 @@ Haiku 5.5 constraints that affect the code:
 | Variable | Used by | Note |
 |---|---|---|
 | `ANTHROPIC_API_KEY` | service | |
-| `EMBED_PROVIDER` | service | `openai` (default) or `voyage` |
+| `EMBED_PROVIDER` | service | `voyage` (default) or `openai` |
 | `OPENAI_API_KEY` or `VOYAGE_API_KEY` | service | embeddings only; the one for the chosen provider |
 | `NEO4J_URI`, `NEO4J_USERNAME`, `NEO4J_PASSWORD` | service | `neo4j+s://` |
 | `S3_BUCKET`, `S3_REGION`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` | service | needs put, get, and list on the bucket; the web app holds no storage credentials |

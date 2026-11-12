@@ -7,8 +7,8 @@ Run, test, deploy: README.md. Read those before planning; don't duplicate them h
 
 ## Layout
 - service/ — FastAPI + CLI (Python 3.12, uv). Models: Claude Haiku 5.5 (`claude-haiku-5-5`) for
-  extraction/answers. Embeddings: `EMBED_PROVIDER` = `openai` (text-embedding-3-small, 1536-d,
-  default) or `voyage` (voyage-4-lite, 1024-d); run `skillpool reembed` after switching.
+  extraction/answers. Embeddings: `EMBED_PROVIDER` = `voyage` (voyage-4-lite, 1024-d,
+  default) or `openai` (text-embedding-3-small, 1536-d); run `skillpool reembed` after switching.
 - web/ — Next.js 16 (App Router, cacheComponents) UI + signed proxy (`app/api/[...path]`).
   Tailwind 4 with tokens in `app/globals.css`, Motion springs, three.js only on the landing page.
   Design decisions: `.plans/frontend-revamp-spec.md`.

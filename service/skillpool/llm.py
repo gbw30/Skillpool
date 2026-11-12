@@ -76,13 +76,19 @@ def _embed_openai(texts: list[str], query: bool) -> tuple[list[list[float]], int
     return [d.embedding for d in sorted(resp.data, key=lambda d: d.index)], resp.usage.total_tokens
 
 
+def _voyage_url(key: str) -> str:
+    # Keys made in MongoDB Atlas start with "al-" and only work at Atlas's address; older keys use Voyage's own.
+    return ("https://ai.mongodb.com/v1" if key.startswith("al-") else "https://api.voyageai.com/v1") + "/embeddings"
+
+
 def _embed_voyage(texts: list[str], query: bool) -> tuple[list[list[float]], int]:
     # Voyage embeds a search question differently from the text it is matched against.
     body = {"model": config.EMBED_MODEL, "input": texts, "input_type": "query" if query else "document"}
-    headers = {"Authorization": f"Bearer {config.require('VOYAGE_API_KEY')}"}
+    key = config.require("VOYAGE_API_KEY")
+    headers = {"Authorization": f"Bearer {key}"}
     for attempt in range(5):  # 5 tries with backoff on rate limits and server errors, like the SDK clients
         try:
-            resp = httpx.post("https://api.voyageai.com/v1/embeddings", json=body, headers=headers, timeout=60)
+            resp = httpx.post(_voyage_url(key), json=body, headers=headers, timeout=60)
             again = resp.status_code == 429 or resp.status_code >= 500
         except httpx.TransportError:
             if attempt == 4:
