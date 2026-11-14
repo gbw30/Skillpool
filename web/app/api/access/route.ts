@@ -19,6 +19,12 @@ const error = (status: number, code: string, message: string) => Response.json({
 const tooMany = () => error(429, "rate_limited", "Too many tries. Wait ten minutes and try again.");
 
 export async function POST(request: NextRequest) {
+  if (Number(request.headers.get("content-length") ?? 0) > 2000) return error(413, "payload_too_large", "Request body is too large.");
+  // Read the body first. Everything after this line runs without a pause, so two requests that
+  // arrive together cannot both pass the check before either is counted.
+  const body: unknown = await request.json().catch(() => null);
+  const code = body && typeof body === "object" && "code" in body && typeof body.code === "string" ? body.code : "";
+
   const ip = request.headers.get("x-forwarded-for")?.split(",")[0].trim() || "unknown";
   const now = Date.now();
   const fresh = (at: number) => now - at < WINDOW_MS;
@@ -26,8 +32,6 @@ export async function POST(request: NextRequest) {
   const mine = (byAddress.get(ip) ?? []).filter(fresh);
   if (everyone.length >= ALL_TRIES || mine.length >= TRIES) return tooMany();
 
-  const body: unknown = await request.json().catch(() => null);
-  const code = body && typeof body === "object" && "code" in body && typeof body.code === "string" ? body.code : "";
   const token = code.length <= 200 ? tokenFor(code) : null;
   if (!token) {
     everyone.push(now);
