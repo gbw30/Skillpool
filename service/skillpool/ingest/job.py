@@ -94,6 +94,19 @@ def _prepare(job_id: str, item: Item) -> Prepared | None:
     return None
 
 
+def _write_order(p: Prepared) -> tuple[bool, int, int]:
+    """Resumes first, then the documents that say most about who their people are.
+
+    A mention with only a name cannot be tied to a known person and stays unconfirmed. Writing
+    the documents that give an email or a job title first puts those people on their projects,
+    and a shared project is what lets a later name-only mention be confirmed.
+    shortcut: this orders one batch. A name-only document uploaded before the documents that
+    would confirm it stays unconfirmed; nothing goes back to it later.
+    """
+    people = p.facts["people"]
+    return p.facts["kind"] != "resume", -sum(bool(x["emails"]) for x in people), -sum(bool(x["title"]) for x in people)
+
+
 def _safe_prepare(job_id: str, item: Item) -> Prepared | None:
     try:
         return _prepare(job_id, item)
@@ -107,7 +120,7 @@ def run_job(job_id: str, items: list[Item]) -> None:
     try:
         with ThreadPoolExecutor(config.INGEST_CONCURRENCY) as pool:
             prepared = [p for p in pool.map(lambda i: _safe_prepare(job_id, i), items) if p]
-        for p in sorted(prepared, key=lambda p: p.facts["kind"] != "resume"):
+        for p in sorted(prepared, key=_write_order):
             status, error, unresolved = "ingested", None, 0
             try:
                 unresolved = write(p.doc_id, p.facts, p.chunks, p.embeddings)

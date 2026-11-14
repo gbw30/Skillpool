@@ -5,16 +5,64 @@ Companion: [PRD.md](PRD.md) (requirement IDs R1–R21 refer to it)
 
 ## 0. Implementation status
 
-Built: sections 3 to 10 and 12 to 13. Verified by 69 automated tests, including the full
-pipeline against Neo4j 5.26 and 2026.10 with model calls faked. The four screens were driven in
+Built: sections 3 to 10 and 12 to 13. Verified by 73 automated tests, including the full
+pipeline against Neo4j 5.26 and 2026.10 with model calls faked. The screens were driven in
 headless Chromium (desktop and phone width) against the service with faked model calls and a
 local S3 emulator: search with a streamed, cited answer, the person page, the no-match case,
-and a folder upload that became searchable.
+a folder upload that became searchable, and the access page.
 
-Not verified: anything that needs a live model or a real AWS bucket. No Claude or OpenAI
-call has been made, so the PRD section 8 targets are unmeasured and the thresholds in
-`service/skillpool/config.py` (identity merge scores, vector floor) are untuned defaults.
-`skillpool eval` produces the numbers.
+Measured on 2026-11-14 by `skillpool eval` on the generated corpus (359 documents, 43
+questions), with Claude Haiku 5.5 and Voyage `voyage-4-lite`:
+
+| Measure (PRD section 8) | Target | First run | After the changes below |
+|---|---|---|---|
+| Recall@10, all questions | at least 0.80 | 0.85 | 0.90 |
+| Recall@10, multi-hop | at least 0.70 | 0.81 | 0.84 (text similarity alone: 0.26) |
+| Recall@10, unstructured (chat or meeting note only) | none set | 0.75 | 0.95 (text similarity alone: 0.30) |
+| Recall@10, direct (resume) | none set | 0.98 | 0.94 |
+| Citations that do not resolve | 0 | 0 | 0 |
+| Identity precision | at least 0.98 | 1.00 | 1.00 |
+| Identity recall | at least 0.90 | 0.69 | 0.98 |
+| People in the graph, against 137 in the truth files | 137 | 179 | 137 |
+| "No one qualifies" answered as such | not in the PRD | 0 of 5 | 5 of 5 |
+| Planted instructions that took effect (R20) | 0 | 0 | 0 |
+| Time to ranked results, p95 | under 3 s | 2.6 s | 1.9 s |
+| Time to complete answer, p95 | under 10 s | 8.9 s | 8.7 s |
+| Model cost to ingest the corpus | under $2 | $0.29 | under $0.01 from the cache |
+
+The first run missed two measures. These changes followed, each checked by a further run that
+read its extractions from the cache:
+
+- Identity recall was 0.69. A document that gave only a name created a second record for that
+  person, as designed, and that record then collected the rest of the project's mentions.
+  - Ingestion now writes the documents that give an email or a job title first (`_write_order`
+    in `job.py`).
+  - A first name standing alone is recorded for the one person in the document it can mean
+    (`verify.py`). The model is asked to list these and left out more than half.
+  - `MERGE_MARGIN` went from 0.20 to 0.15, and `MERGE_SCORE_INITIAL` from 0.50 to 0.33. At
+    0.50 an initial with the same job title could never merge, so "M. Andersson (Partnerships
+    Manager)" became a second Maria Andersson and showed up twice in one search result.
+  - An uncertain mention no longer becomes a second person. It is kept as an unconfirmed
+    mention (`MAY_MENTION`) on the people it might mean.
+  - When the model lists one person twice in a document, by initial and in full, the two
+    entries are folded into one unless a job title or an email address differs (`verify.py`).
+- No "no one qualifies" question was answered as such. Both similarity floors had been chosen
+  for OpenAI's vectors: an unknown skill name resolved to the nearest known one ("COBOL" to
+  "Java"). The floors now belong to the embedding model (`EMBEDDERS` in `config.py`).
+
+Limits of these numbers:
+
+- The thresholds were tuned on the same 359 documents they are scored on. The corpus has no
+  two people who share an initial, a surname and a job title, so it cannot show whether 0.33
+  is too loose for a larger company. A false merge is the costlier mistake (PRD section 10).
+- A line that gives a name and nothing else ("Last reviewed by: Erin Novak") is not tied to
+  anyone. The first design made a second person for it, which showed 11 people twice. It is
+  now kept as an unconfirmed mention on the person it might mean (`MAY_MENTION`), shown on
+  their page and not counted as evidence. Nothing goes back to confirm it later.
+- 43 questions is a small set: one question moves a category's recall by several points.
+
+Not verified: a real AWS bucket, a deployment, and the OpenAI embedding path (never run live;
+its floors are untuned).
 
 Changes from the first draft of this spec, made during implementation:
 
@@ -38,6 +86,13 @@ Changes from the first draft of this spec, made during implementation:
   model its vectors came from and the service refuses to mix them; `skillpool reembed`
   recomputes all vectors from stored text without calling Claude. Voyage is called over plain
   HTTP, and search questions are embedded as queries, stored text as documents.
+- The corpus is generated in full (section 4). The 680 resumes inherited from the original
+  repository are gone, because nobody could say where they came from.
+- The whole site asks for an access code (R22): `web/proxy.ts` turns away any request without
+  the cookie that `POST /api/access` sets, and the API route checks the cookie again itself.
+- `EXTRACT_CACHE_DIR` keeps each document's extraction on disk. Ingestion extracts every
+  document before it writes any of them, so a run that stopped part-way used to pay for all of
+  its extractions again.
 - Milestone M5's deployment is not done; it needs the owner's accounts.
 
 ## 1. Decisions
@@ -53,7 +108,7 @@ Changes from the first draft of this spec, made during implementation:
 | Extraction approach | One structured-output call per document, hand-written upserts. `neo4j-graphrag`'s generic pipeline considered and not used. | Per-fact provenance (R5, R6) is the core requirement and needs exact control over what is written. |
 | Retrieval | Fixed Cypher templates fused with reciprocal rank fusion. No LLM-generated Cypher. | Safe against injection, testable, no weights to tune. |
 | Job queue | None. In-process background task with bounded concurrency; safe to re-send because every step is idempotent. | `shortcut:` a restart drops in-flight work until the job is re-sent. Add a queue when ingest batches exceed what one request can re-drive. |
-| Auth | No user accounts. Web → service calls are HMAC-signed. Upload needs an access code. | R18–R19. |
+| Auth | No user accounts. One access code opens the whole site. Web → service calls are HMAC-signed. Upload needs its own code. | R18–R19, R22. |
 
 ## 2. Architecture
 
@@ -82,10 +137,13 @@ reject if the timestamp is more than 5 minutes off, constant-time compare. Defin
 
 ```
 web/                  Next.js 16 app
-  app/                pages: /, /search, /person/[id], /upload
+  proxy.ts            sends anyone without the access cookie to /access (R22)
+  app/                pages: /, /search, /person/[id], /upload, /access
   app/api/[...path]/  one route handler: allowlisted, signed proxy to the service (BFF)
+  app/api/access/     trades the access code for the cookie
   components/         shared pieces; landing/ holds the 3D graph (three.js, loaded only on /)
-  lib/                service.ts (signing, upload gate), api.ts (browser types and helpers),
+  lib/                service.ts (signing, upload gate), access.ts (site access code),
+                      api.ts (browser types and helpers),
                       graph.ts (graph layout), mock.ts (canned service for `npm run dev:mock`)
 service/
   skillpool/
@@ -103,10 +161,10 @@ service/
   Dockerfile
 docker-compose.yml    local Neo4j for development and tests
 corpus/
-  resumes/            the 680 PDFs from the original repo (pending PRD open question 1)
-  generate.py         synthetic project documents + ground truth
-  generated/          output documents
-  truth/              people.json, projects.json, queries.json
+  generate.py         writes everything below from a seed; calls no model
+  resumes/            130 generated resumes (PDF, Markdown, plain text)
+  generated/          project folders, plus _company/ (team pages, wiki, newsletters, handbook)
+  truth/              people.json, projects.json, queries.json, injection.json
 docs/                 PRD.md, SPEC.md
 ```
 
@@ -115,30 +173,38 @@ development loop and the eval entry point; it is not a second implementation.
 
 ## 4. Corpus
 
-Existing: about 680 one-page resume PDFs, one person each, with sections Experience, Education,
-Skills (with levels), Projects, Certifications, and an email and phone on the second line.
+`corpus/generate.py` writes the knowledge base of one made-up company, Larkfield, with ten teams:
+Platform Engineering, Web and Mobile, Data and Analytics, Security and IT, Product and Design,
+Marketing, Sales and Partnerships, Finance, People, and Customer Support. It is deterministic
+from a seed and calls no model: the text is templated and the structure is decided by code, so
+the ground truth is exact. The generator checks its own output (every labelled name is written
+in its document; every planted tool appears only where the truth says) and fails otherwise.
 
-Generated by `corpus/generate.py` (deterministic from a seed; text written by Haiku, structure
-decided by code so the ground truth is exact):
-
-- About 40 organization-level projects, each with a name, date range, 4–8 skills, and a roster
-  of 3–8 people drawn from the resumes.
-- About 150 documents across those projects: status reports, postmortems, staffing notes, design
-  summaries. Mixed PDF and Markdown.
+- 130 people, 13 per team, each with a resume in one of four layouts: a classic sectioned PDF,
+  a skills-first profile PDF, a Markdown resume with a skills table, and a plain-text resume
+  written in the first person. Every layout states each skill's level.
+- 30 projects, three per team, each staffed mostly from its own team with up to two people
+  from another. A project folder holds a brief (PDF or Markdown), a kickoff email, meeting
+  notes, a chat export, one or two weekly updates, and for some a closing write-up (postmortem,
+  campaign recap, account review and so on) and a retrospective PDF.
+- Company pages: a team page and a how-to wiki page per team, three newsletters, and three
+  handbook policies that name nobody.
 - Deliberate difficulty, each instance recorded in ground truth:
-  - Name variants for the same person: "Aaron Brown", "A. Brown", "Brown, Aaron", first name only
-    after first mention, email only.
-  - At least 10 pairs of different people sharing a full name, distinguishable by email, employer,
-    or project.
-  - Skills used on a project that are absent from a rostered person's resume (the multi-hop cases).
+  - Name variants for the same person: "Aisha Martins", "A. Martins", "Martins, Aisha", a first
+    name alone after a full mention, an email address in place of the name.
+  - Eight contractors who share a full name with someone on file, and three pairs of employees
+    with the same full name in different teams. Told apart by email, employer, title, or project.
+  - Tools a project used that no resume mentions (the multi-hop cases): named only in the brief.
+  - Tools credited to one person only in a chat line or a meeting note (the unstructured cases).
   - Skill synonyms: "k8s"/"Kubernetes", "JS"/"JavaScript", "Postgres"/"PostgreSQL".
   - Two documents with embedded instructions aimed at the model, to test R20.
 
 Ground truth:
 - `people.json`: canonical person → every (document, mention string).
 - `projects.json`: project → roster, skills, documents.
-- `queries.json`: 30 questions with expected people, tagged `direct` (answerable from resumes),
-  `multi_hop` (needs a project document), or `none` (no one qualifies).
+- `queries.json`: 43 questions with expected people, tagged `direct` (answerable from resumes),
+  `multi_hop` (needs a project document), `unstructured` (stated only in a chat or meeting
+  note), or `none` (no one qualifies).
 
 ## 5. Graph schema
 
@@ -165,7 +231,7 @@ Relationships
 | `(Person)-[:STUDIED_AT]->(Organization)` | `degree`, `field`, `start`, `end`, `sources[]` |
 | `(Person)-[:WORKED_ON]->(Project)` | `role`, `contribution`, `sources[]` |
 | `(Project)-[:USED_SKILL]->(Skill)` | `sources[]` |
-| `(Person)-[:POSSIBLE_SAME_AS]->(Person)` | `score`, `reason` (flagged, not merged) |
+| `(Chunk)-[:MAY_MENTION]->(Person)` | `surface`, `reason`: the name fits and nothing confirms it. Not evidence, not a merge |
 
 `sources[]` holds chunk ids. It is how a fact reached by a graph walk still produces a citation,
 and how deletion (R9) knows which facts lose their support.
@@ -244,7 +310,9 @@ a new person.
    - Exactly one candidate with strong corroboration → merge, add the surface form to `aliases`.
    - Ambiguous (several plausible candidates, or one with weak corroboration) → one Haiku call
      with the mention context and candidate profiles, answering same / different / unsure.
-   - `unsure`, or name-only match with no corroboration → new person plus `POSSIBLE_SAME_AS`.
+   - `unsure`, or name-only match with no corroboration → no merge and no new person, which
+     would show one person twice. The mention is kept as `MAY_MENTION` on the people it might
+     mean and shown on their page as unconfirmed.
 
 A name match alone never merges. Thresholds are set by sweeping against `truth/people.json` and
 picking the point that meets the precision target first, then the best recall there.
@@ -291,7 +359,7 @@ generated if absent and passed through to the service and logs.
 | `GET /api/person/:id` | Profile, skills, roles, projects, collaborators, evidence. |
 | `GET /api/documents/:id/url` | Short-lived presigned GET for a citation click-through (R16). |
 | `GET /api/graph` | The landing page's graph (R22): organisation projects, the people on them, the skills they used, and which of those people list which of those skills. At most 600 links of each kind. |
-| `GET /api/stats` | Node and relationship counts, flagged identity pairs. |
+| `GET /api/stats` | Node and relationship counts, unconfirmed mentions. |
 
 Service (FastAPI), all HMAC-protected except `/healthz`: `POST /ingest`, `GET /jobs/{id}`,
 `POST /search`, `GET /person/{id}`, `GET /graph`, `GET /stats`, `DELETE /documents/{id}`.
@@ -322,7 +390,12 @@ tokens, batch processing at half price (Anthropic's published table, read 2026-1
 `text-embedding-3-small` at about $0.02 per million tokens (third-party listings; confirm on
 OpenAI's pricing page).
 
-Estimate for the full corpus, from one sample resume and assumed document sizes, not measured:
+Measured on 2026-11-14 for the generated corpus (359 documents): $0.29 to ingest (408 Claude
+calls: 359 extractions and 49 identity checks), $0.03 for the evaluation's 43 questions asked
+in both modes, and under $0.01 to ingest again with the extraction cache. Voyage embeddings
+fell inside the free allowance.
+
+The estimate made before any model call, for the earlier 830-document corpus:
 
 | Step | Volume | Cost |
 |---|---|---|
@@ -362,8 +435,10 @@ Haiku 5.5 constraints that affect the code:
 | `SERVICE_URL` | web | |
 | `SERVICE_SIGNING_SECRET` | web, service | same value in both |
 | `SKILLPOOL_MODEL`, `NEO4J_DATABASE` | service | optional overrides; defaults `claude-haiku-5-5` and `neo4j` |
+| `SITE_ACCESS_CODE` | web | R22. Unset: a development server is open, a production build is locked |
 | `UPLOADS_ENABLED`, `UPLOAD_ACCESS_CODE` | web | R18 |
 | `DAILY_MODEL_BUDGET_USD`, `SEARCH_RATE_PER_MIN` | service | R19 |
+| `EXTRACT_CACHE_DIR` | service | optional, local runs: a folder that keeps each document's extraction so a repeated ingest makes no second Claude call |
 
 ## 13. Security
 
@@ -371,6 +446,11 @@ Haiku 5.5 constraints that affect the code:
   and exact size and expires in 15 minutes; keys are generated server-side under the job prefix,
   never taken from the client path; the service re-checks size and sniffed type on fetch.
 - Bucket: private, encrypted at rest, CORS limited to the web origin for POST.
+- Site access (R22): `proxy.ts` redirects every page request without a valid cookie to `/access`
+  and answers API requests with 401; the API route handler repeats the check. The cookie holds a
+  hash of the code, is `HttpOnly`, `SameSite=Lax`, `Secure` in production, and lasts 30 days;
+  changing the code ends every session. Ten wrong tries per address in ten minutes are allowed.
+  `shortcut:` that count is in one process's memory, so use a long random code.
 - Service: HMAC on every route; not reachable usefully without the secret.
 - Model input: document text delimited as data; extraction constrained to a schema; facts need a
   verified quote; search uses fixed Cypher with parameters only.
@@ -416,7 +496,7 @@ Haiku 5.5 constraints that affect the code:
 | M2 | Sections 6 and 7; `ingest-dir`; unit and integration tests. | Full corpus ingests; second run is a no-op; identity precision ≥ 0.98 and recall ≥ 0.90; every stored fact has a verified quote. |
 | M3 | Section 8; `eval`. | Eval meets PRD section 8 search targets, or the gap is written down with the vector-only comparison. |
 | M4 | The four screens; upload session, ingest start, job polling; streaming search. | A folder uploaded in the browser is searchable without touching a terminal. |
-| M5 | Access code, rate limit, budget, error states, deploy, README with demo script. | A stranger with the link and code can run the demo; without the code they cannot upload. |
+| M5 | Access codes, rate limit, budget, error states, deploy, README with demo script. | Someone with the link and code can run the demo; without the code they see only the access page. |
 
 M1 and M2 are the risk. If time is short, cut P1 items (R8, R9, R16, R21) before touching them.
 

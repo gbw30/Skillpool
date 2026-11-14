@@ -8,7 +8,9 @@ import pytest
 from skillpool import config, llm, signing, storage
 from skillpool.cli import identity_scores
 from skillpool.ingest.chunk import chunk
+from skillpool.ingest import extract as extraction
 from skillpool.ingest.extract import Extraction, PersonFacts, ProjectDef, ProjectSkill, SkillFact
+from skillpool.ingest.job import Prepared, _write_order
 from skillpool.ingest.parse import ParseError, parse
 from skillpool.ingest.resolve import Context, Name, better_name, decide, name_match, parse_name, score
 from skillpool.ingest.verify import Locator, verify
@@ -116,6 +118,41 @@ def test_email_written_as_a_name_becomes_an_email():
     person = facts["people"][0]
     assert person["name"] == "" and person["emails"] == ["a.brown@example.com"]
     assert person["mentions"][0]["surface"] == "a.brown@example.com"
+
+
+def test_a_first_name_alone_is_recorded_for_the_one_person_it_can_mean():
+    text = "Bao Kumar: morning.\nNoah Lee: Bao, can you look at it? Write to bao.kumar@example.com.\nThanks, Bao"
+    bao, noah = _facts(text, [_person(name="Bao Kumar"), _person(name="Noah Lee")])["people"]
+    assert bao["aliases"] == ["Bao"] and {m["surface"] for m in bao["mentions"]} == {"Bao Kumar", "Bao"}
+    assert noah["aliases"] == []  # "Noah" never stands alone
+
+    for other in ("Bao Lee", "B. Lee", "Mei Bao"):  # another Bao, a possible Bao, a surname Bao
+        text = f"Bao Kumar and {other} met. Bao took notes."
+        people = _facts(text, [_person(name="Bao Kumar"), _person(name=other)])["people"]
+        assert [p["aliases"] for p in people] == [[], []], other
+
+    # "Grace Hall" here is a place, not Grace Lopez: a first name followed by a capitalised word is left alone.
+    assert _facts("Grace Lopez booked Grace Hall.", [_person(name="Grace Lopez")])["people"][0]["aliases"] == []
+
+
+def test_an_initial_and_the_full_name_in_one_document_are_one_person_unless_something_differs():
+    text = "Attendees: N. Mahlangu; Diego Osei\nNaomi Mahlangu has used Rust before.\nNoel Mahlangu was away."
+    rust = SkillFact(name="Rust", level="", quote="has used Rust")
+    people = _facts(text, [_person(name="N. Mahlangu"), _person(name="Diego Osei"), _person(name="Naomi Mahlangu", skills=[rust])])["people"]
+    assert [p["name"] for p in people] == ["Diego Osei", "Naomi Mahlangu"]
+    naomi = people[1]
+    assert naomi["aliases"] == ["N. Mahlangu"] and [s["name"] for s in naomi["skills"]] == ["Rust"]
+    assert {m["surface"] for m in naomi["mentions"]} == {"N. Mahlangu", "Naomi Mahlangu"}
+
+    # Two full names fit the initial: it is left alone.
+    both = [_person(name="N. Mahlangu"), _person(name="Naomi Mahlangu"), _person(name="Noel Mahlangu")]
+    assert len(_facts(text, both)["people"]) == 3
+
+    # Different job titles: two people, as the document lists them.
+    text = "A. Brown (Security Analyst) leads. Aaron Brown (Contract Engineer) tests."
+    analyst, contractor = _person(name="A. Brown"), _person(name="Aaron Brown")
+    analyst.title, contractor.title = "Security Analyst", "Contract Engineer"
+    assert [p["name"] for p in _facts(text, [analyst, contractor])["people"]] == ["A. Brown", "Aaron Brown"]
 
 
 def test_quote_spanning_two_chunks_cites_both():
@@ -316,4 +353,46 @@ def test_embed_charges_the_selected_provider_and_batches(monkeypatch):
 
 def test_each_embedding_provider_is_fully_described():
     assert set(config.EMBEDDERS) == set(llm._EMBED)
-    assert config.EMBEDDERS[config.EMBED_PROVIDER] == (config.EMBED_MODEL, config.EMBED_DIM, config.PRICE_EMBED)
+    assert config.EMBEDDERS[config.EMBED_PROVIDER][:3] == (config.EMBED_MODEL, config.EMBED_DIM, config.PRICE_EMBED)
+
+
+# --- extraction cache ---------------------------------------------------------
+
+def test_extraction_is_read_from_the_cache_instead_of_asking_the_model_again(tmp_path, monkeypatch):
+    asked = []
+
+    def fake_call(text, name):
+        asked.append(name)
+        return Extraction(kind="other", people=[], projects=[ProjectDef(name=text, description="", start="", end="", skills=[])])
+
+    monkeypatch.setattr(extraction, "_call", fake_call)
+    monkeypatch.setattr(config, "EXTRACT_CACHE_DIR", "")
+    extraction.extract("Atlas", [], "a.md")
+    extraction.extract("Atlas", [], "a.md")
+    assert len(asked) == 2  # no cache folder: every call reaches the model
+
+    monkeypatch.setattr(config, "EXTRACT_CACHE_DIR", str(tmp_path / "cache"))
+    first = extraction.extract("Atlas", [], "a.md")
+    assert extraction.extract("Atlas", [], "a.md") == first and len(asked) == 3
+    extraction.extract("Atlas, edited", [], "a.md")  # a changed document
+    extraction.extract("Atlas", [], "b.md")  # the same text under another name
+    monkeypatch.setattr(config, "CLAUDE_MODEL", "another-model")
+    extraction.extract("Atlas", [], "a.md")  # another model
+    assert len(asked) == 6
+    assert not list((tmp_path / "cache").glob("*.tmp"))
+
+
+# --- write order ----------------------------------------------------------------
+
+def test_documents_that_identify_their_people_are_written_before_name_only_ones():
+    def doc(path, kind, people):
+        return Prepared(path, path, {"kind": kind, "people": people}, [], [])
+
+    person = lambda title="", emails=(): {"title": title, "emails": list(emails)}
+    batch = [
+        doc("a-recap.md", "project_doc", [person(), person()]),  # names only
+        doc("b-kickoff.txt", "project_doc", [person("Engineer", ["x@example.com"]), person("Analyst")]),
+        doc("c-team-page.md", "project_doc", [person("Engineer"), person("Analyst"), person("Designer")]),
+        doc("d-resume.pdf", "resume", [person("Engineer", ["x@example.com"])]),
+    ]
+    assert [p.path for p in sorted(batch, key=_write_order)] == ["d-resume.pdf", "b-kickoff.txt", "c-team-page.md", "a-recap.md"]

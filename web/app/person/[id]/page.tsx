@@ -45,6 +45,7 @@ function Person() {
   if (!person) return <p className="pulse font-mono text-xs text-muted" role="status">Loading…</p>;
 
   const aliases = (person.aliases ?? []).filter((a) => a !== person.name);
+  const unconfirmed = [...new Set(person.unconfirmed.map((u) => u.path))]; // one line per document, not per passage
   return (
     <>
       <p className="label flex items-center gap-2"><Glyph kind="person" /> Person</p>
@@ -55,15 +56,13 @@ function Person() {
           Also written as {aliases.map((alias) => <span key={alias} className="chip">{alias}</span>)}
         </p>
       )}
-      {person.possibleSame.length > 0 && (
+      {unconfirmed.length > 0 && (
         <p className="panel mt-6 flex items-start gap-2 border-skill/50 p-4 text-sm">
           <Alert className="mt-0.5 shrink-0 text-skill" />
           <span>
-            May be the same person as{" "}
-            {person.possibleSame.map((p, i) => (
-              <span key={p.id}>{i > 0 && ", "}<Link href={`/person/${p.id}`}>{p.name}</Link></span>
-            ))}
-            . The records were kept apart because nothing beyond the name confirmed it.
+            {unconfirmed.length === 1 ? "One more document uses" : `${unconfirmed.length} more documents use`} the name{" "}
+            {person.name}: <span className="wrap-anywhere font-mono text-xs">{unconfirmed.join(", ")}</span>. Nothing beyond
+            the name confirmed it is this person, so {unconfirmed.length === 1 ? "it is" : "they are"} not counted as evidence.
           </span>
         </p>
       )}
