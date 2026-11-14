@@ -1,0 +1,17 @@
+From: Samir Thapa <sthapa63@example.com>
+To: willow-budget-planning@larkfield.example
+Date: 2023-02-21
+Subject: Willow Budget Planning kickoff: who is doing what
+
+Hi all,
+
+We are kicking off Willow Budget Planning. This is who is on it.
+
+I am the finance lead for Willow Budget Planning.
+O. Novak (Senior Accountant, onovak44@example.net) will be the budget owner for Willow Budget Planning.
+Bao Kumar (Senior Accountant) will be the controller for Willow Budget Planning.
+Andre Johnson (UX Designer) will be the researcher for Willow Budget Planning.
+P. Singh (UX Designer) is our product lead on Willow Budget Planning.
+
+Thanks,
+Samir

@@ -1,0 +1,18 @@
+Daniel Williams
+daniel.williams@example.com
+
+I'm a Senior Machine Learning Engineer based in Toronto.
+
+Where I've worked
+
+I joined Halcyon Freight in 2021 as a Senior Machine Learning Engineer. I trained and shipped a forecasting model that the finance team still uses. I presented quarterly results to the leadership team.
+
+I joined Driftwood Travel in 2019 as a Machine Learning Engineer and stayed until 2021. I turned loose questions from other teams into dashboards people trust, using Python. I trained the wider team on a new process. I cut a nightly job from four hours to forty minutes by rewriting it with Python.
+
+What I'm good at
+
+I'd call myself an expert in Python. I'm advanced in SQL and pandas. I'm at an intermediate level in Tableau. I'm a beginner in Looker.
+
+Education
+
+I studied Statistics at Northfield Polytechnic (BA, 2015).

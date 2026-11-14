@@ -1,0 +1,23 @@
+Erin Novak
+enovak56@example.com
+
+I'm a Support Lead based in Lisbon.
+
+Where I've worked
+
+I joined Paperbirch Publishing in 2019 as a Support Lead. I found the accounts most likely to leave, using Troubleshooting. I mentored two junior colleagues through their first year. I cut first-response time from nine hours to two.
+
+I joined Northgate Logistics in 2016 as a Junior Support Lead and stayed until 2019. I took over a stalled project and delivered it within a quarter. I set up the tooling for a forty-person support team, built around Zendesk. I wrote the documentation new joiners still start with.
+
+What I'm good at
+
+I'd call myself an expert in Jira. I'm advanced in SQL and Zendesk. I'm at an intermediate level in Customer Onboarding. I'm a beginner in Troubleshooting.
+
+Education
+
+I studied Information Systems at Northfield Polytechnic (BA, 2013).
+I also hold the ITIL Foundation.
+
+On the side
+
+Mapstack: a side project I built in my own time.

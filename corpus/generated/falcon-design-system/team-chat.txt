@@ -1,0 +1,7 @@
+#falcon-design-system channel, exported 2025-12-23
+
+[09:02] Nikhil Patel: does anyone have the latest copy of the accessibility pass?
+[09:04] Uma Schmidt: nice. I am still on the GraphQL part of Falcon Design System.
+[09:06] Nikhil Patel: Uma, can you look at the accessibility pass after that?
+[09:08] Uma Schmidt: can it wait until tomorrow? I am out this afternoon.
+[09:10] Valentina Abbasi: reminder that the Falcon Design System review is on Thursday. Nikhil is presenting.

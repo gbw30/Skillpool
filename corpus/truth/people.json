@@ -1,2797 +1,4235 @@
 [
  {
-  "person": "ghost:alex-armstrong-4",
+  "person": "ghost:andre-johnson-1",
   "resume": false,
   "mentions": [
    {
-    "doc": "generated/ember-partner-api/staffing-note.md",
-    "surface": "Alex Armstrong"
+    "doc": "generated/borealis-observability-rollout/kickoff-email.txt",
+    "surface": "Andre Johnson"
    },
    {
-    "doc": "generated/ember-partner-api/status-1.md",
-    "surface": "Alex Armstrong"
+    "doc": "generated/borealis-observability-rollout/team-chat.txt",
+    "surface": "Andre Johnson"
    }
   ]
  },
  {
-  "person": "ghost:alexis-morris-5",
+  "person": "ghost:bao-kumar-7",
   "resume": false,
   "mentions": [
    {
-    "doc": "generated/falcon-migration/staffing-note.md",
-    "surface": "Alexis Morris"
+    "doc": "generated/harbor-reporting-pipeline/kickoff-email.txt",
+    "surface": "Bao Kumar"
+   },
+   {
+    "doc": "generated/harbor-reporting-pipeline/team-chat.txt",
+    "surface": "Bao"
+   },
+   {
+    "doc": "generated/harbor-reporting-pipeline/team-chat.txt",
+    "surface": "Bao Kumar"
    }
   ]
  },
  {
-  "person": "ghost:alvin-conner-7",
+  "person": "ghost:hiroshi-sharma-3",
   "resume": false,
   "mentions": [
    {
-    "doc": "generated/harbor-partner-api/staffing-note.md",
-    "surface": "Alvin Conner"
+    "doc": "generated/dynamo-checkout-redesign/kickoff-email.txt",
+    "surface": "Hiroshi Sharma"
    },
    {
-    "doc": "generated/harbor-partner-api/status-1.md",
-    "surface": "Alvin Conner"
+    "doc": "generated/dynamo-checkout-redesign/team-chat.txt",
+    "surface": "Hiroshi Sharma"
+   },
+   {
+    "doc": "generated/dynamo-checkout-redesign/weekly-update-1.md",
+    "surface": "Hiroshi Sharma"
    }
   ]
  },
  {
-  "person": "ghost:amber-lee-1",
+  "person": "ghost:hiroshi-yamamoto-4",
   "resume": false,
   "mentions": [
    {
-    "doc": "generated/borealis-partner-api/staffing-note.md",
-    "surface": "Amber Lee"
+    "doc": "generated/ember-mobile-relaunch/kickoff-email.txt",
+    "surface": "Hiroshi Yamamoto"
    },
    {
-    "doc": "generated/borealis-partner-api/status-1.md",
-    "surface": "Amber Lee"
+    "doc": "generated/ember-mobile-relaunch/team-chat.txt",
+    "surface": "Hiroshi Yamamoto"
+   },
+   {
+    "doc": "generated/ember-mobile-relaunch/weekly-update-2.md",
+    "surface": "Hiroshi Yamamoto"
    }
   ]
  },
  {
-  "person": "ghost:april-burgess-0",
+  "person": "ghost:jasmine-nakamura-6",
   "resume": false,
   "mentions": [
    {
-    "doc": "generated/atlas-migration/staffing-note.md",
-    "surface": "April Burgess"
+    "doc": "generated/granite-data-platform/kickoff-email.txt",
+    "surface": "Jasmine Nakamura"
    },
    {
-    "doc": "generated/atlas-migration/status-2.md",
-    "surface": "April Burgess"
+    "doc": "generated/granite-data-platform/meeting-notes.md",
+    "surface": "Jasmine Nakamura"
    }
   ]
  },
  {
-  "person": "ghost:ashley-sullivan-8",
+  "person": "ghost:nikhil-patel-5",
   "resume": false,
   "mentions": [
    {
-    "doc": "generated/ion-mobile-relaunch/staffing-note.md",
-    "surface": "Ashley Sullivan"
+    "doc": "generated/falcon-design-system/kickoff-email.txt",
+    "surface": "Nikhil Patel"
    },
    {
-    "doc": "generated/ion-mobile-relaunch/status-1.md",
-    "surface": "Ashley Sullivan"
+    "doc": "generated/falcon-design-system/meeting-notes.md",
+    "surface": "Nikhil Patel"
+   },
+   {
+    "doc": "generated/falcon-design-system/team-chat.txt",
+    "surface": "Nikhil"
+   },
+   {
+    "doc": "generated/falcon-design-system/team-chat.txt",
+    "surface": "Nikhil Patel"
+   },
+   {
+    "doc": "generated/falcon-design-system/weekly-update-1.md",
+    "surface": "Nikhil Patel"
+   },
+   {
+    "doc": "generated/falcon-design-system/weekly-update-2.md",
+    "surface": "Nikhil Patel"
+   },
+   {
+    "doc": "generated/falcon-design-system/retrospective.pdf",
+    "surface": "Nikhil Patel"
    }
   ]
  },
  {
-  "person": "ghost:barbara-mills-2",
+  "person": "ghost:nina-diaz-2",
   "resume": false,
   "mentions": [
    {
-    "doc": "generated/cinder-billing-rewrite/staffing-note.md",
-    "surface": "Barbara Mills"
-   }
-  ]
- },
- {
-  "person": "ghost:brian-hernandez-6",
-  "resume": false,
-  "mentions": [
-   {
-    "doc": "generated/granite-partner-api/staffing-note.md",
-    "surface": "Brian Hernandez"
-   },
-   {
-    "doc": "generated/granite-partner-api/status-1.md",
-    "surface": "Brian Hernandez"
-   }
-  ]
- },
- {
-  "person": "ghost:bryan-mcclure-9",
-  "resume": false,
-  "mentions": [
-   {
-    "doc": "generated/juniper-migration/staffing-note.md",
-    "surface": "Bryan Mcclure"
-   },
-   {
-    "doc": "generated/juniper-migration/status-1.md",
-    "surface": "Bryan Mcclure"
-   }
-  ]
- },
- {
-  "person": "ghost:casey-anderson-3",
-  "resume": false,
-  "mentions": [
-   {
-    "doc": "generated/dynamo-checkout-redesign/staffing-note.md",
-    "surface": "Casey Anderson"
-   }
-  ]
- },
- {
-  "person": "resumes/Aaron_Foster.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/tundra-partner-api/staffing-note.md",
-    "surface": "Aaron Foster"
-   }
-  ]
- },
- {
-  "person": "resumes/Aaron_Herrera.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/raven-observability-rollout/staffing-note.md",
-    "surface": "Aaron Herrera"
-   }
-  ]
- },
- {
-  "person": "resumes/Aaron_Williams.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/meridian-observability-rollout/staffing-note.md",
-    "surface": "Aaron Williams"
-   }
-  ]
- },
- {
-  "person": "resumes/Adam_Franklin.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/granite-partner-api/staffing-note.md",
-    "surface": "Franklin, Adam"
-   },
-   {
-    "doc": "generated/granite-partner-api/status-1.md",
-    "surface": "A. Franklin"
-   },
-   {
-    "doc": "generated/granite-partner-api/postmortem.md",
-    "surface": "A. Franklin"
-   }
-  ]
- },
- {
-  "person": "resumes/Adam_Smith.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/indigo-checkout-redesign/staffing-note.md",
-    "surface": "Adam Smith"
-   },
-   {
-    "doc": "generated/indigo-checkout-redesign/status-1.md",
-    "surface": "Smith, Adam"
-   },
-   {
-    "doc": "generated/indigo-checkout-redesign/status-2.md",
-    "surface": "A. Smith"
-   }
-  ]
- },
- {
-  "person": "resumes/Adam_Wells.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/northwind-search-upgrade/staffing-note.md",
-    "surface": "Wells, Adam"
-   },
-   {
-    "doc": "generated/northwind-search-upgrade/status-2.md",
-    "surface": "Adam Wells"
-   },
-   {
-    "doc": "generated/northwind-search-upgrade/status-2.md",
-    "surface": "Adam"
-   }
-  ]
- },
- {
-  "person": "resumes/Adrian_Anderson.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/anchor-checkout-redesign/staffing-note.md",
-    "surface": "Anderson, Adrian"
-   },
-   {
-    "doc": "generated/anchor-checkout-redesign/status-1.md",
-    "surface": "Adrian Anderson"
-   },
-   {
-    "doc": "generated/anchor-checkout-redesign/status-2.md",
-    "surface": "Anderson, Adrian"
-   }
-  ]
- },
- {
-  "person": "resumes/Alan_Harris.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/ion-mobile-relaunch/staffing-note.md",
-    "surface": "Alan Harris"
-   }
-  ]
- },
- {
-  "person": "resumes/Alan_Peters.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/tundra-partner-api/staffing-note.md",
-    "surface": "A. Peters"
-   },
-   {
-    "doc": "generated/tundra-partner-api/status-1.md",
-    "surface": "baldwinjames@example.org"
-   }
-  ]
- },
- {
-  "person": "resumes/Albert_Haley.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/jasper-search-upgrade/staffing-note.md",
-    "surface": "Albert Haley"
-   },
-   {
-    "doc": "generated/jasper-search-upgrade/status-1.md",
-    "surface": "Albert Haley"
-   }
-  ]
- },
- {
-  "person": "resumes/Alejandro_Campbell.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/umbra-identity-service/staffing-note.md",
-    "surface": "Campbell, Alejandro"
-   }
-  ]
- },
- {
-  "person": "resumes/Alexander_Espinoza.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/yarrow-partner-api/staffing-note.md",
-    "surface": "Alexander Espinoza"
-   },
-   {
-    "doc": "generated/yarrow-partner-api/status-2.md",
-    "surface": "Espinoza, Alexander"
-   },
-   {
-    "doc": "generated/yarrow-partner-api/postmortem.md",
-    "surface": "ryan15@example.net"
-   }
-  ]
- },
- {
-  "person": "resumes/Alexander_Winters.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/vertex-observability-rollout/staffing-note.md",
-    "surface": "Alexander Winters"
-   },
-   {
-    "doc": "generated/vertex-observability-rollout/postmortem.md",
-    "surface": "A. Winters"
-   }
-  ]
- },
- {
-  "person": "resumes/Alexandra_Elliott.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/harbor-partner-api/staffing-note.md",
-    "surface": "Alexandra Elliott"
-   },
-   {
-    "doc": "generated/harbor-partner-api/staffing-note.md",
-    "surface": "Alexandra"
-   },
-   {
-    "doc": "generated/harbor-partner-api/status-1.md",
-    "surface": "Alexandra Elliott"
-   },
-   {
-    "doc": "generated/harbor-partner-api/status-2.md",
-    "surface": "Alexandra Elliott"
-   }
-  ]
- },
- {
-  "person": "resumes/Alexandra_Johnson.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/atlas-migration/staffing-note.md",
-    "surface": "Alexandra Johnson"
-   },
-   {
-    "doc": "generated/atlas-migration/status-2.md",
-    "surface": "Alexandra Johnson"
-   },
-   {
-    "doc": "generated/atlas-migration/postmortem.md",
-    "surface": "Alexandra Johnson"
-   },
-   {
-    "doc": "generated/falcon-migration/staffing-note.md",
-    "surface": "Alexandra Johnson"
-   },
-   {
-    "doc": "generated/falcon-migration/status-1.md",
-    "surface": "Alexandra Johnson"
-   },
-   {
-    "doc": "generated/falcon-migration/status-1.md",
-    "surface": "Alexandra"
-   }
-  ]
- },
- {
-  "person": "resumes/Alexis_Harris.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/willow-data-platform/staffing-note.md",
-    "surface": "A. Harris"
-   },
-   {
-    "doc": "generated/willow-data-platform/status-1.md",
-    "surface": "Alexis Harris"
-   }
-  ]
- },
- {
-  "person": "resumes/Alexis_Martin.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/anchor-checkout-redesign/staffing-note.md",
-    "surface": "Alexis Martin"
-   },
-   {
-    "doc": "generated/anchor-checkout-redesign/status-1.md",
-    "surface": "Martin, Alexis"
-   },
-   {
-    "doc": "generated/anchor-checkout-redesign/status-2.md",
-    "surface": "Alexis Martin"
-   }
-  ]
- },
- {
-  "person": "resumes/Alexis_Morris.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/cobalt-billing-rewrite/staffing-note.md",
-    "surface": "Alexis Morris"
-   },
-   {
-    "doc": "generated/cobalt-billing-rewrite/staffing-note.md",
-    "surface": "Alexis"
-   },
-   {
-    "doc": "generated/cobalt-billing-rewrite/status-1.md",
-    "surface": "Alexis Morris"
-   }
-  ]
- },
- {
-  "person": "resumes/Alexis_Nelson.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/zephyr-partner-api/staffing-note.md",
-    "surface": "rtrujillo@example.org"
-   },
-   {
-    "doc": "generated/zephyr-partner-api/status-1.md",
-    "surface": "A. Nelson"
-   },
-   {
-    "doc": "generated/zephyr-partner-api/status-2.md",
-    "surface": "Alexis Nelson"
-   }
-  ]
- },
- {
-  "person": "resumes/Alicia_Bentley.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/juniper-migration/staffing-note.md",
-    "surface": "A. Bentley"
-   },
-   {
-    "doc": "generated/juniper-migration/status-1.md",
-    "surface": "Bentley, Alicia"
-   }
-  ]
- },
- {
-  "person": "resumes/Alison_Dickerson.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/fathom-partner-api/staffing-note.md",
-    "surface": "Alison Dickerson"
-   },
-   {
-    "doc": "generated/fathom-partner-api/staffing-note.md",
-    "surface": "Alison"
-   }
-  ]
- },
- {
-  "person": "resumes/Allison_Gomez.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/willow-data-platform/staffing-note.md",
-    "surface": "Allison Gomez"
-   },
-   {
-    "doc": "generated/willow-data-platform/status-1.md",
-    "surface": "Allison Gomez"
-   }
-  ]
- },
- {
-  "person": "resumes/Allison_Powell_DVM.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/yarrow-partner-api/staffing-note.md",
-    "surface": "Allison Powell DVM"
-   },
-   {
-    "doc": "generated/yarrow-partner-api/status-2.md",
-    "surface": "A. Powell"
-   },
-   {
-    "doc": "generated/yarrow-partner-api/postmortem.md",
-    "surface": "Allison Powell DVM"
-   }
-  ]
- },
- {
-  "person": "resumes/Allison_Price.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/delta-observability-rollout/staffing-note.md",
-    "surface": "Allison Price"
-   },
-   {
-    "doc": "generated/delta-observability-rollout/status-1.md",
-    "surface": "A. Price"
-   },
-   {
-    "doc": "generated/delta-observability-rollout/status-2.md",
-    "surface": "msullivan@example.net"
-   }
-  ]
- },
- {
-  "person": "resumes/Alyssa_Martin.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/pioneer-mobile-relaunch/staffing-note.md",
-    "surface": "Alyssa Martin"
-   },
-   {
-    "doc": "generated/pioneer-mobile-relaunch/status-1.md",
-    "surface": "Alyssa Martin"
-   },
-   {
-    "doc": "generated/pioneer-mobile-relaunch/status-2.md",
-    "surface": "A. Martin"
-   }
-  ]
- },
- {
-  "person": "resumes/Alyssa_Olsen.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/jasper-search-upgrade/staffing-note.md",
-    "surface": "Alyssa Olsen"
-   },
-   {
-    "doc": "generated/jasper-search-upgrade/status-1.md",
-    "surface": "A. Olsen"
-   },
-   {
-    "doc": "generated/jasper-search-upgrade/status-2.md",
-    "surface": "Alyssa Olsen"
-   }
-  ]
- },
- {
-  "person": "resumes/Amanda_Bailey.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/ion-mobile-relaunch/staffing-note.md",
-    "surface": "Bailey, Amanda"
-   }
-  ]
- },
- {
-  "person": "resumes/Amanda_Bridges.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/zephyr-partner-api/staffing-note.md",
-    "surface": "Amanda Bridges"
-   },
-   {
-    "doc": "generated/zephyr-partner-api/status-1.md",
-    "surface": "Amanda Bridges"
-   },
-   {
-    "doc": "generated/zephyr-partner-api/status-2.md",
-    "surface": "Amanda Bridges"
-   }
-  ]
- },
- {
-  "person": "resumes/Amanda_Campbell.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/falcon-migration/staffing-note.md",
-    "surface": "Amanda Campbell"
-   },
-   {
-    "doc": "generated/falcon-migration/staffing-note.md",
-    "surface": "Amanda"
-   }
-  ]
- },
- {
-  "person": "resumes/Amanda_Flores.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/glacier-migration/staffing-note.md",
-    "surface": "Amanda Flores"
-   },
-   {
-    "doc": "generated/glacier-migration/staffing-note.md",
-    "surface": "Amanda"
-   },
-   {
-    "doc": "generated/glacier-migration/status-1.md",
-    "surface": "Amanda Flores"
-   }
-  ]
- },
- {
-  "person": "resumes/Amanda_Johnson.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/keystone-observability-rollout/staffing-note.md",
-    "surface": "Johnson, Amanda"
-   },
-   {
-    "doc": "generated/keystone-observability-rollout/status-1.md",
-    "surface": "A. Johnson"
-   },
-   {
-    "doc": "generated/keystone-observability-rollout/status-2.md",
-    "surface": "Johnson, Amanda"
-   },
-   {
-    "doc": "generated/keystone-observability-rollout/postmortem.md",
-    "surface": "Amanda Johnson"
-   }
-  ]
- },
- {
-  "person": "resumes/Amanda_Osborne.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/onyx-identity-service/staffing-note.md",
-    "surface": "Amanda Osborne"
-   },
-   {
-    "doc": "generated/onyx-identity-service/status-2.md",
-    "surface": "Amanda Osborne"
-   }
-  ]
- },
- {
-  "person": "resumes/Amanda_Owens.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/ion-mobile-relaunch/staffing-note.md",
-    "surface": "Owens, Amanda"
-   },
-   {
-    "doc": "generated/indigo-checkout-redesign/staffing-note.md",
-    "surface": "Owens, Amanda"
-   },
-   {
-    "doc": "generated/indigo-checkout-redesign/status-2.md",
-    "surface": "Amanda Owens"
-   }
-  ]
- },
- {
-  "person": "resumes/Amanda_Phillips.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/tundra-partner-api/staffing-note.md",
-    "surface": "Amanda Phillips"
-   },
-   {
-    "doc": "generated/tundra-partner-api/status-1.md",
-    "surface": "Amanda Phillips"
-   }
-  ]
- },
- {
-  "person": "resumes/Amanda_Rogers.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/kestrel-checkout-redesign/staffing-note.md",
-    "surface": "A. Rogers"
-   },
-   {
-    "doc": "generated/kestrel-checkout-redesign/status-1.md",
-    "surface": "Amanda Rogers"
-   },
-   {
-    "doc": "generated/kestrel-checkout-redesign/status-1.md",
-    "surface": "Amanda"
-   }
-  ]
- },
- {
-  "person": "resumes/Amanda_Velazquez.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/pioneer-mobile-relaunch/staffing-note.md",
-    "surface": "Amanda Velazquez"
-   },
-   {
-    "doc": "generated/pioneer-mobile-relaunch/status-1.md",
-    "surface": "Velazquez, Amanda"
-   },
-   {
-    "doc": "generated/pioneer-mobile-relaunch/postmortem.md",
-    "surface": "Velazquez, Amanda"
-   }
-  ]
- },
- {
-  "person": "resumes/Amanda_Williams.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/pioneer-mobile-relaunch/staffing-note.md",
-    "surface": "Amanda Williams"
-   },
-   {
-    "doc": "generated/pioneer-mobile-relaunch/status-1.md",
-    "surface": "Amanda Williams"
-   },
-   {
-    "doc": "generated/pioneer-mobile-relaunch/status-2.md",
-    "surface": "Amanda Williams"
-   },
-   {
-    "doc": "generated/summit-billing-rewrite/staffing-note.md",
-    "surface": "Amanda Williams"
-   },
-   {
-    "doc": "generated/summit-billing-rewrite/status-1.md",
-    "surface": "Amanda Williams"
-   },
-   {
-    "doc": "generated/summit-billing-rewrite/postmortem.md",
-    "surface": "Amanda Williams"
-   }
-  ]
- },
- {
-  "person": "resumes/Amanda_Wood.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/cinder-billing-rewrite/staffing-note.md",
-    "surface": "Amanda Wood"
-   }
-  ]
- },
- {
-  "person": "resumes/Amanda_Wright.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/lumen-migration/staffing-note.md",
-    "surface": "Wright, Amanda"
-   },
-   {
-    "doc": "generated/lumen-migration/status-2.md",
-    "surface": "Amanda Wright"
-   }
-  ]
- },
- {
-  "person": "resumes/Amber_Jenkins.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/dynamo-checkout-redesign/staffing-note.md",
-    "surface": "Amber Jenkins"
-   },
-   {
-    "doc": "generated/dynamo-checkout-redesign/status-1.md",
-    "surface": "Jenkins, Amber"
-   },
-   {
-    "doc": "generated/dynamo-checkout-redesign/status-2.md",
-    "surface": "Jenkins, Amber"
-   }
-  ]
- },
- {
-  "person": "resumes/Amber_Kelley.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/raven-observability-rollout/staffing-note.md",
-    "surface": "Amber Kelley"
-   }
-  ]
- },
- {
-  "person": "resumes/Amy_Blackwell.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/lumen-migration/staffing-note.md",
-    "surface": "Blackwell, Amy"
-   },
-   {
-    "doc": "generated/lumen-migration/status-1.md",
-    "surface": "Blackwell, Amy"
-   }
-  ]
- },
- {
-  "person": "resumes/Amy_Crosby.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/onyx-identity-service/staffing-note.md",
-    "surface": "Amy Crosby"
-   }
-  ]
- },
- {
-  "person": "resumes/Amy_Green.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/fathom-partner-api/staffing-note.md",
-    "surface": "Amy Green"
-   },
-   {
-    "doc": "generated/fathom-partner-api/status-1.md",
-    "surface": "Green, Amy"
-   }
-  ]
- },
- {
-  "person": "resumes/Amy_Greene.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/yarrow-partner-api/staffing-note.md",
-    "surface": "A. Greene"
-   },
-   {
-    "doc": "generated/yarrow-partner-api/status-1.md",
-    "surface": "Amy Greene"
-   },
-   {
-    "doc": "generated/yarrow-partner-api/status-2.md",
-    "surface": "A. Greene"
-   },
-   {
-    "doc": "generated/zephyr-partner-api/staffing-note.md",
-    "surface": "Amy Greene"
-   }
-  ]
- },
- {
-  "person": "resumes/Amy_Hamilton.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/delta-observability-rollout/staffing-note.md",
-    "surface": "A. Hamilton"
-   },
-   {
-    "doc": "generated/delta-observability-rollout/status-1.md",
-    "surface": "Amy Hamilton"
-   },
-   {
-    "doc": "generated/delta-observability-rollout/status-2.md",
-    "surface": "A. Hamilton"
-   },
-   {
-    "doc": "generated/jasper-search-upgrade/staffing-note.md",
-    "surface": "Amy Hamilton"
-   },
-   {
-    "doc": "generated/jasper-search-upgrade/status-2.md",
-    "surface": "Amy Hamilton"
-   }
-  ]
- },
- {
-  "person": "resumes/Amy_Hughes.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/borealis-partner-api/staffing-note.md",
-    "surface": "Amy Hughes"
-   },
-   {
-    "doc": "generated/borealis-partner-api/status-1.md",
-    "surface": "Amy Hughes"
-   },
-   {
-    "doc": "generated/borealis-partner-api/status-1.md",
-    "surface": "Amy"
-   }
-  ]
- },
- {
-  "person": "resumes/Amy_Mcbride.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/onyx-identity-service/staffing-note.md",
-    "surface": "A. Mcbride"
-   },
-   {
-    "doc": "generated/onyx-identity-service/status-1.md",
-    "surface": "Amy Mcbride"
-   },
-   {
-    "doc": "generated/onyx-identity-service/status-2.md",
-    "surface": "Mcbride, Amy"
-   },
-   {
-    "doc": "generated/helix-partner-api/staffing-note.md",
-    "surface": "Mcbride, Amy"
-   },
-   {
-    "doc": "generated/helix-partner-api/status-1.md",
-    "surface": "Mcbride, Amy"
-   },
-   {
-    "doc": "generated/helix-partner-api/postmortem.md",
-    "surface": "A. Mcbride"
-   }
-  ]
- },
- {
-  "person": "resumes/Amy_Vasquez.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/atlas-migration/staffing-note.md",
-    "surface": "Vasquez, Amy"
-   },
-   {
-    "doc": "generated/atlas-migration/status-1.md",
-    "surface": "Amy Vasquez"
-   },
-   {
-    "doc": "generated/atlas-migration/status-2.md",
-    "surface": "Amy Vasquez"
-   }
-  ]
- },
- {
-  "person": "resumes/Andre_Ortiz.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/ion-mobile-relaunch/staffing-note.md",
-    "surface": "A. Ortiz"
-   },
-   {
-    "doc": "generated/ion-mobile-relaunch/status-1.md",
-    "surface": "trevorrowe@example.org"
-   }
-  ]
- },
- {
-  "person": "resumes/Andrea_Becker.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/harbor-partner-api/staffing-note.md",
-    "surface": "Becker, Andrea"
-   },
-   {
-    "doc": "generated/harbor-partner-api/status-1.md",
-    "surface": "Andrea Becker"
-   },
-   {
-    "doc": "generated/harbor-partner-api/status-1.md",
-    "surface": "Andrea"
-   }
-  ]
- },
- {
-  "person": "resumes/Andrea_Bond.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/dynamo-checkout-redesign/staffing-note.md",
-    "surface": "Bond, Andrea"
-   },
-   {
-    "doc": "generated/dynamo-checkout-redesign/status-1.md",
-    "surface": "olivia44@example.org"
-   },
-   {
-    "doc": "generated/dynamo-checkout-redesign/status-2.md",
-    "surface": "Andrea Bond"
-   }
-  ]
- },
- {
-  "person": "resumes/Andrea_Francis.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/juniper-migration/staffing-note.md",
-    "surface": "A. Francis"
-   },
-   {
-    "doc": "generated/juniper-migration/status-1.md",
-    "surface": "Andrea Francis"
-   },
-   {
-    "doc": "generated/juniper-migration/postmortem.md",
-    "surface": "Andrea Francis"
-   }
-  ]
- },
- {
-  "person": "resumes/Andrea_Rodriguez.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/falcon-migration/staffing-note.md",
-    "surface": "Andrea Rodriguez"
-   }
-  ]
- },
- {
-  "person": "resumes/Andres_Franco.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/fathom-partner-api/staffing-note.md",
-    "surface": "Andres Franco"
-   }
-  ]
- },
- {
-  "person": "resumes/Andrew_Barber.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/quartz-data-platform/staffing-note.md",
-    "surface": "Andrew Barber"
-   },
-   {
-    "doc": "generated/quartz-data-platform/status-1.md",
-    "surface": "Barber, Andrew"
-   },
-   {
-    "doc": "generated/delta-observability-rollout/staffing-note.md",
-    "surface": "Andrew Barber"
-   },
-   {
-    "doc": "generated/delta-observability-rollout/status-1.md",
-    "surface": "Andrew Barber"
-   },
-   {
-    "doc": "generated/delta-observability-rollout/status-2.md",
-    "surface": "A. Barber"
-   }
-  ]
- },
- {
-  "person": "resumes/Andrew_Bullock.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/fathom-partner-api/staffing-note.md",
-    "surface": "Andrew Bullock"
-   },
-   {
-    "doc": "generated/fathom-partner-api/status-1.md",
-    "surface": "Andrew Bullock"
-   }
-  ]
- },
- {
-  "person": "resumes/Andrew_Grimes.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/umbra-identity-service/staffing-note.md",
-    "surface": "A. Grimes"
-   }
-  ]
- },
- {
-  "person": "resumes/Andrew_Hill.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/zephyr-partner-api/staffing-note.md",
-    "surface": "Andrew Hill"
-   },
-   {
-    "doc": "generated/zephyr-partner-api/staffing-note.md",
-    "surface": "Andrew"
-   }
-  ]
- },
- {
-  "person": "resumes/Andrew_Hutchinson.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/raven-observability-rollout/staffing-note.md",
-    "surface": "Andrew Hutchinson"
-   },
-   {
-    "doc": "generated/raven-observability-rollout/status-1.md",
-    "surface": "Andrew Hutchinson"
-   }
-  ]
- },
- {
-  "person": "resumes/Angela_Donaldson.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/beacon-reporting-pipeline/staffing-note.md",
-    "surface": "Angela Donaldson"
-   },
-   {
-    "doc": "generated/beacon-reporting-pipeline/status-1.md",
-    "surface": "Angela Donaldson"
-   },
-   {
-    "doc": "generated/beacon-reporting-pipeline/status-1.md",
-    "surface": "Angela"
-   },
-   {
-    "doc": "generated/beacon-reporting-pipeline/postmortem.md",
-    "surface": "Angela Donaldson"
-   }
-  ]
- },
- {
-  "person": "resumes/Angela_Harris.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/glacier-migration/staffing-note.md",
-    "surface": "A. Harris"
-   }
-  ]
- },
- {
-  "person": "resumes/Angela_Jennings.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/tundra-partner-api/staffing-note.md",
-    "surface": "Angela Jennings"
-   },
-   {
-    "doc": "generated/tundra-partner-api/status-1.md",
-    "surface": "A. Jennings"
-   }
-  ]
- },
- {
-  "person": "resumes/Angela_Kelly.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/jasper-search-upgrade/staffing-note.md",
-    "surface": "Kelly, Angela"
-   },
-   {
-    "doc": "generated/jasper-search-upgrade/status-2.md",
-    "surface": "Angela Kelly"
-   },
-   {
-    "doc": "generated/jasper-search-upgrade/status-2.md",
-    "surface": "Angela"
-   }
-  ]
- },
- {
-  "person": "resumes/Angela_Lin.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/onyx-identity-service/staffing-note.md",
-    "surface": "A. Lin"
-   }
-  ]
- },
- {
-  "person": "resumes/Angela_Lutz.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/northwind-search-upgrade/staffing-note.md",
-    "surface": "Angela Lutz"
-   },
-   {
-    "doc": "generated/northwind-search-upgrade/status-1.md",
-    "surface": "Angela Lutz"
-   },
-   {
-    "doc": "generated/northwind-search-upgrade/postmortem.md",
-    "surface": "Angela Lutz"
-   }
-  ]
- },
- {
-  "person": "resumes/Angela_Robinson.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/falcon-migration/staffing-note.md",
-    "surface": "Angela Robinson"
-   }
-  ]
- },
- {
-  "person": "resumes/Angela_Roy.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/nimbus-data-platform/staffing-note.md",
-    "surface": "Angela Roy"
-   },
-   {
-    "doc": "generated/zephyr-partner-api/staffing-note.md",
-    "surface": "Angela Roy"
-   },
-   {
-    "doc": "generated/zephyr-partner-api/status-1.md",
-    "surface": "Roy, Angela"
-   },
-   {
-    "doc": "generated/zephyr-partner-api/status-2.md",
-    "surface": "Roy, Angela"
-   }
-  ]
- },
- {
-  "person": "resumes/Ann_Moore.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/cobalt-billing-rewrite/staffing-note.md",
-    "surface": "A. Moore"
-   }
-  ]
- },
- {
-  "person": "resumes/Ann_Stone.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/mosaic-reporting-pipeline/staffing-note.md",
-    "surface": "Ann Stone"
-   },
-   {
-    "doc": "generated/mosaic-reporting-pipeline/status-1.md",
-    "surface": "Ann Stone"
-   }
-  ]
- },
- {
-  "person": "resumes/Ann_Willis.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/cobalt-billing-rewrite/staffing-note.md",
-    "surface": "Ann Willis"
-   },
-   {
-    "doc": "generated/cobalt-billing-rewrite/status-1.md",
-    "surface": "A. Willis"
-   },
-   {
-    "doc": "generated/cobalt-billing-rewrite/status-2.md",
-    "surface": "Willis, Ann"
-   }
-  ]
- },
- {
-  "person": "resumes/Anna_Lowe.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/helix-partner-api/staffing-note.md",
-    "surface": "A. Lowe"
-   },
-   {
-    "doc": "generated/helix-partner-api/status-1.md",
-    "surface": "A. Lowe"
-   },
-   {
-    "doc": "generated/helix-partner-api/status-2.md",
-    "surface": "Anna Lowe"
-   }
-  ]
- },
- {
-  "person": "resumes/Anna_Wong.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/echo-billing-rewrite/staffing-note.md",
-    "surface": "Anna Wong"
-   },
-   {
-    "doc": "generated/echo-billing-rewrite/status-1.md",
-    "surface": "Anna Wong"
-   },
-   {
-    "doc": "generated/echo-billing-rewrite/postmortem.md",
-    "surface": "Wong, Anna"
-   }
-  ]
- },
- {
-  "person": "resumes/Anne_Arnold.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/falcon-migration/staffing-note.md",
-    "surface": "Anne Arnold"
-   },
-   {
-    "doc": "generated/falcon-migration/status-2.md",
-    "surface": "Anne Arnold"
-   }
-  ]
- },
- {
-  "person": "resumes/Anthony_Blackburn_III.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/xenon-billing-rewrite/staffing-note.md",
-    "surface": "Anthony Blackburn III"
-   },
-   {
-    "doc": "generated/xenon-billing-rewrite/status-1.md",
-    "surface": "Anthony Blackburn III"
-   },
-   {
-    "doc": "generated/xenon-billing-rewrite/status-2.md",
-    "surface": "A. Blackburn"
-   }
-  ]
- },
- {
-  "person": "resumes/Anthony_Foster.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/dynamo-checkout-redesign/staffing-note.md",
-    "surface": "Anthony Foster"
-   },
-   {
-    "doc": "generated/dynamo-checkout-redesign/status-2.md",
-    "surface": "A. Foster"
-   },
-   {
-    "doc": "generated/dynamo-checkout-redesign/postmortem.md",
-    "surface": "A. Foster"
-   }
-  ]
- },
- {
-  "person": "resumes/Anthony_Hamilton.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/lantern-mobile-relaunch/staffing-note.md",
-    "surface": "stephaniesimon@example.org"
-   },
-   {
-    "doc": "generated/lantern-mobile-relaunch/status-1.md",
-    "surface": "Hamilton, Anthony"
-   },
-   {
-    "doc": "generated/lantern-mobile-relaunch/status-2.md",
-    "surface": "Hamilton, Anthony"
-   }
-  ]
- },
- {
-  "person": "resumes/Anthony_Jones.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/kestrel-checkout-redesign/staffing-note.md",
-    "surface": "Anthony Jones"
-   },
-   {
-    "doc": "generated/kestrel-checkout-redesign/status-1.md",
-    "surface": "Anthony Jones"
-   },
-   {
-    "doc": "generated/kestrel-checkout-redesign/status-1.md",
-    "surface": "Anthony"
-   }
-  ]
- },
- {
-  "person": "resumes/Anthony_Lara.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/northwind-search-upgrade/staffing-note.md",
-    "surface": "A. Lara"
-   },
-   {
-    "doc": "generated/northwind-search-upgrade/status-1.md",
-    "surface": "Anthony Lara"
-   },
-   {
-    "doc": "generated/northwind-search-upgrade/status-1.md",
-    "surface": "Anthony"
-   },
-   {
-    "doc": "generated/northwind-search-upgrade/postmortem.md",
-    "surface": "Anthony Lara"
-   }
-  ]
- },
- {
-  "person": "resumes/Anthony_Lewis.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/harbor-partner-api/staffing-note.md",
-    "surface": "Anthony Lewis"
-   },
-   {
-    "doc": "generated/harbor-partner-api/status-1.md",
-    "surface": "Anthony Lewis"
-   },
-   {
-    "doc": "generated/harbor-partner-api/status-2.md",
-    "surface": "A. Lewis"
-   }
-  ]
- },
- {
-  "person": "resumes/Anthony_Petersen.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/keystone-observability-rollout/staffing-note.md",
-    "surface": "Anthony Petersen"
-   },
-   {
-    "doc": "generated/keystone-observability-rollout/status-1.md",
-    "surface": "Anthony Petersen"
-   }
-  ]
- },
- {
-  "person": "resumes/Anthony_Strickland.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/beacon-reporting-pipeline/staffing-note.md",
-    "surface": "Anthony Strickland"
-   },
-   {
-    "doc": "generated/beacon-reporting-pipeline/status-1.md",
-    "surface": "Anthony Strickland"
-   }
-  ]
- },
- {
-  "person": "resumes/Ashley_Andrews.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/ion-mobile-relaunch/staffing-note.md",
-    "surface": "A. Andrews"
-   }
-  ]
- },
- {
-  "person": "resumes/Ashley_Atkins.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/indigo-checkout-redesign/staffing-note.md",
-    "surface": "A. Atkins"
-   },
-   {
-    "doc": "generated/indigo-checkout-redesign/status-1.md",
-    "surface": "Ashley Atkins"
-   },
-   {
-    "doc": "generated/indigo-checkout-redesign/status-2.md",
-    "surface": "Ashley Atkins"
-   }
-  ]
- },
- {
-  "person": "resumes/Ashley_Lewis.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/nimbus-data-platform/staffing-note.md",
-    "surface": "Ashley Lewis"
-   }
-  ]
- },
- {
-  "person": "resumes/Ashley_Murphy.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/mosaic-reporting-pipeline/staffing-note.md",
-    "surface": "Murphy, Ashley"
-   }
-  ]
- },
- {
-  "person": "resumes/Ashley_Pugh.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/pioneer-mobile-relaunch/staffing-note.md",
-    "surface": "Ashley Pugh"
-   },
-   {
-    "doc": "generated/pioneer-mobile-relaunch/status-1.md",
-    "surface": "Pugh, Ashley"
-   },
-   {
-    "doc": "generated/pioneer-mobile-relaunch/status-2.md",
-    "surface": "Ashley Pugh"
-   },
-   {
-    "doc": "generated/pioneer-mobile-relaunch/postmortem.md",
-    "surface": "Ashley Pugh"
-   }
-  ]
- },
- {
-  "person": "resumes/Ashley_Robinson.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/lumen-migration/staffing-note.md",
-    "surface": "Ashley Robinson"
-   }
-  ]
- },
- {
-  "person": "resumes/Ashley_Singleton.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/onyx-identity-service/staffing-note.md",
-    "surface": "wsims@example.net"
-   },
-   {
-    "doc": "generated/onyx-identity-service/status-1.md",
-    "surface": "A. Singleton"
-   }
-  ]
- },
- {
-  "person": "resumes/Ashley_Todd_DDS.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/ember-partner-api/staffing-note.md",
-    "surface": "Todd, Ashley"
-   },
-   {
-    "doc": "generated/ember-partner-api/status-1.md",
-    "surface": "Ashley Todd DDS"
-   }
-  ]
- },
- {
-  "person": "resumes/Ashley_Tyler.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/summit-billing-rewrite/staffing-note.md",
-    "surface": "A. Tyler"
-   },
-   {
-    "doc": "generated/summit-billing-rewrite/status-1.md",
-    "surface": "Ashley Tyler"
-   }
-  ]
- },
- {
-  "person": "resumes/Ashley_Werner.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/umbra-identity-service/staffing-note.md",
-    "surface": "Ashley Werner"
-   },
-   {
-    "doc": "generated/umbra-identity-service/status-1.md",
-    "surface": "Ashley Werner"
-   }
-  ]
- },
- {
-  "person": "resumes/Audrey_Delgado.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/quartz-data-platform/staffing-note.md",
-    "surface": "Audrey Delgado"
-   }
-  ]
- },
- {
-  "person": "resumes/Austin_Black.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/borealis-partner-api/staffing-note.md",
-    "surface": "Austin Black"
-   },
-   {
-    "doc": "generated/borealis-partner-api/staffing-note.md",
-    "surface": "Austin"
-   },
-   {
-    "doc": "generated/borealis-partner-api/status-2.md",
-    "surface": "Austin Black"
-   }
-  ]
- },
- {
-  "person": "resumes/Austin_Brown.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/summit-billing-rewrite/staffing-note.md",
-    "surface": "Austin Brown"
-   },
-   {
-    "doc": "generated/summit-billing-rewrite/status-1.md",
-    "surface": "Austin Brown"
-   },
-   {
-    "doc": "generated/summit-billing-rewrite/postmortem.md",
-    "surface": "A. Brown"
-   },
-   {
-    "doc": "generated/tundra-partner-api/staffing-note.md",
-    "surface": "A. Brown"
-   },
-   {
-    "doc": "generated/tundra-partner-api/status-1.md",
-    "surface": "Austin Brown"
-   },
-   {
-    "doc": "generated/tundra-partner-api/status-1.md",
-    "surface": "Austin"
-   }
-  ]
- },
- {
-  "person": "resumes/Austin_Petty.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/mosaic-reporting-pipeline/staffing-note.md",
-    "surface": "Austin Petty"
-   },
-   {
-    "doc": "generated/mosaic-reporting-pipeline/staffing-note.md",
-    "surface": "Austin"
-   },
-   {
-    "doc": "generated/mosaic-reporting-pipeline/status-1.md",
-    "surface": "Austin Petty"
-   }
-  ]
- },
- {
-  "person": "resumes/Austin_Smith.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/northwind-search-upgrade/staffing-note.md",
-    "surface": "Austin Smith"
-   },
-   {
-    "doc": "generated/northwind-search-upgrade/status-2.md",
-    "surface": "Austin Smith"
-   }
-  ]
- },
- {
-  "person": "resumes/Barbara_Roman.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/juniper-migration/staffing-note.md",
-    "surface": "Roman, Barbara"
-   },
-   {
-    "doc": "generated/juniper-migration/status-1.md",
-    "surface": "Roman, Barbara"
-   },
-   {
-    "doc": "generated/willow-data-platform/staffing-note.md",
-    "surface": "Barbara Roman"
-   },
-   {
-    "doc": "generated/willow-data-platform/staffing-note.md",
-    "surface": "Barbara"
-   },
-   {
-    "doc": "generated/willow-data-platform/status-1.md",
-    "surface": "Barbara Roman"
-   },
-   {
-    "doc": "generated/willow-data-platform/status-2.md",
-    "surface": "B. Roman"
-   }
-  ]
- },
- {
-  "person": "resumes/Barry_Castro.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/umbra-identity-service/staffing-note.md",
-    "surface": "Castro, Barry"
+    "doc": "generated/cinder-billing-rewrite/kickoff-email.txt",
+    "surface": "Nina Diaz"
    },
    {
-    "doc": "generated/umbra-identity-service/status-1.md",
-    "surface": "Barry Castro"
+    "doc": "generated/cinder-billing-rewrite/meeting-notes.md",
+    "surface": "Nina Diaz"
    },
    {
-    "doc": "generated/xenon-billing-rewrite/staffing-note.md",
-    "surface": "Barry Castro"
+    "doc": "generated/cinder-billing-rewrite/weekly-update-1.md",
+    "surface": "Nina Diaz"
    }
   ]
  },
  {
-  "person": "resumes/Becky_Wright.pdf",
+  "person": "resumes/Aisha_Dubois.md",
   "resume": true,
   "mentions": [
-   {
-    "doc": "generated/kestrel-checkout-redesign/staffing-note.md",
-    "surface": "Becky Wright"
-   },
-   {
-    "doc": "generated/kestrel-checkout-redesign/status-1.md",
-    "surface": "Becky Wright"
-   },
-   {
-    "doc": "generated/glacier-migration/staffing-note.md",
-    "surface": "Becky Wright"
-   },
    {
-    "doc": "generated/glacier-migration/status-1.md",
-    "surface": "B. Wright"
+    "doc": "generated/_company/teams/customer-support.md",
+    "surface": "Aisha Dubois"
    }
   ]
  },
  {
-  "person": "resumes/Benjamin_Wagner_DDS.pdf",
+  "person": "resumes/Aisha_Mbeki.pdf",
   "resume": true,
   "mentions": [
    {
-    "doc": "generated/vertex-observability-rollout/staffing-note.md",
-    "surface": "Wagner, Benjamin"
+    "doc": "generated/anchor-review-cycle/kickoff-email.txt",
+    "surface": "aisham5@example.org"
    },
    {
-    "doc": "generated/vertex-observability-rollout/status-1.md",
-    "surface": "Benjamin Wagner DDS"
+    "doc": "generated/anchor-review-cycle/meeting-notes.md",
+    "surface": "Aisha Mbeki"
    },
-   {
-    "doc": "generated/vertex-observability-rollout/status-2.md",
-    "surface": "Benjamin Wagner DDS"
-   }
-  ]
- },
- {
-  "person": "resumes/Bethany_Mccarthy.pdf",
-  "resume": true,
-  "mentions": [
    {
-    "doc": "generated/xenon-billing-rewrite/staffing-note.md",
-    "surface": "B. Mccarthy"
+    "doc": "generated/anchor-review-cycle/team-chat.txt",
+    "surface": "Aisha"
    },
    {
-    "doc": "generated/xenon-billing-rewrite/status-1.md",
-    "surface": "B. Mccarthy"
+    "doc": "generated/anchor-review-cycle/team-chat.txt",
+    "surface": "Aisha Mbeki"
    },
-   {
-    "doc": "generated/xenon-billing-rewrite/status-2.md",
-    "surface": "B. Mccarthy"
-   }
-  ]
- },
- {
-  "person": "resumes/Betty_Solis.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/granite-partner-api/staffing-note.md",
-    "surface": "Solis, Betty"
-   }
-  ]
- },
- {
-  "person": "resumes/Bianca_Mcdonald.pdf",
-  "resume": true,
-  "mentions": [
    {
-    "doc": "generated/cinder-billing-rewrite/staffing-note.md",
-    "surface": "Mcdonald, Bianca"
+    "doc": "generated/anchor-review-cycle/weekly-update-2.md",
+    "surface": "aisham5@example.org"
    },
    {
-    "doc": "generated/cinder-billing-rewrite/status-1.md",
-    "surface": "B. Mcdonald"
+    "doc": "generated/_company/teams/people.md",
+    "surface": "Aisha Mbeki"
    }
   ]
  },
  {
-  "person": "resumes/Bianca_Romero.pdf",
+  "person": "resumes/Alejandro_Ng.md",
   "resume": true,
   "mentions": [
    {
-    "doc": "generated/echo-billing-rewrite/staffing-note.md",
-    "surface": "Romero, Bianca"
+    "doc": "generated/nimbus-pricing-experiment/kickoff-email.txt",
+    "surface": "Alejandro Ng"
    },
    {
-    "doc": "generated/echo-billing-rewrite/postmortem.md",
-    "surface": "B. Romero"
-   }
-  ]
- },
- {
-  "person": "resumes/Billy_Zuniga.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/quartz-data-platform/staffing-note.md",
-    "surface": "Zuniga, Billy"
+    "doc": "generated/nimbus-pricing-experiment/meeting-notes.md",
+    "surface": "A. Ng"
    },
-   {
-    "doc": "generated/quartz-data-platform/status-1.md",
-    "surface": "Billy Zuniga"
-   }
-  ]
- },
- {
-  "person": "resumes/Brad_Brown_DVM.pdf",
-  "resume": true,
-  "mentions": [
    {
-    "doc": "generated/nimbus-data-platform/staffing-note.md",
-    "surface": "Brad Brown DVM"
+    "doc": "generated/nimbus-pricing-experiment/team-chat.txt",
+    "surface": "Alejandro Ng"
    },
    {
-    "doc": "generated/nimbus-data-platform/staffing-note.md",
-    "surface": "Brad"
+    "doc": "generated/nimbus-pricing-experiment/team-chat.txt",
+    "surface": "Alejandro"
    },
    {
-    "doc": "generated/nimbus-data-platform/status-1.md",
-    "surface": "Brad Brown DVM"
+    "doc": "generated/nimbus-pricing-experiment/weekly-update-1.md",
+    "surface": "ang65@example.com"
    },
-   {
-    "doc": "generated/nimbus-data-platform/status-1.md",
-    "surface": "Brad"
-   }
-  ]
- },
- {
-  "person": "resumes/Bradley_Lowery.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/glacier-migration/staffing-note.md",
-    "surface": "ztyler@example.com"
-   }
-  ]
- },
- {
-  "person": "resumes/Bradley_Wood.pdf",
-  "resume": true,
-  "mentions": [
    {
-    "doc": "generated/dynamo-checkout-redesign/staffing-note.md",
-    "surface": "Bradley Wood"
+    "doc": "generated/onyx-navigation-redesign/kickoff-email.txt",
+    "surface": "Alejandro Ng"
    },
    {
-    "doc": "generated/dynamo-checkout-redesign/staffing-note.md",
-    "surface": "Bradley"
+    "doc": "generated/onyx-navigation-redesign/kickoff-email.txt",
+    "surface": "Alejandro"
    },
    {
-    "doc": "generated/dynamo-checkout-redesign/status-1.md",
-    "surface": "Bradley Wood"
+    "doc": "generated/onyx-navigation-redesign/meeting-notes.md",
+    "surface": "Alejandro Ng"
    },
    {
-    "doc": "generated/dynamo-checkout-redesign/status-1.md",
-    "surface": "Bradley"
+    "doc": "generated/onyx-navigation-redesign/meeting-notes.md",
+    "surface": "Alejandro"
    },
    {
-    "doc": "generated/dynamo-checkout-redesign/status-2.md",
-    "surface": "Bradley Wood"
+    "doc": "generated/onyx-navigation-redesign/research-findings.md",
+    "surface": "Alejandro Ng"
    },
    {
-    "doc": "generated/dynamo-checkout-redesign/status-2.md",
-    "surface": "Bradley"
+    "doc": "generated/_company/teams/product-and-design.md",
+    "surface": "Alejandro Ng"
    },
    {
-    "doc": "generated/dynamo-checkout-redesign/postmortem.md",
-    "surface": "Bradley Wood"
+    "doc": "generated/_company/wiki/product-and-design-how-to.md",
+    "surface": "Alejandro Ng"
    }
   ]
  },
  {
-  "person": "resumes/Brandon_Bell.pdf",
+  "person": "resumes/Amara_Kumar.md",
   "resume": true,
   "mentions": [
    {
-    "doc": "generated/zephyr-partner-api/staffing-note.md",
-    "surface": "Brandon Bell"
-   },
-   {
-    "doc": "generated/zephyr-partner-api/status-2.md",
-    "surface": "Brandon Bell"
+    "doc": "generated/_company/teams/security-and-it.md",
+    "surface": "Amara Kumar"
    }
   ]
  },
  {
-  "person": "resumes/Brandon_Bishop.pdf",
+  "person": "resumes/Andre_Johnson.pdf",
   "resume": true,
   "mentions": [
    {
-    "doc": "generated/vertex-observability-rollout/staffing-note.md",
-    "surface": "Bishop, Brandon"
+    "doc": "generated/vertex-quarter-close/kickoff-email.txt",
+    "surface": "Johnson, Andre"
    },
-   {
-    "doc": "generated/vertex-observability-rollout/status-2.md",
-    "surface": "Brandon Bishop"
-   }
-  ]
- },
- {
-  "person": "resumes/Brandon_Brown.pdf",
-  "resume": true,
-  "mentions": [
    {
-    "doc": "generated/lantern-mobile-relaunch/staffing-note.md",
-    "surface": "Brown, Brandon"
+    "doc": "generated/vertex-quarter-close/meeting-notes.md",
+    "surface": "Andre Johnson"
    },
    {
-    "doc": "generated/lantern-mobile-relaunch/status-1.md",
-    "surface": "Brown, Brandon"
+    "doc": "generated/vertex-quarter-close/meeting-notes.md",
+    "surface": "Andre"
    },
-   {
-    "doc": "generated/lantern-mobile-relaunch/status-2.md",
-    "surface": "B. Brown"
-   }
-  ]
- },
- {
-  "person": "resumes/Brandon_Garza.pdf",
-  "resume": true,
-  "mentions": [
    {
-    "doc": "generated/echo-billing-rewrite/staffing-note.md",
-    "surface": "shepherdbrittany@example.com"
+    "doc": "generated/vertex-quarter-close/weekly-update-1.md",
+    "surface": "Johnson, Andre"
    },
-   {
-    "doc": "generated/echo-billing-rewrite/status-1.md",
-    "surface": "B. Garza"
-   }
-  ]
- },
- {
-  "person": "resumes/Brandon_Holloway.pdf",
-  "resume": true,
-  "mentions": [
    {
-    "doc": "generated/dynamo-checkout-redesign/staffing-note.md",
-    "surface": "Brandon Holloway"
+    "doc": "generated/vertex-quarter-close/retrospective.pdf",
+    "surface": "Andre Johnson"
    },
-   {
-    "doc": "generated/dynamo-checkout-redesign/status-1.md",
-    "surface": "Brandon Holloway"
-   }
-  ]
- },
- {
-  "person": "resumes/Brandon_Jackson.pdf",
-  "resume": true,
-  "mentions": [
    {
-    "doc": "generated/borealis-partner-api/staffing-note.md",
-    "surface": "B. Jackson"
+    "doc": "generated/willow-budget-planning/kickoff-email.txt",
+    "surface": "Andre Johnson"
    },
    {
-    "doc": "generated/borealis-partner-api/status-2.md",
-    "surface": "B. Jackson"
+    "doc": "generated/willow-budget-planning/meeting-notes.md",
+    "surface": "Johnson, Andre"
    },
    {
-    "doc": "generated/lantern-mobile-relaunch/staffing-note.md",
-    "surface": "B. Jackson"
+    "doc": "generated/willow-budget-planning/team-chat.txt",
+    "surface": "Andre"
    },
    {
-    "doc": "generated/lantern-mobile-relaunch/status-1.md",
-    "surface": "Brandon Jackson"
+    "doc": "generated/willow-budget-planning/team-chat.txt",
+    "surface": "Andre Johnson"
    },
    {
-    "doc": "generated/lantern-mobile-relaunch/status-2.md",
-    "surface": "Jackson, Brandon"
+    "doc": "generated/_company/teams/product-and-design.md",
+    "surface": "Andre Johnson"
    }
   ]
  },
  {
-  "person": "resumes/Brandon_Lam.pdf",
+  "person": "resumes/Anika_Adeyemi.txt",
   "resume": true,
   "mentions": [
    {
-    "doc": "generated/lumen-migration/staffing-note.md",
-    "surface": "Brandon Lam"
+    "doc": "generated/borealis-observability-rollout/kickoff-email.txt",
+    "surface": "Anika Adeyemi"
    },
    {
-    "doc": "generated/lumen-migration/status-1.md",
-    "surface": "Brandon Lam"
+    "doc": "generated/borealis-observability-rollout/weekly-update-2.md",
+    "surface": "Anika Adeyemi"
    },
    {
-    "doc": "generated/lumen-migration/status-2.md",
-    "surface": "Brandon Lam"
-   }
-  ]
- },
- {
-  "person": "resumes/Brandy_Melendez.pdf",
-  "resume": true,
-  "mentions": [
+    "doc": "generated/borealis-observability-rollout/weekly-update-2.md",
+    "surface": "Anika"
+   },
    {
-    "doc": "generated/granite-partner-api/staffing-note.md",
-    "surface": "Brandy Melendez"
+    "doc": "generated/_company/teams/platform-engineering.md",
+    "surface": "Anika Adeyemi"
    }
   ]
  },
  {
-  "person": "resumes/Breanna_Lee.pdf",
+  "person": "resumes/Anika_Popescu.md",
   "resume": true,
   "mentions": [
    {
-    "doc": "generated/onyx-identity-service/staffing-note.md",
-    "surface": "Breanna Lee"
+    "doc": "generated/granite-data-platform/kickoff-email.txt",
+    "surface": "Anika Popescu"
    },
    {
-    "doc": "generated/vertex-observability-rollout/staffing-note.md",
-    "surface": "Breanna Lee"
+    "doc": "generated/granite-data-platform/kickoff-email.txt",
+    "surface": "Anika"
    },
    {
-    "doc": "generated/vertex-observability-rollout/status-1.md",
-    "surface": "Breanna Lee"
+    "doc": "generated/granite-data-platform/team-chat.txt",
+    "surface": "Anika"
    },
-   {
-    "doc": "generated/vertex-observability-rollout/postmortem.md",
-    "surface": "Lee, Breanna"
-   }
-  ]
- },
- {
-  "person": "resumes/Brenda_Adams.pdf",
-  "resume": true,
-  "mentions": [
    {
-    "doc": "generated/atlas-migration/staffing-note.md",
-    "surface": "Brenda Adams"
+    "doc": "generated/granite-data-platform/team-chat.txt",
+    "surface": "Anika Popescu"
    },
    {
-    "doc": "generated/atlas-migration/status-1.md",
-    "surface": "Brenda Adams"
+    "doc": "generated/granite-data-platform/weekly-update-1.md",
+    "surface": "Anika Popescu"
    },
    {
-    "doc": "generated/raven-observability-rollout/staffing-note.md",
-    "surface": "Brenda Adams"
+    "doc": "generated/granite-data-platform/weekly-update-2.md",
+    "surface": "A. Popescu"
    },
    {
-    "doc": "generated/raven-observability-rollout/status-1.md",
-    "surface": "Brenda Adams"
-   }
-  ]
- },
- {
-  "person": "resumes/Brenda_Nguyen.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/meridian-observability-rollout/staffing-note.md",
-    "surface": "B. Nguyen"
+    "doc": "generated/granite-data-platform/analysis-readout.md",
+    "surface": "Anika Popescu"
    },
-   {
-    "doc": "generated/meridian-observability-rollout/status-1.md",
-    "surface": "Brenda Nguyen"
-   }
-  ]
- },
- {
-  "person": "resumes/Brendan_Johnson.pdf",
-  "resume": true,
-  "mentions": [
    {
-    "doc": "generated/nimbus-data-platform/staffing-note.md",
-    "surface": "Brendan Johnson"
+    "doc": "generated/ion-churn-model/kickoff-email.txt",
+    "surface": "Anika Popescu"
    },
    {
-    "doc": "generated/nimbus-data-platform/status-1.md",
-    "surface": "Brendan Johnson"
+    "doc": "generated/ion-churn-model/meeting-notes.md",
+    "surface": "A. Popescu"
    },
-   {
-    "doc": "generated/nimbus-data-platform/status-2.md",
-    "surface": "B. Johnson"
-   }
-  ]
- },
- {
-  "person": "resumes/Brent_Hopkins.pdf",
-  "resume": true,
-  "mentions": [
    {
-    "doc": "generated/beacon-reporting-pipeline/staffing-note.md",
-    "surface": "Brent Hopkins"
+    "doc": "generated/ion-churn-model/team-chat.txt",
+    "surface": "Anika"
    },
    {
-    "doc": "generated/beacon-reporting-pipeline/status-1.md",
-    "surface": "B. Hopkins"
+    "doc": "generated/ion-churn-model/team-chat.txt",
+    "surface": "Anika Popescu"
    },
-   {
-    "doc": "generated/beacon-reporting-pipeline/postmortem.md",
-    "surface": "Hopkins, Brent"
-   }
-  ]
- },
- {
-  "person": "resumes/Brent_Mullen.pdf",
-  "resume": true,
-  "mentions": [
    {
-    "doc": "generated/ember-partner-api/staffing-note.md",
-    "surface": "Mullen, Brent"
+    "doc": "generated/_company/teams/data-and-analytics.md",
+    "surface": "Anika Popescu"
    },
-   {
-    "doc": "generated/ember-partner-api/status-1.md",
-    "surface": "Mullen, Brent"
-   }
-  ]
- },
- {
-  "person": "resumes/Brian_Brewer.pdf",
-  "resume": true,
-  "mentions": [
    {
-    "doc": "generated/willow-data-platform/staffing-note.md",
-    "surface": "Brian Brewer"
+    "doc": "generated/_company/wiki/data-and-analytics-how-to.pdf",
+    "surface": "Anika Popescu"
    },
    {
-    "doc": "generated/willow-data-platform/status-1.md",
-    "surface": "B. Brewer"
+    "doc": "generated/_company/newsletter-2.md",
+    "surface": "Anika Popescu"
    }
   ]
  },
  {
-  "person": "resumes/Brian_Campbell.pdf",
+  "person": "resumes/Arjun_Garcia.pdf",
   "resume": true,
   "mentions": [
-   {
-    "doc": "generated/willow-data-platform/staffing-note.md",
-    "surface": "Campbell, Brian"
-   },
    {
-    "doc": "generated/willow-data-platform/status-2.md",
-    "surface": "Brian Campbell"
+    "doc": "generated/_company/teams/web-and-mobile.md",
+    "surface": "Arjun Garcia"
    }
   ]
  },
  {
-  "person": "resumes/Brian_Cuevas.pdf",
+  "person": "resumes/Bao_Fischer.pdf",
   "resume": true,
   "mentions": [
    {
-    "doc": "generated/glacier-migration/staffing-note.md",
-    "surface": "Brian Cuevas"
+    "doc": "generated/_company/teams/marketing.md",
+    "surface": "Bao Fischer"
    },
    {
-    "doc": "generated/glacier-migration/status-1.md",
-    "surface": "B. Cuevas"
+    "doc": "generated/_company/wiki/marketing-how-to.pdf",
+    "surface": "Bao Fischer"
    }
   ]
  },
  {
-  "person": "resumes/Brian_Henderson.pdf",
+  "person": "resumes/Bao_Hernandez.pdf",
   "resume": true,
   "mentions": [
-   {
-    "doc": "generated/nimbus-data-platform/staffing-note.md",
-    "surface": "matthewpayne@example.com"
-   },
    {
-    "doc": "generated/nimbus-data-platform/status-1.md",
-    "surface": "Brian Henderson"
+    "doc": "generated/_company/teams/finance.md",
+    "surface": "Bao Hernandez"
    },
    {
-    "doc": "generated/nimbus-data-platform/status-2.md",
-    "surface": "B. Henderson"
+    "doc": "generated/_company/wiki/finance-how-to.md",
+    "surface": "B. Hernandez"
    }
   ]
  },
  {
-  "person": "resumes/Brian_Holmes.pdf",
+  "person": "resumes/Bao_Kumar.pdf",
   "resume": true,
   "mentions": [
    {
-    "doc": "generated/keystone-observability-rollout/staffing-note.md",
-    "surface": "B. Holmes"
+    "doc": "generated/willow-budget-planning/kickoff-email.txt",
+    "surface": "Bao Kumar"
    },
    {
-    "doc": "generated/keystone-observability-rollout/status-1.md",
-    "surface": "Brian Holmes"
+    "doc": "generated/willow-budget-planning/team-chat.txt",
+    "surface": "Bao Kumar"
    },
-   {
-    "doc": "generated/keystone-observability-rollout/status-2.md",
-    "surface": "Brian Holmes"
-   }
-  ]
- },
- {
-  "person": "resumes/Brian_Lawrence.pdf",
-  "resume": true,
-  "mentions": [
    {
-    "doc": "generated/keystone-observability-rollout/staffing-note.md",
-    "surface": "Brian Lawrence"
+    "doc": "generated/willow-budget-planning/weekly-update-1.md",
+    "surface": "Bao Kumar"
    },
    {
-    "doc": "generated/keystone-observability-rollout/status-1.md",
-    "surface": "Brian Lawrence"
+    "doc": "generated/willow-budget-planning/weekly-update-1.md",
+    "surface": "Bao"
    },
    {
-    "doc": "generated/keystone-observability-rollout/status-2.md",
-    "surface": "Brian Lawrence"
+    "doc": "generated/xenon-expense-cleanup/kickoff-email.txt",
+    "surface": "Bao Kumar"
    },
-   {
-    "doc": "generated/keystone-observability-rollout/postmortem.md",
-    "surface": "Lawrence, Brian"
-   }
-  ]
- },
- {
-  "person": "resumes/Brian_Parrish.pdf",
-  "resume": true,
-  "mentions": [
    {
-    "doc": "generated/meridian-observability-rollout/staffing-note.md",
-    "surface": "Brian Parrish"
+    "doc": "generated/xenon-expense-cleanup/meeting-notes.md",
+    "surface": "Bao Kumar"
    },
-   {
-    "doc": "generated/meridian-observability-rollout/status-1.md",
-    "surface": "Brian Parrish"
-   }
-  ]
- },
- {
-  "person": "resumes/Brian_Perez.pdf",
-  "resume": true,
-  "mentions": [
    {
-    "doc": "generated/lantern-mobile-relaunch/staffing-note.md",
-    "surface": "Perez, Brian"
+    "doc": "generated/xenon-expense-cleanup/team-chat.txt",
+    "surface": "Bao"
    },
-   {
-    "doc": "generated/lantern-mobile-relaunch/status-2.md",
-    "surface": "B. Perez"
-   }
-  ]
- },
- {
-  "person": "resumes/Brian_Torres.pdf",
-  "resume": true,
-  "mentions": [
    {
-    "doc": "generated/borealis-partner-api/staffing-note.md",
-    "surface": "B. Torres"
+    "doc": "generated/xenon-expense-cleanup/team-chat.txt",
+    "surface": "Bao Kumar"
    },
    {
-    "doc": "generated/borealis-partner-api/status-1.md",
-    "surface": "Brian Torres"
-   }
-  ]
- },
- {
-  "person": "resumes/Brian_White.pdf",
-  "resume": true,
-  "mentions": [
+    "doc": "generated/xenon-expense-cleanup/weekly-update-1.md",
+    "surface": "Bao Kumar"
+   },
    {
-    "doc": "generated/atlas-migration/staffing-note.md",
-    "surface": "Brian White"
+    "doc": "generated/xenon-expense-cleanup/weekly-update-2.md",
+    "surface": "Kumar, Bao"
    },
    {
-    "doc": "generated/atlas-migration/status-2.md",
-    "surface": "Brian White"
+    "doc": "generated/xenon-expense-cleanup/retrospective.pdf",
+    "surface": "Bao Kumar"
    },
    {
-    "doc": "generated/atlas-migration/postmortem.md",
-    "surface": "Brian White"
+    "doc": "generated/_company/teams/finance.md",
+    "surface": "Bao Kumar"
    }
   ]
  },
  {
-  "person": "resumes/Brianna_Salas.pdf",
+  "person": "resumes/Bao_Mishra.txt",
   "resume": true,
   "mentions": [
-   {
-    "doc": "generated/meridian-observability-rollout/staffing-note.md",
-    "surface": "B. Salas"
-   },
    {
-    "doc": "generated/meridian-observability-rollout/status-1.md",
-    "surface": "Brianna Salas"
+    "doc": "generated/juniper-access-review/kickoff-email.txt",
+    "surface": "Bao Mishra"
    },
    {
-    "doc": "generated/meridian-observability-rollout/status-1.md",
-    "surface": "Brianna"
+    "doc": "generated/juniper-access-review/team-chat.txt",
+    "surface": "Bao"
    },
-   {
-    "doc": "generated/umbra-identity-service/staffing-note.md",
-    "surface": "Brianna Salas"
-   }
-  ]
- },
- {
-  "person": "resumes/Brittany_Jones.pdf",
-  "resume": true,
-  "mentions": [
    {
-    "doc": "generated/xenon-billing-rewrite/staffing-note.md",
-    "surface": "Jones, Brittany"
+    "doc": "generated/juniper-access-review/team-chat.txt",
+    "surface": "Bao Mishra"
    },
    {
-    "doc": "generated/xenon-billing-rewrite/status-1.md",
-    "surface": "Brittany Jones"
+    "doc": "generated/juniper-access-review/weekly-update-1.md",
+    "surface": "Bao Mishra"
    },
-   {
-    "doc": "generated/xenon-billing-rewrite/status-2.md",
-    "surface": "Brittany Jones"
-   }
-  ]
- },
- {
-  "person": "resumes/Brittany_Martinez.pdf",
-  "resume": true,
-  "mentions": [
    {
-    "doc": "generated/quartz-data-platform/staffing-note.md",
-    "surface": "Brittany Martinez"
+    "doc": "generated/juniper-access-review/weekly-update-2.md",
+    "surface": "Bao Mishra"
    },
    {
-    "doc": "generated/quartz-data-platform/staffing-note.md",
-    "surface": "Brittany"
+    "doc": "generated/juniper-access-review/weekly-update-2.md",
+    "surface": "Bao"
    },
    {
-    "doc": "generated/quartz-data-platform/status-1.md",
-    "surface": "Brittany Martinez"
+    "doc": "generated/juniper-access-review/retrospective.pdf",
+    "surface": "Bao Mishra"
    },
    {
-    "doc": "generated/quartz-data-platform/status-1.md",
-    "surface": "Brittany"
+    "doc": "generated/kestrel-device-refresh/kickoff-email.txt",
+    "surface": "Bao Mishra"
    },
    {
-    "doc": "generated/anchor-checkout-redesign/staffing-note.md",
-    "surface": "Martinez, Brittany"
+    "doc": "generated/kestrel-device-refresh/kickoff-email.txt",
+    "surface": "Bao"
    },
    {
-    "doc": "generated/anchor-checkout-redesign/status-1.md",
-    "surface": "Brittany Martinez"
+    "doc": "generated/kestrel-device-refresh/weekly-update-2.md",
+    "surface": "B. Mishra"
    },
    {
-    "doc": "generated/anchor-checkout-redesign/status-2.md",
-    "surface": "Brittany Martinez"
+    "doc": "generated/_company/teams/security-and-it.md",
+    "surface": "Bao Mishra"
    },
    {
-    "doc": "generated/anchor-checkout-redesign/status-2.md",
-    "surface": "Brittany"
+    "doc": "generated/_company/newsletter-3.md",
+    "surface": "Bao Mishra"
    }
   ]
  },
  {
-  "person": "resumes/Bruce_Cardenas.pdf",
+  "person": "resumes/Bao_Pereira.pdf",
   "resume": true,
   "mentions": [
    {
-    "doc": "generated/indigo-checkout-redesign/staffing-note.md",
-    "surface": "Cardenas, Bruce"
+    "doc": "generated/onyx-navigation-redesign/kickoff-email.txt",
+    "surface": "bpereira28@example.net"
    },
    {
-    "doc": "generated/indigo-checkout-redesign/status-2.md",
-    "surface": "Cardenas, Bruce"
-   }
-  ]
- },
- {
-  "person": "resumes/Bruce_Garcia.pdf",
-  "resume": true,
-  "mentions": [
+    "doc": "generated/onyx-navigation-redesign/meeting-notes.md",
+    "surface": "Bao Pereira"
+   },
    {
-    "doc": "generated/borealis-partner-api/staffing-note.md",
-    "surface": "Bruce Garcia"
-   }
-  ]
- },
- {
-  "person": "resumes/Bruce_Smith.pdf",
-  "resume": true,
-  "mentions": [
+    "doc": "generated/onyx-navigation-redesign/weekly-update-1.md",
+    "surface": "Pereira, Bao"
+   },
    {
-    "doc": "generated/fathom-partner-api/staffing-note.md",
-    "surface": "Bruce Smith"
+    "doc": "generated/onyx-navigation-redesign/research-findings.md",
+    "surface": "Bao Pereira"
    },
    {
-    "doc": "generated/fathom-partner-api/status-1.md",
-    "surface": "Bruce Smith"
+    "doc": "generated/_company/teams/product-and-design.md",
+    "surface": "Bao Pereira"
    }
   ]
  },
  {
-  "person": "resumes/Bryan_Anderson.pdf",
+  "person": "resumes/Camille_Novak.pdf",
   "resume": true,
   "mentions": [
    {
-    "doc": "generated/helix-partner-api/staffing-note.md",
-    "surface": "Bryan Anderson"
+    "doc": "generated/dynamo-checkout-redesign/kickoff-email.txt",
+    "surface": "C. Novak"
    },
    {
-    "doc": "generated/helix-partner-api/status-1.md",
-    "surface": "Bryan Anderson"
+    "doc": "generated/dynamo-checkout-redesign/meeting-notes.md",
+    "surface": "C. Novak"
    },
    {
-    "doc": "generated/helix-partner-api/status-2.md",
-    "surface": "Anderson, Bryan"
+    "doc": "generated/dynamo-checkout-redesign/team-chat.txt",
+    "surface": "Camille"
    },
-   {
-    "doc": "generated/helix-partner-api/postmortem.md",
-    "surface": "B. Anderson"
-   }
-  ]
- },
- {
-  "person": "resumes/Bryan_Brown.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/raven-observability-rollout/staffing-note.md",
-    "surface": "Bryan Brown"
-   }
-  ]
- },
- {
-  "person": "resumes/Bryan_Greene.pdf",
-  "resume": true,
-  "mentions": [
-   {
-    "doc": "generated/mosaic-reporting-pipeline/staffing-note.md",
-    "surface": "Bryan Greene"
-   }
-  ]
- },
- {
-  "person": "resumes/Caitlin_Higgins.pdf",
-  "resume": true,
-  "mentions": [
    {
-    "doc": "generated/granite-partner-api/staffing-note.md",
-    "surface": "C. Higgins"
+    "doc": "generated/dynamo-checkout-redesign/team-chat.txt",
+    "surface": "Camille Novak"
    },
    {
-    "doc": "generated/granite-partner-api/postmortem.md",
-    "surface": "Caitlin Higgins"
-   }
-  ]
- },
- {
-  "person": "resumes/Caitlyn_Cruz.pdf",
-  "resume": true,
-  "mentions": [
+    "doc": "generated/dynamo-checkout-redesign/weekly-update-1.md",
+    "surface": "Camille Novak"
+   },
    {
-    "doc": "generated/yarrow-partner-api/staffing-note.md",
-    "surface": "Caitlyn Cruz"
+    "doc": "generated/dynamo-checkout-redesign/weekly-update-1.md",
+    "surface": "Camille"
    },
    {
-    "doc": "generated/yarrow-partner-api/staffing-note.md",
-    "surface": "Caitlyn"
+    "doc": "generated/dynamo-checkout-redesign/retrospective.pdf",
+    "surface": "Camille Novak"
    },
    {
-    "doc": "generated/yarrow-partner-api/status-1.md",
-    "surface": "Caitlyn Cruz"
+    "doc": "generated/ember-mobile-relaunch/kickoff-email.txt",
+    "surface": "Camille Novak"
    },
    {
-    "doc": "generated/yarrow-partner-api/status-2.md",
-    "surface": "C. Cruz"
+    "doc": "generated/_company/teams/web-and-mobile.md",
+    "surface": "Camille Novak"
    }
   ]
  },
  {
-  "person": "resumes/Caleb_Ingram.pdf",
+  "person": "resumes/Carlos_Ortiz.md",
   "resume": true,
   "mentions": [
    {
-    "doc": "generated/vertex-observability-rollout/staffing-note.md",
-    "surface": "C. Ingram"
+    "doc": "generated/dynamo-checkout-redesign/kickoff-email.txt",
+    "surface": "Carlos Ortiz"
    },
-   {
-    "doc": "generated/vertex-observability-rollout/status-1.md",
-    "surface": "C. Ingram"
-   }
-  ]
- },
- {
-  "person": "resumes/Calvin_Bond.pdf",
-  "resume": true,
-  "mentions": [
    {
-    "doc": "generated/falcon-migration/staffing-note.md",
-    "surface": "Calvin Bond"
+    "doc": "generated/dynamo-checkout-redesign/meeting-notes.md",
+    "surface": "Carlos Ortiz"
    },
    {
-    "doc": "generated/falcon-migration/status-1.md",
-    "surface": "Calvin Bond"
+    "doc": "generated/dynamo-checkout-redesign/weekly-update-1.md",
+    "surface": "Carlos Ortiz"
    },
    {
-    "doc": "generated/falcon-migration/status-2.md",
-    "surface": "Calvin Bond"
+    "doc": "generated/_company/teams/web-and-mobile.md",
+    "surface": "Carlos Ortiz"
    },
    {
-    "doc": "generated/falcon-migration/status-2.md",
-    "surface": "Calvin"
+    "doc": "generated/_company/newsletter-2.md",
+    "surface": "Carlos Ortiz"
    }
   ]
  },
  {
-  "person": "resumes/Carla_Rodriguez.pdf",
+  "person": "resumes/Carlos_Thapa.pdf",
   "resume": true,
   "mentions": [
    {
-    "doc": "generated/cobalt-billing-rewrite/staffing-note.md",
-    "surface": "C. Rodriguez"
+    "doc": "generated/juniper-access-review/kickoff-email.txt",
+    "surface": "Carlos Thapa"
    },
    {
-    "doc": "generated/cobalt-billing-rewrite/status-1.md",
-    "surface": "Carla Rodriguez"
+    "doc": "generated/juniper-access-review/meeting-notes.md",
+    "surface": "C. Thapa"
    },
-   {
-    "doc": "generated/cobalt-billing-rewrite/status-2.md",
-    "surface": "Carla Rodriguez"
-   }
-  ]
- },
- {
-  "person": "resumes/Carlos_Clark.pdf",
-  "resume": true,
-  "mentions": [
    {
-    "doc": "generated/meridian-observability-rollout/staffing-note.md",
-    "surface": "Carlos Clark"
+    "doc": "generated/juniper-access-review/weekly-update-2.md",
+    "surface": "Thapa, Carlos"
    },
    {
-    "doc": "generated/meridian-observability-rollout/status-1.md",
-    "surface": "Carlos Clark"
+    "doc": "generated/juniper-access-review/incident-report.md",
+    "surface": "Carlos Thapa"
    },
-   {
-    "doc": "generated/meridian-observability-rollout/postmortem.md",
-    "surface": "Clark, Carlos"
-   }
-  ]
- },
- {
-  "person": "resumes/Carlos_Green.pdf",
-  "resume": true,
-  "mentions": [
    {
-    "doc": "generated/granite-partner-api/staffing-note.md",
-    "surface": "Carlos Green"
+    "doc": "generated/summit-partner-program/kickoff-email.txt",
+    "surface": "Carlos Thapa"
    },
    {
-    "doc": "generated/granite-partner-api/staffing-note.md",
+    "doc": "generated/summit-partner-program/kickoff-email.txt",
     "surface": "Carlos"
    },
    {
-    "doc": "generated/granite-partner-api/status-1.md",
-    "surface": "Carlos Green"
+    "doc": "generated/summit-partner-program/meeting-notes.md",
+    "surface": "Thapa, Carlos"
+   },
+   {
+    "doc": "generated/summit-partner-program/team-chat.txt",
+    "surface": "Carlos Thapa"
+   },
+   {
+    "doc": "generated/summit-partner-program/weekly-update-1.md",
+    "surface": "C. Thapa"
+   },
+   {
+    "doc": "generated/summit-partner-program/account-review.md",
+    "surface": "Carlos Thapa"
+   },
+   {
+    "doc": "generated/_company/teams/sales-and-partnerships.md",
+    "surface": "Carlos Thapa"
    }
   ]
  },
  {
-  "person": "resumes/Carmen_Arnold.pdf",
+  "person": "resumes/Chloe_Mishra.pdf",
   "resume": true,
   "mentions": [
    {
-    "doc": "generated/juniper-migration/staffing-note.md",
-    "surface": "Carmen Arnold"
+    "doc": "generated/_company/teams/people.md",
+    "surface": "Chloe Mishra"
    },
    {
-    "doc": "generated/juniper-migration/postmortem.md",
-    "surface": "Carmen Arnold"
-   },
-   {
-    "doc": "generated/nimbus-data-platform/staffing-note.md",
-    "surface": "Arnold, Carmen"
+    "doc": "generated/_company/wiki/people-how-to.md",
+    "surface": "Chloe Mishra"
    }
   ]
  },
  {
-  "person": "resumes/Carol_Riley.pdf",
+  "person": "resumes/Chloe_Rossi.pdf",
   "resume": true,
   "mentions": [
    {
-    "doc": "generated/cobalt-billing-rewrite/staffing-note.md",
-    "surface": "C. Riley"
+    "doc": "generated/yarrow-hiring-sprint/kickoff-email.txt",
+    "surface": "Chloe Rossi"
    },
    {
-    "doc": "generated/cobalt-billing-rewrite/status-1.md",
-    "surface": "C. Riley"
+    "doc": "generated/yarrow-hiring-sprint/meeting-notes.md",
+    "surface": "C. Rossi"
    },
    {
-    "doc": "generated/cobalt-billing-rewrite/status-2.md",
-    "surface": "C. Riley"
+    "doc": "generated/yarrow-hiring-sprint/team-chat.txt",
+    "surface": "Chloe"
    },
    {
-    "doc": "generated/mosaic-reporting-pipeline/staffing-note.md",
-    "surface": "Carol Riley"
+    "doc": "generated/yarrow-hiring-sprint/team-chat.txt",
+    "surface": "Chloe Rossi"
    },
    {
-    "doc": "generated/mosaic-reporting-pipeline/status-1.md",
-    "surface": "Carol Riley"
+    "doc": "generated/yarrow-hiring-sprint/weekly-update-1.md",
+    "surface": "C. Rossi"
+   },
+   {
+    "doc": "generated/yarrow-hiring-sprint/weekly-update-2.md",
+    "surface": "Chloe Rossi"
+   },
+   {
+    "doc": "generated/yarrow-hiring-sprint/program-review.md",
+    "surface": "Chloe Rossi"
+   },
+   {
+    "doc": "generated/anchor-review-cycle/kickoff-email.txt",
+    "surface": "Chloe Rossi"
+   },
+   {
+    "doc": "generated/anchor-review-cycle/kickoff-email.txt",
+    "surface": "Chloe"
+   },
+   {
+    "doc": "generated/anchor-review-cycle/weekly-update-1.md",
+    "surface": "Chloe Rossi"
+   },
+   {
+    "doc": "generated/anchor-review-cycle/weekly-update-1.md",
+    "surface": "Chloe"
+   },
+   {
+    "doc": "generated/anchor-review-cycle/weekly-update-2.md",
+    "surface": "Chloe Rossi"
+   },
+   {
+    "doc": "generated/_company/teams/people.md",
+    "surface": "Chloe Rossi"
    }
   ]
  },
  {
-  "person": "resumes/Carol_Smith.pdf",
+  "person": "resumes/Chloe_Williams.md",
   "resume": true,
   "mentions": [
    {
-    "doc": "generated/glacier-migration/staffing-note.md",
-    "surface": "Carol Smith"
+    "doc": "generated/atlas-migration/kickoff-email.txt",
+    "surface": "Chloe Williams"
    },
    {
-    "doc": "generated/glacier-migration/status-1.md",
-    "surface": "Carol Smith"
+    "doc": "generated/atlas-migration/team-chat.txt",
+    "surface": "Chloe"
+   },
+   {
+    "doc": "generated/atlas-migration/team-chat.txt",
+    "surface": "Chloe Williams"
+   },
+   {
+    "doc": "generated/atlas-migration/weekly-update-1.md",
+    "surface": "C. Williams"
+   },
+   {
+    "doc": "generated/borealis-observability-rollout/kickoff-email.txt",
+    "surface": "C. Williams"
+   },
+   {
+    "doc": "generated/borealis-observability-rollout/team-chat.txt",
+    "surface": "Chloe"
+   },
+   {
+    "doc": "generated/borealis-observability-rollout/team-chat.txt",
+    "surface": "Chloe Williams"
+   },
+   {
+    "doc": "generated/borealis-observability-rollout/weekly-update-1.md",
+    "surface": "C. Williams"
+   },
+   {
+    "doc": "generated/_company/teams/platform-engineering.md",
+    "surface": "Chloe Williams"
    }
   ]
  },
  {
-  "person": "resumes/Carolyn_Wilcox_DDS.pdf",
+  "person": "resumes/Daniel_Kim.md",
   "resume": true,
   "mentions": [
    {
-    "doc": "generated/summit-billing-rewrite/staffing-note.md",
-    "surface": "Carolyn Wilcox DDS"
+    "doc": "generated/tundra-enterprise-pilot/kickoff-email.txt",
+    "surface": "Daniel Kim"
    },
    {
-    "doc": "generated/summit-billing-rewrite/status-1.md",
-    "surface": "Wilcox, Carolyn"
+    "doc": "generated/tundra-enterprise-pilot/kickoff-email.txt",
+    "surface": "Daniel"
+   },
+   {
+    "doc": "generated/tundra-enterprise-pilot/meeting-notes.md",
+    "surface": "Daniel Kim"
+   },
+   {
+    "doc": "generated/tundra-enterprise-pilot/meeting-notes.md",
+    "surface": "Daniel"
+   },
+   {
+    "doc": "generated/tundra-enterprise-pilot/retrospective.pdf",
+    "surface": "Daniel Kim"
+   },
+   {
+    "doc": "generated/umbra-renewal-drive/kickoff-email.txt",
+    "surface": "Daniel Kim"
+   },
+   {
+    "doc": "generated/umbra-renewal-drive/meeting-notes.md",
+    "surface": "D. Kim"
+   },
+   {
+    "doc": "generated/umbra-renewal-drive/weekly-update-2.md",
+    "surface": "Daniel Kim"
+   },
+   {
+    "doc": "generated/umbra-renewal-drive/account-review.md",
+    "surface": "D. Kim"
+   },
+   {
+    "doc": "generated/_company/teams/sales-and-partnerships.md",
+    "surface": "Daniel Kim"
+   },
+   {
+    "doc": "generated/_company/newsletter-1.md",
+    "surface": "Daniel Kim"
    }
   ]
  },
  {
-  "person": "resumes/Carrie_Clark.pdf",
+  "person": "resumes/Daniel_Kumar.md",
   "resume": true,
   "mentions": [
    {
-    "doc": "generated/cinder-billing-rewrite/staffing-note.md",
-    "surface": "Carrie Clark"
+    "doc": "generated/kestrel-device-refresh/kickoff-email.txt",
+    "surface": "Daniel Kumar"
    },
    {
-    "doc": "generated/cinder-billing-rewrite/status-1.md",
-    "surface": "Clark, Carrie"
+    "doc": "generated/kestrel-device-refresh/meeting-notes.md",
+    "surface": "Daniel Kumar"
    },
    {
-    "doc": "generated/meridian-observability-rollout/staffing-note.md",
-    "surface": "Carrie Clark"
+    "doc": "generated/kestrel-device-refresh/team-chat.txt",
+    "surface": "Daniel"
    },
    {
-    "doc": "generated/meridian-observability-rollout/staffing-note.md",
-    "surface": "Carrie"
+    "doc": "generated/kestrel-device-refresh/team-chat.txt",
+    "surface": "Daniel Kumar"
    },
    {
-    "doc": "generated/meridian-observability-rollout/postmortem.md",
-    "surface": "Carrie Clark"
+    "doc": "generated/kestrel-device-refresh/weekly-update-1.md",
+    "surface": "Daniel Kumar"
+   },
+   {
+    "doc": "generated/kestrel-device-refresh/weekly-update-2.md",
+    "surface": "Daniel Kumar"
+   },
+   {
+    "doc": "generated/yarrow-hiring-sprint/kickoff-email.txt",
+    "surface": "Daniel Kumar"
+   },
+   {
+    "doc": "generated/yarrow-hiring-sprint/meeting-notes.md",
+    "surface": "Daniel Kumar"
+   },
+   {
+    "doc": "generated/yarrow-hiring-sprint/team-chat.txt",
+    "surface": "Daniel"
+   },
+   {
+    "doc": "generated/yarrow-hiring-sprint/team-chat.txt",
+    "surface": "Daniel Kumar"
+   },
+   {
+    "doc": "generated/yarrow-hiring-sprint/weekly-update-1.md",
+    "surface": "D. Kumar"
+   },
+   {
+    "doc": "generated/yarrow-hiring-sprint/weekly-update-2.md",
+    "surface": "Daniel Kumar"
+   },
+   {
+    "doc": "generated/_company/teams/people.md",
+    "surface": "Daniel Kumar"
    }
   ]
  },
  {
-  "person": "resumes/Carrie_Horn.pdf",
+  "person": "resumes/Daniel_Popescu.txt",
   "resume": true,
   "mentions": [
    {
-    "doc": "generated/vertex-observability-rollout/staffing-note.md",
-    "surface": "Horn, Carrie"
+    "doc": "generated/borealis-observability-rollout/kickoff-email.txt",
+    "surface": "danielp2@example.com"
    },
    {
-    "doc": "generated/vertex-observability-rollout/status-1.md",
-    "surface": "Carrie Horn"
+    "doc": "generated/borealis-observability-rollout/meeting-notes.md",
+    "surface": "Daniel Popescu"
    },
    {
-    "doc": "generated/vertex-observability-rollout/status-2.md",
-    "surface": "Horn, Carrie"
+    "doc": "generated/borealis-observability-rollout/weekly-update-1.md",
+    "surface": "Daniel Popescu"
+   },
+   {
+    "doc": "generated/borealis-observability-rollout/weekly-update-2.md",
+    "surface": "Daniel Popescu"
+   },
+   {
+    "doc": "generated/borealis-observability-rollout/retrospective.pdf",
+    "surface": "D. Popescu"
+   },
+   {
+    "doc": "generated/meridian-signup-research/kickoff-email.txt",
+    "surface": "Daniel Popescu"
+   },
+   {
+    "doc": "generated/meridian-signup-research/kickoff-email.txt",
+    "surface": "Daniel"
+   },
+   {
+    "doc": "generated/meridian-signup-research/meeting-notes.md",
+    "surface": "Popescu, Daniel"
+   },
+   {
+    "doc": "generated/meridian-signup-research/weekly-update-1.md",
+    "surface": "Daniel Popescu"
+   },
+   {
+    "doc": "generated/meridian-signup-research/weekly-update-1.md",
+    "surface": "Daniel"
+   },
+   {
+    "doc": "generated/meridian-signup-research/research-findings.md",
+    "surface": "Daniel Popescu"
+   },
+   {
+    "doc": "generated/_company/teams/product-and-design.md",
+    "surface": "Daniel Popescu"
    }
   ]
  },
  {
-  "person": "resumes/Casey_Anderson.pdf",
+  "person": "resumes/Daniel_Williams.txt",
   "resume": true,
   "mentions": [
    {
-    "doc": "generated/jasper-search-upgrade/staffing-note.md",
-    "surface": "C. Anderson"
-   },
-   {
-    "doc": "generated/jasper-search-upgrade/status-2.md",
-    "surface": "patriciabrown@example.com"
+    "doc": "generated/_company/teams/data-and-analytics.md",
+    "surface": "Daniel Williams"
    }
   ]
  },
  {
-  "person": "resumes/Casey_Pittman.pdf",
+  "person": "resumes/Deepa_Ivanov.pdf",
   "resume": true,
   "mentions": [
    {
-    "doc": "generated/ember-partner-api/staffing-note.md",
-    "surface": "C. Pittman"
-   },
-   {
-    "doc": "generated/ember-partner-api/status-1.md",
-    "surface": "Casey Pittman"
-   },
-   {
-    "doc": "generated/xenon-billing-rewrite/staffing-note.md",
-    "surface": "C. Pittman"
-   },
-   {
-    "doc": "generated/xenon-billing-rewrite/status-2.md",
-    "surface": "C. Pittman"
+    "doc": "generated/_company/teams/security-and-it.md",
+    "surface": "Deepa Ivanov"
    }
   ]
  },
  {
-  "person": "resumes/Casey_Wright.pdf",
+  "person": "resumes/Deepa_Jensen.pdf",
   "resume": true,
   "mentions": [
    {
-    "doc": "generated/lumen-migration/staffing-note.md",
-    "surface": "Wright, Casey"
+    "doc": "generated/beacon-help-center-rebuild/kickoff-email.txt",
+    "surface": "Deepa Jensen"
    },
    {
-    "doc": "generated/lumen-migration/status-1.md",
-    "surface": "Casey Wright"
+    "doc": "generated/beacon-help-center-rebuild/kickoff-email.txt",
+    "surface": "Deepa"
    },
    {
-    "doc": "generated/lumen-migration/status-2.md",
-    "surface": "Casey Wright"
+    "doc": "generated/beacon-help-center-rebuild/meeting-notes.md",
+    "surface": "Jensen, Deepa"
+   },
+   {
+    "doc": "generated/beacon-help-center-rebuild/retrospective.pdf",
+    "surface": "Deepa Jensen"
+   },
+   {
+    "doc": "generated/delta-chat-support-launch/kickoff-email.txt",
+    "surface": "Deepa Jensen"
+   },
+   {
+    "doc": "generated/delta-chat-support-launch/meeting-notes.md",
+    "surface": "D. Jensen"
+   },
+   {
+    "doc": "generated/delta-chat-support-launch/team-chat.txt",
+    "surface": "Deepa Jensen"
+   },
+   {
+    "doc": "generated/delta-chat-support-launch/weekly-update-1.md",
+    "surface": "Deepa Jensen"
+   },
+   {
+    "doc": "generated/delta-chat-support-launch/escalation-review.md",
+    "surface": "Deepa Jensen"
+   },
+   {
+    "doc": "generated/_company/teams/customer-support.md",
+    "surface": "Deepa Jensen"
    }
   ]
  },
  {
-  "person": "resumes/Cassandra_Cross.pdf",
+  "person": "resumes/Diego_Banerjee.txt",
   "resume": true,
   "mentions": [
    {
-    "doc": "generated/jasper-search-upgrade/staffing-note.md",
-    "surface": "Cassandra Cross"
-   },
-   {
-    "doc": "generated/jasper-search-upgrade/status-1.md",
-    "surface": "C. Cross"
+    "doc": "generated/_company/teams/data-and-analytics.md",
+    "surface": "Diego Banerjee"
    }
   ]
  },
  {
-  "person": "resumes/Cassandra_Hunter.pdf",
+  "person": "resumes/Diego_Costa.pdf",
   "resume": true,
   "mentions": [
    {
-    "doc": "generated/helix-partner-api/staffing-note.md",
-    "surface": "ubanks@example.com"
+    "doc": "generated/cinder-billing-rewrite/kickoff-email.txt",
+    "surface": "Diego Costa"
    },
    {
-    "doc": "generated/helix-partner-api/status-1.md",
-    "surface": "Cassandra Hunter"
+    "doc": "generated/cinder-billing-rewrite/team-chat.txt",
+    "surface": "Diego Costa"
    },
    {
-    "doc": "generated/helix-partner-api/status-2.md",
-    "surface": "Cassandra Hunter"
+    "doc": "generated/_company/teams/platform-engineering.md",
+    "surface": "Diego Costa"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Diego_Osei.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/cinder-billing-rewrite/kickoff-email.txt",
+    "surface": "Diego Osei"
+   },
+   {
+    "doc": "generated/cinder-billing-rewrite/meeting-notes.md",
+    "surface": "Diego Osei"
+   },
+   {
+    "doc": "generated/cinder-billing-rewrite/team-chat.txt",
+    "surface": "Diego Osei"
+   },
+   {
+    "doc": "generated/cinder-billing-rewrite/weekly-update-1.md",
+    "surface": "Diego Osei"
+   },
+   {
+    "doc": "generated/cinder-billing-rewrite/weekly-update-2.md",
+    "surface": "D. Osei"
+   },
+   {
+    "doc": "generated/cinder-billing-rewrite/postmortem.md",
+    "surface": "Diego Osei"
+   },
+   {
+    "doc": "generated/_company/teams/platform-engineering.md",
+    "surface": "Diego Osei"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Diego_Torres.txt",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/_company/teams/platform-engineering.md",
+    "surface": "Diego Torres"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Elena_Chen.md",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/quartz-launch-campaign/kickoff-email.txt",
+    "surface": "Elena Chen"
+   },
+   {
+    "doc": "generated/quartz-launch-campaign/kickoff-email.txt",
+    "surface": "Elena"
+   },
+   {
+    "doc": "generated/quartz-launch-campaign/meeting-notes.md",
+    "surface": "Elena Chen"
+   },
+   {
+    "doc": "generated/quartz-launch-campaign/team-chat.txt",
+    "surface": "Elena"
+   },
+   {
+    "doc": "generated/quartz-launch-campaign/team-chat.txt",
+    "surface": "Elena Chen"
+   },
+   {
+    "doc": "generated/quartz-launch-campaign/weekly-update-1.md",
+    "surface": "E. Chen"
+   },
+   {
+    "doc": "generated/quartz-launch-campaign/weekly-update-2.md",
+    "surface": "Elena Chen"
+   },
+   {
+    "doc": "generated/_company/teams/marketing.md",
+    "surface": "Elena Chen"
+   },
+   {
+    "doc": "generated/_company/wiki/marketing-how-to.pdf",
+    "surface": "E. Chen"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Elena_Eriksen.md",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/ion-churn-model/kickoff-email.txt",
+    "surface": "Elena Eriksen"
+   },
+   {
+    "doc": "generated/ion-churn-model/kickoff-email.txt",
+    "surface": "Elena"
+   },
+   {
+    "doc": "generated/ion-churn-model/meeting-notes.md",
+    "surface": "Eriksen, Elena"
+   },
+   {
+    "doc": "generated/ion-churn-model/team-chat.txt",
+    "surface": "Elena Eriksen"
+   },
+   {
+    "doc": "generated/ion-churn-model/weekly-update-1.md",
+    "surface": "Elena Eriksen"
+   },
+   {
+    "doc": "generated/ion-churn-model/analysis-readout.md",
+    "surface": "Elena Eriksen"
+   },
+   {
+    "doc": "generated/_company/teams/data-and-analytics.md",
+    "surface": "Elena Eriksen"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Elena_Ivanov.txt",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/cobalt-escalation-playbook/kickoff-email.txt",
+    "surface": "Elena Ivanov"
+   },
+   {
+    "doc": "generated/cobalt-escalation-playbook/kickoff-email.txt",
+    "surface": "Elena"
+   },
+   {
+    "doc": "generated/cobalt-escalation-playbook/meeting-notes.md",
+    "surface": "Elena Ivanov"
+   },
+   {
+    "doc": "generated/cobalt-escalation-playbook/team-chat.txt",
+    "surface": "Elena"
+   },
+   {
+    "doc": "generated/cobalt-escalation-playbook/team-chat.txt",
+    "surface": "Elena Ivanov"
+   },
+   {
+    "doc": "generated/_company/teams/customer-support.md",
+    "surface": "Elena Ivanov"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Emeka_Hernandez.txt",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/anchor-review-cycle/kickoff-email.txt",
+    "surface": "Emeka Hernandez"
+   },
+   {
+    "doc": "generated/anchor-review-cycle/meeting-notes.md",
+    "surface": "Emeka Hernandez"
+   },
+   {
+    "doc": "generated/anchor-review-cycle/program-review.md",
+    "surface": "Emeka Hernandez"
+   },
+   {
+    "doc": "generated/_company/teams/people.md",
+    "surface": "Emeka Hernandez"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Emeka_Sokolov.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/_company/teams/security-and-it.md",
+    "surface": "Emeka Sokolov"
+   },
+   {
+    "doc": "generated/_company/wiki/security-and-it-how-to.pdf",
+    "surface": "Emeka Sokolov"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Erin_Novak.txt",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/beacon-help-center-rebuild/kickoff-email.txt",
+    "surface": "Erin Novak"
+   },
+   {
+    "doc": "generated/beacon-help-center-rebuild/meeting-notes.md",
+    "surface": "E. Novak"
+   },
+   {
+    "doc": "generated/beacon-help-center-rebuild/team-chat.txt",
+    "surface": "Erin"
+   },
+   {
+    "doc": "generated/beacon-help-center-rebuild/team-chat.txt",
+    "surface": "Erin Novak"
+   },
+   {
+    "doc": "generated/beacon-help-center-rebuild/weekly-update-1.md",
+    "surface": "E. Novak"
+   },
+   {
+    "doc": "generated/beacon-help-center-rebuild/escalation-review.md",
+    "surface": "Erin Novak"
+   },
+   {
+    "doc": "generated/delta-chat-support-launch/kickoff-email.txt",
+    "surface": "Erin Novak"
+   },
+   {
+    "doc": "generated/delta-chat-support-launch/kickoff-email.txt",
+    "surface": "Erin"
+   },
+   {
+    "doc": "generated/_company/teams/customer-support.md",
+    "surface": "Erin Novak"
+   },
+   {
+    "doc": "generated/_company/wiki/customer-support-how-to.md",
+    "surface": "Erin Novak"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Fatima_Martins.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/cinder-billing-rewrite/kickoff-email.txt",
+    "surface": "Fatima Martins"
+   },
+   {
+    "doc": "generated/cinder-billing-rewrite/kickoff-email.txt",
+    "surface": "Fatima"
+   },
+   {
+    "doc": "generated/cinder-billing-rewrite/team-chat.txt",
+    "surface": "Fatima"
+   },
+   {
+    "doc": "generated/cinder-billing-rewrite/team-chat.txt",
+    "surface": "Fatima Martins"
+   },
+   {
+    "doc": "generated/cinder-billing-rewrite/weekly-update-2.md",
+    "surface": "Fatima Martins"
+   },
+   {
+    "doc": "generated/_company/teams/sales-and-partnerships.md",
+    "surface": "Fatima Martins"
+   },
+   {
+    "doc": "generated/_company/wiki/sales-and-partnerships-how-to.md",
+    "surface": "Fatima Martins"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Fatima_Nakamura.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/onyx-navigation-redesign/kickoff-email.txt",
+    "surface": "Nakamura, Fatima"
+   },
+   {
+    "doc": "generated/onyx-navigation-redesign/meeting-notes.md",
+    "surface": "Fatima Nakamura"
+   },
+   {
+    "doc": "generated/onyx-navigation-redesign/meeting-notes.md",
+    "surface": "Fatima"
+   },
+   {
+    "doc": "generated/onyx-navigation-redesign/team-chat.txt",
+    "surface": "Fatima Nakamura"
+   },
+   {
+    "doc": "generated/onyx-navigation-redesign/weekly-update-1.md",
+    "surface": "Fatima Nakamura"
+   },
+   {
+    "doc": "generated/cobalt-escalation-playbook/kickoff-email.txt",
+    "surface": "Fatima Nakamura"
+   },
+   {
+    "doc": "generated/cobalt-escalation-playbook/meeting-notes.md",
+    "surface": "Fatima Nakamura"
+   },
+   {
+    "doc": "generated/cobalt-escalation-playbook/meeting-notes.md",
+    "surface": "Fatima"
+   },
+   {
+    "doc": "generated/cobalt-escalation-playbook/team-chat.txt",
+    "surface": "Fatima Nakamura"
+   },
+   {
+    "doc": "generated/cobalt-escalation-playbook/weekly-update-1.md",
+    "surface": "Nakamura, Fatima"
+   },
+   {
+    "doc": "generated/_company/teams/customer-support.md",
+    "surface": "Fatima Nakamura"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Gabriela_Kumar.txt",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/_company/teams/security-and-it.md",
+    "surface": "Gabriela Kumar"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Gabriela_Ortiz.md",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/lumen-zero-trust-rollout/kickoff-email.txt",
+    "surface": "Gabriela Ortiz"
+   },
+   {
+    "doc": "generated/lumen-zero-trust-rollout/meeting-notes.md",
+    "surface": "Ortiz, Gabriela"
+   },
+   {
+    "doc": "generated/lumen-zero-trust-rollout/weekly-update-2.md",
+    "surface": "G. Ortiz"
+   },
+   {
+    "doc": "generated/lumen-zero-trust-rollout/retrospective.pdf",
+    "surface": "G. Ortiz"
+   },
+   {
+    "doc": "generated/_company/teams/security-and-it.md",
+    "surface": "Gabriela Ortiz"
+   },
+   {
+    "doc": "generated/_company/newsletter-3.md",
+    "surface": "Gabriela Ortiz"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Grace_Yilmaz.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/zephyr-new-hire-program/kickoff-email.txt",
+    "surface": "Grace Yilmaz"
+   },
+   {
+    "doc": "generated/zephyr-new-hire-program/kickoff-email.txt",
+    "surface": "Grace"
+   },
+   {
+    "doc": "generated/zephyr-new-hire-program/meeting-notes.md",
+    "surface": "Grace Yilmaz"
+   },
+   {
+    "doc": "generated/zephyr-new-hire-program/team-chat.txt",
+    "surface": "Grace"
+   },
+   {
+    "doc": "generated/zephyr-new-hire-program/team-chat.txt",
+    "surface": "Grace Yilmaz"
+   },
+   {
+    "doc": "generated/zephyr-new-hire-program/weekly-update-1.md",
+    "surface": "Grace Yilmaz"
+   },
+   {
+    "doc": "generated/zephyr-new-hire-program/retrospective.pdf",
+    "surface": "G. Yilmaz"
+   },
+   {
+    "doc": "generated/_company/teams/people.md",
+    "surface": "Grace Yilmaz"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Hana_Moreau.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/pioneer-brand-refresh/kickoff-email.txt",
+    "surface": "Hana Moreau"
+   },
+   {
+    "doc": "generated/pioneer-brand-refresh/meeting-notes.md",
+    "surface": "Hana Moreau"
+   },
+   {
+    "doc": "generated/pioneer-brand-refresh/team-chat.txt",
+    "surface": "Hana Moreau"
+   },
+   {
+    "doc": "generated/pioneer-brand-refresh/weekly-update-1.md",
+    "surface": "Hana Moreau"
+   },
+   {
+    "doc": "generated/pioneer-brand-refresh/weekly-update-1.md",
+    "surface": "Hana"
+   },
+   {
+    "doc": "generated/pioneer-brand-refresh/weekly-update-2.md",
+    "surface": "H. Moreau"
+   },
+   {
+    "doc": "generated/raven-webinar-series/kickoff-email.txt",
+    "surface": "Hana Moreau"
+   },
+   {
+    "doc": "generated/raven-webinar-series/meeting-notes.md",
+    "surface": "Hana Moreau"
+   },
+   {
+    "doc": "generated/raven-webinar-series/meeting-notes.md",
+    "surface": "H. Moreau"
+   },
+   {
+    "doc": "generated/raven-webinar-series/team-chat.txt",
+    "surface": "Hana"
+   },
+   {
+    "doc": "generated/raven-webinar-series/team-chat.txt",
+    "surface": "Hana Moreau"
+   },
+   {
+    "doc": "generated/raven-webinar-series/retrospective.pdf",
+    "surface": "Hana Moreau"
+   },
+   {
+    "doc": "generated/_company/teams/marketing.md",
+    "surface": "Hana Moreau"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Hassan_Weber.txt",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/_company/teams/web-and-mobile.md",
+    "surface": "Hassan Weber"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Hiroshi_Mendoza.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/summit-partner-program/kickoff-email.txt",
+    "surface": "H. Mendoza"
+   },
+   {
+    "doc": "generated/summit-partner-program/meeting-notes.md",
+    "surface": "Mendoza, Hiroshi"
+   },
+   {
+    "doc": "generated/summit-partner-program/team-chat.txt",
+    "surface": "Hiroshi"
+   },
+   {
+    "doc": "generated/summit-partner-program/team-chat.txt",
+    "surface": "Hiroshi Mendoza"
+   },
+   {
+    "doc": "generated/summit-partner-program/weekly-update-1.md",
+    "surface": "H. Mendoza"
+   },
+   {
+    "doc": "generated/summit-partner-program/account-review.md",
+    "surface": "Hiroshi Mendoza"
+   },
+   {
+    "doc": "generated/_company/teams/sales-and-partnerships.md",
+    "surface": "Hiroshi Mendoza"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Hiroshi_Sharma.md",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/ion-churn-model/kickoff-email.txt",
+    "surface": "H. Sharma"
+   },
+   {
+    "doc": "generated/ion-churn-model/meeting-notes.md",
+    "surface": "Hiroshi Sharma"
+   },
+   {
+    "doc": "generated/ion-churn-model/weekly-update-1.md",
+    "surface": "Hiroshi Sharma"
+   },
+   {
+    "doc": "generated/_company/teams/data-and-analytics.md",
+    "surface": "Hiroshi Sharma"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Hiroshi_Yamamoto.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/raven-webinar-series/kickoff-email.txt",
+    "surface": "Hiroshi Yamamoto"
+   },
+   {
+    "doc": "generated/raven-webinar-series/kickoff-email.txt",
+    "surface": "Hiroshi"
+   },
+   {
+    "doc": "generated/raven-webinar-series/meeting-notes.md",
+    "surface": "Hiroshi Yamamoto"
+   },
+   {
+    "doc": "generated/raven-webinar-series/team-chat.txt",
+    "surface": "Hiroshi Yamamoto"
+   },
+   {
+    "doc": "generated/raven-webinar-series/weekly-update-1.md",
+    "surface": "Hiroshi Yamamoto"
+   },
+   {
+    "doc": "generated/raven-webinar-series/weekly-update-2.md",
+    "surface": "Hiroshi Yamamoto"
+   },
+   {
+    "doc": "generated/raven-webinar-series/campaign-recap.md",
+    "surface": "Hiroshi Yamamoto"
+   },
+   {
+    "doc": "generated/_company/teams/marketing.md",
+    "surface": "Hiroshi Yamamoto"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Ingrid_Johnson.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/harbor-reporting-pipeline/kickoff-email.txt",
+    "surface": "Ingrid Johnson"
+   },
+   {
+    "doc": "generated/harbor-reporting-pipeline/team-chat.txt",
+    "surface": "Ingrid Johnson"
+   },
+   {
+    "doc": "generated/umbra-renewal-drive/kickoff-email.txt",
+    "surface": "Ingrid Johnson"
+   },
+   {
+    "doc": "generated/umbra-renewal-drive/kickoff-email.txt",
+    "surface": "Ingrid"
+   },
+   {
+    "doc": "generated/umbra-renewal-drive/team-chat.txt",
+    "surface": "Ingrid Johnson"
+   },
+   {
+    "doc": "generated/umbra-renewal-drive/weekly-update-1.md",
+    "surface": "Ingrid Johnson"
+   },
+   {
+    "doc": "generated/_company/teams/data-and-analytics.md",
+    "surface": "Ingrid Johnson"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Ingrid_Ng.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/pioneer-brand-refresh/kickoff-email.txt",
+    "surface": "I. Ng"
+   },
+   {
+    "doc": "generated/pioneer-brand-refresh/meeting-notes.md",
+    "surface": "Ingrid Ng"
+   },
+   {
+    "doc": "generated/pioneer-brand-refresh/weekly-update-1.md",
+    "surface": "I. Ng"
+   },
+   {
+    "doc": "generated/pioneer-brand-refresh/campaign-recap.md",
+    "surface": "Ingrid Ng"
+   },
+   {
+    "doc": "generated/quartz-launch-campaign/kickoff-email.txt",
+    "surface": "Ingrid Ng"
+   },
+   {
+    "doc": "generated/quartz-launch-campaign/meeting-notes.md",
+    "surface": "I. Ng"
+   },
+   {
+    "doc": "generated/quartz-launch-campaign/team-chat.txt",
+    "surface": "Ingrid Ng"
+   },
+   {
+    "doc": "generated/quartz-launch-campaign/weekly-update-1.md",
+    "surface": "Ng, Ingrid"
+   },
+   {
+    "doc": "generated/quartz-launch-campaign/weekly-update-2.md",
+    "surface": "I. Ng"
+   },
+   {
+    "doc": "generated/_company/teams/marketing.md",
+    "surface": "Ingrid Ng"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Isaac_Abbasi.md",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/ember-mobile-relaunch/kickoff-email.txt",
+    "surface": "Isaac Abbasi"
+   },
+   {
+    "doc": "generated/ember-mobile-relaunch/meeting-notes.md",
+    "surface": "Isaac Abbasi"
+   },
+   {
+    "doc": "generated/ember-mobile-relaunch/weekly-update-1.md",
+    "surface": "Isaac Abbasi"
+   },
+   {
+    "doc": "generated/ember-mobile-relaunch/weekly-update-2.md",
+    "surface": "Isaac Abbasi"
+   },
+   {
+    "doc": "generated/_company/teams/web-and-mobile.md",
+    "surface": "Isaac Abbasi"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Isaac_Haddad.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/_company/teams/customer-support.md",
+    "surface": "Isaac Haddad"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Isaac_Larsen.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/zephyr-new-hire-program/kickoff-email.txt",
+    "surface": "I. Larsen"
+   },
+   {
+    "doc": "generated/zephyr-new-hire-program/meeting-notes.md",
+    "surface": "Isaac Larsen"
+   },
+   {
+    "doc": "generated/zephyr-new-hire-program/meeting-notes.md",
+    "surface": "Isaac"
+   },
+   {
+    "doc": "generated/zephyr-new-hire-program/team-chat.txt",
+    "surface": "Isaac"
+   },
+   {
+    "doc": "generated/zephyr-new-hire-program/team-chat.txt",
+    "surface": "Isaac Larsen"
+   },
+   {
+    "doc": "generated/zephyr-new-hire-program/weekly-update-1.md",
+    "surface": "I. Larsen"
+   },
+   {
+    "doc": "generated/_company/teams/people.md",
+    "surface": "Isaac Larsen"
+   },
+   {
+    "doc": "generated/_company/wiki/people-how-to.md",
+    "surface": "I. Larsen"
+   },
+   {
+    "doc": "generated/_company/newsletter-2.md",
+    "surface": "Isaac Larsen"
+   },
+   {
+    "doc": "generated/_company/newsletter-3.md",
+    "surface": "Isaac Larsen"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Isaac_Meyer.txt",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/granite-data-platform/kickoff-email.txt",
+    "surface": "Isaac Meyer"
+   },
+   {
+    "doc": "generated/granite-data-platform/meeting-notes.md",
+    "surface": "I. Meyer"
+   },
+   {
+    "doc": "generated/granite-data-platform/team-chat.txt",
+    "surface": "Isaac"
+   },
+   {
+    "doc": "generated/granite-data-platform/team-chat.txt",
+    "surface": "Isaac Meyer"
+   },
+   {
+    "doc": "generated/granite-data-platform/weekly-update-1.md",
+    "surface": "Meyer, Isaac"
+   },
+   {
+    "doc": "generated/granite-data-platform/weekly-update-2.md",
+    "surface": "Meyer, Isaac"
+   },
+   {
+    "doc": "generated/ion-churn-model/kickoff-email.txt",
+    "surface": "Isaac Meyer"
+   },
+   {
+    "doc": "generated/ion-churn-model/kickoff-email.txt",
+    "surface": "Isaac"
+   },
+   {
+    "doc": "generated/ion-churn-model/meeting-notes.md",
+    "surface": "Isaac Meyer"
+   },
+   {
+    "doc": "generated/ion-churn-model/meeting-notes.md",
+    "surface": "Isaac"
+   },
+   {
+    "doc": "generated/ion-churn-model/team-chat.txt",
+    "surface": "Isaac"
+   },
+   {
+    "doc": "generated/ion-churn-model/team-chat.txt",
+    "surface": "Isaac Meyer"
+   },
+   {
+    "doc": "generated/ion-churn-model/weekly-update-1.md",
+    "surface": "Meyer, Isaac"
+   },
+   {
+    "doc": "generated/ion-churn-model/analysis-readout.md",
+    "surface": "I. Meyer"
+   },
+   {
+    "doc": "generated/_company/teams/data-and-analytics.md",
+    "surface": "Isaac Meyer"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Ivan_Abbasi.txt",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/umbra-renewal-drive/kickoff-email.txt",
+    "surface": "Ivan Abbasi"
+   },
+   {
+    "doc": "generated/umbra-renewal-drive/kickoff-email.txt",
+    "surface": "Ivan"
+   },
+   {
+    "doc": "generated/umbra-renewal-drive/team-chat.txt",
+    "surface": "Ivan"
+   },
+   {
+    "doc": "generated/umbra-renewal-drive/team-chat.txt",
+    "surface": "Ivan Abbasi"
+   },
+   {
+    "doc": "generated/umbra-renewal-drive/weekly-update-1.md",
+    "surface": "Ivan Abbasi"
+   },
+   {
+    "doc": "generated/umbra-renewal-drive/weekly-update-1.md",
+    "surface": "Ivan"
+   },
+   {
+    "doc": "generated/umbra-renewal-drive/weekly-update-2.md",
+    "surface": "I. Abbasi"
+   },
+   {
+    "doc": "generated/_company/teams/sales-and-partnerships.md",
+    "surface": "Ivan Abbasi"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Ivan_Eriksen.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/atlas-migration/kickoff-email.txt",
+    "surface": "ivan.eriksen@example.org"
+   },
+   {
+    "doc": "generated/atlas-migration/meeting-notes.md",
+    "surface": "Ivan Eriksen"
+   },
+   {
+    "doc": "generated/atlas-migration/team-chat.txt",
+    "surface": "Ivan"
+   },
+   {
+    "doc": "generated/atlas-migration/team-chat.txt",
+    "surface": "Ivan Eriksen"
+   },
+   {
+    "doc": "generated/atlas-migration/weekly-update-1.md",
+    "surface": "Eriksen, Ivan"
+   },
+   {
+    "doc": "generated/atlas-migration/weekly-update-2.md",
+    "surface": "Eriksen, Ivan"
+   },
+   {
+    "doc": "generated/_company/teams/finance.md",
+    "surface": "Ivan Eriksen"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Jamal_Andersson.md",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/borealis-observability-rollout/kickoff-email.txt",
+    "surface": "Jamal Andersson"
+   },
+   {
+    "doc": "generated/borealis-observability-rollout/weekly-update-1.md",
+    "surface": "Jamal Andersson"
+   },
+   {
+    "doc": "generated/_company/teams/product-and-design.md",
+    "surface": "Jamal Andersson"
+   },
+   {
+    "doc": "generated/_company/wiki/product-and-design-how-to.md",
+    "surface": "Jamal Andersson"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Jamal_Andersson_2.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/yarrow-hiring-sprint/kickoff-email.txt",
+    "surface": "Jamal Andersson"
+   },
+   {
+    "doc": "generated/yarrow-hiring-sprint/kickoff-email.txt",
+    "surface": "Jamal"
+   },
+   {
+    "doc": "generated/yarrow-hiring-sprint/meeting-notes.md",
+    "surface": "Jamal Andersson"
+   },
+   {
+    "doc": "generated/yarrow-hiring-sprint/team-chat.txt",
+    "surface": "Jamal Andersson"
+   },
+   {
+    "doc": "generated/yarrow-hiring-sprint/weekly-update-1.md",
+    "surface": "Jamal Andersson"
+   },
+   {
+    "doc": "generated/yarrow-hiring-sprint/weekly-update-2.md",
+    "surface": "Jamal Andersson"
+   },
+   {
+    "doc": "generated/yarrow-hiring-sprint/program-review.md",
+    "surface": "Jamal Andersson"
+   },
+   {
+    "doc": "generated/_company/teams/people.md",
+    "surface": "Jamal Andersson"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Jasmine_Nakamura.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/vertex-quarter-close/kickoff-email.txt",
+    "surface": "Jasmine Nakamura"
+   },
+   {
+    "doc": "generated/vertex-quarter-close/meeting-notes.md",
+    "surface": "J. Nakamura"
+   },
+   {
+    "doc": "generated/vertex-quarter-close/team-chat.txt",
+    "surface": "Jasmine Nakamura"
+   },
+   {
+    "doc": "generated/_company/teams/finance.md",
+    "surface": "Jasmine Nakamura"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Jasmine_Ortiz.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/vertex-quarter-close/kickoff-email.txt",
+    "surface": "Jasmine Ortiz"
+   },
+   {
+    "doc": "generated/vertex-quarter-close/weekly-update-1.md",
+    "surface": "Jasmine Ortiz"
+   },
+   {
+    "doc": "generated/vertex-quarter-close/close-notes.md",
+    "surface": "Jasmine Ortiz"
+   },
+   {
+    "doc": "generated/vertex-quarter-close/retrospective.pdf",
+    "surface": "Jasmine Ortiz"
+   },
+   {
+    "doc": "generated/xenon-expense-cleanup/kickoff-email.txt",
+    "surface": "Jasmine Ortiz"
+   },
+   {
+    "doc": "generated/xenon-expense-cleanup/kickoff-email.txt",
+    "surface": "Jasmine"
+   },
+   {
+    "doc": "generated/xenon-expense-cleanup/meeting-notes.md",
+    "surface": "Jasmine Ortiz"
+   },
+   {
+    "doc": "generated/xenon-expense-cleanup/meeting-notes.md",
+    "surface": "Jasmine"
+   },
+   {
+    "doc": "generated/xenon-expense-cleanup/team-chat.txt",
+    "surface": "Jasmine Ortiz"
+   },
+   {
+    "doc": "generated/xenon-expense-cleanup/weekly-update-1.md",
+    "surface": "Jasmine Ortiz"
+   },
+   {
+    "doc": "generated/xenon-expense-cleanup/weekly-update-2.md",
+    "surface": "Jasmine Ortiz"
+   },
+   {
+    "doc": "generated/xenon-expense-cleanup/weekly-update-2.md",
+    "surface": "Jasmine"
+   },
+   {
+    "doc": "generated/xenon-expense-cleanup/close-notes.md",
+    "surface": "Jasmine Ortiz"
+   },
+   {
+    "doc": "generated/xenon-expense-cleanup/retrospective.pdf",
+    "surface": "Jasmine Ortiz"
+   },
+   {
+    "doc": "generated/_company/teams/finance.md",
+    "surface": "Jasmine Ortiz"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Jin_Almeida.md",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/harbor-reporting-pipeline/kickoff-email.txt",
+    "surface": "Jin Almeida"
+   },
+   {
+    "doc": "generated/harbor-reporting-pipeline/meeting-notes.md",
+    "surface": "Jin Almeida"
+   },
+   {
+    "doc": "generated/vertex-quarter-close/kickoff-email.txt",
+    "surface": "Jin Almeida"
+   },
+   {
+    "doc": "generated/vertex-quarter-close/kickoff-email.txt",
+    "surface": "Jin"
+   },
+   {
+    "doc": "generated/vertex-quarter-close/meeting-notes.md",
+    "surface": "Jin Almeida"
+   },
+   {
+    "doc": "generated/vertex-quarter-close/team-chat.txt",
+    "surface": "Jin Almeida"
+   },
+   {
+    "doc": "generated/vertex-quarter-close/weekly-update-1.md",
+    "surface": "Jin Almeida"
+   },
+   {
+    "doc": "generated/_company/teams/finance.md",
+    "surface": "Jin Almeida"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Jin_Sharma.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/_company/teams/sales-and-partnerships.md",
+    "surface": "Jin Sharma"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Jonas_Andersson.txt",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/beacon-help-center-rebuild/kickoff-email.txt",
+    "surface": "Jonas Andersson"
+   },
+   {
+    "doc": "generated/beacon-help-center-rebuild/meeting-notes.md",
+    "surface": "Jonas Andersson"
+   },
+   {
+    "doc": "generated/beacon-help-center-rebuild/team-chat.txt",
+    "surface": "Jonas Andersson"
+   },
+   {
+    "doc": "generated/cobalt-escalation-playbook/kickoff-email.txt",
+    "surface": "J. Andersson"
+   },
+   {
+    "doc": "generated/cobalt-escalation-playbook/meeting-notes.md",
+    "surface": "Jonas Andersson"
+   },
+   {
+    "doc": "generated/cobalt-escalation-playbook/meeting-notes.md",
+    "surface": "Jonas"
+   },
+   {
+    "doc": "generated/cobalt-escalation-playbook/weekly-update-1.md",
+    "surface": "Jonas Andersson"
+   },
+   {
+    "doc": "generated/_company/teams/customer-support.md",
+    "surface": "Jonas Andersson"
+   },
+   {
+    "doc": "generated/_company/newsletter-1.md",
+    "surface": "Jonas Andersson"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Jonas_Hansen.txt",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/ember-mobile-relaunch/kickoff-email.txt",
+    "surface": "Jonas Hansen"
+   },
+   {
+    "doc": "generated/ember-mobile-relaunch/kickoff-email.txt",
+    "surface": "Jonas"
+   },
+   {
+    "doc": "generated/ember-mobile-relaunch/meeting-notes.md",
+    "surface": "Jonas Hansen"
+   },
+   {
+    "doc": "generated/ember-mobile-relaunch/team-chat.txt",
+    "surface": "Jonas"
+   },
+   {
+    "doc": "generated/ember-mobile-relaunch/team-chat.txt",
+    "surface": "Jonas Hansen"
+   },
+   {
+    "doc": "generated/_company/teams/web-and-mobile.md",
+    "surface": "Jonas Hansen"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Jonas_Jensen.md",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/lumen-zero-trust-rollout/kickoff-email.txt",
+    "surface": "Jonas Jensen"
+   },
+   {
+    "doc": "generated/lumen-zero-trust-rollout/meeting-notes.md",
+    "surface": "Jonas Jensen"
+   },
+   {
+    "doc": "generated/lumen-zero-trust-rollout/team-chat.txt",
+    "surface": "Jonas"
+   },
+   {
+    "doc": "generated/lumen-zero-trust-rollout/team-chat.txt",
+    "surface": "Jonas Jensen"
+   },
+   {
+    "doc": "generated/lumen-zero-trust-rollout/weekly-update-1.md",
+    "surface": "Jonas Jensen"
+   },
+   {
+    "doc": "generated/lumen-zero-trust-rollout/weekly-update-2.md",
+    "surface": "Jonas Jensen"
+   },
+   {
+    "doc": "generated/lumen-zero-trust-rollout/incident-report.md",
+    "surface": "Jonas Jensen"
+   },
+   {
+    "doc": "generated/lumen-zero-trust-rollout/retrospective.pdf",
+    "surface": "Jonas Jensen"
+   },
+   {
+    "doc": "generated/_company/teams/security-and-it.md",
+    "surface": "Jonas Jensen"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Julia_Williams.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/nimbus-pricing-experiment/kickoff-email.txt",
+    "surface": "Julia Williams"
+   },
+   {
+    "doc": "generated/nimbus-pricing-experiment/kickoff-email.txt",
+    "surface": "Julia"
+   },
+   {
+    "doc": "generated/nimbus-pricing-experiment/meeting-notes.md",
+    "surface": "J. Williams"
+   },
+   {
+    "doc": "generated/nimbus-pricing-experiment/weekly-update-1.md",
+    "surface": "Julia Williams"
+   },
+   {
+    "doc": "generated/onyx-navigation-redesign/kickoff-email.txt",
+    "surface": "Julia Williams"
+   },
+   {
+    "doc": "generated/onyx-navigation-redesign/meeting-notes.md",
+    "surface": "Julia Williams"
+   },
+   {
+    "doc": "generated/onyx-navigation-redesign/meeting-notes.md",
+    "surface": "J. Williams"
+   },
+   {
+    "doc": "generated/onyx-navigation-redesign/team-chat.txt",
+    "surface": "Julia"
+   },
+   {
+    "doc": "generated/onyx-navigation-redesign/team-chat.txt",
+    "surface": "Julia Williams"
+   },
+   {
+    "doc": "generated/_company/teams/product-and-design.md",
+    "surface": "Julia Williams"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Kai_Jensen.md",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/meridian-signup-research/kickoff-email.txt",
+    "surface": "Kai Jensen"
+   },
+   {
+    "doc": "generated/meridian-signup-research/weekly-update-1.md",
+    "surface": "Kai Jensen"
+   },
+   {
+    "doc": "generated/_company/teams/product-and-design.md",
+    "surface": "Kai Jensen"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Kai_Kaplan.md",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/_company/teams/customer-support.md",
+    "surface": "Kai Kaplan"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Kai_Singh.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/delta-chat-support-launch/kickoff-email.txt",
+    "surface": "K. Singh"
+   },
+   {
+    "doc": "generated/delta-chat-support-launch/meeting-notes.md",
+    "surface": "Singh, Kai"
+   },
+   {
+    "doc": "generated/delta-chat-support-launch/team-chat.txt",
+    "surface": "Kai"
+   },
+   {
+    "doc": "generated/delta-chat-support-launch/team-chat.txt",
+    "surface": "Kai Singh"
+   },
+   {
+    "doc": "generated/delta-chat-support-launch/weekly-update-1.md",
+    "surface": "K. Singh"
+   },
+   {
+    "doc": "generated/delta-chat-support-launch/escalation-review.md",
+    "surface": "Kai Singh"
+   },
+   {
+    "doc": "generated/_company/teams/customer-support.md",
+    "surface": "Kai Singh"
+   },
+   {
+    "doc": "generated/_company/newsletter-1.md",
+    "surface": "Kai Singh"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Karim_Adeyemi.txt",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/onyx-navigation-redesign/kickoff-email.txt",
+    "surface": "Karim Adeyemi"
+   },
+   {
+    "doc": "generated/onyx-navigation-redesign/meeting-notes.md",
+    "surface": "Karim Adeyemi"
+   },
+   {
+    "doc": "generated/onyx-navigation-redesign/team-chat.txt",
+    "surface": "Karim"
+   },
+   {
+    "doc": "generated/onyx-navigation-redesign/team-chat.txt",
+    "surface": "Karim Adeyemi"
+   },
+   {
+    "doc": "generated/_company/teams/product-and-design.md",
+    "surface": "Karim Adeyemi"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Karim_Park.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/nimbus-pricing-experiment/kickoff-email.txt",
+    "surface": "Karim Park"
+   },
+   {
+    "doc": "generated/nimbus-pricing-experiment/meeting-notes.md",
+    "surface": "Karim Park"
+   },
+   {
+    "doc": "generated/nimbus-pricing-experiment/meeting-notes.md",
+    "surface": "Karim"
+   },
+   {
+    "doc": "generated/nimbus-pricing-experiment/team-chat.txt",
+    "surface": "Karim Park"
+   },
+   {
+    "doc": "generated/nimbus-pricing-experiment/weekly-update-1.md",
+    "surface": "Karim Park"
+   },
+   {
+    "doc": "generated/nimbus-pricing-experiment/retrospective.pdf",
+    "surface": "K. Park"
+   },
+   {
+    "doc": "generated/_company/teams/product-and-design.md",
+    "surface": "Karim Park"
+   },
+   {
+    "doc": "generated/_company/newsletter-1.md",
+    "surface": "Karim Park"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Keisha_Garcia.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/meridian-signup-research/kickoff-email.txt",
+    "surface": "Garcia, Keisha"
+   },
+   {
+    "doc": "generated/meridian-signup-research/meeting-notes.md",
+    "surface": "Keisha Garcia"
+   },
+   {
+    "doc": "generated/meridian-signup-research/team-chat.txt",
+    "surface": "Keisha"
+   },
+   {
+    "doc": "generated/meridian-signup-research/team-chat.txt",
+    "surface": "Keisha Garcia"
+   },
+   {
+    "doc": "generated/meridian-signup-research/weekly-update-1.md",
+    "surface": "K. Garcia"
+   },
+   {
+    "doc": "generated/nimbus-pricing-experiment/kickoff-email.txt",
+    "surface": "K. Garcia"
+   },
+   {
+    "doc": "generated/nimbus-pricing-experiment/meeting-notes.md",
+    "surface": "Keisha Garcia"
+   },
+   {
+    "doc": "generated/nimbus-pricing-experiment/team-chat.txt",
+    "surface": "Keisha"
+   },
+   {
+    "doc": "generated/nimbus-pricing-experiment/team-chat.txt",
+    "surface": "Keisha Garcia"
+   },
+   {
+    "doc": "generated/nimbus-pricing-experiment/weekly-update-1.md",
+    "surface": "Keisha Garcia"
+   },
+   {
+    "doc": "generated/nimbus-pricing-experiment/retrospective.pdf",
+    "surface": "Keisha Garcia"
+   },
+   {
+    "doc": "generated/_company/teams/product-and-design.md",
+    "surface": "Keisha Garcia"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Keisha_Kim.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/granite-data-platform/kickoff-email.txt",
+    "surface": "Keisha Kim"
+   },
+   {
+    "doc": "generated/granite-data-platform/meeting-notes.md",
+    "surface": "Keisha Kim"
+   },
+   {
+    "doc": "generated/granite-data-platform/weekly-update-2.md",
+    "surface": "K. Kim"
+   },
+   {
+    "doc": "generated/_company/teams/data-and-analytics.md",
+    "surface": "Keisha Kim"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Keisha_Sokolov.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/beacon-help-center-rebuild/kickoff-email.txt",
+    "surface": "Keisha Sokolov"
+   },
+   {
+    "doc": "generated/beacon-help-center-rebuild/team-chat.txt",
+    "surface": "Keisha"
+   },
+   {
+    "doc": "generated/beacon-help-center-rebuild/team-chat.txt",
+    "surface": "Keisha Sokolov"
+   },
+   {
+    "doc": "generated/beacon-help-center-rebuild/weekly-update-1.md",
+    "surface": "Sokolov, Keisha"
+   },
+   {
+    "doc": "generated/beacon-help-center-rebuild/escalation-review.md",
+    "surface": "Keisha Sokolov"
+   },
+   {
+    "doc": "generated/beacon-help-center-rebuild/retrospective.pdf",
+    "surface": "Keisha Sokolov"
+   },
+   {
+    "doc": "generated/cobalt-escalation-playbook/kickoff-email.txt",
+    "surface": "Keisha Sokolov"
+   },
+   {
+    "doc": "generated/cobalt-escalation-playbook/kickoff-email.txt",
+    "surface": "Keisha"
+   },
+   {
+    "doc": "generated/cobalt-escalation-playbook/meeting-notes.md",
+    "surface": "Keisha Sokolov"
+   },
+   {
+    "doc": "generated/cobalt-escalation-playbook/team-chat.txt",
+    "surface": "Keisha"
+   },
+   {
+    "doc": "generated/cobalt-escalation-playbook/team-chat.txt",
+    "surface": "Keisha Sokolov"
+   },
+   {
+    "doc": "generated/_company/teams/customer-support.md",
+    "surface": "Keisha Sokolov"
+   },
+   {
+    "doc": "generated/_company/wiki/customer-support-how-to.md",
+    "surface": "Keisha Sokolov"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Kenji_Abbasi.md",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/harbor-reporting-pipeline/kickoff-email.txt",
+    "surface": "Kenji Abbasi"
+   },
+   {
+    "doc": "generated/harbor-reporting-pipeline/kickoff-email.txt",
+    "surface": "Kenji"
+   },
+   {
+    "doc": "generated/harbor-reporting-pipeline/team-chat.txt",
+    "surface": "Kenji Abbasi"
+   },
+   {
+    "doc": "generated/harbor-reporting-pipeline/team-chat.txt",
+    "surface": "Kenji"
+   },
+   {
+    "doc": "generated/harbor-reporting-pipeline/retrospective.pdf",
+    "surface": "Kenji Abbasi"
+   },
+   {
+    "doc": "generated/tundra-enterprise-pilot/kickoff-email.txt",
+    "surface": "Kenji Abbasi"
+   },
+   {
+    "doc": "generated/tundra-enterprise-pilot/meeting-notes.md",
+    "surface": "K. Abbasi"
+   },
+   {
+    "doc": "generated/tundra-enterprise-pilot/weekly-update-1.md",
+    "surface": "Kenji Abbasi"
+   },
+   {
+    "doc": "generated/_company/teams/data-and-analytics.md",
+    "surface": "Kenji Abbasi"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Lars_Kaplan.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/pioneer-brand-refresh/kickoff-email.txt",
+    "surface": "Lars Kaplan"
+   },
+   {
+    "doc": "generated/pioneer-brand-refresh/kickoff-email.txt",
+    "surface": "Lars"
+   },
+   {
+    "doc": "generated/pioneer-brand-refresh/meeting-notes.md",
+    "surface": "Lars Kaplan"
+   },
+   {
+    "doc": "generated/pioneer-brand-refresh/team-chat.txt",
+    "surface": "Lars"
+   },
+   {
+    "doc": "generated/pioneer-brand-refresh/team-chat.txt",
+    "surface": "Lars Kaplan"
+   },
+   {
+    "doc": "generated/pioneer-brand-refresh/weekly-update-1.md",
+    "surface": "Lars Kaplan"
+   },
+   {
+    "doc": "generated/pioneer-brand-refresh/campaign-recap.md",
+    "surface": "Lars Kaplan"
+   },
+   {
+    "doc": "generated/pioneer-brand-refresh/retrospective.pdf",
+    "surface": "Lars Kaplan"
+   },
+   {
+    "doc": "generated/_company/teams/marketing.md",
+    "surface": "Lars Kaplan"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Lars_Sato.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/summit-partner-program/kickoff-email.txt",
+    "surface": "Lars Sato"
+   },
+   {
+    "doc": "generated/summit-partner-program/kickoff-email.txt",
+    "surface": "Lars"
+   },
+   {
+    "doc": "generated/summit-partner-program/meeting-notes.md",
+    "surface": "Lars Sato"
+   },
+   {
+    "doc": "generated/summit-partner-program/team-chat.txt",
+    "surface": "Lars"
+   },
+   {
+    "doc": "generated/summit-partner-program/team-chat.txt",
+    "surface": "Lars Sato"
+   },
+   {
+    "doc": "generated/summit-partner-program/weekly-update-1.md",
+    "surface": "L. Sato"
+   },
+   {
+    "doc": "generated/umbra-renewal-drive/kickoff-email.txt",
+    "surface": "Lars Sato"
+   },
+   {
+    "doc": "generated/umbra-renewal-drive/kickoff-email.txt",
+    "surface": "Lars"
+   },
+   {
+    "doc": "generated/umbra-renewal-drive/meeting-notes.md",
+    "surface": "Lars Sato"
+   },
+   {
+    "doc": "generated/umbra-renewal-drive/meeting-notes.md",
+    "surface": "Lars"
+   },
+   {
+    "doc": "generated/umbra-renewal-drive/team-chat.txt",
+    "surface": "Lars"
+   },
+   {
+    "doc": "generated/umbra-renewal-drive/team-chat.txt",
+    "surface": "Lars Sato"
+   },
+   {
+    "doc": "generated/_company/teams/sales-and-partnerships.md",
+    "surface": "Lars Sato"
+   },
+   {
+    "doc": "generated/_company/wiki/sales-and-partnerships-how-to.md",
+    "surface": "Lars Sato"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Lars_Vargas.txt",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/kestrel-device-refresh/kickoff-email.txt",
+    "surface": "Lars Vargas"
+   },
+   {
+    "doc": "generated/kestrel-device-refresh/meeting-notes.md",
+    "surface": "lvargas16@example.net"
+   },
+   {
+    "doc": "generated/kestrel-device-refresh/team-chat.txt",
+    "surface": "Lars Vargas"
+   },
+   {
+    "doc": "generated/kestrel-device-refresh/weekly-update-2.md",
+    "surface": "Lars Vargas"
+   },
+   {
+    "doc": "generated/kestrel-device-refresh/weekly-update-2.md",
+    "surface": "Lars"
+   },
+   {
+    "doc": "generated/_company/teams/people.md",
+    "surface": "Lars Vargas"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Layla_Patel.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/kestrel-device-refresh/kickoff-email.txt",
+    "surface": "Layla Patel"
+   },
+   {
+    "doc": "generated/kestrel-device-refresh/kickoff-email.txt",
+    "surface": "Layla"
+   },
+   {
+    "doc": "generated/kestrel-device-refresh/meeting-notes.md",
+    "surface": "Layla Patel"
+   },
+   {
+    "doc": "generated/kestrel-device-refresh/team-chat.txt",
+    "surface": "Layla Patel"
+   },
+   {
+    "doc": "generated/kestrel-device-refresh/team-chat.txt",
+    "surface": "Layla"
+   },
+   {
+    "doc": "generated/_company/teams/security-and-it.md",
+    "surface": "Layla Patel"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Leila_Castillo.txt",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/_company/teams/web-and-mobile.md",
+    "surface": "Leila Castillo"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Leila_Gupta.md",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/_company/teams/product-and-design.md",
+    "surface": "Leila Gupta"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Leila_Popescu.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/_company/teams/people.md",
+    "surface": "Leila Popescu"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Liam_Abbasi.txt",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/_company/teams/security-and-it.md",
+    "surface": "Liam Abbasi"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Lucia_Barros.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/_company/teams/sales-and-partnerships.md",
+    "surface": "Lucia Barros"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Lucia_Hansen.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/atlas-migration/kickoff-email.txt",
+    "surface": "Lucia Hansen"
+   },
+   {
+    "doc": "generated/atlas-migration/meeting-notes.md",
+    "surface": "Lucia Hansen"
+   },
+   {
+    "doc": "generated/atlas-migration/meeting-notes.md",
+    "surface": "Lucia"
+   },
+   {
+    "doc": "generated/atlas-migration/weekly-update-1.md",
+    "surface": "L. Hansen"
+   },
+   {
+    "doc": "generated/atlas-migration/postmortem.md",
+    "surface": "Lucia Hansen"
+   },
+   {
+    "doc": "generated/cinder-billing-rewrite/kickoff-email.txt",
+    "surface": "Lucia Hansen"
+   },
+   {
+    "doc": "generated/cinder-billing-rewrite/kickoff-email.txt",
+    "surface": "Lucia"
+   },
+   {
+    "doc": "generated/cinder-billing-rewrite/meeting-notes.md",
+    "surface": "Hansen, Lucia"
+   },
+   {
+    "doc": "generated/cinder-billing-rewrite/weekly-update-1.md",
+    "surface": "Lucia Hansen"
+   },
+   {
+    "doc": "generated/cinder-billing-rewrite/weekly-update-2.md",
+    "surface": "L. Hansen"
+   },
+   {
+    "doc": "generated/cinder-billing-rewrite/postmortem.md",
+    "surface": "L. Hansen"
+   },
+   {
+    "doc": "generated/_company/teams/platform-engineering.md",
+    "surface": "Lucia Hansen"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Marco_Ito.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/ember-mobile-relaunch/kickoff-email.txt",
+    "surface": "M. Ito"
+   },
+   {
+    "doc": "generated/ember-mobile-relaunch/team-chat.txt",
+    "surface": "Marco"
+   },
+   {
+    "doc": "generated/ember-mobile-relaunch/team-chat.txt",
+    "surface": "Marco Ito"
+   },
+   {
+    "doc": "generated/ember-mobile-relaunch/weekly-update-1.md",
+    "surface": "Marco Ito"
+   },
+   {
+    "doc": "generated/ember-mobile-relaunch/weekly-update-2.md",
+    "surface": "Marco Ito"
+   },
+   {
+    "doc": "generated/xenon-expense-cleanup/kickoff-email.txt",
+    "surface": "Marco Ito"
+   },
+   {
+    "doc": "generated/xenon-expense-cleanup/kickoff-email.txt",
+    "surface": "Marco"
+   },
+   {
+    "doc": "generated/xenon-expense-cleanup/meeting-notes.md",
+    "surface": "Marco Ito"
+   },
+   {
+    "doc": "generated/xenon-expense-cleanup/team-chat.txt",
+    "surface": "Marco"
+   },
+   {
+    "doc": "generated/xenon-expense-cleanup/team-chat.txt",
+    "surface": "Marco Ito"
+   },
+   {
+    "doc": "generated/xenon-expense-cleanup/weekly-update-1.md",
+    "surface": "Marco Ito"
+   },
+   {
+    "doc": "generated/xenon-expense-cleanup/weekly-update-2.md",
+    "surface": "M. Ito"
+   },
+   {
+    "doc": "generated/xenon-expense-cleanup/close-notes.md",
+    "surface": "Marco Ito"
+   },
+   {
+    "doc": "generated/_company/teams/finance.md",
+    "surface": "Marco Ito"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Maria_Andersson.md",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/tundra-enterprise-pilot/kickoff-email.txt",
+    "surface": "Maria Andersson"
+   },
+   {
+    "doc": "generated/tundra-enterprise-pilot/meeting-notes.md",
+    "surface": "M. Andersson"
+   },
+   {
+    "doc": "generated/tundra-enterprise-pilot/team-chat.txt",
+    "surface": "Maria Andersson"
+   },
+   {
+    "doc": "generated/tundra-enterprise-pilot/team-chat.txt",
+    "surface": "Maria"
+   },
+   {
+    "doc": "generated/tundra-enterprise-pilot/retrospective.pdf",
+    "surface": "Maria Andersson"
+   },
+   {
+    "doc": "generated/umbra-renewal-drive/kickoff-email.txt",
+    "surface": "M. Andersson"
+   },
+   {
+    "doc": "generated/umbra-renewal-drive/meeting-notes.md",
+    "surface": "Maria Andersson"
+   },
+   {
+    "doc": "generated/umbra-renewal-drive/meeting-notes.md",
+    "surface": "M. Andersson"
+   },
+   {
+    "doc": "generated/umbra-renewal-drive/weekly-update-2.md",
+    "surface": "Maria Andersson"
+   },
+   {
+    "doc": "generated/_company/teams/sales-and-partnerships.md",
+    "surface": "Maria Andersson"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Maria_Jensen.md",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/_company/teams/sales-and-partnerships.md",
+    "surface": "Maria Jensen"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Maria_Johnson.md",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/_company/teams/marketing.md",
+    "surface": "Maria Johnson"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Maria_Olsen.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/atlas-migration/kickoff-email.txt",
+    "surface": "Maria Olsen"
+   },
+   {
+    "doc": "generated/atlas-migration/meeting-notes.md",
+    "surface": "Maria Olsen"
+   },
+   {
+    "doc": "generated/atlas-migration/meeting-notes.md",
+    "surface": "Maria"
+   },
+   {
+    "doc": "generated/atlas-migration/weekly-update-2.md",
+    "surface": "mariao7@example.com"
+   },
+   {
+    "doc": "generated/atlas-migration/postmortem.md",
+    "surface": "Maria Olsen"
+   },
+   {
+    "doc": "generated/borealis-observability-rollout/kickoff-email.txt",
+    "surface": "M. Olsen"
+   },
+   {
+    "doc": "generated/borealis-observability-rollout/meeting-notes.md",
+    "surface": "Maria Olsen"
+   },
+   {
+    "doc": "generated/borealis-observability-rollout/team-chat.txt",
+    "surface": "Maria"
+   },
+   {
+    "doc": "generated/borealis-observability-rollout/team-chat.txt",
+    "surface": "Maria Olsen"
+   },
+   {
+    "doc": "generated/borealis-observability-rollout/retrospective.pdf",
+    "surface": "Maria Olsen"
+   },
+   {
+    "doc": "generated/_company/teams/platform-engineering.md",
+    "surface": "Maria Olsen"
+   },
+   {
+    "doc": "generated/_company/newsletter-2.md",
+    "surface": "Maria Olsen"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Mei_Haddad.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/harbor-reporting-pipeline/kickoff-email.txt",
+    "surface": "M. Haddad"
+   },
+   {
+    "doc": "generated/harbor-reporting-pipeline/meeting-notes.md",
+    "surface": "Mei Haddad"
+   },
+   {
+    "doc": "generated/harbor-reporting-pipeline/weekly-update-1.md",
+    "surface": "Mei Haddad"
+   },
+   {
+    "doc": "generated/harbor-reporting-pipeline/retrospective.pdf",
+    "surface": "Mei Haddad"
+   },
+   {
+    "doc": "generated/_company/teams/data-and-analytics.md",
+    "surface": "Mei Haddad"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Mei_Popescu.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/_company/teams/finance.md",
+    "surface": "Mei Popescu"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Mei_Rossi.md",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/dynamo-checkout-redesign/kickoff-email.txt",
+    "surface": "meir9@example.net"
+   },
+   {
+    "doc": "generated/dynamo-checkout-redesign/meeting-notes.md",
+    "surface": "Rossi, Mei"
+   },
+   {
+    "doc": "generated/dynamo-checkout-redesign/weekly-update-1.md",
+    "surface": "Mei Rossi"
+   },
+   {
+    "doc": "generated/dynamo-checkout-redesign/launch-review.md",
+    "surface": "M. Rossi"
+   },
+   {
+    "doc": "generated/ember-mobile-relaunch/kickoff-email.txt",
+    "surface": "meir9@example.net"
+   },
+   {
+    "doc": "generated/ember-mobile-relaunch/weekly-update-2.md",
+    "surface": "M. Rossi"
+   },
+   {
+    "doc": "generated/_company/teams/web-and-mobile.md",
+    "surface": "Mei Rossi"
+   },
+   {
+    "doc": "generated/_company/wiki/web-and-mobile-how-to.md",
+    "surface": "Mei Rossi"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Miguel_Dubois.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/delta-chat-support-launch/kickoff-email.txt",
+    "surface": "M. Dubois"
+   },
+   {
+    "doc": "generated/delta-chat-support-launch/meeting-notes.md",
+    "surface": "mdubois28@example.org"
+   },
+   {
+    "doc": "generated/delta-chat-support-launch/retrospective.pdf",
+    "surface": "Miguel Dubois"
+   },
+   {
+    "doc": "generated/_company/teams/customer-support.md",
+    "surface": "Miguel Dubois"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Miguel_Schmidt.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/_company/teams/customer-support.md",
+    "surface": "Miguel Schmidt"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Miguel_Thapa.txt",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/_company/teams/sales-and-partnerships.md",
+    "surface": "Miguel Thapa"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Nadia_Hansen.txt",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/_company/teams/platform-engineering.md",
+    "surface": "Nadia Hansen"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Nadia_Jensen.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/_company/teams/marketing.md",
+    "surface": "Nadia Jensen"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Nadia_Larsen.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/meridian-signup-research/kickoff-email.txt",
+    "surface": "Nadia Larsen"
+   },
+   {
+    "doc": "generated/meridian-signup-research/meeting-notes.md",
+    "surface": "Nadia Larsen"
+   },
+   {
+    "doc": "generated/meridian-signup-research/team-chat.txt",
+    "surface": "Nadia"
+   },
+   {
+    "doc": "generated/meridian-signup-research/team-chat.txt",
+    "surface": "Nadia Larsen"
+   },
+   {
+    "doc": "generated/meridian-signup-research/research-findings.md",
+    "surface": "N. Larsen"
+   },
+   {
+    "doc": "generated/_company/teams/data-and-analytics.md",
+    "surface": "Nadia Larsen"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Naomi_Mahlangu.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/cinder-billing-rewrite/kickoff-email.txt",
+    "surface": "Mahlangu, Naomi"
+   },
+   {
+    "doc": "generated/cinder-billing-rewrite/meeting-notes.md",
+    "surface": "Naomi Mahlangu"
+   },
+   {
+    "doc": "generated/cinder-billing-rewrite/meeting-notes.md",
+    "surface": "N. Mahlangu"
+   },
+   {
+    "doc": "generated/cinder-billing-rewrite/weekly-update-1.md",
+    "surface": "Naomi Mahlangu"
+   },
+   {
+    "doc": "generated/cinder-billing-rewrite/weekly-update-2.md",
+    "surface": "Mahlangu, Naomi"
+   },
+   {
+    "doc": "generated/tundra-enterprise-pilot/kickoff-email.txt",
+    "surface": "Naomi Mahlangu"
+   },
+   {
+    "doc": "generated/tundra-enterprise-pilot/kickoff-email.txt",
+    "surface": "Naomi"
+   },
+   {
+    "doc": "generated/tundra-enterprise-pilot/team-chat.txt",
+    "surface": "Naomi"
+   },
+   {
+    "doc": "generated/tundra-enterprise-pilot/team-chat.txt",
+    "surface": "Naomi Mahlangu"
+   },
+   {
+    "doc": "generated/tundra-enterprise-pilot/weekly-update-1.md",
+    "surface": "Naomi Mahlangu"
+   },
+   {
+    "doc": "generated/_company/teams/sales-and-partnerships.md",
+    "surface": "Naomi Mahlangu"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Naomi_Schmidt.md",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/juniper-access-review/kickoff-email.txt",
+    "surface": "Naomi Schmidt"
+   },
+   {
+    "doc": "generated/juniper-access-review/kickoff-email.txt",
+    "surface": "Naomi"
+   },
+   {
+    "doc": "generated/juniper-access-review/meeting-notes.md",
+    "surface": "Naomi Schmidt"
+   },
+   {
+    "doc": "generated/juniper-access-review/meeting-notes.md",
+    "surface": "Naomi"
+   },
+   {
+    "doc": "generated/juniper-access-review/team-chat.txt",
+    "surface": "Naomi"
+   },
+   {
+    "doc": "generated/juniper-access-review/team-chat.txt",
+    "surface": "Naomi Schmidt"
+   },
+   {
+    "doc": "generated/juniper-access-review/weekly-update-1.md",
+    "surface": "Naomi Schmidt"
+   },
+   {
+    "doc": "generated/juniper-access-review/incident-report.md",
+    "surface": "Naomi Schmidt"
+   },
+   {
+    "doc": "generated/juniper-access-review/retrospective.pdf",
+    "surface": "Naomi Schmidt"
+   },
+   {
+    "doc": "generated/raven-webinar-series/kickoff-email.txt",
+    "surface": "N. Schmidt"
+   },
+   {
+    "doc": "generated/raven-webinar-series/meeting-notes.md",
+    "surface": "Naomi Schmidt"
+   },
+   {
+    "doc": "generated/raven-webinar-series/team-chat.txt",
+    "surface": "Naomi"
+   },
+   {
+    "doc": "generated/raven-webinar-series/team-chat.txt",
+    "surface": "Naomi Schmidt"
+   },
+   {
+    "doc": "generated/raven-webinar-series/weekly-update-1.md",
+    "surface": "Naomi Schmidt"
+   },
+   {
+    "doc": "generated/raven-webinar-series/weekly-update-1.md",
+    "surface": "Naomi"
+   },
+   {
+    "doc": "generated/raven-webinar-series/campaign-recap.md",
+    "surface": "Naomi Schmidt"
+   },
+   {
+    "doc": "generated/_company/teams/security-and-it.md",
+    "surface": "Naomi Schmidt"
+   },
+   {
+    "doc": "generated/_company/wiki/security-and-it-how-to.pdf",
+    "surface": "Naomi Schmidt"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Naomi_Yilmaz.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/borealis-observability-rollout/kickoff-email.txt",
+    "surface": "Naomi Yilmaz"
+   },
+   {
+    "doc": "generated/borealis-observability-rollout/kickoff-email.txt",
+    "surface": "Naomi"
+   },
+   {
+    "doc": "generated/borealis-observability-rollout/meeting-notes.md",
+    "surface": "Yilmaz, Naomi"
+   },
+   {
+    "doc": "generated/borealis-observability-rollout/weekly-update-1.md",
+    "surface": "Naomi Yilmaz"
+   },
+   {
+    "doc": "generated/_company/teams/platform-engineering.md",
+    "surface": "Naomi Yilmaz"
+   },
+   {
+    "doc": "generated/_company/wiki/platform-engineering-how-to.pdf",
+    "surface": "Naomi Yilmaz"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Nikhil_Patel.txt",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/onyx-navigation-redesign/kickoff-email.txt",
+    "surface": "Nikhil Patel"
+   },
+   {
+    "doc": "generated/onyx-navigation-redesign/kickoff-email.txt",
+    "surface": "Nikhil"
+   },
+   {
+    "doc": "generated/_company/teams/customer-support.md",
+    "surface": "Nikhil Patel"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Nina_Diaz.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/_company/teams/product-and-design.md",
+    "surface": "Nina Diaz"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Olga_Cohen.txt",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/delta-chat-support-launch/kickoff-email.txt",
+    "surface": "ocohen66@example.com"
+   },
+   {
+    "doc": "generated/delta-chat-support-launch/meeting-notes.md",
+    "surface": "Olga Cohen"
+   },
+   {
+    "doc": "generated/delta-chat-support-launch/team-chat.txt",
+    "surface": "Olga"
+   },
+   {
+    "doc": "generated/delta-chat-support-launch/team-chat.txt",
+    "surface": "Olga Cohen"
+   },
+   {
+    "doc": "generated/delta-chat-support-launch/weekly-update-1.md",
+    "surface": "O. Cohen"
+   },
+   {
+    "doc": "generated/delta-chat-support-launch/retrospective.pdf",
+    "surface": "Olga Cohen"
+   },
+   {
+    "doc": "generated/_company/teams/finance.md",
+    "surface": "Olga Cohen"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Olga_Sokolov.md",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/falcon-design-system/kickoff-email.txt",
+    "surface": "Olga Sokolov"
+   },
+   {
+    "doc": "generated/falcon-design-system/kickoff-email.txt",
+    "surface": "Olga"
+   },
+   {
+    "doc": "generated/falcon-design-system/meeting-notes.md",
+    "surface": "Sokolov, Olga"
+   },
+   {
+    "doc": "generated/falcon-design-system/weekly-update-2.md",
+    "surface": "Olga Sokolov"
+   },
+   {
+    "doc": "generated/falcon-design-system/weekly-update-2.md",
+    "surface": "Olga"
+   },
+   {
+    "doc": "generated/falcon-design-system/launch-review.md",
+    "surface": "O. Sokolov"
+   },
+   {
+    "doc": "generated/_company/teams/web-and-mobile.md",
+    "surface": "Olga Sokolov"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Omar_Novak.md",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/vertex-quarter-close/kickoff-email.txt",
+    "surface": "Omar Novak"
+   },
+   {
+    "doc": "generated/vertex-quarter-close/team-chat.txt",
+    "surface": "Omar"
+   },
+   {
+    "doc": "generated/vertex-quarter-close/team-chat.txt",
+    "surface": "Omar Novak"
+   },
+   {
+    "doc": "generated/vertex-quarter-close/weekly-update-1.md",
+    "surface": "Omar Novak"
+   },
+   {
+    "doc": "generated/vertex-quarter-close/close-notes.md",
+    "surface": "Omar Novak"
+   },
+   {
+    "doc": "generated/willow-budget-planning/kickoff-email.txt",
+    "surface": "O. Novak"
+   },
+   {
+    "doc": "generated/willow-budget-planning/meeting-notes.md",
+    "surface": "Omar Novak"
+   },
+   {
+    "doc": "generated/willow-budget-planning/weekly-update-1.md",
+    "surface": "Omar Novak"
+   },
+   {
+    "doc": "generated/_company/teams/finance.md",
+    "surface": "Omar Novak"
+   },
+   {
+    "doc": "generated/_company/newsletter-3.md",
+    "surface": "Omar Novak"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Paolo_Silva.txt",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/lumen-zero-trust-rollout/kickoff-email.txt",
+    "surface": "Paolo Silva"
+   },
+   {
+    "doc": "generated/lumen-zero-trust-rollout/meeting-notes.md",
+    "surface": "Paolo Silva"
+   },
+   {
+    "doc": "generated/lumen-zero-trust-rollout/team-chat.txt",
+    "surface": "Paolo"
+   },
+   {
+    "doc": "generated/lumen-zero-trust-rollout/team-chat.txt",
+    "surface": "Paolo Silva"
+   },
+   {
+    "doc": "generated/lumen-zero-trust-rollout/weekly-update-1.md",
+    "surface": "Paolo Silva"
+   },
+   {
+    "doc": "generated/lumen-zero-trust-rollout/weekly-update-2.md",
+    "surface": "Paolo Silva"
+   },
+   {
+    "doc": "generated/lumen-zero-trust-rollout/incident-report.md",
+    "surface": "Paolo Silva"
+   },
+   {
+    "doc": "generated/_company/teams/security-and-it.md",
+    "surface": "Paolo Silva"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Paolo_Silva_2.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/anchor-review-cycle/kickoff-email.txt",
+    "surface": "Paolo Silva"
+   },
+   {
+    "doc": "generated/anchor-review-cycle/meeting-notes.md",
+    "surface": "Paolo Silva"
+   },
+   {
+    "doc": "generated/anchor-review-cycle/team-chat.txt",
+    "surface": "Paolo Silva"
+   },
+   {
+    "doc": "generated/anchor-review-cycle/weekly-update-1.md",
+    "surface": "Paolo Silva"
+   },
+   {
+    "doc": "generated/anchor-review-cycle/weekly-update-2.md",
+    "surface": "Paolo Silva"
+   },
+   {
+    "doc": "generated/anchor-review-cycle/program-review.md",
+    "surface": "Paolo Silva"
+   },
+   {
+    "doc": "generated/_company/teams/finance.md",
+    "surface": "Paolo Silva"
+   },
+   {
+    "doc": "generated/_company/wiki/finance-how-to.md",
+    "surface": "Paolo Silva"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Paolo_Singh.md",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/meridian-signup-research/kickoff-email.txt",
+    "surface": "Paolo Singh"
+   },
+   {
+    "doc": "generated/meridian-signup-research/kickoff-email.txt",
+    "surface": "Paolo"
+   },
+   {
+    "doc": "generated/meridian-signup-research/meeting-notes.md",
+    "surface": "Paolo Singh"
+   },
+   {
+    "doc": "generated/meridian-signup-research/team-chat.txt",
+    "surface": "Paolo Singh"
+   },
+   {
+    "doc": "generated/meridian-signup-research/weekly-update-1.md",
+    "surface": "Paolo Singh"
+   },
+   {
+    "doc": "generated/willow-budget-planning/kickoff-email.txt",
+    "surface": "P. Singh"
+   },
+   {
+    "doc": "generated/willow-budget-planning/meeting-notes.md",
+    "surface": "Paolo Singh"
+   },
+   {
+    "doc": "generated/willow-budget-planning/team-chat.txt",
+    "surface": "Paolo"
+   },
+   {
+    "doc": "generated/willow-budget-planning/team-chat.txt",
+    "surface": "Paolo Singh"
+   },
+   {
+    "doc": "generated/willow-budget-planning/weekly-update-1.md",
+    "surface": "Paolo Singh"
+   },
+   {
+    "doc": "generated/_company/teams/product-and-design.md",
+    "surface": "Paolo Singh"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Rafael_Diaz.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/_company/teams/marketing.md",
+    "surface": "Rafael Diaz"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Rafael_Nakamura.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/_company/teams/web-and-mobile.md",
+    "surface": "Rafael Nakamura"
+   },
+   {
+    "doc": "generated/_company/wiki/web-and-mobile-how-to.md",
+    "surface": "Rafael Nakamura"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Rahul_Singh.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/umbra-renewal-drive/kickoff-email.txt",
+    "surface": "Rahul Singh"
+   },
+   {
+    "doc": "generated/umbra-renewal-drive/meeting-notes.md",
+    "surface": "Singh, Rahul"
+   },
+   {
+    "doc": "generated/umbra-renewal-drive/weekly-update-2.md",
+    "surface": "Singh, Rahul"
+   },
+   {
+    "doc": "generated/umbra-renewal-drive/account-review.md",
+    "surface": "Rahul Singh"
+   },
+   {
+    "doc": "generated/_company/teams/data-and-analytics.md",
+    "surface": "Rahul Singh"
+   },
+   {
+    "doc": "generated/_company/wiki/data-and-analytics-how-to.pdf",
+    "surface": "Rahul Singh"
+   },
+   {
+    "doc": "generated/_company/newsletter-3.md",
+    "surface": "Rahul Singh"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Samir_Almeida.md",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/_company/teams/platform-engineering.md",
+    "surface": "Samir Almeida"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Samir_Lee.txt",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/juniper-access-review/kickoff-email.txt",
+    "surface": "Samir Lee"
+   },
+   {
+    "doc": "generated/juniper-access-review/meeting-notes.md",
+    "surface": "Samir Lee"
+   },
+   {
+    "doc": "generated/juniper-access-review/team-chat.txt",
+    "surface": "Samir Lee"
+   },
+   {
+    "doc": "generated/kestrel-device-refresh/kickoff-email.txt",
+    "surface": "Samir Lee"
+   },
+   {
+    "doc": "generated/kestrel-device-refresh/weekly-update-1.md",
+    "surface": "Samir Lee"
+   },
+   {
+    "doc": "generated/kestrel-device-refresh/weekly-update-2.md",
+    "surface": "Samir Lee"
+   },
+   {
+    "doc": "generated/_company/teams/security-and-it.md",
+    "surface": "Samir Lee"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Samir_Lee_2.md",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/_company/teams/sales-and-partnerships.md",
+    "surface": "Samir Lee"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Samir_Thapa.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/ember-mobile-relaunch/kickoff-email.txt",
+    "surface": "Samir Thapa"
+   },
+   {
+    "doc": "generated/ember-mobile-relaunch/meeting-notes.md",
+    "surface": "Samir Thapa"
+   },
+   {
+    "doc": "generated/ember-mobile-relaunch/weekly-update-1.md",
+    "surface": "sthapa63@example.com"
+   },
+   {
+    "doc": "generated/willow-budget-planning/kickoff-email.txt",
+    "surface": "Samir Thapa"
+   },
+   {
+    "doc": "generated/willow-budget-planning/kickoff-email.txt",
+    "surface": "Samir"
+   },
+   {
+    "doc": "generated/willow-budget-planning/weekly-update-1.md",
+    "surface": "Samir Thapa"
+   },
+   {
+    "doc": "generated/willow-budget-planning/weekly-update-1.md",
+    "surface": "Samir"
+   },
+   {
+    "doc": "generated/_company/teams/finance.md",
+    "surface": "Samir Thapa"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Sana_Fernandez.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/atlas-migration/kickoff-email.txt",
+    "surface": "Sana Fernandez"
+   },
+   {
+    "doc": "generated/atlas-migration/meeting-notes.md",
+    "surface": "Sana Fernandez"
+   },
+   {
+    "doc": "generated/atlas-migration/weekly-update-2.md",
+    "surface": "Sana Fernandez"
+   },
+   {
+    "doc": "generated/harbor-reporting-pipeline/kickoff-email.txt",
+    "surface": "Sana Fernandez"
+   },
+   {
+    "doc": "generated/harbor-reporting-pipeline/meeting-notes.md",
+    "surface": "Sana Fernandez"
+   },
+   {
+    "doc": "generated/harbor-reporting-pipeline/weekly-update-1.md",
+    "surface": "Sana Fernandez"
+   },
+   {
+    "doc": "generated/_company/teams/finance.md",
+    "surface": "Sana Fernandez"
+   },
+   {
+    "doc": "generated/_company/newsletter-1.md",
+    "surface": "Sana Fernandez"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Tariq_Costa.md",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/cinder-billing-rewrite/kickoff-email.txt",
+    "surface": "T. Costa"
+   },
+   {
+    "doc": "generated/cinder-billing-rewrite/meeting-notes.md",
+    "surface": "tariq.costa@example.net"
+   },
+   {
+    "doc": "generated/_company/teams/platform-engineering.md",
+    "surface": "Tariq Costa"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Tariq_Weber.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/_company/teams/people.md",
+    "surface": "Tariq Weber"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Tessa_Gupta.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/zephyr-new-hire-program/kickoff-email.txt",
+    "surface": "Tessa Gupta"
+   },
+   {
+    "doc": "generated/zephyr-new-hire-program/meeting-notes.md",
+    "surface": "Tessa Gupta"
+   },
+   {
+    "doc": "generated/zephyr-new-hire-program/team-chat.txt",
+    "surface": "Tessa Gupta"
+   },
+   {
+    "doc": "generated/zephyr-new-hire-program/weekly-update-1.md",
+    "surface": "tessa.gupta@example.org"
+   },
+   {
+    "doc": "generated/zephyr-new-hire-program/retrospective.pdf",
+    "surface": "Tessa Gupta"
+   },
+   {
+    "doc": "generated/anchor-review-cycle/kickoff-email.txt",
+    "surface": "Tessa Gupta"
+   },
+   {
+    "doc": "generated/anchor-review-cycle/meeting-notes.md",
+    "surface": "Tessa Gupta"
+   },
+   {
+    "doc": "generated/anchor-review-cycle/team-chat.txt",
+    "surface": "Tessa"
+   },
+   {
+    "doc": "generated/anchor-review-cycle/team-chat.txt",
+    "surface": "Tessa Gupta"
+   },
+   {
+    "doc": "generated/anchor-review-cycle/weekly-update-1.md",
+    "surface": "Tessa Gupta"
+   },
+   {
+    "doc": "generated/_company/teams/people.md",
+    "surface": "Tessa Gupta"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Tessa_Mahlangu.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/quartz-launch-campaign/kickoff-email.txt",
+    "surface": "Mahlangu, Tessa"
+   },
+   {
+    "doc": "generated/quartz-launch-campaign/meeting-notes.md",
+    "surface": "Mahlangu, Tessa"
+   },
+   {
+    "doc": "generated/quartz-launch-campaign/team-chat.txt",
+    "surface": "Tessa Mahlangu"
+   },
+   {
+    "doc": "generated/quartz-launch-campaign/team-chat.txt",
+    "surface": "Tessa"
+   },
+   {
+    "doc": "generated/quartz-launch-campaign/weekly-update-1.md",
+    "surface": "Tessa Mahlangu"
+   },
+   {
+    "doc": "generated/quartz-launch-campaign/weekly-update-1.md",
+    "surface": "Tessa"
+   },
+   {
+    "doc": "generated/quartz-launch-campaign/weekly-update-2.md",
+    "surface": "T. Mahlangu"
+   },
+   {
+    "doc": "generated/_company/teams/marketing.md",
+    "surface": "Tessa Mahlangu"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Tessa_Moreau.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/lumen-zero-trust-rollout/kickoff-email.txt",
+    "surface": "Tessa Moreau"
+   },
+   {
+    "doc": "generated/lumen-zero-trust-rollout/kickoff-email.txt",
+    "surface": "Tessa"
+   },
+   {
+    "doc": "generated/lumen-zero-trust-rollout/meeting-notes.md",
+    "surface": "Tessa Moreau"
+   },
+   {
+    "doc": "generated/lumen-zero-trust-rollout/team-chat.txt",
+    "surface": "Tessa Moreau"
+   },
+   {
+    "doc": "generated/lumen-zero-trust-rollout/weekly-update-1.md",
+    "surface": "Moreau, Tessa"
+   },
+   {
+    "doc": "generated/lumen-zero-trust-rollout/weekly-update-2.md",
+    "surface": "T. Moreau"
+   },
+   {
+    "doc": "generated/_company/teams/security-and-it.md",
+    "surface": "Tessa Moreau"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Tessa_Tanaka.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/_company/teams/platform-engineering.md",
+    "surface": "Tessa Tanaka"
+   },
+   {
+    "doc": "generated/_company/wiki/platform-engineering-how-to.pdf",
+    "surface": "Tessa Tanaka"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Uma_Schmidt.md",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/falcon-design-system/kickoff-email.txt",
+    "surface": "Uma Schmidt"
+   },
+   {
+    "doc": "generated/falcon-design-system/kickoff-email.txt",
+    "surface": "Uma"
+   },
+   {
+    "doc": "generated/falcon-design-system/meeting-notes.md",
+    "surface": "Uma Schmidt"
+   },
+   {
+    "doc": "generated/falcon-design-system/team-chat.txt",
+    "surface": "Uma"
+   },
+   {
+    "doc": "generated/falcon-design-system/team-chat.txt",
+    "surface": "Uma Schmidt"
+   },
+   {
+    "doc": "generated/falcon-design-system/weekly-update-1.md",
+    "surface": "Uma Schmidt"
+   },
+   {
+    "doc": "generated/falcon-design-system/weekly-update-1.md",
+    "surface": "Uma"
+   },
+   {
+    "doc": "generated/falcon-design-system/weekly-update-2.md",
+    "surface": "umas7@example.com"
+   },
+   {
+    "doc": "generated/falcon-design-system/launch-review.md",
+    "surface": "U. Schmidt"
+   },
+   {
+    "doc": "generated/falcon-design-system/retrospective.pdf",
+    "surface": "Uma Schmidt"
+   },
+   {
+    "doc": "generated/_company/teams/web-and-mobile.md",
+    "surface": "Uma Schmidt"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Valentina_Abbasi.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/falcon-design-system/kickoff-email.txt",
+    "surface": "Valentina Abbasi"
+   },
+   {
+    "doc": "generated/falcon-design-system/meeting-notes.md",
+    "surface": "Valentina Abbasi"
+   },
+   {
+    "doc": "generated/falcon-design-system/team-chat.txt",
+    "surface": "Valentina Abbasi"
+   },
+   {
+    "doc": "generated/falcon-design-system/weekly-update-2.md",
+    "surface": "Abbasi, Valentina"
+   },
+   {
+    "doc": "generated/_company/teams/web-and-mobile.md",
+    "surface": "Valentina Abbasi"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Valentina_Ito.txt",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/tundra-enterprise-pilot/kickoff-email.txt",
+    "surface": "Valentina Ito"
+   },
+   {
+    "doc": "generated/tundra-enterprise-pilot/team-chat.txt",
+    "surface": "Valentina Ito"
+   },
+   {
+    "doc": "generated/_company/teams/data-and-analytics.md",
+    "surface": "Valentina Ito"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Victor_Osei.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/granite-data-platform/kickoff-email.txt",
+    "surface": "Victor Osei"
+   },
+   {
+    "doc": "generated/granite-data-platform/meeting-notes.md",
+    "surface": "Victor Osei"
+   },
+   {
+    "doc": "generated/granite-data-platform/weekly-update-1.md",
+    "surface": "victoro6@example.org"
+   },
+   {
+    "doc": "generated/granite-data-platform/analysis-readout.md",
+    "surface": "Victor Osei"
+   },
+   {
+    "doc": "generated/_company/teams/marketing.md",
+    "surface": "Victor Osei"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Wei_Johnson.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/dynamo-checkout-redesign/kickoff-email.txt",
+    "surface": "Wei Johnson"
+   },
+   {
+    "doc": "generated/dynamo-checkout-redesign/kickoff-email.txt",
+    "surface": "Wei"
+   },
+   {
+    "doc": "generated/dynamo-checkout-redesign/meeting-notes.md",
+    "surface": "Wei Johnson"
+   },
+   {
+    "doc": "generated/dynamo-checkout-redesign/meeting-notes.md",
+    "surface": "Wei"
+   },
+   {
+    "doc": "generated/dynamo-checkout-redesign/team-chat.txt",
+    "surface": "Wei"
+   },
+   {
+    "doc": "generated/dynamo-checkout-redesign/team-chat.txt",
+    "surface": "Wei Johnson"
+   },
+   {
+    "doc": "generated/dynamo-checkout-redesign/launch-review.md",
+    "surface": "W. Johnson"
+   },
+   {
+    "doc": "generated/dynamo-checkout-redesign/retrospective.pdf",
+    "surface": "Wei Johnson"
+   },
+   {
+    "doc": "generated/_company/teams/web-and-mobile.md",
+    "surface": "Wei Johnson"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Wei_Ng.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/atlas-migration/kickoff-email.txt",
+    "surface": "Wei Ng"
+   },
+   {
+    "doc": "generated/atlas-migration/kickoff-email.txt",
+    "surface": "Wei"
+   },
+   {
+    "doc": "generated/atlas-migration/team-chat.txt",
+    "surface": "Wei Ng"
+   },
+   {
+    "doc": "generated/atlas-migration/weekly-update-2.md",
+    "surface": "wng58@example.org"
+   },
+   {
+    "doc": "generated/_company/teams/platform-engineering.md",
+    "surface": "Wei Ng"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Wei_Popescu.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/granite-data-platform/kickoff-email.txt",
+    "surface": "Wei Popescu"
+   },
+   {
+    "doc": "generated/granite-data-platform/meeting-notes.md",
+    "surface": "Wei Popescu"
+   },
+   {
+    "doc": "generated/granite-data-platform/meeting-notes.md",
+    "surface": "Wei"
+   },
+   {
+    "doc": "generated/granite-data-platform/team-chat.txt",
+    "surface": "Wei Popescu"
+   },
+   {
+    "doc": "generated/raven-webinar-series/kickoff-email.txt",
+    "surface": "Wei Popescu"
+   },
+   {
+    "doc": "generated/raven-webinar-series/meeting-notes.md",
+    "surface": "Wei Popescu"
+   },
+   {
+    "doc": "generated/raven-webinar-series/weekly-update-1.md",
+    "surface": "Wei Popescu"
+   },
+   {
+    "doc": "generated/raven-webinar-series/weekly-update-2.md",
+    "surface": "Wei Popescu"
+   },
+   {
+    "doc": "generated/_company/teams/marketing.md",
+    "surface": "Wei Popescu"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Yara_Hansen.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/pioneer-brand-refresh/kickoff-email.txt",
+    "surface": "Y. Hansen"
+   },
+   {
+    "doc": "generated/pioneer-brand-refresh/meeting-notes.md",
+    "surface": "Hansen, Yara"
+   },
+   {
+    "doc": "generated/pioneer-brand-refresh/team-chat.txt",
+    "surface": "Yara"
+   },
+   {
+    "doc": "generated/pioneer-brand-refresh/team-chat.txt",
+    "surface": "Yara Hansen"
+   },
+   {
+    "doc": "generated/pioneer-brand-refresh/weekly-update-1.md",
+    "surface": "Hansen, Yara"
+   },
+   {
+    "doc": "generated/pioneer-brand-refresh/weekly-update-2.md",
+    "surface": "yara.hansen@example.com"
+   },
+   {
+    "doc": "generated/pioneer-brand-refresh/retrospective.pdf",
+    "surface": "Yara Hansen"
+   },
+   {
+    "doc": "generated/raven-webinar-series/kickoff-email.txt",
+    "surface": "Yara Hansen"
+   },
+   {
+    "doc": "generated/raven-webinar-series/meeting-notes.md",
+    "surface": "Yara Hansen"
+   },
+   {
+    "doc": "generated/raven-webinar-series/meeting-notes.md",
+    "surface": "Yara"
+   },
+   {
+    "doc": "generated/raven-webinar-series/retrospective.pdf",
+    "surface": "Yara Hansen"
+   },
+   {
+    "doc": "generated/_company/teams/marketing.md",
+    "surface": "Yara Hansen"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Yusuf_Ortiz.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/_company/teams/people.md",
+    "surface": "Yusuf Ortiz"
    }
   ]
  }

@@ -1,0 +1,7 @@
+#lumen-zero-trust-rollout channel, exported 2025-07-16
+
+[09:02] Paolo Silva: quick update: I finished the access audit yesterday.
+[09:05] Jonas Jensen: nice. I am still on the Python part of Lumen Zero Trust Rollout.
+[09:08] Paolo Silva: Jonas, can you look at the laptop inventory after that?
+[09:11] Jonas Jensen: yes, will do.
+[09:14] Tessa Moreau: reminder that the Lumen Zero Trust Rollout review is on Thursday. Paolo is presenting.

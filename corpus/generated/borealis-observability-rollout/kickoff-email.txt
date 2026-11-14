@@ -1,0 +1,19 @@
+From: Naomi Yilmaz <nyilmaz51@example.net>
+To: borealis-observability-rollout@larkfield.example
+Date: 2025-03-28
+Subject: Borealis Observability Rollout kickoff: who is doing what
+
+Hi all,
+
+We are kicking off Borealis Observability Rollout. This is who is on it.
+
+I am the release manager for Borealis Observability Rollout.
+Anika Adeyemi (Backend Engineer) joins Borealis Observability Rollout as backend engineer.
+M. Olsen (Backend Engineer, mariao7@example.com) is our tech lead on Borealis Observability Rollout.
+C. Williams (Senior Platform Engineer) will be the site reliability engineer for Borealis Observability Rollout.
+Jamal Andersson (UX Researcher, jamal.andersson@example.org) is our product lead on Borealis Observability Rollout.
+danielp2@example.com (UX Researcher) is our design lead on Borealis Observability Rollout.
+Andre Johnson (Contract UX Designer, andre.johnson@brightline.example) from Brightline Partners is our product analyst on Borealis Observability Rollout.
+
+Thanks,
+Naomi

@@ -1,0 +1,18 @@
+From: Paolo Singh <paolo.singh@example.com>
+To: meridian-signup-research@larkfield.example
+Date: 2024-06-23
+Subject: Meridian Signup Research kickoff: who is doing what
+
+Hi all,
+
+Meridian Signup Research starts this month, so here is the team.
+
+I am the design lead for Meridian Signup Research.
+Garcia, Keisha (UX Researcher) will be the product lead for Meridian Signup Research.
+Daniel Popescu (UX Researcher) is our researcher on Meridian Signup Research.
+Daniel starts on Meridian Signup Research in 2024-06.
+Kai Jensen (UX Designer, kaij5@example.net) joins Meridian Signup Research as product analyst.
+Nadia Larsen (Analytics Engineer, nadial8@example.net) is our model owner on Meridian Signup Research.
+
+Thanks,
+Paolo

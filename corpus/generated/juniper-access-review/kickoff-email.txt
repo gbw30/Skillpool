@@ -1,0 +1,16 @@
+From: Naomi Schmidt <naomis7@example.org>
+To: juniper-access-review@larkfield.example
+Date: 2024-02-09
+Subject: Juniper Access Review kickoff: who is doing what
+
+Hi all,
+
+We are kicking off Juniper Access Review. This is who is on it.
+
+I am the security reviewer for Juniper Access Review.
+Bao Mishra (Senior Security Engineer, bao.mishra@example.com) will be the compliance contact for Juniper Access Review.
+Samir Lee (IT Administrator, slee95@example.org) will be the security lead for Juniper Access Review.
+Carlos Thapa (Account Executive) is our operations analyst on Juniper Access Review.
+
+Thanks,
+Naomi

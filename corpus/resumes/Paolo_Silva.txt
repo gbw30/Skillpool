@@ -1,0 +1,18 @@
+Paolo Silva
+paolos8@example.net
+
+I'm a Systems Administrator based in Lisbon.
+
+Where I've worked
+
+I joined Obsidian Games in 2023 as a Systems Administrator. I looked after Okta for a company of two thousand people. I took over a stalled project and delivered it within a quarter. I closed out an external audit with no major findings.
+
+I joined Sundial Energy in 2019 as an IT Administrator and stayed until 2023. I handled a key vendor relationship and renegotiated the contract. I led the response to a phishing incident and wrote the playbook that followed.
+
+What I'm good at
+
+I'd call myself an expert in Okta. I'm advanced in AWS and Penetration Testing. I'm at an intermediate level in Active Directory, Incident Response and Kubernetes. I'm a beginner in Wireshark and Python.
+
+Education
+
+I studied Information Security at University of Westmarch (BSc, 2015).

@@ -1,0 +1,23 @@
+Anika Adeyemi
+anika.adeyemi@example.com
+
+I'm a Backend Engineer based in Lisbon.
+
+Where I've worked
+
+I joined Pinebridge Health in 2019 as a Backend Engineer. I moved a legacy system to a new platform and cut deploy time in half, leaning on Redis. I trained the wider team on a new process. I wrote the deploy tooling the rest of the team uses, built on Linux.
+
+I joined Mistral Telecom in 2017 as a DevOps Engineer and stayed until 2019. I wrote the documentation new joiners still start with. I built and ran services that handled millions of requests a day, mostly in Jenkins. I mentored two junior colleagues through their first year.
+
+What I'm good at
+
+I'd call myself an expert in AWS and Go. I'm advanced in Linux, Jenkins, PostgreSQL and Redis. I'm at an intermediate level in Docker.
+
+Education
+
+I studied Computer Science at Northfield Polytechnic (BA, 2014).
+I also hold the ITIL Foundation.
+
+On the side
+
+Fieldnotes: a side project I built in my own time.

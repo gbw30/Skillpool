@@ -1,0 +1,15 @@
+From: Jamal Andersson <jamala1@example.net>
+To: yarrow-hiring-sprint@larkfield.example
+Date: 2025-06-20
+Subject: Yarrow Hiring Sprint kickoff: who is doing what
+
+Hi all,
+
+We are kicking off Yarrow Hiring Sprint. This is who is on it.
+
+I am the program owner for Yarrow Hiring Sprint.
+Daniel Kumar (Recruiter) joins Yarrow Hiring Sprint as people lead.
+Chloe Rossi (Learning Specialist) will be the recruiter for Yarrow Hiring Sprint.
+
+Thanks,
+Jamal

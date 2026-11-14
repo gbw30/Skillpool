@@ -3,327 +3,376 @@
   "q": "Who has hands-on experience with Kafka?",
   "tag": "multi_hop",
   "expected": [
-   "resumes/Alexandra_Johnson.pdf",
-   "resumes/Amanda_Rogers.pdf",
-   "resumes/Amy_Vasquez.pdf",
-   "resumes/Anthony_Jones.pdf",
-   "resumes/Becky_Wright.pdf",
-   "resumes/Brenda_Adams.pdf",
-   "resumes/Brian_White.pdf"
+   "resumes/Chloe_Williams.md",
+   "resumes/Ivan_Eriksen.pdf",
+   "resumes/Lucia_Hansen.pdf",
+   "resumes/Maria_Olsen.pdf",
+   "resumes/Sana_Fernandez.pdf",
+   "resumes/Wei_Ng.pdf"
+  ]
+ },
+ {
+  "q": "Who has hands-on experience with Terraform?",
+  "tag": "multi_hop",
+  "expected": [
+   "resumes/Anika_Adeyemi.txt",
+   "resumes/Chloe_Williams.md",
+   "resumes/Daniel_Popescu.txt",
+   "resumes/Jamal_Andersson.md",
+   "resumes/Maria_Olsen.pdf",
+   "resumes/Naomi_Yilmaz.pdf"
+  ]
+ },
+ {
+  "q": "Who has hands-on experience with WebAssembly?",
+  "tag": "multi_hop",
+  "expected": [
+   "resumes/Camille_Novak.pdf",
+   "resumes/Carlos_Ortiz.md",
+   "resumes/Mei_Rossi.md",
+   "resumes/Wei_Johnson.pdf"
+  ]
+ },
+ {
+  "q": "Who has hands-on experience with Flutter?",
+  "tag": "multi_hop",
+  "expected": [
+   "resumes/Camille_Novak.pdf",
+   "resumes/Isaac_Abbasi.md",
+   "resumes/Jonas_Hansen.txt",
+   "resumes/Marco_Ito.pdf",
+   "resumes/Mei_Rossi.md",
+   "resumes/Samir_Thapa.pdf"
   ]
  },
  {
   "q": "Who has hands-on experience with Snowflake?",
   "tag": "multi_hop",
   "expected": [
-   "resumes/Amanda_Wright.pdf",
-   "resumes/Amy_Blackwell.pdf",
-   "resumes/Amy_Hughes.pdf",
-   "resumes/Ashley_Robinson.pdf",
-   "resumes/Austin_Black.pdf",
-   "resumes/Brandon_Jackson.pdf",
-   "resumes/Brandon_Lam.pdf",
-   "resumes/Brian_Torres.pdf",
-   "resumes/Bruce_Garcia.pdf",
-   "resumes/Casey_Wright.pdf"
-  ]
- },
- {
-  "q": "Who has hands-on experience with Rust?",
-  "tag": "multi_hop",
-  "expected": [
-   "resumes/Aaron_Williams.pdf",
-   "resumes/Amanda_Wood.pdf",
-   "resumes/Bianca_Mcdonald.pdf",
-   "resumes/Brenda_Nguyen.pdf",
-   "resumes/Brian_Parrish.pdf",
-   "resumes/Brianna_Salas.pdf",
-   "resumes/Carlos_Clark.pdf",
-   "resumes/Carrie_Clark.pdf"
-  ]
- },
- {
-  "q": "Who has hands-on experience with Elixir?",
-  "tag": "multi_hop",
-  "expected": [
-   "resumes/Amber_Jenkins.pdf",
-   "resumes/Andrea_Bond.pdf",
-   "resumes/Angela_Roy.pdf",
-   "resumes/Anthony_Foster.pdf",
-   "resumes/Ashley_Lewis.pdf",
-   "resumes/Brad_Brown_DVM.pdf",
-   "resumes/Bradley_Wood.pdf",
-   "resumes/Brandon_Holloway.pdf",
-   "resumes/Brendan_Johnson.pdf",
-   "resumes/Brian_Henderson.pdf",
-   "resumes/Carmen_Arnold.pdf"
+   "resumes/Anika_Popescu.md",
+   "resumes/Isaac_Meyer.txt",
+   "resumes/Keisha_Kim.pdf",
+   "resumes/Victor_Osei.pdf",
+   "resumes/Wei_Popescu.pdf"
   ]
  },
  {
   "q": "Who has hands-on experience with Airflow?",
   "tag": "multi_hop",
   "expected": [
-   "resumes/Amanda_Osborne.pdf",
-   "resumes/Amy_Crosby.pdf",
-   "resumes/Amy_Mcbride.pdf",
-   "resumes/Angela_Lin.pdf",
-   "resumes/Ashley_Singleton.pdf",
-   "resumes/Ashley_Todd_DDS.pdf",
-   "resumes/Breanna_Lee.pdf",
-   "resumes/Brent_Mullen.pdf",
-   "resumes/Casey_Pittman.pdf"
+   "resumes/Ingrid_Johnson.pdf",
+   "resumes/Jin_Almeida.md",
+   "resumes/Kenji_Abbasi.md",
+   "resumes/Mei_Haddad.pdf",
+   "resumes/Sana_Fernandez.pdf"
   ]
  },
  {
-  "q": "Who has hands-on experience with Elasticsearch?",
+  "q": "Who has hands-on experience with Splunk?",
   "tag": "multi_hop",
   "expected": [
-   "resumes/Alexandra_Johnson.pdf",
-   "resumes/Amanda_Campbell.pdf",
-   "resumes/Andrea_Rodriguez.pdf",
-   "resumes/Angela_Robinson.pdf",
-   "resumes/Anne_Arnold.pdf",
-   "resumes/Calvin_Bond.pdf"
+   "resumes/Bao_Mishra.txt",
+   "resumes/Carlos_Thapa.pdf",
+   "resumes/Daniel_Kumar.md",
+   "resumes/Lars_Vargas.txt",
+   "resumes/Layla_Patel.pdf",
+   "resumes/Naomi_Schmidt.md",
+   "resumes/Samir_Lee.txt"
   ]
  },
  {
-  "q": "Who has hands-on experience with RabbitMQ?",
+  "q": "Who has hands-on experience with Amplitude?",
   "tag": "multi_hop",
   "expected": [
-   "resumes/Adam_Franklin.pdf",
-   "resumes/Betty_Solis.pdf",
-   "resumes/Brandy_Melendez.pdf",
-   "resumes/Caitlin_Higgins.pdf",
-   "resumes/Carlos_Green.pdf"
+   "resumes/Alejandro_Ng.md",
+   "resumes/Daniel_Popescu.txt",
+   "resumes/Julia_Williams.pdf",
+   "resumes/Kai_Jensen.md",
+   "resumes/Karim_Park.pdf",
+   "resumes/Keisha_Garcia.pdf",
+   "resumes/Nadia_Larsen.pdf",
+   "resumes/Paolo_Singh.md"
   ]
  },
  {
-  "q": "Who has hands-on experience with Ansible?",
+  "q": "Who has hands-on experience with Marketo?",
   "tag": "multi_hop",
   "expected": [
-   "resumes/Alexandra_Elliott.pdf",
-   "resumes/Andrea_Becker.pdf",
-   "resumes/Anthony_Lewis.pdf"
+   "resumes/Elena_Chen.md",
+   "resumes/Hana_Moreau.pdf",
+   "resumes/Ingrid_Ng.pdf",
+   "resumes/Lars_Kaplan.pdf",
+   "resumes/Tessa_Mahlangu.pdf",
+   "resumes/Yara_Hansen.pdf"
   ]
  },
  {
-  "q": "Who has hands-on experience with Scala?",
+  "q": "Who has hands-on experience with Gong?",
   "tag": "multi_hop",
   "expected": [
-   "resumes/Alan_Harris.pdf",
-   "resumes/Amanda_Bailey.pdf",
-   "resumes/Amanda_Owens.pdf",
-   "resumes/Andre_Ortiz.pdf",
-   "resumes/Ashley_Andrews.pdf"
+   "resumes/Carlos_Thapa.pdf",
+   "resumes/Daniel_Kim.md",
+   "resumes/Hiroshi_Mendoza.pdf",
+   "resumes/Kenji_Abbasi.md",
+   "resumes/Lars_Sato.pdf",
+   "resumes/Maria_Andersson.md",
+   "resumes/Naomi_Mahlangu.pdf",
+   "resumes/Valentina_Ito.txt"
   ]
  },
  {
-  "q": "Who has hands-on experience with Spark?",
+  "q": "Who has hands-on experience with Anaplan?",
   "tag": "multi_hop",
   "expected": [
-   "resumes/Alicia_Bentley.pdf",
-   "resumes/Andrea_Francis.pdf",
-   "resumes/Barbara_Roman.pdf",
-   "resumes/Carmen_Arnold.pdf"
+   "resumes/Andre_Johnson.pdf",
+   "resumes/Bao_Kumar.pdf",
+   "resumes/Jasmine_Nakamura.pdf",
+   "resumes/Jasmine_Ortiz.pdf",
+   "resumes/Jin_Almeida.md",
+   "resumes/Omar_Novak.md",
+   "resumes/Paolo_Singh.md",
+   "resumes/Samir_Thapa.pdf"
   ]
  },
  {
-  "q": "Who worked on Meridian Observability Rollout?",
+  "q": "Who has hands-on experience with Greenhouse?",
   "tag": "multi_hop",
   "expected": [
-   "resumes/Aaron_Williams.pdf",
-   "resumes/Brenda_Nguyen.pdf",
-   "resumes/Brian_Parrish.pdf",
-   "resumes/Brianna_Salas.pdf",
-   "resumes/Carlos_Clark.pdf",
-   "resumes/Carrie_Clark.pdf"
+   "resumes/Chloe_Rossi.pdf",
+   "resumes/Daniel_Kumar.md",
+   "resumes/Grace_Yilmaz.pdf",
+   "resumes/Isaac_Larsen.pdf",
+   "resumes/Jamal_Andersson_2.pdf",
+   "resumes/Tessa_Gupta.pdf"
   ]
  },
  {
-  "q": "Who worked on Tundra Partner API?",
+  "q": "Who has hands-on experience with Intercom?",
   "tag": "multi_hop",
   "expected": [
-   "resumes/Aaron_Foster.pdf",
-   "resumes/Alan_Peters.pdf",
-   "resumes/Amanda_Phillips.pdf",
-   "resumes/Angela_Jennings.pdf",
-   "resumes/Austin_Brown.pdf"
+   "resumes/Deepa_Jensen.pdf",
+   "resumes/Elena_Ivanov.txt",
+   "resumes/Erin_Novak.txt",
+   "resumes/Fatima_Nakamura.pdf",
+   "resumes/Jonas_Andersson.txt",
+   "resumes/Keisha_Sokolov.pdf"
   ]
  },
  {
-  "q": "Who worked on Lantern Mobile Relaunch?",
+  "q": "Who worked on Kestrel Device Refresh?",
   "tag": "multi_hop",
   "expected": [
-   "resumes/Anthony_Hamilton.pdf",
-   "resumes/Brandon_Brown.pdf",
-   "resumes/Brandon_Jackson.pdf",
-   "resumes/Brian_Perez.pdf"
+   "resumes/Bao_Mishra.txt",
+   "resumes/Daniel_Kumar.md",
+   "resumes/Lars_Vargas.txt",
+   "resumes/Layla_Patel.pdf",
+   "resumes/Samir_Lee.txt"
   ]
  },
  {
-  "q": "Who is an expert in Django and also knows C?",
-  "tag": "direct",
+  "q": "Who worked on Vertex Quarter Close?",
+  "tag": "multi_hop",
   "expected": [
-   "resumes/Amanda_Wright.pdf",
-   "resumes/Billy_Turner.pdf"
+   "resumes/Andre_Johnson.pdf",
+   "resumes/Jasmine_Nakamura.pdf",
+   "resumes/Jasmine_Ortiz.pdf",
+   "resumes/Jin_Almeida.md",
+   "resumes/Omar_Novak.md"
   ]
  },
  {
-  "q": "Who is an expert in Django and also knows Spring?",
-  "tag": "direct",
+  "q": "Who worked on Cinder Billing Rewrite?",
+  "tag": "multi_hop",
   "expected": [
-   "resumes/Adam_Skinner.pdf",
-   "resumes/Alexis_Martin.pdf",
-   "resumes/Alison_Christensen.pdf",
-   "resumes/Alyssa_Whitaker.pdf",
-   "resumes/Amanda_Wyatt.pdf",
-   "resumes/Andrew_Bullock.pdf",
-   "resumes/Beth_Price.pdf",
-   "resumes/Billy_Turner.pdf",
-   "resumes/Brett_Wall.pdf"
+   "resumes/Diego_Costa.pdf",
+   "resumes/Diego_Osei.pdf",
+   "resumes/Fatima_Martins.pdf",
+   "resumes/Lucia_Hansen.pdf",
+   "resumes/Naomi_Mahlangu.pdf",
+   "resumes/Tariq_Costa.md"
   ]
  },
  {
-  "q": "Who is an expert in C++ and also knows Django?",
-  "tag": "direct",
+  "q": "Who has hands-on experience with Rust?",
+  "tag": "unstructured",
   "expected": [
-   "resumes/Angela_Donaldson.pdf",
-   "resumes/Angela_Morris.pdf",
-   "resumes/Angela_Roy.pdf",
-   "resumes/Anna_Lowe.pdf",
-   "resumes/Anthony_Fernandez.pdf",
-   "resumes/Ashley_Todd_DDS.pdf",
-   "resumes/Barbara_Harris.pdf",
-   "resumes/Barry_Huang.pdf",
-   "resumes/Benjamin_Shepherd.pdf",
-   "resumes/Brett_Wall.pdf",
-   "resumes/Brian_Anderson.pdf",
-   "resumes/Caleb_Richardson.pdf",
-   "resumes/Carol_Parker.pdf",
-   "resumes/Carol_Thomas.pdf",
-   "resumes/Carolyn_Wilcox_DDS.pdf"
+   "resumes/Maria_Olsen.pdf",
+   "resumes/Naomi_Mahlangu.pdf"
   ]
  },
  {
-  "q": "Who is an expert in PostgreSQL and also knows MongoDB?",
-  "tag": "direct",
+  "q": "Who has hands-on experience with Svelte?",
+  "tag": "unstructured",
   "expected": [
-   "resumes/Adam_Dodson.pdf",
-   "resumes/Alexis_Morris.pdf",
-   "resumes/Alice_Duran.pdf",
-   "resumes/Amy_Greene.pdf",
-   "resumes/April_Hamilton.pdf",
-   "resumes/Caitlyn_Cruz.pdf",
-   "resumes/Carlos_Dixon.pdf"
+   "resumes/Marco_Ito.pdf",
+   "resumes/Valentina_Abbasi.pdf"
   ]
  },
  {
-  "q": "Who is an expert in PostgreSQL and also knows SQL?",
-  "tag": "direct",
+  "q": "Who has hands-on experience with Databricks?",
+  "tag": "unstructured",
   "expected": [
-   "resumes/Allison_Gomez.pdf",
-   "resumes/Allison_Hancock.pdf",
-   "resumes/Anne_Meza.pdf",
-   "resumes/Annette_Charles.pdf",
-   "resumes/Bobby_Hubbard.pdf",
-   "resumes/Carolyn_Williams.pdf"
+   "resumes/Isaac_Meyer.txt",
+   "resumes/Kenji_Abbasi.md"
   ]
  },
  {
-  "q": "Who is an expert in Spring and also knows Django?",
-  "tag": "direct",
+  "q": "Who has hands-on experience with CrowdStrike?",
+  "tag": "unstructured",
   "expected": [
-   "resumes/Amanda_Williams.pdf",
-   "resumes/Amber_Kelley.pdf",
-   "resumes/Angela_Lutz.pdf",
-   "resumes/Angela_Wilson.pdf",
-   "resumes/Ariel_Simmons.pdf",
-   "resumes/Barbara_Harris.pdf",
-   "resumes/Becky_Wright.pdf",
-   "resumes/Billy_Turner.pdf",
-   "resumes/Cameron_Myers.pdf",
-   "resumes/Carl_Carter.pdf",
-   "resumes/Carolyn_Wilcox_DDS.pdf"
+   "resumes/Layla_Patel.pdf",
+   "resumes/Paolo_Silva.txt"
   ]
  },
  {
-  "q": "Who is an expert in Azure and also knows Solidity?",
-  "tag": "direct",
+  "q": "Who has hands-on experience with Miro?",
+  "tag": "unstructured",
   "expected": [
-   "resumes/Amber_Barber.pdf",
-   "resumes/Anne_Arnold.pdf",
-   "resumes/Ashley_Pugh.pdf",
-   "resumes/Bruce_Dickerson.pdf"
+   "resumes/Alejandro_Ng.md",
+   "resumes/Julia_Williams.pdf"
   ]
  },
  {
-  "q": "Who is an expert in Redis and also knows MongoDB?",
-  "tag": "direct",
+  "q": "Who has hands-on experience with Webflow?",
+  "tag": "unstructured",
   "expected": [
-   "resumes/Aaron_Brown.pdf",
-   "resumes/Adrienne_Black.pdf",
-   "resumes/Amy_Long.pdf",
-   "resumes/Andrea_Rodriguez.pdf",
-   "resumes/Angela_Castro.pdf",
-   "resumes/Anita_Rodriguez.pdf",
-   "resumes/Anthony_Lewis.pdf",
-   "resumes/Brian_Lawrence.pdf",
-   "resumes/Brian_Thompson.pdf",
-   "resumes/Carlos_Stevenson.pdf"
+   "resumes/Hana_Moreau.pdf",
+   "resumes/Tessa_Mahlangu.pdf"
   ]
  },
  {
-  "q": "Who is an expert in Python and also knows Angular?",
-  "tag": "direct",
+  "q": "Who has hands-on experience with DocuSign?",
+  "tag": "unstructured",
   "expected": [
-   "resumes/Amanda_Lee.pdf",
-   "resumes/Andrea_Duncan.pdf",
-   "resumes/Andrea_Rodriguez.pdf",
-   "resumes/Andrew_Chavez.pdf",
-   "resumes/Andrew_Fowler.pdf",
-   "resumes/Anna_Wong.pdf",
-   "resumes/Anthony_Villanueva.pdf",
-   "resumes/Ashley_Werner.pdf",
-   "resumes/Barbara_Bridges.pdf",
-   "resumes/Benjamin_Carr.pdf",
-   "resumes/Brandon_Brown.pdf",
-   "resumes/Brian_Cross.pdf",
-   "resumes/Caleb_Rowland.pdf"
+   "resumes/Maria_Andersson.md"
   ]
  },
  {
-  "q": "Who is an expert in PostgreSQL and also knows Solidity?",
-  "tag": "direct",
+  "q": "Who has hands-on experience with QuickBooks?",
+  "tag": "unstructured",
   "expected": [
-   "resumes/Adam_Smith.pdf",
-   "resumes/Andrew_Grimes.pdf",
-   "resumes/Antonio_Collins.pdf",
-   "resumes/Ashley_Pugh.pdf"
+   "resumes/Jasmine_Ortiz.pdf",
+   "resumes/Paolo_Singh.md"
   ]
  },
  {
-  "q": "Who is an expert in Django and also knows Flask?",
-  "tag": "direct",
+  "q": "Who has hands-on experience with BambooHR?",
+  "tag": "unstructured",
   "expected": [
-   "resumes/Adam_Skinner.pdf",
-   "resumes/Alexis_Martin.pdf",
-   "resumes/Allison_Horne.pdf",
-   "resumes/Amanda_Wyatt.pdf",
-   "resumes/Amy_Hamilton.pdf",
-   "resumes/Amy_Sanchez.pdf",
-   "resumes/Andrew_Nichols.pdf",
-   "resumes/Angela_Harris.pdf",
-   "resumes/Anna_Wong.pdf",
-   "resumes/Barbara_Mills.pdf",
-   "resumes/Bonnie_Newton.pdf",
-   "resumes/Bradley_Thomas.pdf"
+   "resumes/Paolo_Silva_2.pdf",
+   "resumes/Tessa_Gupta.pdf"
   ]
  },
  {
-  "q": "Who is an expert in Angular and also knows React Native?",
+  "q": "Who has hands-on experience with Freshdesk?",
+  "tag": "unstructured",
+  "expected": [
+   "resumes/Elena_Ivanov.txt",
+   "resumes/Olga_Cohen.txt"
+  ]
+ },
+ {
+  "q": "Who is an expert in Compensation Planning and also knows Workday?",
   "tag": "direct",
   "expected": [
-   "resumes/Alvin_Conner.pdf"
+   "resumes/Emeka_Hernandez.txt",
+   "resumes/Tessa_Gupta.pdf"
+  ]
+ },
+ {
+  "q": "Who is an expert in CSS and also knows TypeScript?",
+  "tag": "direct",
+  "expected": [
+   "resumes/Arjun_Garcia.pdf",
+   "resumes/Valentina_Abbasi.pdf"
+  ]
+ },
+ {
+  "q": "Who is an expert in Usability Testing and also knows SQL?",
+  "tag": "direct",
+  "expected": [
+   "resumes/Alejandro_Ng.md",
+   "resumes/Bao_Pereira.pdf",
+   "resumes/Keisha_Garcia.pdf"
+  ]
+ },
+ {
+  "q": "Who is an expert in Performance Management and also knows Compensation Planning?",
+  "tag": "direct",
+  "expected": [
+   "resumes/Chloe_Mishra.pdf",
+   "resumes/Isaac_Larsen.pdf",
+   "resumes/Tessa_Gupta.pdf",
+   "resumes/Yusuf_Ortiz.pdf"
+  ]
+ },
+ {
+  "q": "Who is an expert in Excel and also knows Performance Management?",
+  "tag": "direct",
+  "expected": [
+   "resumes/Isaac_Larsen.pdf",
+   "resumes/Tariq_Weber.pdf",
+   "resumes/Tessa_Gupta.pdf",
+   "resumes/Yusuf_Ortiz.pdf"
+  ]
+ },
+ {
+  "q": "Who is an expert in Redis and also knows PostgreSQL?",
+  "tag": "direct",
+  "expected": [
+   "resumes/Diego_Costa.pdf",
+   "resumes/Tariq_Costa.md"
+  ]
+ },
+ {
+  "q": "Who is an expert in Account Planning and also knows Negotiation?",
+  "tag": "direct",
+  "expected": [
+   "resumes/Hiroshi_Mendoza.pdf",
+   "resumes/Miguel_Thapa.txt"
+  ]
+ },
+ {
+  "q": "Who is an expert in SQL and also knows Accounts Payable?",
+  "tag": "direct",
+  "expected": [
+   "resumes/Elena_Eriksen.md",
+   "resumes/Omar_Novak.md"
+  ]
+ },
+ {
+  "q": "Who is an expert in Roadmapping and also knows Usability Testing?",
+  "tag": "direct",
+  "expected": [
+   "resumes/Andre_Johnson.pdf",
+   "resumes/Karim_Park.pdf"
+  ]
+ },
+ {
+  "q": "Who is an expert in React and also knows Kotlin?",
+  "tag": "direct",
+  "expected": [
+   "resumes/Hassan_Weber.txt",
+   "resumes/Wei_Johnson.pdf"
+  ]
+ },
+ {
+  "q": "Who is an expert in Accounts Payable and also knows Auditing?",
+  "tag": "direct",
+  "expected": [
+   "resumes/Jasmine_Ortiz.pdf",
+   "resumes/Paolo_Silva_2.pdf"
+  ]
+ },
+ {
+  "q": "Who is an expert in Workday and also knows Employee Onboarding?",
+  "tag": "direct",
+  "expected": [
+   "resumes/Aisha_Mbeki.pdf",
+   "resumes/Chloe_Mishra.pdf",
+   "resumes/Chloe_Rossi.pdf",
+   "resumes/Tessa_Gupta.pdf",
+   "resumes/Yusuf_Ortiz.pdf"
   ]
  },
  {

@@ -1,0 +1,16 @@
+From: Jasmine Ortiz <jortiz74@example.org>
+To: xenon-expense-cleanup@larkfield.example
+Date: 2025-05-05
+Subject: Xenon Expense Cleanup kickoff: who is doing what
+
+Hi all,
+
+We are kicking off Xenon Expense Cleanup. This is who is on it.
+
+I am the controller for Xenon Expense Cleanup.
+Marco Ito (Controller) is our budget owner on Xenon Expense Cleanup.
+Marco starts on Xenon Expense Cleanup in 2025-05.
+Bao Kumar (Senior Accountant) joins Xenon Expense Cleanup as finance lead.
+
+Thanks,
+Jasmine

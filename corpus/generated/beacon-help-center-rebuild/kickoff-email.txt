@@ -1,0 +1,16 @@
+From: Deepa Jensen <deepa.jensen@example.org>
+To: beacon-help-center-rebuild@larkfield.example
+Date: 2025-01-06
+Subject: Beacon Help Center Rebuild kickoff: who is doing what
+
+Hi all,
+
+We are kicking off Beacon Help Center Rebuild. This is who is on it.
+
+I am the support lead for Beacon Help Center Rebuild.
+Jonas Andersson (Customer Success Manager) is our success manager on Beacon Help Center Rebuild.
+Keisha Sokolov (Support Lead) is our documentation owner on Beacon Help Center Rebuild.
+Erin Novak (Support Lead) will be the escalation owner for Beacon Help Center Rebuild.
+
+Thanks,
+Deepa

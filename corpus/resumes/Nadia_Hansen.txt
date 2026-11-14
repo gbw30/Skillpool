@@ -1,0 +1,20 @@
+Nadia Hansen
+nadia.hansen@example.org
+
+I'm a Platform Engineer based in Toronto.
+
+Where I've worked
+
+I joined Sundial Energy in 2018 as a Platform Engineer. I moved a legacy system to a new platform and cut deploy time in half, leaning on AWS. I mentored two junior colleagues through their first year.
+
+I joined Obsidian Games in 2014 as a Platform Engineer and stayed until 2018. I owned the on-call rotation and reduced pages by 40 percent. I trained the wider team on a new process.
+
+I joined Tidewater Labs in 2012 as a Platform Engineer and stayed until 2014. I wrote the deploy tooling the rest of the team uses, built on AWS. I presented quarterly results to the leadership team. I built and ran services that handled millions of requests a day, mostly in Jenkins.
+
+What I'm good at
+
+I'd call myself an expert in PostgreSQL. I'm advanced in Jenkins. I'm at an intermediate level in Python and Kubernetes. I'm a beginner in Docker, AWS and Negotiation.
+
+Education
+
+I studied Computer Science at Sablewood University (BA, 2010).

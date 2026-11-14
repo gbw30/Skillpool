@@ -1,0 +1,7 @@
+#atlas-migration channel, exported 2025-12-24
+
+[09:02] Ivan Eriksen: morning. the on-call handover is done on my side.
+[09:06] Chloe Williams: nice. I am still on the Linux part of Atlas Migration.
+[09:10] Ivan Eriksen: Chloe, can you look at the cutover checklist after that?
+[09:14] Chloe Williams: can it wait until tomorrow? I am out this afternoon.
+[09:18] Wei Ng: reminder that the Atlas Migration review is on Thursday. Ivan is presenting.

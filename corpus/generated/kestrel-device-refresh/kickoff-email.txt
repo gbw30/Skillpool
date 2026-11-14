@@ -1,0 +1,18 @@
+From: Layla Patel <lpatel73@example.org>
+To: kestrel-device-refresh@larkfield.example
+Date: 2024-01-28
+Subject: Kestrel Device Refresh kickoff: who is doing what
+
+Hi all,
+
+We are kicking off Kestrel Device Refresh. This is who is on it.
+
+I am the security lead for Kestrel Device Refresh.
+Samir Lee (IT Administrator, slee95@example.org) is our security reviewer on Kestrel Device Refresh.
+Bao Mishra (Senior Security Engineer, bao.mishra@example.com) is our compliance contact on Kestrel Device Refresh.
+Bao starts on Kestrel Device Refresh in 2024-01.
+Lars Vargas (Senior People Partner, lvargas16@example.net) joins Kestrel Device Refresh as people lead.
+Daniel Kumar (Recruiter, daniel.kumar@example.org) will be the program owner for Kestrel Device Refresh.
+
+Thanks,
+Layla

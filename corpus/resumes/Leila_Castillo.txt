@@ -1,0 +1,23 @@
+Leila Castillo
+lcastillo78@example.com
+
+I'm a Senior Frontend Engineer based in Austin.
+
+Where I've worked
+
+I joined Pinebridge Health in 2020 as a Senior Frontend Engineer. I shipped features used by thousands of customers every week, mostly in Kotlin. I presented quarterly results to the leadership team. I paired with designers to turn mockups into working screens.
+
+I joined Emberline Retail in 2016 as a Junior Frontend Engineer and stayed until 2020. I trained the wider team on a new process. I rebuilt the signup flow and raised completion by a fifth, using Figma. I ran the weekly planning meeting and kept it to thirty minutes.
+
+What I'm good at
+
+I'm advanced in Swift, TypeScript and React. I'm at an intermediate level in Kotlin, Figma and Jenkins. I'm a beginner in Zendesk.
+
+Education
+
+I studied Software Engineering at Cedar Valley College (BA, 2013).
+I also hold the Scrum Master certification.
+
+On the side
+
+Quietcast: a side project I built in my own time.

@@ -1,0 +1,16 @@
+From: Julia Williams <julia.williams@example.net>
+To: nimbus-pricing-experiment@larkfield.example
+Date: 2023-03-23
+Subject: Nimbus Pricing Experiment kickoff: who is doing what
+
+Hi all,
+
+We are kicking off Nimbus Pricing Experiment. This is who is on it.
+
+I am the design lead for Nimbus Pricing Experiment.
+Karim Park (UX Researcher) joins Nimbus Pricing Experiment as product analyst.
+Alejandro Ng (Product Manager, ang65@example.com) will be the product lead for Nimbus Pricing Experiment.
+K. Garcia (UX Researcher) joins Nimbus Pricing Experiment as researcher.
+
+Thanks,
+Julia

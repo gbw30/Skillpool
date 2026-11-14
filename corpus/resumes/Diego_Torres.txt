@@ -1,0 +1,18 @@
+Diego Torres
+diegot2@example.net
+
+I'm a Senior Site Reliability Engineer based in Recife.
+
+Where I've worked
+
+I joined Pinebridge Health in 2022 as a Senior Site Reliability Engineer. I wrote the deploy tooling the rest of the team uses, built on Go. I mentored two junior colleagues through their first year. I owned the on-call rotation and reduced pages by 40 percent.
+
+I joined Saltmarsh Media in 2018 as a Site Reliability Engineer and stayed until 2022. I trained the wider team on a new process. I built and ran services that handled millions of requests a day, mostly in Jenkins.
+
+What I'm good at
+
+I'd call myself an expert in Go. I'm advanced in PostgreSQL, Employee Onboarding and Swift. I'm at an intermediate level in Jenkins, Python and Kubernetes. I'm a beginner in Java.
+
+Education
+
+I studied Computer Science at Lakeshore Institute of Technology (BSc, 2015).

@@ -1,0 +1,8 @@
+#harbor-reporting-pipeline channel, exported 2023-11-14
+
+[09:02] Kenji Abbasi: does anyone have the latest copy of the model evaluation?
+[09:04] Bao Kumar: nice. I am still on the Python part of Harbor Reporting Pipeline.
+[09:06] Kenji Abbasi: Bao, can you look at the data quality checks after that?
+[09:08] Bao Kumar: yes, will do.
+[09:10] Kenji Abbasi: I have run Databricks for a whole team before, happy to own it here.
+[09:12] Ingrid Johnson: reminder that the Harbor Reporting Pipeline review is on Thursday. Kenji is presenting.

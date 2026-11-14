@@ -1,0 +1,18 @@
+From: Anika Popescu <anikap1@example.net>
+To: granite-data-platform@larkfield.example
+Date: 2024-04-13
+Subject: Granite Data Platform kickoff: who is doing what
+
+Hi all,
+
+Granite Data Platform starts this month, so here is the team.
+
+I am the model owner for Granite Data Platform.
+Isaac Meyer (Analytics Engineer, isaac.meyer@example.com) will be the data analyst for Granite Data Platform.
+Keisha Kim (Analytics Engineer, keishak1@example.com) will be the data lead for Granite Data Platform.
+Victor Osei (Growth Marketer) joins Granite Data Platform as designer.
+Wei Popescu (Growth Marketer) will be the campaign lead for Granite Data Platform.
+Jasmine Nakamura (Contract Financial Analyst, jasmine.nakamura@brightline.example) from Brightline Partners will be the controller for Granite Data Platform.
+
+Thanks,
+Anika

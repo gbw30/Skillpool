@@ -2,1012 +2,879 @@
  {
   "name": "Atlas Migration",
   "slug": "atlas-migration",
+  "team": "Platform Engineering",
   "skills": [
-   "Django",
-   "MySQL",
-   "Vue",
-   "Redis",
-   "Dart",
+   "Java",
+   "Linux",
+   "Docker",
+   "AWS",
+   "Python",
    "Kafka"
   ],
   "hopSkill": "Kafka",
   "roster": [
-   "resumes/Brenda_Adams.pdf",
-   "resumes/Brian_White.pdf",
-   "resumes/Amy_Vasquez.pdf",
-   "resumes/Alexandra_Johnson.pdf"
+   "resumes/Wei_Ng.pdf",
+   "resumes/Lucia_Hansen.pdf",
+   "resumes/Chloe_Williams.md",
+   "resumes/Maria_Olsen.pdf",
+   "resumes/Ivan_Eriksen.pdf",
+   "resumes/Sana_Fernandez.pdf"
   ],
-  "ghosts": [
-   "ghost:april-burgess-0"
-  ],
+  "ghosts": [],
   "docs": [
    "generated/atlas-migration/design-summary.pdf",
-   "generated/atlas-migration/staffing-note.md",
-   "generated/atlas-migration/status-1.md",
-   "generated/atlas-migration/status-2.md",
+   "generated/atlas-migration/kickoff-email.txt",
+   "generated/atlas-migration/meeting-notes.md",
+   "generated/atlas-migration/team-chat.txt",
+   "generated/atlas-migration/weekly-update-1.md",
+   "generated/atlas-migration/weekly-update-2.md",
    "generated/atlas-migration/postmortem.md"
   ]
  },
  {
-  "name": "Borealis Partner API",
-  "slug": "borealis-partner-api",
+  "name": "Borealis Observability Rollout",
+  "slug": "borealis-observability-rollout",
+  "team": "Platform Engineering",
   "skills": [
-   "AWS",
-   "Azure",
-   "Django",
-   "Flask",
-   "Snowflake"
+   "Redis",
+   "Go",
+   "Kubernetes",
+   "Docker",
+   "Terraform"
   ],
-  "hopSkill": "Snowflake",
+  "hopSkill": "Terraform",
   "roster": [
-   "resumes/Amy_Hughes.pdf",
-   "resumes/Bruce_Garcia.pdf",
-   "resumes/Austin_Black.pdf",
-   "resumes/Brian_Torres.pdf",
-   "resumes/Brandon_Jackson.pdf"
+   "resumes/Naomi_Yilmaz.pdf",
+   "resumes/Anika_Adeyemi.txt",
+   "resumes/Maria_Olsen.pdf",
+   "resumes/Chloe_Williams.md",
+   "resumes/Jamal_Andersson.md",
+   "resumes/Daniel_Popescu.txt"
   ],
   "ghosts": [
-   "ghost:amber-lee-1"
+   "ghost:andre-johnson-1"
   ],
   "docs": [
-   "generated/borealis-partner-api/design-summary.md",
-   "generated/borealis-partner-api/staffing-note.md",
-   "generated/borealis-partner-api/status-1.md",
-   "generated/borealis-partner-api/status-2.md"
+   "generated/borealis-observability-rollout/design-summary.md",
+   "generated/borealis-observability-rollout/kickoff-email.txt",
+   "generated/borealis-observability-rollout/meeting-notes.md",
+   "generated/borealis-observability-rollout/team-chat.txt",
+   "generated/borealis-observability-rollout/weekly-update-1.md",
+   "generated/borealis-observability-rollout/weekly-update-2.md",
+   "generated/borealis-observability-rollout/retrospective.pdf"
   ]
  },
  {
   "name": "Cinder Billing Rewrite",
   "slug": "cinder-billing-rewrite",
+  "team": "Platform Engineering",
   "skills": [
-   "MySQL",
-   "Node.js",
+   "AWS",
    "Python",
-   "Rust"
+   "Docker",
+   "Java"
   ],
-  "hopSkill": "Rust",
+  "hopSkill": null,
   "roster": [
-   "resumes/Carrie_Clark.pdf",
-   "resumes/Amanda_Wood.pdf",
-   "resumes/Bianca_Mcdonald.pdf"
+   "resumes/Diego_Osei.pdf",
+   "resumes/Tariq_Costa.md",
+   "resumes/Diego_Costa.pdf",
+   "resumes/Lucia_Hansen.pdf",
+   "resumes/Fatima_Martins.pdf",
+   "resumes/Naomi_Mahlangu.pdf"
   ],
   "ghosts": [
-   "ghost:barbara-mills-2"
+   "ghost:nina-diaz-2"
   ],
   "docs": [
    "generated/cinder-billing-rewrite/design-summary.pdf",
-   "generated/cinder-billing-rewrite/staffing-note.md",
-   "generated/cinder-billing-rewrite/status-1.md"
+   "generated/cinder-billing-rewrite/kickoff-email.txt",
+   "generated/cinder-billing-rewrite/meeting-notes.md",
+   "generated/cinder-billing-rewrite/team-chat.txt",
+   "generated/cinder-billing-rewrite/weekly-update-1.md",
+   "generated/cinder-billing-rewrite/weekly-update-2.md",
+   "generated/cinder-billing-rewrite/postmortem.md"
   ]
  },
  {
   "name": "Dynamo Checkout Redesign",
   "slug": "dynamo-checkout-redesign",
+  "team": "Web and Mobile",
   "skills": [
-   "Swift",
-   "AWS",
-   "SQL",
-   "React",
-   "Ruby",
-   "Elixir"
+   "Vue",
+   "Figma",
+   "CSS",
+   "WebAssembly"
   ],
-  "hopSkill": "Elixir",
+  "hopSkill": "WebAssembly",
   "roster": [
-   "resumes/Amber_Jenkins.pdf",
-   "resumes/Anthony_Foster.pdf",
-   "resumes/Andrea_Bond.pdf",
-   "resumes/Bradley_Wood.pdf",
-   "resumes/Brandon_Holloway.pdf"
+   "resumes/Wei_Johnson.pdf",
+   "resumes/Carlos_Ortiz.md",
+   "resumes/Camille_Novak.pdf",
+   "resumes/Mei_Rossi.md"
   ],
   "ghosts": [
-   "ghost:casey-anderson-3"
+   "ghost:hiroshi-sharma-3"
   ],
   "docs": [
    "generated/dynamo-checkout-redesign/design-summary.md",
-   "generated/dynamo-checkout-redesign/staffing-note.md",
-   "generated/dynamo-checkout-redesign/status-1.md",
-   "generated/dynamo-checkout-redesign/status-2.md",
-   "generated/dynamo-checkout-redesign/postmortem.md"
+   "generated/dynamo-checkout-redesign/kickoff-email.txt",
+   "generated/dynamo-checkout-redesign/meeting-notes.md",
+   "generated/dynamo-checkout-redesign/team-chat.txt",
+   "generated/dynamo-checkout-redesign/weekly-update-1.md",
+   "generated/dynamo-checkout-redesign/launch-review.md",
+   "generated/dynamo-checkout-redesign/retrospective.pdf"
   ]
  },
  {
-  "name": "Ember Partner API",
-  "slug": "ember-partner-api",
+  "name": "Ember Mobile Relaunch",
+  "slug": "ember-mobile-relaunch",
+  "team": "Web and Mobile",
   "skills": [
-   "PostgreSQL",
-   "Python",
-   "Dart",
-   "C",
-   "Spring",
-   "Airflow"
-  ],
-  "hopSkill": "Airflow",
-  "roster": [
-   "resumes/Ashley_Todd_DDS.pdf",
-   "resumes/Brent_Mullen.pdf",
-   "resumes/Casey_Pittman.pdf"
-  ],
-  "ghosts": [
-   "ghost:alex-armstrong-4"
-  ],
-  "docs": [
-   "generated/ember-partner-api/design-summary.pdf",
-   "generated/ember-partner-api/staffing-note.md",
-   "generated/ember-partner-api/status-1.md"
-  ]
- },
- {
-  "name": "Falcon Migration",
-  "slug": "falcon-migration",
-  "skills": [
-   "JavaScript",
-   "Angular",
-   "Oracle",
-   "Ruby",
-   "MongoDB",
-   "Elasticsearch"
-  ],
-  "hopSkill": "Elasticsearch",
-  "roster": [
-   "resumes/Amanda_Campbell.pdf",
-   "resumes/Calvin_Bond.pdf",
-   "resumes/Alexandra_Johnson.pdf",
-   "resumes/Angela_Robinson.pdf",
-   "resumes/Andrea_Rodriguez.pdf",
-   "resumes/Anne_Arnold.pdf"
-  ],
-  "ghosts": [
-   "ghost:alexis-morris-5"
-  ],
-  "docs": [
-   "generated/falcon-migration/design-summary.md",
-   "generated/falcon-migration/staffing-note.md",
-   "generated/falcon-migration/status-1.md",
-   "generated/falcon-migration/status-2.md"
-  ]
- },
- {
-  "name": "Granite Partner API",
-  "slug": "granite-partner-api",
-  "skills": [
-   "Java",
-   "MySQL",
-   "Angular",
-   "AWS",
-   "RabbitMQ"
-  ],
-  "hopSkill": "RabbitMQ",
-  "roster": [
-   "resumes/Adam_Franklin.pdf",
-   "resumes/Betty_Solis.pdf",
-   "resumes/Carlos_Green.pdf",
-   "resumes/Caitlin_Higgins.pdf",
-   "resumes/Brandy_Melendez.pdf"
-  ],
-  "ghosts": [
-   "ghost:brian-hernandez-6"
-  ],
-  "docs": [
-   "generated/granite-partner-api/design-summary.pdf",
-   "generated/granite-partner-api/staffing-note.md",
-   "generated/granite-partner-api/status-1.md",
-   "generated/granite-partner-api/postmortem.md"
-  ]
- },
- {
-  "name": "Harbor Partner API",
-  "slug": "harbor-partner-api",
-  "skills": [
-   "PostgreSQL",
-   "JavaScript",
-   "Ruby",
-   "SQL",
-   "Redis",
-   "Ansible"
-  ],
-  "hopSkill": "Ansible",
-  "roster": [
-   "resumes/Andrea_Becker.pdf",
-   "resumes/Anthony_Lewis.pdf",
-   "resumes/Alexandra_Elliott.pdf"
-  ],
-  "ghosts": [
-   "ghost:alvin-conner-7"
-  ],
-  "docs": [
-   "generated/harbor-partner-api/design-summary.md",
-   "generated/harbor-partner-api/staffing-note.md",
-   "generated/harbor-partner-api/status-1.md",
-   "generated/harbor-partner-api/status-2.md"
-  ]
- },
- {
-  "name": "Ion Mobile Relaunch",
-  "slug": "ion-mobile-relaunch",
-  "skills": [
-   "Oracle",
    "Vue",
+   "React",
    "Node.js",
-   "Redis",
+   "Kotlin",
+   "Flutter"
+  ],
+  "hopSkill": "Flutter",
+  "roster": [
+   "resumes/Jonas_Hansen.txt",
+   "resumes/Isaac_Abbasi.md",
+   "resumes/Mei_Rossi.md",
+   "resumes/Camille_Novak.pdf",
+   "resumes/Marco_Ito.pdf",
+   "resumes/Samir_Thapa.pdf"
+  ],
+  "ghosts": [
+   "ghost:hiroshi-yamamoto-4"
+  ],
+  "docs": [
+   "generated/ember-mobile-relaunch/design-summary.pdf",
+   "generated/ember-mobile-relaunch/kickoff-email.txt",
+   "generated/ember-mobile-relaunch/meeting-notes.md",
+   "generated/ember-mobile-relaunch/team-chat.txt",
+   "generated/ember-mobile-relaunch/weekly-update-1.md",
+   "generated/ember-mobile-relaunch/weekly-update-2.md"
+  ]
+ },
+ {
+  "name": "Falcon Design System",
+  "slug": "falcon-design-system",
+  "team": "Web and Mobile",
+  "skills": [
+   "Vue",
+   "GraphQL",
+   "CSS"
+  ],
+  "hopSkill": null,
+  "roster": [
+   "resumes/Uma_Schmidt.md",
+   "resumes/Olga_Sokolov.md",
+   "resumes/Valentina_Abbasi.pdf"
+  ],
+  "ghosts": [
+   "ghost:nikhil-patel-5"
+  ],
+  "docs": [
+   "generated/falcon-design-system/design-summary.md",
+   "generated/falcon-design-system/kickoff-email.txt",
+   "generated/falcon-design-system/meeting-notes.md",
+   "generated/falcon-design-system/team-chat.txt",
+   "generated/falcon-design-system/weekly-update-1.md",
+   "generated/falcon-design-system/weekly-update-2.md",
+   "generated/falcon-design-system/launch-review.md",
+   "generated/falcon-design-system/retrospective.pdf"
+  ]
+ },
+ {
+  "name": "Granite Data Platform",
+  "slug": "granite-data-platform",
+  "team": "Data and Analytics",
+  "skills": [
+   "Looker",
    "SQL",
-   "Scala"
-  ],
-  "hopSkill": "Scala",
-  "roster": [
-   "resumes/Alan_Harris.pdf",
-   "resumes/Ashley_Andrews.pdf",
-   "resumes/Amanda_Owens.pdf",
-   "resumes/Amanda_Bailey.pdf",
-   "resumes/Andre_Ortiz.pdf"
-  ],
-  "ghosts": [
-   "ghost:ashley-sullivan-8"
-  ],
-  "docs": [
-   "generated/ion-mobile-relaunch/design-summary.pdf",
-   "generated/ion-mobile-relaunch/staffing-note.md",
-   "generated/ion-mobile-relaunch/status-1.md"
-  ]
- },
- {
-  "name": "Juniper Migration",
-  "slug": "juniper-migration",
-  "skills": [
-   "Solidity",
-   "Angular",
-   "C",
-   "Go",
-   "Spark"
-  ],
-  "hopSkill": "Spark",
-  "roster": [
-   "resumes/Barbara_Roman.pdf",
-   "resumes/Andrea_Francis.pdf",
-   "resumes/Alicia_Bentley.pdf",
-   "resumes/Carmen_Arnold.pdf"
-  ],
-  "ghosts": [
-   "ghost:bryan-mcclure-9"
-  ],
-  "docs": [
-   "generated/juniper-migration/design-summary.md",
-   "generated/juniper-migration/staffing-note.md",
-   "generated/juniper-migration/status-1.md",
-   "generated/juniper-migration/postmortem.md"
-  ]
- },
- {
-  "name": "Kestrel Checkout Redesign",
-  "slug": "kestrel-checkout-redesign",
-  "skills": [
-   "Node.js",
-   "Spring",
-   "Java",
-   "Kafka"
-  ],
-  "hopSkill": "Kafka",
-  "roster": [
-   "resumes/Amanda_Rogers.pdf",
-   "resumes/Becky_Wright.pdf",
-   "resumes/Anthony_Jones.pdf"
-  ],
-  "ghosts": [],
-  "docs": [
-   "generated/kestrel-checkout-redesign/design-summary.pdf",
-   "generated/kestrel-checkout-redesign/staffing-note.md",
-   "generated/kestrel-checkout-redesign/status-1.md"
-  ]
- },
- {
-  "name": "Lumen Migration",
-  "slug": "lumen-migration",
-  "skills": [
-   "Java",
-   "AWS",
-   "C#",
-   "PostgreSQL",
+   "Tableau",
+   "dbt",
    "Snowflake"
   ],
   "hopSkill": "Snowflake",
   "roster": [
-   "resumes/Brandon_Lam.pdf",
-   "resumes/Amy_Blackwell.pdf",
-   "resumes/Casey_Wright.pdf",
-   "resumes/Ashley_Robinson.pdf",
-   "resumes/Amanda_Wright.pdf"
+   "resumes/Anika_Popescu.md",
+   "resumes/Isaac_Meyer.txt",
+   "resumes/Keisha_Kim.pdf",
+   "resumes/Victor_Osei.pdf",
+   "resumes/Wei_Popescu.pdf"
   ],
-  "ghosts": [],
+  "ghosts": [
+   "ghost:jasmine-nakamura-6"
+  ],
   "docs": [
-   "generated/lumen-migration/design-summary.md",
-   "generated/lumen-migration/staffing-note.md",
-   "generated/lumen-migration/status-1.md",
-   "generated/lumen-migration/status-2.md"
+   "generated/granite-data-platform/design-summary.pdf",
+   "generated/granite-data-platform/kickoff-email.txt",
+   "generated/granite-data-platform/meeting-notes.md",
+   "generated/granite-data-platform/team-chat.txt",
+   "generated/granite-data-platform/weekly-update-1.md",
+   "generated/granite-data-platform/weekly-update-2.md",
+   "generated/granite-data-platform/analysis-readout.md"
   ]
  },
  {
-  "name": "Meridian Observability Rollout",
-  "slug": "meridian-observability-rollout",
+  "name": "Harbor Reporting Pipeline",
+  "slug": "harbor-reporting-pipeline",
+  "team": "Data and Analytics",
   "skills": [
-   "Solidity",
-   "MySQL",
-   "Dart",
-   "Rust"
-  ],
-  "hopSkill": "Rust",
-  "roster": [
-   "resumes/Aaron_Williams.pdf",
-   "resumes/Carlos_Clark.pdf",
-   "resumes/Carrie_Clark.pdf",
-   "resumes/Brianna_Salas.pdf",
-   "resumes/Brenda_Nguyen.pdf",
-   "resumes/Brian_Parrish.pdf"
-  ],
-  "ghosts": [],
-  "docs": [
-   "generated/meridian-observability-rollout/design-summary.pdf",
-   "generated/meridian-observability-rollout/staffing-note.md",
-   "generated/meridian-observability-rollout/status-1.md",
-   "generated/meridian-observability-rollout/postmortem.md"
-  ]
- },
- {
-  "name": "Nimbus Data Platform",
-  "slug": "nimbus-data-platform",
-  "skills": [
-   "C",
-   "Swift",
-   "C++",
-   "Elixir"
-  ],
-  "hopSkill": "Elixir",
-  "roster": [
-   "resumes/Brad_Brown_DVM.pdf",
-   "resumes/Brian_Henderson.pdf",
-   "resumes/Ashley_Lewis.pdf",
-   "resumes/Carmen_Arnold.pdf",
-   "resumes/Angela_Roy.pdf",
-   "resumes/Brendan_Johnson.pdf"
-  ],
-  "ghosts": [],
-  "docs": [
-   "generated/nimbus-data-platform/design-summary.md",
-   "generated/nimbus-data-platform/staffing-note.md",
-   "generated/nimbus-data-platform/status-1.md",
-   "generated/nimbus-data-platform/status-2.md"
-  ]
- },
- {
-  "name": "Onyx Identity Service",
-  "slug": "onyx-identity-service",
-  "skills": [
-   "Spring",
-   "React",
-   "Ruby",
+   "BigQuery",
+   "Python",
+   "SQL",
+   "Tableau",
+   "Excel",
    "Airflow"
   ],
   "hopSkill": "Airflow",
   "roster": [
-   "resumes/Amy_Mcbride.pdf",
-   "resumes/Amy_Crosby.pdf",
-   "resumes/Amanda_Osborne.pdf",
-   "resumes/Ashley_Singleton.pdf",
-   "resumes/Angela_Lin.pdf",
-   "resumes/Breanna_Lee.pdf"
+   "resumes/Kenji_Abbasi.md",
+   "resumes/Mei_Haddad.pdf",
+   "resumes/Ingrid_Johnson.pdf",
+   "resumes/Jin_Almeida.md",
+   "resumes/Sana_Fernandez.pdf"
   ],
-  "ghosts": [],
+  "ghosts": [
+   "ghost:bao-kumar-7"
+  ],
   "docs": [
-   "generated/onyx-identity-service/design-summary.pdf",
-   "generated/onyx-identity-service/staffing-note.md",
-   "generated/onyx-identity-service/status-1.md",
-   "generated/onyx-identity-service/status-2.md"
+   "generated/harbor-reporting-pipeline/design-summary.md",
+   "generated/harbor-reporting-pipeline/kickoff-email.txt",
+   "generated/harbor-reporting-pipeline/meeting-notes.md",
+   "generated/harbor-reporting-pipeline/team-chat.txt",
+   "generated/harbor-reporting-pipeline/weekly-update-1.md",
+   "generated/harbor-reporting-pipeline/retrospective.pdf"
   ]
  },
  {
-  "name": "Pioneer Mobile Relaunch",
-  "slug": "pioneer-mobile-relaunch",
+  "name": "Ion Churn Model",
+  "slug": "ion-churn-model",
+  "team": "Data and Analytics",
   "skills": [
-   "Vue",
-   "Solidity",
-   "React Native"
-  ],
-  "hopSkill": null,
-  "roster": [
-   "resumes/Amanda_Williams.pdf",
-   "resumes/Ashley_Pugh.pdf",
-   "resumes/Alyssa_Martin.pdf",
-   "resumes/Amanda_Velazquez.pdf"
-  ],
-  "ghosts": [],
-  "docs": [
-   "generated/pioneer-mobile-relaunch/design-summary.md",
-   "generated/pioneer-mobile-relaunch/staffing-note.md",
-   "generated/pioneer-mobile-relaunch/status-1.md",
-   "generated/pioneer-mobile-relaunch/status-2.md",
-   "generated/pioneer-mobile-relaunch/postmortem.md"
-  ]
- },
- {
-  "name": "Quartz Data Platform",
-  "slug": "quartz-data-platform",
-  "skills": [
-   "JavaScript",
-   "SQL",
-   "Go"
-  ],
-  "hopSkill": null,
-  "roster": [
-   "resumes/Audrey_Delgado.pdf",
-   "resumes/Brittany_Martinez.pdf",
-   "resumes/Billy_Zuniga.pdf",
-   "resumes/Andrew_Barber.pdf"
-  ],
-  "ghosts": [],
-  "docs": [
-   "generated/quartz-data-platform/design-summary.pdf",
-   "generated/quartz-data-platform/staffing-note.md",
-   "generated/quartz-data-platform/status-1.md"
-  ]
- },
- {
-  "name": "Raven Observability Rollout",
-  "slug": "raven-observability-rollout",
-  "skills": [
-   "SQL",
-   "Django",
-   "Solidity",
-   "Flask"
-  ],
-  "hopSkill": null,
-  "roster": [
-   "resumes/Brenda_Adams.pdf",
-   "resumes/Bryan_Brown.pdf",
-   "resumes/Amber_Kelley.pdf",
-   "resumes/Andrew_Hutchinson.pdf",
-   "resumes/Aaron_Herrera.pdf"
-  ],
-  "ghosts": [],
-  "docs": [
-   "generated/raven-observability-rollout/design-summary.md",
-   "generated/raven-observability-rollout/staffing-note.md",
-   "generated/raven-observability-rollout/status-1.md"
-  ]
- },
- {
-  "name": "Summit Billing Rewrite",
-  "slug": "summit-billing-rewrite",
-  "skills": [
-   "Django",
-   "Node.js",
-   "NoSQL",
-   "Oracle"
-  ],
-  "hopSkill": null,
-  "roster": [
-   "resumes/Carolyn_Wilcox_DDS.pdf",
-   "resumes/Amanda_Williams.pdf",
-   "resumes/Austin_Brown.pdf",
-   "resumes/Ashley_Tyler.pdf"
-  ],
-  "ghosts": [],
-  "docs": [
-   "generated/summit-billing-rewrite/design-summary.pdf",
-   "generated/summit-billing-rewrite/staffing-note.md",
-   "generated/summit-billing-rewrite/status-1.md",
-   "generated/summit-billing-rewrite/postmortem.md"
-  ]
- },
- {
-  "name": "Tundra Partner API",
-  "slug": "tundra-partner-api",
-  "skills": [
-   "Ruby",
-   "Swift",
-   "Azure",
-   "Django"
-  ],
-  "hopSkill": null,
-  "roster": [
-   "resumes/Aaron_Foster.pdf",
-   "resumes/Amanda_Phillips.pdf",
-   "resumes/Austin_Brown.pdf",
-   "resumes/Angela_Jennings.pdf",
-   "resumes/Alan_Peters.pdf"
-  ],
-  "ghosts": [],
-  "docs": [
-   "generated/tundra-partner-api/design-summary.md",
-   "generated/tundra-partner-api/staffing-note.md",
-   "generated/tundra-partner-api/status-1.md"
-  ]
- },
- {
-  "name": "Umbra Identity Service",
-  "slug": "umbra-identity-service",
-  "skills": [
-   "Python",
-   "Swift",
-   "Solidity",
-   "Dart"
-  ],
-  "hopSkill": null,
-  "roster": [
-   "resumes/Ashley_Werner.pdf",
-   "resumes/Alejandro_Campbell.pdf",
-   "resumes/Andrew_Grimes.pdf",
-   "resumes/Barry_Castro.pdf",
-   "resumes/Brianna_Salas.pdf"
-  ],
-  "ghosts": [],
-  "docs": [
-   "generated/umbra-identity-service/design-summary.pdf",
-   "generated/umbra-identity-service/staffing-note.md",
-   "generated/umbra-identity-service/status-1.md"
-  ]
- },
- {
-  "name": "Vertex Observability Rollout",
-  "slug": "vertex-observability-rollout",
-  "skills": [
-   "Angular",
-   "JavaScript",
-   "Node.js",
-   "Spring"
-  ],
-  "hopSkill": null,
-  "roster": [
-   "resumes/Alexander_Winters.pdf",
-   "resumes/Carrie_Horn.pdf",
-   "resumes/Breanna_Lee.pdf",
-   "resumes/Benjamin_Wagner_DDS.pdf",
-   "resumes/Brandon_Bishop.pdf",
-   "resumes/Caleb_Ingram.pdf"
-  ],
-  "ghosts": [],
-  "docs": [
-   "generated/vertex-observability-rollout/design-summary.md",
-   "generated/vertex-observability-rollout/staffing-note.md",
-   "generated/vertex-observability-rollout/status-1.md",
-   "generated/vertex-observability-rollout/status-2.md",
-   "generated/vertex-observability-rollout/postmortem.md"
-  ]
- },
- {
-  "name": "Willow Data Platform",
-  "slug": "willow-data-platform",
-  "skills": [
-   "Spring",
-   "PostgreSQL",
-   "AWS"
-  ],
-  "hopSkill": null,
-  "roster": [
-   "resumes/Brian_Campbell.pdf",
-   "resumes/Allison_Gomez.pdf",
-   "resumes/Alexis_Harris.pdf",
-   "resumes/Brian_Brewer.pdf",
-   "resumes/Barbara_Roman.pdf"
-  ],
-  "ghosts": [],
-  "docs": [
-   "generated/willow-data-platform/design-summary.pdf",
-   "generated/willow-data-platform/staffing-note.md",
-   "generated/willow-data-platform/status-1.md",
-   "generated/willow-data-platform/status-2.md"
-  ]
- },
- {
-  "name": "Xenon Billing Rewrite",
-  "slug": "xenon-billing-rewrite",
-  "skills": [
-   "Ruby",
-   "C#",
-   "SQL",
-   "NoSQL",
-   "Google Cloud"
-  ],
-  "hopSkill": null,
-  "roster": [
-   "resumes/Brittany_Jones.pdf",
-   "resumes/Casey_Pittman.pdf",
-   "resumes/Bethany_Mccarthy.pdf",
-   "resumes/Barry_Castro.pdf",
-   "resumes/Anthony_Blackburn_III.pdf"
-  ],
-  "ghosts": [],
-  "docs": [
-   "generated/xenon-billing-rewrite/design-summary.md",
-   "generated/xenon-billing-rewrite/staffing-note.md",
-   "generated/xenon-billing-rewrite/status-1.md",
-   "generated/xenon-billing-rewrite/status-2.md"
-  ]
- },
- {
-  "name": "Yarrow Partner API",
-  "slug": "yarrow-partner-api",
-  "skills": [
-   "PostgreSQL",
-   "Python",
-   "Dart"
-  ],
-  "hopSkill": null,
-  "roster": [
-   "resumes/Amy_Greene.pdf",
-   "resumes/Caitlyn_Cruz.pdf",
-   "resumes/Allison_Powell_DVM.pdf",
-   "resumes/Alexander_Espinoza.pdf"
-  ],
-  "ghosts": [],
-  "docs": [
-   "generated/yarrow-partner-api/design-summary.pdf",
-   "generated/yarrow-partner-api/staffing-note.md",
-   "generated/yarrow-partner-api/status-1.md",
-   "generated/yarrow-partner-api/status-2.md",
-   "generated/yarrow-partner-api/postmortem.md"
-  ]
- },
- {
-  "name": "Zephyr Partner API",
-  "slug": "zephyr-partner-api",
-  "skills": [
-   "MongoDB",
-   "Python",
-   "Flask",
-   "Swift",
-   "C++"
-  ],
-  "hopSkill": null,
-  "roster": [
-   "resumes/Alexis_Nelson.pdf",
-   "resumes/Brandon_Bell.pdf",
-   "resumes/Amy_Greene.pdf",
-   "resumes/Andrew_Hill.pdf",
-   "resumes/Amanda_Bridges.pdf",
-   "resumes/Angela_Roy.pdf"
-  ],
-  "ghosts": [],
-  "docs": [
-   "generated/zephyr-partner-api/design-summary.md",
-   "generated/zephyr-partner-api/staffing-note.md",
-   "generated/zephyr-partner-api/status-1.md",
-   "generated/zephyr-partner-api/status-2.md"
-  ]
- },
- {
-  "name": "Anchor Checkout Redesign",
-  "slug": "anchor-checkout-redesign",
-  "skills": [
-   "PostgreSQL",
-   "SQL",
-   "Spring"
-  ],
-  "hopSkill": null,
-  "roster": [
-   "resumes/Alexis_Martin.pdf",
-   "resumes/Adrian_Anderson.pdf",
-   "resumes/Brittany_Martinez.pdf"
-  ],
-  "ghosts": [],
-  "docs": [
-   "generated/anchor-checkout-redesign/design-summary.pdf",
-   "generated/anchor-checkout-redesign/staffing-note.md",
-   "generated/anchor-checkout-redesign/status-1.md",
-   "generated/anchor-checkout-redesign/status-2.md"
-  ]
- },
- {
-  "name": "Beacon Reporting Pipeline",
-  "slug": "beacon-reporting-pipeline",
-  "skills": [
-   "C",
-   "Python",
-   "Dart",
-   "C++",
-   "Ruby"
-  ],
-  "hopSkill": null,
-  "roster": [
-   "resumes/Angela_Donaldson.pdf",
-   "resumes/Anthony_Strickland.pdf",
-   "resumes/Brent_Hopkins.pdf"
-  ],
-  "ghosts": [],
-  "docs": [
-   "generated/beacon-reporting-pipeline/design-summary.md",
-   "generated/beacon-reporting-pipeline/staffing-note.md",
-   "generated/beacon-reporting-pipeline/status-1.md",
-   "generated/beacon-reporting-pipeline/postmortem.md"
-  ]
- },
- {
-  "name": "Cobalt Billing Rewrite",
-  "slug": "cobalt-billing-rewrite",
-  "skills": [
-   "MongoDB",
-   "Dart",
-   "Google Cloud",
-   "Spring",
-   "Angular"
-  ],
-  "hopSkill": null,
-  "roster": [
-   "resumes/Alexis_Morris.pdf",
-   "resumes/Ann_Willis.pdf",
-   "resumes/Carol_Riley.pdf",
-   "resumes/Ann_Moore.pdf",
-   "resumes/Carla_Rodriguez.pdf"
-  ],
-  "ghosts": [],
-  "docs": [
-   "generated/cobalt-billing-rewrite/design-summary.pdf",
-   "generated/cobalt-billing-rewrite/staffing-note.md",
-   "generated/cobalt-billing-rewrite/status-1.md",
-   "generated/cobalt-billing-rewrite/status-2.md"
-  ]
- },
- {
-  "name": "Delta Observability Rollout",
-  "slug": "delta-observability-rollout",
-  "skills": [
-   "Angular",
-   "Java",
-   "React"
-  ],
-  "hopSkill": null,
-  "roster": [
-   "resumes/Amy_Hamilton.pdf",
-   "resumes/Allison_Price.pdf",
-   "resumes/Andrew_Barber.pdf"
-  ],
-  "ghosts": [],
-  "docs": [
-   "generated/delta-observability-rollout/design-summary.md",
-   "generated/delta-observability-rollout/staffing-note.md",
-   "generated/delta-observability-rollout/status-1.md",
-   "generated/delta-observability-rollout/status-2.md"
-  ]
- },
- {
-  "name": "Echo Billing Rewrite",
-  "slug": "echo-billing-rewrite",
-  "skills": [
-   "Angular",
-   "React",
-   "Spring",
+   "pandas",
+   "BigQuery",
+   "PyTorch",
    "SQL"
   ],
   "hopSkill": null,
   "roster": [
-   "resumes/Brandon_Garza.pdf",
-   "resumes/Anna_Wong.pdf",
-   "resumes/Bianca_Romero.pdf"
+   "resumes/Isaac_Meyer.txt",
+   "resumes/Hiroshi_Sharma.md",
+   "resumes/Anika_Popescu.md",
+   "resumes/Elena_Eriksen.md"
   ],
   "ghosts": [],
   "docs": [
-   "generated/echo-billing-rewrite/design-summary.pdf",
-   "generated/echo-billing-rewrite/staffing-note.md",
-   "generated/echo-billing-rewrite/status-1.md",
-   "generated/echo-billing-rewrite/postmortem.md"
+   "generated/ion-churn-model/design-summary.pdf",
+   "generated/ion-churn-model/kickoff-email.txt",
+   "generated/ion-churn-model/meeting-notes.md",
+   "generated/ion-churn-model/team-chat.txt",
+   "generated/ion-churn-model/weekly-update-1.md",
+   "generated/ion-churn-model/analysis-readout.md"
   ]
  },
  {
-  "name": "Fathom Partner API",
-  "slug": "fathom-partner-api",
-  "skills": [
-   "Spring",
-   "Dart",
-   "React Native"
-  ],
-  "hopSkill": null,
-  "roster": [
-   "resumes/Andrew_Bullock.pdf",
-   "resumes/Amy_Green.pdf",
-   "resumes/Andres_Franco.pdf",
-   "resumes/Bruce_Smith.pdf",
-   "resumes/Alison_Dickerson.pdf"
-  ],
-  "ghosts": [],
-  "docs": [
-   "generated/fathom-partner-api/design-summary.md",
-   "generated/fathom-partner-api/staffing-note.md",
-   "generated/fathom-partner-api/status-1.md"
-  ]
- },
- {
-  "name": "Glacier Migration",
-  "slug": "glacier-migration",
-  "skills": [
-   "Redis",
-   "React Native",
-   "PostgreSQL",
-   "MySQL",
-   "Oracle"
-  ],
-  "hopSkill": null,
-  "roster": [
-   "resumes/Becky_Wright.pdf",
-   "resumes/Angela_Harris.pdf",
-   "resumes/Carol_Smith.pdf",
-   "resumes/Bradley_Lowery.pdf",
-   "resumes/Brian_Cuevas.pdf",
-   "resumes/Amanda_Flores.pdf"
-  ],
-  "ghosts": [],
-  "docs": [
-   "generated/glacier-migration/design-summary.pdf",
-   "generated/glacier-migration/staffing-note.md",
-   "generated/glacier-migration/status-1.md"
-  ]
- },
- {
-  "name": "Helix Partner API",
-  "slug": "helix-partner-api",
-  "skills": [
-   "Solidity",
-   "Django",
-   "MySQL"
-  ],
-  "hopSkill": null,
-  "roster": [
-   "resumes/Amy_Mcbride.pdf",
-   "resumes/Cassandra_Hunter.pdf",
-   "resumes/Anna_Lowe.pdf",
-   "resumes/Bryan_Anderson.pdf"
-  ],
-  "ghosts": [],
-  "docs": [
-   "generated/helix-partner-api/design-summary.md",
-   "generated/helix-partner-api/staffing-note.md",
-   "generated/helix-partner-api/status-1.md",
-   "generated/helix-partner-api/status-2.md",
-   "generated/helix-partner-api/postmortem.md"
-  ]
- },
- {
-  "name": "Indigo Checkout Redesign",
-  "slug": "indigo-checkout-redesign",
-  "skills": [
-   "Ruby",
-   "Go",
-   "Solidity"
-  ],
-  "hopSkill": null,
-  "roster": [
-   "resumes/Adam_Smith.pdf",
-   "resumes/Amanda_Owens.pdf",
-   "resumes/Bruce_Cardenas.pdf",
-   "resumes/Ashley_Atkins.pdf"
-  ],
-  "ghosts": [],
-  "docs": [
-   "generated/indigo-checkout-redesign/design-summary.pdf",
-   "generated/indigo-checkout-redesign/staffing-note.md",
-   "generated/indigo-checkout-redesign/status-1.md",
-   "generated/indigo-checkout-redesign/status-2.md"
-  ]
- },
- {
-  "name": "Jasper Search Upgrade",
-  "slug": "jasper-search-upgrade",
-  "skills": [
-   "Solidity",
-   "Oracle",
-   "JavaScript",
-   "Dart",
-   "Ruby"
-  ],
-  "hopSkill": null,
-  "roster": [
-   "resumes/Cassandra_Cross.pdf",
-   "resumes/Amy_Hamilton.pdf",
-   "resumes/Casey_Anderson.pdf",
-   "resumes/Alyssa_Olsen.pdf",
-   "resumes/Angela_Kelly.pdf",
-   "resumes/Albert_Haley.pdf"
-  ],
-  "ghosts": [],
-  "docs": [
-   "generated/jasper-search-upgrade/design-summary.md",
-   "generated/jasper-search-upgrade/staffing-note.md",
-   "generated/jasper-search-upgrade/status-1.md",
-   "generated/jasper-search-upgrade/status-2.md"
-  ]
- },
- {
-  "name": "Keystone Observability Rollout",
-  "slug": "keystone-observability-rollout",
+  "name": "Juniper Access Review",
+  "slug": "juniper-access-review",
+  "team": "Security and IT",
   "skills": [
    "Python",
-   "React",
-   "C",
-   "C#"
+   "Vulnerability Management",
+   "Active Directory",
+   "Splunk"
   ],
-  "hopSkill": null,
+  "hopSkill": "Splunk",
   "roster": [
-   "resumes/Anthony_Petersen.pdf",
-   "resumes/Brian_Holmes.pdf",
-   "resumes/Brian_Lawrence.pdf",
-   "resumes/Amanda_Johnson.pdf"
+   "resumes/Naomi_Schmidt.md",
+   "resumes/Bao_Mishra.txt",
+   "resumes/Samir_Lee.txt",
+   "resumes/Carlos_Thapa.pdf"
   ],
   "ghosts": [],
   "docs": [
-   "generated/keystone-observability-rollout/design-summary.pdf",
-   "generated/keystone-observability-rollout/staffing-note.md",
-   "generated/keystone-observability-rollout/status-1.md",
-   "generated/keystone-observability-rollout/status-2.md",
-   "generated/keystone-observability-rollout/postmortem.md"
+   "generated/juniper-access-review/rollout-plan.md",
+   "generated/juniper-access-review/kickoff-email.txt",
+   "generated/juniper-access-review/meeting-notes.md",
+   "generated/juniper-access-review/team-chat.txt",
+   "generated/juniper-access-review/weekly-update-1.md",
+   "generated/juniper-access-review/weekly-update-2.md",
+   "generated/juniper-access-review/incident-report.md",
+   "generated/juniper-access-review/retrospective.pdf"
   ]
  },
  {
-  "name": "Lantern Mobile Relaunch",
-  "slug": "lantern-mobile-relaunch",
+  "name": "Kestrel Device Refresh",
+  "slug": "kestrel-device-refresh",
+  "team": "Security and IT",
   "skills": [
-   "React Native",
-   "Vue",
-   "C#",
-   "C++",
-   "NoSQL"
+   "Python",
+   "Wireshark",
+   "AWS",
+   "Active Directory",
+   "Okta",
+   "Splunk"
   ],
-  "hopSkill": null,
+  "hopSkill": "Splunk",
   "roster": [
-   "resumes/Brandon_Brown.pdf",
-   "resumes/Brandon_Jackson.pdf",
-   "resumes/Anthony_Hamilton.pdf",
-   "resumes/Brian_Perez.pdf"
+   "resumes/Layla_Patel.pdf",
+   "resumes/Samir_Lee.txt",
+   "resumes/Bao_Mishra.txt",
+   "resumes/Lars_Vargas.txt",
+   "resumes/Daniel_Kumar.md"
   ],
   "ghosts": [],
   "docs": [
-   "generated/lantern-mobile-relaunch/design-summary.md",
-   "generated/lantern-mobile-relaunch/staffing-note.md",
-   "generated/lantern-mobile-relaunch/status-1.md",
-   "generated/lantern-mobile-relaunch/status-2.md"
+   "generated/kestrel-device-refresh/rollout-plan.pdf",
+   "generated/kestrel-device-refresh/kickoff-email.txt",
+   "generated/kestrel-device-refresh/meeting-notes.md",
+   "generated/kestrel-device-refresh/team-chat.txt",
+   "generated/kestrel-device-refresh/weekly-update-1.md",
+   "generated/kestrel-device-refresh/weekly-update-2.md"
   ]
  },
  {
-  "name": "Mosaic Reporting Pipeline",
-  "slug": "mosaic-reporting-pipeline",
+  "name": "Lumen Zero Trust Rollout",
+  "slug": "lumen-zero-trust-rollout",
+  "team": "Security and IT",
   "skills": [
-   "Flask",
-   "C#",
-   "Ruby"
+   "Linux",
+   "Python",
+   "AWS",
+   "Active Directory",
+   "Penetration Testing"
   ],
   "hopSkill": null,
   "roster": [
-   "resumes/Carol_Riley.pdf",
-   "resumes/Bryan_Greene.pdf",
-   "resumes/Austin_Petty.pdf",
-   "resumes/Ann_Stone.pdf",
-   "resumes/Ashley_Murphy.pdf"
+   "resumes/Tessa_Moreau.pdf",
+   "resumes/Jonas_Jensen.md",
+   "resumes/Paolo_Silva.txt",
+   "resumes/Gabriela_Ortiz.md"
   ],
   "ghosts": [],
   "docs": [
-   "generated/mosaic-reporting-pipeline/design-summary.pdf",
-   "generated/mosaic-reporting-pipeline/staffing-note.md",
-   "generated/mosaic-reporting-pipeline/status-1.md"
+   "generated/lumen-zero-trust-rollout/rollout-plan.md",
+   "generated/lumen-zero-trust-rollout/kickoff-email.txt",
+   "generated/lumen-zero-trust-rollout/meeting-notes.md",
+   "generated/lumen-zero-trust-rollout/team-chat.txt",
+   "generated/lumen-zero-trust-rollout/weekly-update-1.md",
+   "generated/lumen-zero-trust-rollout/weekly-update-2.md",
+   "generated/lumen-zero-trust-rollout/incident-report.md",
+   "generated/lumen-zero-trust-rollout/retrospective.pdf"
   ]
  },
  {
-  "name": "Northwind Search Upgrade",
-  "slug": "northwind-search-upgrade",
+  "name": "Meridian Signup Research",
+  "slug": "meridian-signup-research",
+  "team": "Product and Design",
   "skills": [
-   "Google Cloud",
-   "Django",
-   "Solidity",
-   "C#"
+   "User Research",
+   "Usability Testing",
+   "Jira",
+   "Amplitude"
   ],
-  "hopSkill": null,
+  "hopSkill": "Amplitude",
   "roster": [
-   "resumes/Anthony_Lara.pdf",
-   "resumes/Adam_Wells.pdf",
-   "resumes/Austin_Smith.pdf",
-   "resumes/Angela_Lutz.pdf"
+   "resumes/Paolo_Singh.md",
+   "resumes/Keisha_Garcia.pdf",
+   "resumes/Daniel_Popescu.txt",
+   "resumes/Kai_Jensen.md",
+   "resumes/Nadia_Larsen.pdf"
   ],
   "ghosts": [],
   "docs": [
-   "generated/northwind-search-upgrade/design-summary.md",
-   "generated/northwind-search-upgrade/staffing-note.md",
-   "generated/northwind-search-upgrade/status-1.md",
-   "generated/northwind-search-upgrade/status-2.md",
-   "generated/northwind-search-upgrade/postmortem.md"
+   "generated/meridian-signup-research/project-brief.pdf",
+   "generated/meridian-signup-research/kickoff-email.txt",
+   "generated/meridian-signup-research/meeting-notes.md",
+   "generated/meridian-signup-research/team-chat.txt",
+   "generated/meridian-signup-research/weekly-update-1.md",
+   "generated/meridian-signup-research/research-findings.md"
+  ]
+ },
+ {
+  "name": "Nimbus Pricing Experiment",
+  "slug": "nimbus-pricing-experiment",
+  "team": "Product and Design",
+  "skills": [
+   "Prototyping",
+   "Usability Testing",
+   "Jira",
+   "Figma",
+   "Amplitude"
+  ],
+  "hopSkill": "Amplitude",
+  "roster": [
+   "resumes/Julia_Williams.pdf",
+   "resumes/Karim_Park.pdf",
+   "resumes/Alejandro_Ng.md",
+   "resumes/Keisha_Garcia.pdf"
+  ],
+  "ghosts": [],
+  "docs": [
+   "generated/nimbus-pricing-experiment/project-brief.md",
+   "generated/nimbus-pricing-experiment/kickoff-email.txt",
+   "generated/nimbus-pricing-experiment/meeting-notes.md",
+   "generated/nimbus-pricing-experiment/team-chat.txt",
+   "generated/nimbus-pricing-experiment/weekly-update-1.md",
+   "generated/nimbus-pricing-experiment/retrospective.pdf"
+  ]
+ },
+ {
+  "name": "Onyx Navigation Redesign",
+  "slug": "onyx-navigation-redesign",
+  "team": "Product and Design",
+  "skills": [
+   "Prototyping",
+   "User Research",
+   "Jira",
+   "SQL"
+  ],
+  "hopSkill": null,
+  "roster": [
+   "resumes/Alejandro_Ng.md",
+   "resumes/Julia_Williams.pdf",
+   "resumes/Karim_Adeyemi.txt",
+   "resumes/Bao_Pereira.pdf",
+   "resumes/Nikhil_Patel.txt",
+   "resumes/Fatima_Nakamura.pdf"
+  ],
+  "ghosts": [],
+  "docs": [
+   "generated/onyx-navigation-redesign/project-brief.pdf",
+   "generated/onyx-navigation-redesign/kickoff-email.txt",
+   "generated/onyx-navigation-redesign/meeting-notes.md",
+   "generated/onyx-navigation-redesign/team-chat.txt",
+   "generated/onyx-navigation-redesign/weekly-update-1.md",
+   "generated/onyx-navigation-redesign/research-findings.md"
+  ]
+ },
+ {
+  "name": "Pioneer Brand Refresh",
+  "slug": "pioneer-brand-refresh",
+  "team": "Marketing",
+  "skills": [
+   "Figma",
+   "Google Analytics",
+   "Content Strategy",
+   "Marketo"
+  ],
+  "hopSkill": "Marketo",
+  "roster": [
+   "resumes/Lars_Kaplan.pdf",
+   "resumes/Yara_Hansen.pdf",
+   "resumes/Hana_Moreau.pdf",
+   "resumes/Ingrid_Ng.pdf"
+  ],
+  "ghosts": [],
+  "docs": [
+   "generated/pioneer-brand-refresh/campaign-brief.md",
+   "generated/pioneer-brand-refresh/kickoff-email.txt",
+   "generated/pioneer-brand-refresh/meeting-notes.md",
+   "generated/pioneer-brand-refresh/team-chat.txt",
+   "generated/pioneer-brand-refresh/weekly-update-1.md",
+   "generated/pioneer-brand-refresh/weekly-update-2.md",
+   "generated/pioneer-brand-refresh/campaign-recap.md",
+   "generated/pioneer-brand-refresh/retrospective.pdf"
+  ]
+ },
+ {
+  "name": "Quartz Launch Campaign",
+  "slug": "quartz-launch-campaign",
+  "team": "Marketing",
+  "skills": [
+   "Google Analytics",
+   "Copywriting",
+   "SEO",
+   "Excel",
+   "Marketo"
+  ],
+  "hopSkill": "Marketo",
+  "roster": [
+   "resumes/Elena_Chen.md",
+   "resumes/Ingrid_Ng.pdf",
+   "resumes/Tessa_Mahlangu.pdf"
+  ],
+  "ghosts": [],
+  "docs": [
+   "generated/quartz-launch-campaign/campaign-brief.pdf",
+   "generated/quartz-launch-campaign/kickoff-email.txt",
+   "generated/quartz-launch-campaign/meeting-notes.md",
+   "generated/quartz-launch-campaign/team-chat.txt",
+   "generated/quartz-launch-campaign/weekly-update-1.md",
+   "generated/quartz-launch-campaign/weekly-update-2.md"
+  ]
+ },
+ {
+  "name": "Raven Webinar Series",
+  "slug": "raven-webinar-series",
+  "team": "Marketing",
+  "skills": [
+   "Excel",
+   "HubSpot",
+   "Figma"
+  ],
+  "hopSkill": null,
+  "roster": [
+   "resumes/Hiroshi_Yamamoto.pdf",
+   "resumes/Wei_Popescu.pdf",
+   "resumes/Yara_Hansen.pdf",
+   "resumes/Hana_Moreau.pdf",
+   "resumes/Naomi_Schmidt.md"
+  ],
+  "ghosts": [],
+  "docs": [
+   "generated/raven-webinar-series/campaign-brief.md",
+   "generated/raven-webinar-series/kickoff-email.txt",
+   "generated/raven-webinar-series/meeting-notes.md",
+   "generated/raven-webinar-series/team-chat.txt",
+   "generated/raven-webinar-series/weekly-update-1.md",
+   "generated/raven-webinar-series/weekly-update-2.md",
+   "generated/raven-webinar-series/campaign-recap.md",
+   "generated/raven-webinar-series/retrospective.pdf"
+  ]
+ },
+ {
+  "name": "Summit Partner Program",
+  "slug": "summit-partner-program",
+  "team": "Sales and Partnerships",
+  "skills": [
+   "Public Speaking",
+   "Salesforce",
+   "Negotiation",
+   "Gong"
+  ],
+  "hopSkill": "Gong",
+  "roster": [
+   "resumes/Carlos_Thapa.pdf",
+   "resumes/Hiroshi_Mendoza.pdf",
+   "resumes/Lars_Sato.pdf"
+  ],
+  "ghosts": [],
+  "docs": [
+   "generated/summit-partner-program/program-brief.pdf",
+   "generated/summit-partner-program/kickoff-email.txt",
+   "generated/summit-partner-program/meeting-notes.md",
+   "generated/summit-partner-program/team-chat.txt",
+   "generated/summit-partner-program/weekly-update-1.md",
+   "generated/summit-partner-program/account-review.md"
+  ]
+ },
+ {
+  "name": "Tundra Enterprise Pilot",
+  "slug": "tundra-enterprise-pilot",
+  "team": "Sales and Partnerships",
+  "skills": [
+   "Account Planning",
+   "Negotiation",
+   "Salesforce",
+   "Gong"
+  ],
+  "hopSkill": "Gong",
+  "roster": [
+   "resumes/Naomi_Mahlangu.pdf",
+   "resumes/Daniel_Kim.md",
+   "resumes/Maria_Andersson.md",
+   "resumes/Kenji_Abbasi.md",
+   "resumes/Valentina_Ito.txt"
+  ],
+  "ghosts": [],
+  "docs": [
+   "generated/tundra-enterprise-pilot/program-brief.md",
+   "generated/tundra-enterprise-pilot/kickoff-email.txt",
+   "generated/tundra-enterprise-pilot/meeting-notes.md",
+   "generated/tundra-enterprise-pilot/team-chat.txt",
+   "generated/tundra-enterprise-pilot/weekly-update-1.md",
+   "generated/tundra-enterprise-pilot/retrospective.pdf"
+  ]
+ },
+ {
+  "name": "Umbra Renewal Drive",
+  "slug": "umbra-renewal-drive",
+  "team": "Sales and Partnerships",
+  "skills": [
+   "Salesforce",
+   "Account Planning",
+   "HubSpot",
+   "Sales Forecasting",
+   "Solution Selling"
+  ],
+  "hopSkill": null,
+  "roster": [
+   "resumes/Lars_Sato.pdf",
+   "resumes/Daniel_Kim.md",
+   "resumes/Maria_Andersson.md",
+   "resumes/Ivan_Abbasi.txt",
+   "resumes/Rahul_Singh.pdf",
+   "resumes/Ingrid_Johnson.pdf"
+  ],
+  "ghosts": [],
+  "docs": [
+   "generated/umbra-renewal-drive/program-brief.pdf",
+   "generated/umbra-renewal-drive/kickoff-email.txt",
+   "generated/umbra-renewal-drive/meeting-notes.md",
+   "generated/umbra-renewal-drive/team-chat.txt",
+   "generated/umbra-renewal-drive/weekly-update-1.md",
+   "generated/umbra-renewal-drive/weekly-update-2.md",
+   "generated/umbra-renewal-drive/account-review.md"
+  ]
+ },
+ {
+  "name": "Vertex Quarter Close",
+  "slug": "vertex-quarter-close",
+  "team": "Finance",
+  "skills": [
+   "Accounts Payable",
+   "Financial Modeling",
+   "SQL",
+   "Auditing",
+   "GAAP",
+   "Anaplan"
+  ],
+  "hopSkill": "Anaplan",
+  "roster": [
+   "resumes/Jin_Almeida.md",
+   "resumes/Omar_Novak.md",
+   "resumes/Jasmine_Ortiz.pdf",
+   "resumes/Jasmine_Nakamura.pdf",
+   "resumes/Andre_Johnson.pdf"
+  ],
+  "ghosts": [],
+  "docs": [
+   "generated/vertex-quarter-close/plan.md",
+   "generated/vertex-quarter-close/kickoff-email.txt",
+   "generated/vertex-quarter-close/meeting-notes.md",
+   "generated/vertex-quarter-close/team-chat.txt",
+   "generated/vertex-quarter-close/weekly-update-1.md",
+   "generated/vertex-quarter-close/close-notes.md",
+   "generated/vertex-quarter-close/retrospective.pdf"
+  ]
+ },
+ {
+  "name": "Willow Budget Planning",
+  "slug": "willow-budget-planning",
+  "team": "Finance",
+  "skills": [
+   "Financial Modeling",
+   "Auditing",
+   "Accounts Payable",
+   "SQL",
+   "Anaplan"
+  ],
+  "hopSkill": "Anaplan",
+  "roster": [
+   "resumes/Samir_Thapa.pdf",
+   "resumes/Omar_Novak.md",
+   "resumes/Bao_Kumar.pdf",
+   "resumes/Andre_Johnson.pdf",
+   "resumes/Paolo_Singh.md"
+  ],
+  "ghosts": [],
+  "docs": [
+   "generated/willow-budget-planning/plan.pdf",
+   "generated/willow-budget-planning/kickoff-email.txt",
+   "generated/willow-budget-planning/meeting-notes.md",
+   "generated/willow-budget-planning/team-chat.txt",
+   "generated/willow-budget-planning/weekly-update-1.md"
+  ]
+ },
+ {
+  "name": "Xenon Expense Cleanup",
+  "slug": "xenon-expense-cleanup",
+  "team": "Finance",
+  "skills": [
+   "Financial Modeling",
+   "GAAP",
+   "SQL"
+  ],
+  "hopSkill": null,
+  "roster": [
+   "resumes/Jasmine_Ortiz.pdf",
+   "resumes/Marco_Ito.pdf",
+   "resumes/Bao_Kumar.pdf"
+  ],
+  "ghosts": [],
+  "docs": [
+   "generated/xenon-expense-cleanup/plan.md",
+   "generated/xenon-expense-cleanup/kickoff-email.txt",
+   "generated/xenon-expense-cleanup/meeting-notes.md",
+   "generated/xenon-expense-cleanup/team-chat.txt",
+   "generated/xenon-expense-cleanup/weekly-update-1.md",
+   "generated/xenon-expense-cleanup/weekly-update-2.md",
+   "generated/xenon-expense-cleanup/close-notes.md",
+   "generated/xenon-expense-cleanup/retrospective.pdf"
+  ]
+ },
+ {
+  "name": "Yarrow Hiring Sprint",
+  "slug": "yarrow-hiring-sprint",
+  "team": "People",
+  "skills": [
+   "Workday",
+   "Employee Onboarding",
+   "Employee Relations",
+   "Greenhouse"
+  ],
+  "hopSkill": "Greenhouse",
+  "roster": [
+   "resumes/Jamal_Andersson_2.pdf",
+   "resumes/Daniel_Kumar.md",
+   "resumes/Chloe_Rossi.pdf"
+  ],
+  "ghosts": [],
+  "docs": [
+   "generated/yarrow-hiring-sprint/program-brief.pdf",
+   "generated/yarrow-hiring-sprint/kickoff-email.txt",
+   "generated/yarrow-hiring-sprint/meeting-notes.md",
+   "generated/yarrow-hiring-sprint/team-chat.txt",
+   "generated/yarrow-hiring-sprint/weekly-update-1.md",
+   "generated/yarrow-hiring-sprint/weekly-update-2.md",
+   "generated/yarrow-hiring-sprint/program-review.md"
+  ]
+ },
+ {
+  "name": "Zephyr New Hire Program",
+  "slug": "zephyr-new-hire-program",
+  "team": "People",
+  "skills": [
+   "Performance Management",
+   "Employee Onboarding",
+   "Workday",
+   "Excel",
+   "Interviewing",
+   "Greenhouse"
+  ],
+  "hopSkill": "Greenhouse",
+  "roster": [
+   "resumes/Grace_Yilmaz.pdf",
+   "resumes/Isaac_Larsen.pdf",
+   "resumes/Tessa_Gupta.pdf"
+  ],
+  "ghosts": [],
+  "docs": [
+   "generated/zephyr-new-hire-program/program-brief.md",
+   "generated/zephyr-new-hire-program/kickoff-email.txt",
+   "generated/zephyr-new-hire-program/meeting-notes.md",
+   "generated/zephyr-new-hire-program/team-chat.txt",
+   "generated/zephyr-new-hire-program/weekly-update-1.md",
+   "generated/zephyr-new-hire-program/retrospective.pdf"
+  ]
+ },
+ {
+  "name": "Anchor Review Cycle",
+  "slug": "anchor-review-cycle",
+  "team": "People",
+  "skills": [
+   "Workday",
+   "Performance Management",
+   "Employee Relations",
+   "Excel"
+  ],
+  "hopSkill": null,
+  "roster": [
+   "resumes/Chloe_Rossi.pdf",
+   "resumes/Tessa_Gupta.pdf",
+   "resumes/Emeka_Hernandez.txt",
+   "resumes/Aisha_Mbeki.pdf",
+   "resumes/Paolo_Silva_2.pdf"
+  ],
+  "ghosts": [],
+  "docs": [
+   "generated/anchor-review-cycle/program-brief.pdf",
+   "generated/anchor-review-cycle/kickoff-email.txt",
+   "generated/anchor-review-cycle/meeting-notes.md",
+   "generated/anchor-review-cycle/team-chat.txt",
+   "generated/anchor-review-cycle/weekly-update-1.md",
+   "generated/anchor-review-cycle/weekly-update-2.md",
+   "generated/anchor-review-cycle/program-review.md"
+  ]
+ },
+ {
+  "name": "Beacon Help Center Rebuild",
+  "slug": "beacon-help-center-rebuild",
+  "team": "Customer Support",
+  "skills": [
+   "SQL",
+   "Technical Writing",
+   "Jira",
+   "Intercom"
+  ],
+  "hopSkill": "Intercom",
+  "roster": [
+   "resumes/Deepa_Jensen.pdf",
+   "resumes/Jonas_Andersson.txt",
+   "resumes/Keisha_Sokolov.pdf",
+   "resumes/Erin_Novak.txt"
+  ],
+  "ghosts": [],
+  "docs": [
+   "generated/beacon-help-center-rebuild/project-brief.md",
+   "generated/beacon-help-center-rebuild/kickoff-email.txt",
+   "generated/beacon-help-center-rebuild/meeting-notes.md",
+   "generated/beacon-help-center-rebuild/team-chat.txt",
+   "generated/beacon-help-center-rebuild/weekly-update-1.md",
+   "generated/beacon-help-center-rebuild/escalation-review.md",
+   "generated/beacon-help-center-rebuild/retrospective.pdf"
+  ]
+ },
+ {
+  "name": "Cobalt Escalation Playbook",
+  "slug": "cobalt-escalation-playbook",
+  "team": "Customer Support",
+  "skills": [
+   "Customer Onboarding",
+   "Zendesk",
+   "Conflict Resolution",
+   "Jira",
+   "Intercom"
+  ],
+  "hopSkill": "Intercom",
+  "roster": [
+   "resumes/Elena_Ivanov.txt",
+   "resumes/Fatima_Nakamura.pdf",
+   "resumes/Keisha_Sokolov.pdf",
+   "resumes/Jonas_Andersson.txt"
+  ],
+  "ghosts": [],
+  "docs": [
+   "generated/cobalt-escalation-playbook/project-brief.pdf",
+   "generated/cobalt-escalation-playbook/kickoff-email.txt",
+   "generated/cobalt-escalation-playbook/meeting-notes.md",
+   "generated/cobalt-escalation-playbook/team-chat.txt",
+   "generated/cobalt-escalation-playbook/weekly-update-1.md"
+  ]
+ },
+ {
+  "name": "Delta Chat Support Launch",
+  "slug": "delta-chat-support-launch",
+  "team": "Customer Support",
+  "skills": [
+   "Jira",
+   "SQL",
+   "Zendesk",
+   "Technical Writing",
+   "Customer Onboarding"
+  ],
+  "hopSkill": null,
+  "roster": [
+   "resumes/Erin_Novak.txt",
+   "resumes/Kai_Singh.pdf",
+   "resumes/Deepa_Jensen.pdf",
+   "resumes/Miguel_Dubois.pdf",
+   "resumes/Olga_Cohen.txt"
+  ],
+  "ghosts": [],
+  "docs": [
+   "generated/delta-chat-support-launch/project-brief.md",
+   "generated/delta-chat-support-launch/kickoff-email.txt",
+   "generated/delta-chat-support-launch/meeting-notes.md",
+   "generated/delta-chat-support-launch/team-chat.txt",
+   "generated/delta-chat-support-launch/weekly-update-1.md",
+   "generated/delta-chat-support-launch/escalation-review.md",
+   "generated/delta-chat-support-launch/retrospective.pdf"
   ]
  }
 ]

@@ -1,0 +1,16 @@
+From: Lars Kaplan <lars.kaplan@example.com>
+To: pioneer-brand-refresh@larkfield.example
+Date: 2023-01-12
+Subject: Pioneer Brand Refresh kickoff: who is doing what
+
+Hi all,
+
+We are kicking off Pioneer Brand Refresh. This is who is on it.
+
+I am the content owner for Pioneer Brand Refresh.
+Y. Hansen (Senior Brand Designer) is our designer on Pioneer Brand Refresh.
+Hana Moreau (Brand Designer) will be the marketing analyst for Pioneer Brand Refresh.
+I. Ng (Marketing Analyst, ing58@example.com) joins Pioneer Brand Refresh as campaign lead.
+
+Thanks,
+Lars

@@ -1,0 +1,18 @@
+From: Wei Ng <wng58@example.org>
+To: atlas-migration@larkfield.example
+Date: 2025-03-19
+Subject: Atlas Migration kickoff: who is doing what
+
+Hi all,
+
+We are kicking off Atlas Migration. This is who is on it.
+
+I am the site reliability engineer for Atlas Migration.
+Lucia Hansen (Senior DevOps Engineer) is our tech lead on Atlas Migration.
+Chloe Williams (Senior Platform Engineer) will be the release manager for Atlas Migration.
+Maria Olsen (Backend Engineer, mariao7@example.com) joins Atlas Migration as backend engineer.
+ivan.eriksen@example.org (Planning Manager) will be the analyst for Atlas Migration.
+Sana Fernandez (Senior Accountant, sanaf8@example.net) is our controller on Atlas Migration.
+
+Thanks,
+Wei

@@ -1,6 +1,6 @@
 # Atlas Migration: postmortem
 
-An outage on Atlas Migration lasted 120 minutes.
-Brian White led the response on Atlas Migration and traced the fault to the Django layer.
-Alexandra Johnson worked on Atlas Migration during the incident and restored service using MySQL.
-Follow-up actions are tracked in the status reports.
+An outage on Atlas Migration lasted 107 minutes.
+Lucia Hansen led Atlas Migration and did most of the Java work.
+Maria Olsen worked on Atlas Migration and covered Linux.
+Follow-up actions are tracked in the weekly updates.

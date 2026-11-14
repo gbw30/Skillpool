@@ -1,0 +1,8 @@
+#cobalt-escalation-playbook channel, exported 2024-10-12
+
+[09:02] Keisha Sokolov: does anyone have the latest copy of the handoff notes?
+[09:04] Elena Ivanov: thanks. the Zendesk piece for Cobalt Escalation Playbook is nearly there.
+[09:06] Keisha Sokolov: Elena, can you look at the help article backlog after that?
+[09:08] Elena Ivanov: sure, after lunch.
+[09:10] Elena Ivanov: I have run Freshdesk for a whole team before, happy to own it here.
+[09:12] Fatima Nakamura: reminder that the Cobalt Escalation Playbook review is on Thursday. Keisha is presenting.

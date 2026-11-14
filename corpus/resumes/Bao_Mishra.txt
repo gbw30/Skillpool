@@ -1,0 +1,21 @@
+Bao Mishra
+bao.mishra@example.com
+
+I'm a Senior Security Engineer based in Denver.
+
+Where I've worked
+
+I joined Copperleaf Studios in 2019 as a Senior Security Engineer. I led the response to a phishing incident and wrote the playbook that followed. I worked with three other departments on a company-wide deadline and hit it.
+
+I joined Fernhill Insurance in 2015 as a Security Engineer and stayed until 2019. I looked after Vulnerability Management for a company of two thousand people. I presented quarterly results to the leadership team. I closed out an external audit with no major findings.
+
+I joined Obsidian Games in 2011 as a Systems Administrator and stayed until 2015. I mentored two junior colleagues through their first year. I automated account cleanup and removed hundreds of stale logins, drawing on Penetration Testing.
+
+What I'm good at
+
+I'd call myself an expert in Okta and Vulnerability Management. I'm at an intermediate level in Active Directory, Linux, Wireshark and Penetration Testing. I'm a beginner in Incident Response.
+
+Education
+
+I studied Information Security at Riverton State University (BA, 2008).
+I also hold the CISSP.

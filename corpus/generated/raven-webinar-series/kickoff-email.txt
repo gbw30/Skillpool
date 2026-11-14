@@ -1,0 +1,17 @@
+From: Hiroshi Yamamoto <hyamamoto33@example.net>
+To: raven-webinar-series@larkfield.example
+Date: 2024-04-25
+Subject: Raven Webinar Series kickoff: who is doing what
+
+Hi all,
+
+Raven Webinar Series starts this month, so here is the team.
+
+I am the campaign lead for Raven Webinar Series.
+Wei Popescu (Growth Marketer, weip5@example.org) will be the designer for Raven Webinar Series.
+Yara Hansen (Senior Brand Designer, yara.hansen@example.com) joins Raven Webinar Series as marketing analyst.
+Hana Moreau (Brand Designer, hmoreau64@example.com) joins Raven Webinar Series as content owner.
+N. Schmidt (IT Administrator, naomis7@example.org) is our compliance contact on Raven Webinar Series.
+
+Thanks,
+Hiroshi

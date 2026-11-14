@@ -1,0 +1,24 @@
+Isaac Meyer
+isaac.meyer@example.com
+
+I'm an Analytics Engineer based in Austin.
+
+Where I've worked
+
+I joined Tidewater Labs in 2018 as an Analytics Engineer. I trained and shipped a forecasting model that the finance team still uses. I wrote the documentation new joiners still start with. I built the pipelines that feed the company's weekly reporting, mostly in Looker.
+
+I joined Corvid Analytics in 2015 as an Analytics Engineer and stayed until 2018. I presented quarterly results to the leadership team. I cut a nightly job from four hours to forty minutes by rewriting it with Tableau.
+
+I joined Emberline Retail in 2011 as an Analytics Engineer and stayed until 2015. I took over a stalled project and delivered it within a quarter. I turned loose questions from other teams into dashboards people trust, using Excel.
+
+What I'm good at
+
+I'd call myself an expert in BigQuery and SQL. I'm advanced in Looker and Swift. I'm at an intermediate level in pandas, Tableau and Excel.
+
+Education
+
+I studied Statistics at Ashgrove College (MSc, 2007).
+
+On the side
+
+Hackathon Entry: a side project I built in my own time.

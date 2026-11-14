@@ -77,7 +77,7 @@ Priority: P0 = needed for the demo to be honest, P1 = planned, P2 = later.
 | R4 | One bad file does not stop the batch. | P0 |
 | R5 | From each document the system extracts people, skills (with level if stated), roles and employers, education, and projects, and records which passage supports each fact. | P0 |
 | R6 | A fact is stored only if its supporting quote is found verbatim in the source document. | P0 |
-| R7 | Mentions of the same person across documents are resolved to one person. A merge needs corroboration beyond the name. Uncertain cases stay separate and are flagged. | P0 |
+| R7 | Mentions of the same person across documents are resolved to one person. A merge needs corroboration beyond the name. An uncertain mention is neither merged nor made into a second person; it is kept as unconfirmed on the people it might mean. | P0 |
 | R8 | DOCX support. | P1 |
 | R9 | Delete a document and every fact that only it supported. | P1 |
 
@@ -98,8 +98,9 @@ Priority: P0 = needed for the demo to be honest, P1 = planned, P2 = later.
 |---|---|---|
 | R18 | Uploads on a public deployment require an access code and can be switched off entirely. | P0 |
 | R19 | Search on a public deployment is rate limited, with a daily cap on model spend. | P0 |
+| R22 | The whole site asks for one access code. Without it no page and no API route answers, and a deployment with no code configured lets nobody in. | P0 |
 | R20 | Document text is never treated as instructions and model output is never rendered as HTML. | P0 |
-| R21 | A stats view shows counts of documents, chunks, people, skills, projects, and flagged identity pairs. | P1 |
+| R21 | A stats view shows counts of documents, chunks, people, skills, projects, and unconfirmed mentions. | P1 |
 | R22 | The landing page draws the indexed graph of organisation projects, the people on them, and the skills they used. A node can be pointed at to trace its links, a person opens their page, the view can be zoomed and moved, and the same content is offered as a list. | P1 |
 
 ## 7. Experience
@@ -127,6 +128,7 @@ Targets are for the P0 release.
 |---|---|
 | Recall@10 on labelled questions | at least 0.80 overall |
 | Recall@10 on questions answerable only through a project document (multi-hop) | at least 0.70; vector-only baseline reported beside it |
+| Recall@10 on questions answerable only from a chat export or meeting notes (unstructured) | reported; no target set yet |
 | Citation validity (citation resolves to a shown passage containing the quote) | 100% |
 | Identity resolution precision (merged pairs that are truly the same person) | at least 0.98 |
 | Identity resolution recall | at least 0.90 |
@@ -144,7 +146,7 @@ not beat vector-only there, that is a finding to report, not hide.
 | Milestone | Outcome |
 |---|---|
 | M0 Skeleton | Web app, service, database, and bucket deployed and talking; health check green. |
-| M1 Corpus | Synthetic project documents generated over the existing resumes, with ground truth files. |
+| M1 Corpus | A synthetic company knowledge base (resumes, project documents, company pages) generated with ground truth files. |
 | M2 Ingestion | A folder on disk becomes a correct graph; identity resolution measured. |
 | M3 Search | Hybrid retrieval and cited answers; evaluation run passes the targets or reports the gap. |
 | M4 Interface | The four screens, including browser upload end to end. |
@@ -158,14 +160,15 @@ not beat vector-only there, that is a finding to report, not hide.
 | The synthetic corpus makes the problem look easier than real data. | Generator injects name variants, same-name people, and skill synonyms; say plainly in the README that it is synthetic. |
 | The graph leg adds complexity without adding recall. | Report vector-only baseline beside hybrid on every eval run. |
 | Resume "projects" are named after job titles and collide across people. | Resume projects are scoped to their person unless matched to a project defined in a project document. |
-| A public demo with open upload and search spends the owner's API budget. | R18 and R19. |
-| Rights to reuse the resume dataset are undocumented. | Open question below. |
+| A public demo with open upload and search spends the owner's API budget. | R18, R19 and R22. |
+| Rights to reuse the resume dataset are undocumented. | Closed: the inherited resumes were replaced with generated ones. |
 
 ## 11. Open questions
 
-1. Where did the 680 resume PDFs come from, and may they be redistributed in a public repo? If
-   unknown, regenerate resumes with the same generator used for project documents.
-2. Is the hosted demo public, or shared by link with an access code only?
+1. Closed (owner, 2026-11-12): the origin of the 680 inherited resume PDFs is unknown, so they
+   were removed. `corpus/generate.py` now writes the resumes as well as the other documents.
+2. Closed (owner, 2026-11-12): the demo is private. The whole site asks for an access code (R22)
+   and the team records its own demo.
 3. Should the rebuild credit the original team in the README? (Laurynas Lukas Kanopka, Yanka
    Deshkovski, Gabriel Wong, Lucas G.)
 

@@ -1,0 +1,19 @@
+From: Jonas Hansen <jhansen42@example.net>
+To: ember-mobile-relaunch@larkfield.example
+Date: 2023-01-27
+Subject: Ember Mobile Relaunch kickoff: who is doing what
+
+Hi all,
+
+Ember Mobile Relaunch starts this month, so here is the team.
+
+I am the frontend lead for Ember Mobile Relaunch.
+Isaac Abbasi (Senior Web Developer) will be the mobile engineer for Ember Mobile Relaunch.
+meir9@example.net (Frontend Engineer) will be the QA lead for Ember Mobile Relaunch.
+Camille Novak (Full Stack Developer, camille.novak@example.org) joins Ember Mobile Relaunch as web engineer.
+M. Ito (Controller, mito28@example.com) joins Ember Mobile Relaunch as analyst.
+Samir Thapa (Senior Controller, sthapa63@example.com) joins Ember Mobile Relaunch as controller.
+Hiroshi Yamamoto (Contract Growth Marketer, hiroshi.yamamoto@marlow.example) from Marlow Contracting is our marketing analyst on Ember Mobile Relaunch.
+
+Thanks,
+Jonas
