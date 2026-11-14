@@ -2,6 +2,7 @@
 // Browsers never reach the service directly, and only the routes listed here exist.
 import type { NextRequest } from "next/server";
 import { ACCESS_COOKIE, siteGate } from "@/lib/access";
+import { readBody } from "@/lib/body";
 import { MOCK, MOCK_STORAGE } from "@/lib/mock";
 import { callService, uploadGate } from "@/lib/service";
 
@@ -23,25 +24,6 @@ const ROUTES: Route[] = [
 ];
 
 const error = (status: number, code: string, message: string) => Response.json({ code, message }, { status });
-
-/** The request body as text, or null once it passes MAX_BODY_BYTES. Never buffers more than that. */
-async function readBody(request: NextRequest): Promise<string | null> {
-  if (Number(request.headers.get("content-length") ?? 0) > MAX_BODY_BYTES) return null;
-  if (!request.body) return "";
-  const reader = request.body.getReader();
-  const decoder = new TextDecoder();
-  let text = "";
-  for (let bytes = 0; ; ) {
-    const { done, value } = await reader.read();
-    if (done) return text + decoder.decode();
-    bytes += value.byteLength;
-    if (bytes > MAX_BODY_BYTES) {
-      await reader.cancel();
-      return null;
-    }
-    text += decoder.decode(value, { stream: true });
-  }
-}
 
 async function handle(request: NextRequest, ctx: RouteContext<"/api/[...path]">) {
   // proxy.ts already turns these away; checked again here so the API never depends on it alone.
@@ -68,7 +50,7 @@ async function handle(request: NextRequest, ctx: RouteContext<"/api/[...path]">)
     if (gate === "denied") return error(403, "forbidden", "That access code is not valid.");
   }
 
-  const body = request.method === "POST" ? await readBody(request) : "";
+  const body = request.method === "POST" ? await readBody(request, MAX_BODY_BYTES) : "";
   if (body === null) return error(413, "payload_too_large", "Request body is too large.");
 
   let upstream: Response;
