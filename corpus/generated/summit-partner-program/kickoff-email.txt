@@ -1,0 +1,16 @@
+From: Carlos Thapa <carlos.thapa@example.org>
+To: summit-partner-program@larkfield.example
+Date: 2025-02-12
+Subject: Summit Partner Program kickoff: who is doing what
+
+Hi all,
+
+We are kicking off Summit Partner Program. This is who is on it.
+
+I am the deal lead for Summit Partner Program.
+H. Mendoza (Senior Sales Operations Analyst) joins Summit Partner Program as partner manager.
+Lars Sato (Senior Sales Operations Analyst) will be the sales engineer for Summit Partner Program.
+Lars starts on Summit Partner Program in 2025-02.
+
+Thanks,
+Carlos

@@ -1,0 +1,18 @@
+From: Kenji Abbasi <kenji.abbasi@example.net>
+To: harbor-reporting-pipeline@larkfield.example
+Date: 2023-02-13
+Subject: Harbor Reporting Pipeline kickoff: who is doing what
+
+Hi all,
+
+Harbor Reporting Pipeline starts this month, so here is the team.
+
+I am the data analyst for Harbor Reporting Pipeline.
+M. Haddad (Data Engineer, mei.haddad@example.net) is our data lead on Harbor Reporting Pipeline.
+Ingrid Johnson (Data Analyst) will be the analytics engineer for Harbor Reporting Pipeline.
+Jin Almeida (Financial Analyst, jina5@example.com) is our analyst on Harbor Reporting Pipeline.
+Sana Fernandez (Senior Accountant) joins Harbor Reporting Pipeline as controller.
+Bao Kumar (Contract Planning Manager, bao.kumar@okafor.example) from Okafor Systems will be the budget owner for Harbor Reporting Pipeline.
+
+Thanks,
+Kenji

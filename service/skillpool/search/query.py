@@ -1,11 +1,8 @@
 """Turn a question into the skills and projects it asks for, tied to graph nodes."""
 from pydantic import BaseModel
 
-from .. import graph, llm
+from .. import config, graph, llm
 from ..text import skill_id, slug
-
-# Neo4j cosine score, (1 + cos) / 2. Deliberately high: "Java" must not resolve to "JavaScript".
-SKILL_VECTOR_FLOOR = 0.85
 
 
 class ParsedQuestion(BaseModel):
@@ -29,9 +26,11 @@ def understand(question: str, mode: str) -> tuple[list[float], list[dict], list[
     skills = {r["id"]: r for r in graph.run(graph.SKILLS_BY_ID, ids=[skill_id(n) for n in names])}
     unknown = [n for n in names if skill_id(n) not in skills]
     vector = llm.embed([question], query=True)[0]
-    for v in llm.embed(unknown):  # no exact node: accept only a very close neighbour
+    # No exact node: accept only a very close neighbour. "Java" must not resolve to "JavaScript",
+    # nor a skill nobody has to the nearest one somebody does.
+    for v in llm.embed(unknown):
         hit = graph.run(graph.SKILL_BY_VECTOR, embedding=v)
-        if hit and hit[0]["score"] >= SKILL_VECTOR_FLOOR:
+        if hit and hit[0]["score"] >= config.SKILL_VECTOR_FLOOR:
             skills[hit[0]["id"]] = {"id": hit[0]["id"], "name": hit[0]["name"]}
     projects = graph.run(graph.ORG_PROJECTS_BY_ID, ids=[slug(p) for p in parsed.projects if slug(p)])
     return vector, list(skills.values()), projects

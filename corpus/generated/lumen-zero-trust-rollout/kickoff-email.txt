@@ -1,0 +1,16 @@
+From: Tessa Moreau <tessam3@example.net>
+To: lumen-zero-trust-rollout@larkfield.example
+Date: 2025-01-08
+Subject: Lumen Zero Trust Rollout kickoff: who is doing what
+
+Hi all,
+
+We are kicking off Lumen Zero Trust Rollout. This is who is on it.
+
+I am the security reviewer for Lumen Zero Trust Rollout.
+Jonas Jensen (Senior IT Administrator) joins Lumen Zero Trust Rollout as IT lead.
+Paolo Silva (Systems Administrator, paolos8@example.net) will be the compliance contact for Lumen Zero Trust Rollout.
+Gabriela Ortiz (IT Administrator) is our security lead on Lumen Zero Trust Rollout.
+
+Thanks,
+Tessa

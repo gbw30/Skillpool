@@ -1,0 +1,20 @@
+Hassan Weber
+hassanw2@example.org
+
+I'm a Mobile Developer based in Osaka.
+
+Where I've worked
+
+I joined Corvid Analytics in 2023 as a Mobile Developer. I shipped features used by thousands of customers every week, mostly in Vue. I trained the wider team on a new process.
+
+I joined Tallgrass Bank in 2019 as a Mobile Developer and stayed until 2023. I set up the test suite and brought flaky tests under control. I presented quarterly results to the leadership team.
+
+I joined Driftwood Travel in 2016 as a Web Developer and stayed until 2019. I rebuilt the signup flow and raised completion by a fifth, using CSS. I worked with three other departments on a company-wide deadline and hit it. I paired with designers to turn mockups into working screens.
+
+What I'm good at
+
+I'd call myself an expert in CSS, React and Kotlin. I'm at an intermediate level in Vue. I'm a beginner in Swift.
+
+Education
+
+I studied Software Engineering at University of Westmarch (BA, 2014).

@@ -1,7 +1,9 @@
 """Decide whether a mention is a person we already know (SPEC section 7).
 
 A shared name alone never merges two records: a merge needs a shared email, or a compatible
-name plus evidence beyond the name. Unclear cases stay separate and are flagged.
+name plus evidence beyond the name. An unclear case is neither merged nor made into a second
+person, which would show one person twice: the mention is kept as unconfirmed on the people it
+might mean.
 """
 import math
 import uuid
@@ -114,7 +116,7 @@ def decide(scored: list[tuple[str, str, float]]) -> tuple[str, list[str]]:
     """scored: (person id, match kind, score). Returns (action, person ids).
 
     merge: one clear winner. ask: plausible but unclear, put it to the model.
-    flag: the name matches and nothing else does.
+    flag: the name matches and nothing else does, so the mention stays unconfirmed.
     new: no candidates, or the evidence says they are someone else.
     """
     if not scored:
@@ -184,7 +186,8 @@ def _create(person: dict, name: Name) -> str:
 
 
 def resolve(person: dict, ctx: Context, doc_people: list[tuple[Name, str]]) -> str | None:
-    """Person id for this mention, creating the person if needed. None when it cannot be placed.
+    """Person id for this mention, creating the person if needed. None when it cannot be placed:
+    nobody fits, or the name fits someone on record and nothing else confirms it.
 
     doc_people holds the people already placed from this document. Two people a document lists
     separately are two people, so those are never candidates for each other.
@@ -220,7 +223,7 @@ def resolve(person: dict, ctx: Context, doc_people: list[tuple[Name, str]]) -> s
         reason = "model could not tell"
     if action == "merge":
         return _merge(ids[0], person)
-    pid = _create(person, name)
-    for other in ids if action == "flag" else []:
-        graph.run(graph.FLAG_POSSIBLE_SAME, a=pid, b=other, score=0.0, reason=reason)
-    return pid
+    if action == "new":
+        return _create(person, name)
+    graph.run(graph.LINK_UNCONFIRMED, mentions=person["mentions"], people=ids, reason=reason)
+    return None

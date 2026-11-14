@@ -1,0 +1,20 @@
+From: Lars Sato <lsato81@example.org>
+To: umbra-renewal-drive@larkfield.example
+Date: 2023-03-05
+Subject: Umbra Renewal Drive kickoff: who is doing what
+
+Hi all,
+
+We are kicking off Umbra Renewal Drive. This is who is on it.
+
+I am the partner manager for Umbra Renewal Drive.
+Daniel Kim (Partnerships Manager, dkim90@example.net) joins Umbra Renewal Drive as operations analyst.
+M. Andersson (Senior Partnerships Manager) joins Umbra Renewal Drive as sales engineer.
+Ivan Abbasi (Sales Operations Analyst, iabbasi60@example.com) is our deal lead on Umbra Renewal Drive.
+Ivan starts on Umbra Renewal Drive in 2023-03.
+Rahul Singh (Data Engineer) will be the data lead for Umbra Renewal Drive.
+Ingrid Johnson (Data Analyst) is our data analyst on Umbra Renewal Drive.
+Ingrid starts on Umbra Renewal Drive in 2023-03.
+
+Thanks,
+Lars

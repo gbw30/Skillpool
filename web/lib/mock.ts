@@ -94,7 +94,7 @@ const PEOPLE: PersonProfile[] = [
         collaborators: [{ id: "p-amy-vasquez", name: "Amy Vasquez" }, { id: "p-christopher-montgomery-abernathy", name: "Christopher Montgomery-Abernathy" }],
       },
     ],
-    possibleSame: [],
+    unconfirmed: [],
     evidence: RESULTS.people[0].evidence,
   },
   {
@@ -109,7 +109,7 @@ const PEOPLE: PersonProfile[] = [
       { id: "pr-beacon", name: "Beacon Reporting Pipeline", scope: "internal", role: "QA lead", collaborators: [] },
       { id: "pr-atlas", name: "Atlas Migration", scope: "internal", role: "QA lead", collaborators: [{ id: "p-brenda-adams", name: "Brenda Adams" }] },
     ],
-    possibleSame: [{ id: "p-amy-vasquez-2", name: "Amy Vasquez" }],
+    unconfirmed: [{ docId: "d-vendor-memo", path: "_misc/vendor-memo.md", surface: "Amy Vasquez" }],
     evidence: RESULTS.people[1].evidence,
   },
   {
@@ -121,11 +121,11 @@ const PEOPLE: PersonProfile[] = [
     roles: [],
     education: [],
     projects: [{ id: "pr-atlas", name: "Atlas Migration", scope: "internal", role: null, collaborators: [{ id: "p-brenda-adams", name: "Brenda Adams" }] }],
-    possibleSame: [],
+    unconfirmed: [],
     evidence: RESULTS.people[2].evidence,
   },
   {
-    // A second record with the same name, kept apart: shows every empty state.
+    // A different person with the same name: shows every empty state.
     id: "p-amy-vasquez-2",
     name: "Amy Vasquez",
     title: null,
@@ -134,7 +134,7 @@ const PEOPLE: PersonProfile[] = [
     roles: [],
     education: [],
     projects: [],
-    possibleSame: [{ id: "p-amy-vasquez", name: "Amy Vasquez" }],
+    unconfirmed: [],
     evidence: [],
   },
 ];
@@ -147,7 +147,7 @@ function sampleProfile(id: string): PersonProfile | undefined {
   if (!person) return undefined;
   const named = (list: { id: string; name: string }[], key: string) => list.find((x) => x.id === key)?.name ?? key;
   return {
-    id, name: person.name, title: null, aliases: null, roles: [], education: [], possibleSame: [], evidence: [],
+    id, name: person.name, title: null, aliases: null, roles: [], education: [], unconfirmed: [], evidence: [],
     skills: GRAPH.has.filter(([p]) => p === id).map(([, skill]) => ({ name: named(GRAPH.skills, skill), level: null })),
     projects: GRAPH.workedOn.filter(([p]) => p === id).map(([, project]) => ({
       id: project, name: named(GRAPH.projects, project), scope: "org", role: null,

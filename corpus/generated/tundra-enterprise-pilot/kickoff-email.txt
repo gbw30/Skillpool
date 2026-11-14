@@ -1,0 +1,18 @@
+From: Naomi Mahlangu <naomim5@example.com>
+To: tundra-enterprise-pilot@larkfield.example
+Date: 2025-04-22
+Subject: Tundra Enterprise Pilot kickoff: who is doing what
+
+Hi all,
+
+Tundra Enterprise Pilot starts this month, so here is the team.
+
+I am the sales engineer for Tundra Enterprise Pilot.
+Daniel Kim (Partnerships Manager, dkim90@example.net) is our partner manager on Tundra Enterprise Pilot.
+Daniel starts on Tundra Enterprise Pilot in 2025-04.
+Maria Andersson (Senior Partnerships Manager) joins Tundra Enterprise Pilot as operations analyst.
+Kenji Abbasi (Machine Learning Engineer) joins Tundra Enterprise Pilot as analytics engineer.
+Valentina Ito (Data Engineer) is our data analyst on Tundra Enterprise Pilot.
+
+Thanks,
+Naomi

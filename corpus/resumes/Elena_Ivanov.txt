@@ -1,0 +1,24 @@
+Elena Ivanov
+elenai6@example.org
+
+I'm a Senior Support Engineer based in Austin.
+
+Where I've worked
+
+I joined Northgate Logistics in 2019 as a Senior Support Engineer. I found the accounts most likely to leave, using Technical Writing. I mentored two junior colleagues through their first year.
+
+I joined Copperleaf Studios in 2016 as a Support Lead and stayed until 2019. I answered the hardest tickets and wrote them up so nobody had to solve them twice. I handled a key vendor relationship and renegotiated the contract. I cut first-response time from nine hours to two.
+
+I joined Halcyon Freight in 2012 as a Junior Support Engineer and stayed until 2016. I worked with three other departments on a company-wide deadline and hit it. I set up the tooling for a forty-person support team, built around Troubleshooting.
+
+What I'm good at
+
+I'd call myself an expert in Technical Writing, SQL, Troubleshooting and HubSpot. I'm advanced in Salesforce. I'm at an intermediate level in Jira. I'm a beginner in Prototyping.
+
+Education
+
+I studied Information Systems at Lakeshore Institute of Technology (BA, 2010).
+
+On the side
+
+Mapstack: a side project I built in my own time.

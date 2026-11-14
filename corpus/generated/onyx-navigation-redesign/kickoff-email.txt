@@ -1,0 +1,19 @@
+From: Alejandro Ng <ang65@example.com>
+To: onyx-navigation-redesign@larkfield.example
+Date: 2023-02-17
+Subject: Onyx Navigation Redesign kickoff: who is doing what
+
+Hi all,
+
+We are kicking off Onyx Navigation Redesign. This is who is on it.
+
+I am the product lead for Onyx Navigation Redesign.
+Julia Williams (UX Researcher) will be the researcher for Onyx Navigation Redesign.
+Karim Adeyemi (UX Researcher) will be the product analyst for Onyx Navigation Redesign.
+bpereira28@example.net (Senior UX Designer) joins Onyx Navigation Redesign as design lead.
+Nikhil Patel (Technical Writer, nikhilp5@example.net) joins Onyx Navigation Redesign as support lead.
+Nikhil starts on Onyx Navigation Redesign in 2023-02.
+Nakamura, Fatima (Customer Success Manager) joins Onyx Navigation Redesign as documentation owner.
+
+Thanks,
+Alejandro

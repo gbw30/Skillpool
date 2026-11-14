@@ -1,5 +1,7 @@
 """One structured-output call per document (or per window of a long one)."""
+import hashlib
 import secrets
+from pathlib import Path
 from typing import Literal
 
 from pydantic import BaseModel
@@ -131,6 +133,28 @@ def _merge(parts: list[Extraction]) -> Extraction:
 
 
 def extract(text: str, chunks: list[Chunk], name: str) -> Extraction:
+    """Facts the model reads from one document.
+
+    With EXTRACT_CACHE_DIR set, an answer already paid for is read back from disk, so an ingest
+    that is repeated or was cut off part-way makes no second call for the same document. The
+    answer is still checked against the document by `verify`, like a fresh one.
+    """
+    if not config.EXTRACT_CACHE_DIR:
+        return _extract(text, chunks, name)
+    # Everything the model saw decides the answer: the model, the instructions, the file name, the text.
+    key = hashlib.sha256("\0".join((config.CLAUDE_MODEL, SYSTEM, name, text)).encode()).hexdigest()
+    cached = Path(config.EXTRACT_CACHE_DIR) / f"{key}.json"
+    if cached.exists():
+        return Extraction.model_validate_json(cached.read_text())
+    out = _extract(text, chunks, name)
+    cached.parent.mkdir(parents=True, exist_ok=True)
+    partial = cached.with_suffix(f".{secrets.token_hex(4)}.tmp")
+    partial.write_text(out.model_dump_json())
+    partial.replace(cached)  # in one step, so a run that is killed never leaves half a file behind
+    return out
+
+
+def _extract(text: str, chunks: list[Chunk], name: str) -> Extraction:
     if len(text) <= config.LONG_DOC_CHARS:
         return _call(text, name)
     # shortcut: each window sees only the document's opening as shared context, so a fact

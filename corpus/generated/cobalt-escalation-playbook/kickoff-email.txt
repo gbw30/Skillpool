@@ -1,0 +1,17 @@
+From: Elena Ivanov <elenai6@example.org>
+To: cobalt-escalation-playbook@larkfield.example
+Date: 2024-02-05
+Subject: Cobalt Escalation Playbook kickoff: who is doing what
+
+Hi all,
+
+We are kicking off Cobalt Escalation Playbook. This is who is on it.
+
+I am the success manager for Cobalt Escalation Playbook.
+Fatima Nakamura (Customer Success Manager) will be the escalation owner for Cobalt Escalation Playbook.
+Keisha Sokolov (Support Lead) is our support lead on Cobalt Escalation Playbook.
+Keisha starts on Cobalt Escalation Playbook in 2024-02.
+J. Andersson (Customer Success Manager) is our documentation owner on Cobalt Escalation Playbook.
+
+Thanks,
+Elena

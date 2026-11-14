@@ -1,0 +1,8 @@
+#kestrel-device-refresh channel, exported 2024-08-21
+
+[09:02] Layla Patel: heads up, I am going to be late with the access audit.
+[09:04] Daniel Kumar: thanks. the Wireshark piece for Kestrel Device Refresh is nearly there.
+[09:06] Layla Patel: Daniel, can you look at the laptop inventory after that?
+[09:08] Daniel Kumar: on it.
+[09:10] Layla Patel: I have run CrowdStrike for a whole team before, happy to own it here.
+[09:12] Lars Vargas: reminder that the Kestrel Device Refresh review is on Thursday. Layla is presenting.

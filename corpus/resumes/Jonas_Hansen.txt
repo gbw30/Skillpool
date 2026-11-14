@@ -1,0 +1,22 @@
+Jonas Hansen
+jhansen42@example.net
+
+I'm a Senior Web Developer based in Tampa.
+
+Where I've worked
+
+I joined Paperbirch Publishing in 2022 as a Senior Web Developer. I paired with designers to turn mockups into working screens. I mentored two junior colleagues through their first year.
+
+I joined Larkspur Foods in 2018 as a Web Developer and stayed until 2022. I shipped features used by thousands of customers every week, mostly in React. I handled a key vendor relationship and renegotiated the contract. I set up the test suite and brought flaky tests under control.
+
+What I'm good at
+
+I'd call myself an expert in React and Node.js. I'm advanced in Vue and CSS. I'm a beginner in TypeScript.
+
+Education
+
+I studied Software Engineering at Northfield Polytechnic (BSc, 2014).
+
+On the side
+
+Mapstack: a side project I built in my own time.

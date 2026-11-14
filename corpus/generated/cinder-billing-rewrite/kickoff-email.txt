@@ -1,0 +1,21 @@
+From: Diego Osei <dosei81@example.org>
+To: cinder-billing-rewrite@larkfield.example
+Date: 2024-06-26
+Subject: Cinder Billing Rewrite kickoff: who is doing what
+
+Hi all,
+
+We are kicking off Cinder Billing Rewrite. This is who is on it.
+
+I am the release manager for Cinder Billing Rewrite.
+T. Costa (Site Reliability Engineer) is our backend engineer on Cinder Billing Rewrite.
+Diego Costa (Platform Engineer) joins Cinder Billing Rewrite as site reliability engineer.
+Lucia Hansen (Senior DevOps Engineer, lhansen68@example.org) joins Cinder Billing Rewrite as tech lead.
+Lucia starts on Cinder Billing Rewrite in 2024-06.
+Fatima Martins (Sales Operations Analyst) will be the deal lead for Cinder Billing Rewrite.
+Fatima starts on Cinder Billing Rewrite in 2024-06.
+Mahlangu, Naomi (Senior Account Executive) joins Cinder Billing Rewrite as partner manager.
+Nina Diaz (Contract Product Designer, nina.diaz@okafor.example) from Okafor Systems joins Cinder Billing Rewrite as product lead.
+
+Thanks,
+Diego Osei

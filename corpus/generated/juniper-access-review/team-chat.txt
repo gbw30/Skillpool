@@ -1,0 +1,7 @@
+#juniper-access-review channel, exported 2024-08-13
+
+[09:02] Naomi Schmidt: morning. the vendor review is done on my side.
+[09:04] Bao Mishra: nice. I am still on the Vulnerability Management part of Juniper Access Review.
+[09:06] Naomi Schmidt: Bao, can you look at the incident drill after that?
+[09:08] Bao Mishra: sure, after lunch.
+[09:10] Samir Lee: reminder that the Juniper Access Review review is on Thursday. Naomi is presenting.

@@ -1,0 +1,8 @@
+#borealis-observability-rollout channel, exported 2025-08-05
+
+[09:02] Chloe Williams: heads up, I am going to be late with the load test plan.
+[09:05] Maria Olsen: nice. I am still on the Go part of Borealis Observability Rollout.
+[09:08] Chloe Williams: Maria, can you look at the on-call handover after that?
+[09:11] Maria Olsen: can it wait until tomorrow? I am out this afternoon.
+[09:14] Maria Olsen: I used Rust for two years at my last job, so I can take that part.
+[09:17] Andre Johnson: reminder that the Borealis Observability Rollout review is on Thursday. Chloe is presenting.

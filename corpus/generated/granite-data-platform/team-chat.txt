@@ -1,0 +1,7 @@
+#granite-data-platform channel, exported 2024-12-22
+
+[09:02] Isaac Meyer: quick update: I finished the data backfill yesterday.
+[09:04] Anika Popescu: nice. I am still on the SQL part of Granite Data Platform.
+[09:06] Isaac Meyer: Anika, can you look at the data quality checks after that?
+[09:08] Anika Popescu: can it wait until tomorrow? I am out this afternoon.
+[09:10] Wei Popescu: reminder that the Granite Data Platform review is on Thursday. Isaac is presenting.

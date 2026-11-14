@@ -24,7 +24,8 @@ export type PersonProfile = {
   roles: { org: string; title: string; start: string | null; end: string | null }[];
   education: { school: string; degree: string; field: string }[];
   projects: { id: string; name: string; scope: string; role: string | null; collaborators: { id: string; name: string }[] }[];
-  possibleSame: { id: string; name: string }[];
+  /** Documents that write this name with nothing else to confirm it is this person. Not evidence. */
+  unconfirmed: { docId: string; path: string; surface: string }[];
   evidence: { chunkId: string; docId: string; path: string; text: string }[];
 };
 

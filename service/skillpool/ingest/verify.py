@@ -1,7 +1,10 @@
 """Keep only facts whose quote is in the document, and record which chunks hold it (PRD R6)."""
+import re
+
 from ..text import squash
 from .chunk import Chunk
 from .extract import Extraction
+from .resolve import parse_name
 
 
 def index(text: str) -> tuple[str, list[int]]:
@@ -37,12 +40,24 @@ class Locator:
         ids: list[str] = []
         i = hay.find(needle) if needle else -1
         while i != -1:
-            a, b = self.pos[i], self.pos[i + len(needle) - 1] + 1
-            ids += [c.id for c in self.chunks if c.start < b and a < c.end and c.id not in ids]
+            ids += [cid for cid in self._chunks_at(i, len(needle)) if cid not in ids]
             if not every:
                 break
             i = hay.find(needle, i + 1)
         return ids
+
+    def standalone(self, word: str) -> list[str]:
+        """Ids of the chunks where `word` stands by itself: not inside a longer word or an email
+        address, and not followed by another capitalised word, which would make it part of a
+        longer name."""
+        ids: list[str] = []
+        for m in re.finditer(rf"(?<![\w@.-]){re.escape(word)}(?![\w@-]|\.\w|\s+[A-Z])", self.flat):
+            ids += [cid for cid in self._chunks_at(m.start(), len(word)) if cid not in ids]
+        return ids
+
+    def _chunks_at(self, i: int, length: int) -> list[str]:
+        a, b = self.pos[i], self.pos[i + length - 1] + 1
+        return [c.id for c in self.chunks if c.start < b and a < c.end]
 
 
 def verify(ex: Extraction, text: str, chunks: list[Chunk]) -> dict:
@@ -91,6 +106,51 @@ def verify(ex: Extraction, text: str, chunks: list[Chunk]) -> dict:
                 "mentions": mentions,
             }
         )
+
+    # The model sometimes lists one person twice, by initial in a list ("N. Mahlangu") and in full
+    # in a sentence. Fold the initial into the full name when exactly one full name fits and the
+    # document says nothing that tells them apart. Two entries with different job titles or
+    # different email addresses are two people and stay that way.
+    names = [parse_name(p["name"]) for p in people]
+    for short, initial in list(zip(people, names)):
+        if not initial or not initial.last or len(initial.first) != 1:
+            continue
+        fits = [
+            p for p, n in zip(people, names)
+            if p is not short and n and n.last == initial.last and len(n.first) > 1 and n.first[0] == initial.first
+        ]
+        if len(fits) != 1:
+            continue
+        full = fits[0]
+        differ = lambda a, b: bool(a and b and not {x.casefold() for x in a} & {x.casefold() for x in b})
+        if differ([short["title"]], [full["title"]]) or differ(short["emails"], full["emails"]):
+            continue
+        full["aliases"] += [a for a in (short["name"], *short["aliases"]) if a not in full["aliases"]]
+        full["emails"] += [e for e in short["emails"] if e not in full["emails"]]
+        full["title"] = full["title"] or short["title"]
+        full["isSubject"] = full["isSubject"] or short["isSubject"]
+        for key in ("skills", "roles", "education", "projects", "mentions"):
+            full[key] += short[key]
+        people.remove(short)
+
+    # A first name on its own ("Bao, can you look at this?") means the one person this document
+    # names in full with that first name. The model is asked to list these as aliases and often
+    # leaves them out, so they are found here. Nothing is added when it could mean someone else.
+    parsed = [parse_name(p["name"]) for p in people]
+    for p, name in zip(people, parsed):
+        if not name or not name.last or len(name.first) < 2:
+            continue
+        could_be_another = any(
+            other is not name and other and (other.first in (name.first, name.first[0]) or other.last == name.first)
+            for other in parsed
+        )
+        first = next((t.strip(".,") for t in p["name"].split() if t.strip(".,").lower() == name.first), "")
+        if could_be_another or not first or first in p["aliases"]:
+            continue
+        found = loc.standalone(first)
+        if found:
+            p["aliases"].append(first)
+            p["mentions"] += [{"chunkId": cid, "surface": first} for cid in found]
 
     projects = []
     for pr in ex.projects:

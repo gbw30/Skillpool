@@ -1,0 +1,22 @@
+Samir Lee
+slee95@example.org
+
+I'm an IT Administrator based in Nairobi.
+
+Where I've worked
+
+I joined Northgate Logistics in 2022 as an IT Administrator. I led the response to a phishing incident and wrote the playbook that followed. I trained the wider team on a new process.
+
+I joined Redfern Robotics in 2020 as an IT Administrator and stayed until 2022. I automated account cleanup and removed hundreds of stale logins, drawing on Penetration Testing. I worked with three other departments on a company-wide deadline and hit it. I looked after Penetration Testing for a company of two thousand people.
+
+What I'm good at
+
+I'd call myself an expert in Okta, Python, Active Directory and Docker. I'm at an intermediate level in Penetration Testing and AWS.
+
+Education
+
+I studied Information Security at Lakeshore Institute of Technology (BSc, 2016).
+
+On the side
+
+Tidewatch: a side project I built in my own time.

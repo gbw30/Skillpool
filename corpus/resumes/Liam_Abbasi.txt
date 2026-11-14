@@ -1,0 +1,20 @@
+Liam Abbasi
+labbasi86@example.com
+
+I'm a Systems Administrator based in Recife.
+
+Where I've worked
+
+I joined Corvid Analytics in 2019 as a Systems Administrator. I looked after Okta for a company of two thousand people. I ran the weekly planning meeting and kept it to thirty minutes.
+
+I joined Emberline Retail in 2015 as a Junior Systems Administrator and stayed until 2019. I led the response to a phishing incident and wrote the playbook that followed. I wrote the documentation new joiners still start with. I closed out an external audit with no major findings.
+
+I joined Sundial Energy in 2013 as a Junior Systems Administrator and stayed until 2015. I presented quarterly results to the leadership team. I automated account cleanup and removed hundreds of stale logins, drawing on AWS.
+
+What I'm good at
+
+I'd call myself an expert in Penetration Testing and Wireshark. I'm advanced in Okta. I'm at an intermediate level in Active Directory, Linux, AWS and Performance Management. I'm a beginner in Roadmapping.
+
+Education
+
+I studied Information Security at Ashgrove College (BA, 2011).

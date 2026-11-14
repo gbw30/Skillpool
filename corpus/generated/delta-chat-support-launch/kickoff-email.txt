@@ -1,0 +1,17 @@
+From: Erin Novak <enovak56@example.com>
+To: delta-chat-support-launch@larkfield.example
+Date: 2025-03-19
+Subject: Delta Chat Support Launch kickoff: who is doing what
+
+Hi all,
+
+We are kicking off Delta Chat Support Launch. This is who is on it.
+
+I am the documentation owner for Delta Chat Support Launch.
+K. Singh (Customer Success Manager) is our escalation owner on Delta Chat Support Launch.
+Deepa Jensen (Technical Writer) is our support lead on Delta Chat Support Launch.
+M. Dubois (Technical Writer) joins Delta Chat Support Launch as success manager.
+ocohen66@example.com (Planning Manager) will be the budget owner for Delta Chat Support Launch.
+
+Thanks,
+Erin

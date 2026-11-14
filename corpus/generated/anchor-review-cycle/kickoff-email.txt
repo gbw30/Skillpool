@@ -1,0 +1,17 @@
+From: Chloe Rossi <crossi52@example.com>
+To: anchor-review-cycle@larkfield.example
+Date: 2023-03-19
+Subject: Anchor Review Cycle kickoff: who is doing what
+
+Hi all,
+
+We are kicking off Anchor Review Cycle. This is who is on it.
+
+I am the people lead for Anchor Review Cycle.
+Tessa Gupta (People Partner, tessa.gupta@example.org) will be the compensation analyst for Anchor Review Cycle.
+Emeka Hernandez (Senior Learning Specialist) is our recruiter on Anchor Review Cycle.
+aisham5@example.org (Senior Recruiter) will be the program owner for Anchor Review Cycle.
+Paolo Silva (Senior Financial Analyst, paolo.silva@example.org) will be the finance lead for Anchor Review Cycle.
+
+Thanks,
+Chloe

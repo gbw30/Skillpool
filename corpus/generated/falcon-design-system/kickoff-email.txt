@@ -1,0 +1,17 @@
+From: Uma Schmidt <umas7@example.com>
+To: falcon-design-system@larkfield.example
+Date: 2025-04-07
+Subject: Falcon Design System kickoff: who is doing what
+
+Hi all,
+
+Falcon Design System starts this month, so here is the team.
+
+I am the QA lead for Falcon Design System.
+Olga Sokolov (Web Developer) joins Falcon Design System as frontend lead.
+Olga starts on Falcon Design System in 2025-04.
+Valentina Abbasi (Web Developer) is our web engineer on Falcon Design System.
+Nikhil Patel (Contract Support Lead, nikhil.patel@halvorsen.example) from Halvorsen Consulting joins Falcon Design System as support lead.
+
+Thanks,
+Uma

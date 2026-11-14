@@ -1,0 +1,7 @@
+#cinder-billing-rewrite channel, exported 2024-12-23
+
+[09:02] Fatima Martins: morning. the on-call handover is done on my side.
+[09:06] Diego Costa: thanks. the Python piece for Cinder Billing Rewrite is nearly there.
+[09:10] Fatima Martins: Diego Costa, can you look at the on-call handover after that?
+[09:14] Diego Costa: on it.
+[09:18] Diego Osei: reminder that the Cinder Billing Rewrite review is on Thursday. Fatima is presenting.

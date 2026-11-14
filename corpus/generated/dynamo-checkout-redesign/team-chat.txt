@@ -1,0 +1,7 @@
+#dynamo-checkout-redesign channel, exported 2025-11-09
+
+[09:02] Wei Johnson: morning. the accessibility pass is done on my side.
+[09:05] Camille Novak: thanks. the Figma piece for Dynamo Checkout Redesign is nearly there.
+[09:08] Wei Johnson: Camille, can you look at the performance budget after that?
+[09:11] Camille Novak: can it wait until tomorrow? I am out this afternoon.
+[09:14] Hiroshi Sharma: reminder that the Dynamo Checkout Redesign review is on Thursday. Wei is presenting.

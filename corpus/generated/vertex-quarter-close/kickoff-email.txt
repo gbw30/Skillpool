@@ -1,0 +1,17 @@
+From: Jin Almeida <jina5@example.com>
+To: vertex-quarter-close@larkfield.example
+Date: 2024-03-23
+Subject: Vertex Quarter Close kickoff: who is doing what
+
+Hi all,
+
+Vertex Quarter Close starts this month, so here is the team.
+
+I am the analyst for Vertex Quarter Close.
+Omar Novak (Senior Accountant) is our budget owner on Vertex Quarter Close.
+Jasmine Ortiz (Senior Financial Analyst) will be the controller for Vertex Quarter Close.
+Jasmine Nakamura (Senior Accountant, jnakamura10@example.org) will be the finance lead for Vertex Quarter Close.
+Johnson, Andre (UX Designer, andre.johnson@example.net) is our researcher on Vertex Quarter Close.
+
+Thanks,
+Jin

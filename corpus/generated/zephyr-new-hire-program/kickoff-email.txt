@@ -1,0 +1,15 @@
+From: Grace Yilmaz <grace.yilmaz@example.net>
+To: zephyr-new-hire-program@larkfield.example
+Date: 2024-02-23
+Subject: Zephyr New Hire Program kickoff: who is doing what
+
+Hi all,
+
+We are kicking off Zephyr New Hire Program. This is who is on it.
+
+I am the compensation analyst for Zephyr New Hire Program.
+I. Larsen (Compensation Analyst, isaacl9@example.org) joins Zephyr New Hire Program as people lead.
+Tessa Gupta (People Partner, tessa.gupta@example.org) is our program owner on Zephyr New Hire Program.
+
+Thanks,
+Grace

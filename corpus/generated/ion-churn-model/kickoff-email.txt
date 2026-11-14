@@ -1,0 +1,17 @@
+From: Isaac Meyer <isaac.meyer@example.com>
+To: ion-churn-model@larkfield.example
+Date: 2025-03-16
+Subject: Ion Churn Model kickoff: who is doing what
+
+Hi all,
+
+We are kicking off Ion Churn Model. This is who is on it.
+
+I am the data lead for Ion Churn Model.
+H. Sharma (Data Analyst, hiroshis9@example.net) joins Ion Churn Model as data analyst.
+Anika Popescu (Data Engineer) joins Ion Churn Model as model owner.
+Elena Eriksen (Data Analyst, elena.eriksen@example.com) is our analytics engineer on Ion Churn Model.
+Elena starts on Ion Churn Model in 2025-03.
+
+Thanks,
+Isaac

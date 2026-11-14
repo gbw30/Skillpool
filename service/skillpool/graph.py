@@ -169,10 +169,14 @@ SET p.name = $name, p.title = $title,
     p.emails = [x IN coalesce(p.emails, []) WHERE NOT x IN $emails] + $emails
 """
 
-FLAG_POSSIBLE_SAME = """
-MATCH (a:Person {id: $a}), (b:Person {id: $b})
-MERGE (a)-[r:POSSIBLE_SAME_AS]->(b)
-SET r.score = $score, r.reason = $reason
+# A mention whose name fits someone on record with nothing else to confirm it: kept on the
+# people it might mean, and never counted as evidence for them.
+LINK_UNCONFIRMED = """
+UNWIND $mentions AS m
+MATCH (c:Chunk {id: m.chunkId})
+MATCH (p:Person) WHERE p.id IN $people
+MERGE (c)-[r:MAY_MENTION {surface: m.surface}]->(p)
+SET r.reason = $reason
 """
 
 LINK_ABOUT = "MATCH (d:Document {id: $docId}), (p:Person {id: $personId}) MERGE (d)-[:ABOUT]->(p)"
@@ -318,7 +322,7 @@ RETURN p.id AS id, p.name AS name, p.title AS title, p.aliases AS aliases,
   [(p)-[r:STUDIED_AT]->(o) | {school: o.name, degree: r.degree, field: r.field}] AS education,
   [(p)-[r:WORKED_ON]->(pr) | {id: pr.id, name: pr.name, scope: pr.scope, role: r.role,
      collaborators: [(pr)<-[:WORKED_ON]-(q) WHERE q <> p | {id: q.id, name: q.name}]}] AS projects,
-  [(p)-[:POSSIBLE_SAME_AS]-(q) | {id: q.id, name: q.name}] AS possibleSame
+  [(p)<-[r:MAY_MENTION]-(c)-[:CHUNK_OF]->(d) | {docId: d.id, path: d.path, surface: r.surface}] AS unconfirmed
 """
 
 PERSON_EVIDENCE = """
@@ -340,7 +344,7 @@ STATS = """
 RETURN COUNT { (:Document) } AS documents, COUNT { (:Chunk) } AS chunks,
        COUNT { (:Person) } AS people, COUNT { (:Skill) } AS skills,
        COUNT { (:Project) } AS projects, COUNT { (:Organization) } AS organizations,
-       COUNT { (:Person)-[:POSSIBLE_SAME_AS]->(:Person) } AS flaggedPairs
+       COUNT { (:Chunk)-[:MAY_MENTION]->(:Person) } AS unconfirmedMentions
 """
 
 # --- graph view (landing page) ------------------------------------------------

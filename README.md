@@ -21,22 +21,25 @@ Built and tested without live model calls:
   showed up in search.
 - Uploads: the upload policy was run against a local S3 emulator (LocalStack 4.4), which
   rejected a wrong size, key, or content type and accepted the exact file.
-- Corpus (`corpus/`): 680 resumes, 159 generated project documents, and ground truth.
+- Corpus (`corpus/`): the knowledge base of one made-up company with ten teams. 130 resumes,
+  229 project and company documents, and ground truth, all written by `corpus/generate.py`.
+- Access: the whole site asks for one access code (`SITE_ACCESS_CODE`).
 
-Not yet done, because it needs your API keys and accounts:
+- Evaluation: run on 2026-11-14 with Claude Haiku 5.5 and Voyage embeddings. Every target in
+  PRD section 8 that the run measures was met; the numbers are in `docs/SPEC.md` section 0.
 
-- No real Claude or OpenAI call has been made. Extraction quality, the identity-resolution
-  thresholds, and the search floor are untuned defaults. Run the evaluation below to get real
-  numbers against the PRD targets.
+Not yet done:
+
 - Browser upload has not been run against a real AWS bucket, only the emulator.
 - Nothing is deployed.
+- The OpenAI embedding path has never been run live, and its search floors are untuned.
 
 ## Layout
 
 ```
 service/   FastAPI service and CLI (Python, uv)
 web/       Next.js app: UI and a signed proxy to the service
-corpus/    resumes/, generate.py, generated/, truth/
+corpus/    generate.py, and what it writes: resumes/, generated/, truth/
 docs/      PRD.md, SPEC.md
 ```
 
@@ -54,8 +57,8 @@ cp service/.env.example service/.env && cp web/.env.example web/.env.local
 ```
 
 Fill in the Anthropic key, the key of the embedding provider you chose, and one shared
-`SERVICE_SIGNING_SECRET` in both files. Then, from
-`service/`:
+`SERVICE_SIGNING_SECRET` in both files. Set `SITE_ACCESS_CODE` in `web/.env.local` if you want
+the access page locally; a development server is open without it. Then, from `service/`:
 
 ```bash
 uv run --env-file .env skillpool init-db
@@ -65,10 +68,15 @@ uv run --env-file .env skillpool init-db
 uv run --env-file .env skillpool eval ../corpus
 ```
 
-`eval` ingests the corpus (about 840 documents; the spec estimates around $1 of model calls,
-and the default daily cap is $5) and writes scores to `corpus/eval/`. It is safe to re-run:
-documents already ingested are skipped. To load documents without scoring, use
-`skillpool ingest-dir <folder>`.
+`eval` ingests the corpus (359 documents) and writes scores to `corpus/eval/`. The first run
+cost $0.29 of Claude calls to ingest and $0.03 for the 43 questions; the default daily cap is
+$5. It is safe to re-run: documents already ingested are skipped. To load documents without
+scoring, use `skillpool ingest-dir <folder>`.
+
+Set `EXTRACT_CACHE_DIR=.cache/extract` in `service/.env` before the first run. Ingestion reads
+every document with Claude before it writes any of them, so a run that is cut off part-way
+would otherwise pay for all of that reading again. With the cache, repeating the whole ingest
+into an empty database cost under one cent.
 
 Start the service and the web app:
 
@@ -81,6 +89,17 @@ cd web && npm install && npm run dev
 ```
 
 Open http://localhost:3000.
+
+### Access code
+
+The whole site sits behind one code, `SITE_ACCESS_CODE` in the web app's environment. Without
+the cookie that the access page sets, every page redirects to `/access` and every API route
+answers 401. A production build with no code configured lets nobody in, so a deployment that
+forgot the variable is closed, not public. Use a long random code (`openssl rand -base64 18`):
+wrong tries are limited to ten per address and 100 in total every ten minutes, but those counts
+live in one server process. Past the total the page refuses everyone, the right code included,
+until the ten minutes pass. Changing the code signs everyone out. Uploads still need their own
+`UPLOAD_ACCESS_CODE` on top.
 
 ### Screens only, without keys
 
@@ -156,14 +175,16 @@ tests against a throwaway Neo4j, plus the web lint and build, on every push and 
 - Service: `service/Dockerfile` on any container host. Run a single instance: batch progress
   and rate limits are held in memory. The daily spend total is stored in the graph, so a
   restart does not reset the cap. Set a spend limit with each model provider as well.
-- Web: Vercel or any Node host, with the four variables from `web/.env.example`. The rate
-  limit trusts the first `x-forwarded-for` entry, which is only reliable behind a platform
-  proxy that sets it.
+- Web: Vercel or any Node host, with the variables from `web/.env.example`, including
+  `SITE_ACCESS_CODE`. The rate limit trusts the first `x-forwarded-for` entry, which is only
+  reliable behind a platform proxy that sets it.
 
 ## Demo script
 
 1. Search "Who has hands-on experience with Kafka?" No resume mentions Kafka. The people
    returned are found through project documents: person → worked on → project → used → Kafka.
+   Then "Who has hands-on experience with DocuSign?": the only evidence is one line in a team
+   chat.
 2. Open a result. The person page shows the name variants that were resolved to them and the
    passages each fact came from.
 3. Search "Who has COBOL experience?" The answer is that no one matches.
@@ -171,14 +192,15 @@ tests against a throwaway Neo4j, plus the web lint and build, on every push and 
 
 ## Licence
 
-The code is under the [MIT License](LICENSE). That does not cover the resumes in
-`corpus/resumes/`: they come from the original hackathon repository, and their origin and licence
-are not documented. Confirm both before publishing this repository (PRD section 11).
+The code is under the [MIT License](LICENSE). The corpus is generated by `corpus/generate.py`;
+the resumes inherited from the original hackathon repository were removed because their origin
+was unknown.
 
 The landing page credits the original team at the bottom.
 
 ## Notes
 
-- The resumes are synthetic.
-- `corpus/generate.py` is deterministic for a seed. `--llm` has Claude rewrite the prose and
-  costs model calls; that path has not been run.
+- Every person, company and document in the corpus is made up. Any match with a real person's
+  name is a coincidence.
+- `corpus/generate.py` is deterministic for a seed and calls no model. Regenerate with
+  `uv run --project service python corpus/generate.py`; do not edit its output by hand.

@@ -1,0 +1,8 @@
+#ember-mobile-relaunch channel, exported 2023-11-16
+
+[09:02] Jonas Hansen: quick update: I finished the component audit yesterday.
+[09:05] Marco Ito: nice. I am still on the React part of Ember Mobile Relaunch.
+[09:08] Jonas Hansen: Marco, can you look at the performance budget after that?
+[09:11] Marco Ito: on it.
+[09:14] Marco Ito: I have run Svelte for a whole team before, happy to own it here.
+[09:17] Hiroshi Yamamoto: reminder that the Ember Mobile Relaunch review is on Thursday. Jonas is presenting.

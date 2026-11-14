@@ -16,7 +16,7 @@ from skillpool.cli import ingest_dir, reembed
 from skillpool.ingest.extract import (
     Extraction, PersonFacts, PersonProject, ProjectDef, ProjectSkill, RoleFact, SkillFact,
 )
-from skillpool.ingest.resolve import Adjudication
+from skillpool.ingest.resolve import Adjudication, Context, resolve
 from skillpool.search import synthesize
 from skillpool.search.query import ParsedQuestion
 from skillpool.search.retrieve import search
@@ -128,7 +128,7 @@ def test_ingest_builds_the_graph(corpus, calls):
     assert stats["documents"] == len(DOCS) and stats["chunks"] == len(DOCS)
     # Aaron (resume), Bea (resume), and the contractor who shares Aaron's name.
     assert stats["people"] == 3
-    assert stats["flaggedPairs"] == 0
+    assert stats["unconfirmedMentions"] == 0
 
 
 def test_name_variants_resolve_to_the_resume_person(corpus, calls):
@@ -143,6 +143,30 @@ def test_same_name_with_a_different_email_stays_a_separate_person(corpus, calls)
     both = people_named("Aaron Brown")
     assert sorted(e for p in both for e in p["emails"]) == ["aaron.brown@vendor.example", "aaron@example.com"]
     assert len({p["id"] for p in both}) == 2
+
+
+def test_a_name_with_nothing_else_makes_no_second_person(corpus, calls):
+    ingest_dir(corpus)
+    people = lambda: graph.run("MATCH (p:Person) RETURN count(p) AS n")[0]["n"]
+    before = people()
+    chunk_id = graph.run("MATCH (c:Chunk)-[:CHUNK_OF]->(:Document {path: 'generated/misc/notice.md'}) RETURN c.id AS id")[0]["id"]
+    mention = {"name": "Bea Wu", "aliases": [], "emails": [], "title": "", "isSubject": False,
+               "mentions": [{"chunkId": chunk_id, "surface": "Bea Wu"}]}
+    nothing_else = Context(kind="other", orgs=set(), projects=set(), roles={}, skills=set(), embedding=None, excerpt="Reviewed by Bea Wu")
+    try:
+        assert resolve(mention, nothing_else, []) is None
+        assert people() == before
+        (bea,) = people_named("Bea Wu")
+        unconfirmed = graph.run(graph.PERSON, id=bea["id"])[0]["unconfirmed"]
+        assert [(u["path"], u["surface"]) for u in unconfirmed] == [("generated/misc/notice.md", "Bea Wu")]
+        # It is not evidence: the notice is not among the passages shown for her.
+        assert "generated/misc/notice.md" not in {e["path"] for e in graph.run(graph.PERSON_EVIDENCE, id=bea["id"])}
+        # Someone nobody has heard of is still a new person.
+        stranger = {**mention, "name": "Zed Okoye", "mentions": [{"chunkId": chunk_id, "surface": "Zed Okoye"}]}
+        assert resolve(stranger, nothing_else, []) and people() == before + 1
+    finally:
+        graph.run("MATCH ()-[r:MAY_MENTION]->() DELETE r")
+        graph.run("MATCH (p:Person {name: 'Zed Okoye'}) DETACH DELETE p")
 
 
 def test_resume_projects_and_org_projects_are_scoped(corpus, calls):

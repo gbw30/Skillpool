@@ -1,0 +1,19 @@
+Diego Banerjee
+diegob4@example.com
+
+I'm a Senior Machine Learning Engineer based in Osaka.
+
+Where I've worked
+
+I joined Paperbirch Publishing in 2019 as a Senior Machine Learning Engineer. I turned loose questions from other teams into dashboards people trust, using Python. I mentored two junior colleagues through their first year. I trained and shipped a forecasting model that the finance team still uses.
+
+I joined Northgate Logistics in 2015 as a Machine Learning Engineer and stayed until 2019. I wrote the documentation new joiners still start with. I built the pipelines that feed the company's weekly reporting, mostly in BigQuery.
+
+What I'm good at
+
+I'd call myself an expert in Python, SQL and Negotiation. I'm advanced in Tableau and Jenkins. I'm at an intermediate level in dbt, pandas and BigQuery. I'm a beginner in PyTorch.
+
+Education
+
+I studied Statistics at Harborview University (BSc, 2012).
+I also hold the Six Sigma Green Belt.

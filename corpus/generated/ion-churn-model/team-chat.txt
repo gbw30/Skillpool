@@ -1,0 +1,7 @@
+#ion-churn-model channel, exported 2025-11-19
+
+[09:02] Isaac Meyer: does anyone have the latest copy of the model evaluation?
+[09:06] Anika Popescu: thanks. the BigQuery piece for Ion Churn Model is nearly there.
+[09:10] Isaac Meyer: Anika, can you look at the model evaluation after that?
+[09:14] Anika Popescu: can it wait until tomorrow? I am out this afternoon.
+[09:18] Elena Eriksen: reminder that the Ion Churn Model review is on Thursday. Isaac is presenting.

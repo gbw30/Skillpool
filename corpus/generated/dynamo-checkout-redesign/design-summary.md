@@ -1,11 +1,9 @@
 # Dynamo Checkout Redesign: design summary
 
-Dynamo Checkout Redesign ran from 2024-06 to 2024-08.
-The Dynamo Checkout Redesign stack is built on Swift, AWS, SQL, React, Ruby and Elixir.
-Dynamo Checkout Redesign uses Swift for deployment.
-Dynamo Checkout Redesign uses AWS for its core services.
-Dynamo Checkout Redesign uses SQL for its core services.
-Dynamo Checkout Redesign uses React for deployment.
-Dynamo Checkout Redesign uses Ruby for monitoring.
-Dynamo Checkout Redesign uses Elixir for deployment.
-The team is listed in the staffing note for this project.
+Dynamo Checkout Redesign is a Web and Mobile project at Larkfield. It ran from 2025-04 to 2025-09.
+Dynamo Checkout Redesign relies on Vue, Figma, CSS and WebAssembly.
+Dynamo Checkout Redesign uses Vue for monitoring.
+Dynamo Checkout Redesign uses Figma for monitoring.
+Dynamo Checkout Redesign uses CSS for deployment.
+Dynamo Checkout Redesign uses WebAssembly for monitoring.
+The team is listed in the kickoff email for this project.

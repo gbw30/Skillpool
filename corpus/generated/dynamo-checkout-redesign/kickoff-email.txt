@@ -1,0 +1,17 @@
+From: Wei Johnson <wei.johnson@example.net>
+To: dynamo-checkout-redesign@larkfield.example
+Date: 2025-04-02
+Subject: Dynamo Checkout Redesign kickoff: who is doing what
+
+Hi all,
+
+Dynamo Checkout Redesign starts this month, so here is the team.
+
+I am the QA lead for Dynamo Checkout Redesign.
+Carlos Ortiz (Senior Mobile Developer) joins Dynamo Checkout Redesign as web engineer.
+C. Novak (Full Stack Developer) joins Dynamo Checkout Redesign as mobile engineer.
+meir9@example.net (Frontend Engineer) is our frontend lead on Dynamo Checkout Redesign.
+Hiroshi Sharma (Contract Machine Learning Engineer, hiroshi.sharma@tessellate.example) from Tessellate Labs joins Dynamo Checkout Redesign as model owner.
+
+Thanks,
+Wei
