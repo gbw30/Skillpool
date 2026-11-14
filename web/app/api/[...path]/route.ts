@@ -1,6 +1,7 @@
 // The only server code in the web app: a signed proxy to the Python service.
 // Browsers never reach the service directly, and only the routes listed here exist.
 import type { NextRequest } from "next/server";
+import { ACCESS_COOKIE, siteGate } from "@/lib/access";
 import { MOCK, MOCK_STORAGE } from "@/lib/mock";
 import { callService, uploadGate } from "@/lib/service";
 
@@ -43,6 +44,10 @@ async function readBody(request: NextRequest): Promise<string | null> {
 }
 
 async function handle(request: NextRequest, ctx: RouteContext<"/api/[...path]">) {
+  // proxy.ts already turns these away; checked again here so the API never depends on it alone.
+  if (siteGate(request.cookies.get(ACCESS_COOKIE)?.value) === "locked") {
+    return error(401, "locked", "Enter the access code to use SkillPool.");
+  }
   const path = (await ctx.params).path.join("/");
   if (MOCK && request.method === "POST" && path === MOCK_STORAGE) return new Response(null, { status: 204 }); // the bucket
   let target: string | undefined;
