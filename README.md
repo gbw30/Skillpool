@@ -96,8 +96,9 @@ The whole site sits behind one code, `SITE_ACCESS_CODE` in the web app's environ
 the cookie that the access page sets, every page redirects to `/access` and every API route
 answers 401. A production build with no code configured lets nobody in, so a deployment that
 forgot the variable is closed, not public. Use a long random code (`openssl rand -base64 18`):
-wrong tries are limited to ten per address in ten minutes, but that count lives in one server
-process. Changing the code signs everyone out. Uploads still need their own
+wrong tries are limited to ten per address and 100 in total every ten minutes, but those counts
+live in one server process. Past the total the page refuses everyone, the right code included,
+until the ten minutes pass. Changing the code signs everyone out. Uploads still need their own
 `UPLOAD_ACCESS_CODE` on top.
 
 ### Screens only, without keys

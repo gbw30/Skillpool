@@ -449,8 +449,10 @@ Haiku 5.5 constraints that affect the code:
 - Site access (R22): `proxy.ts` redirects every page request without a valid cookie to `/access`
   and answers API requests with 401; the API route handler repeats the check. The cookie holds a
   hash of the code, is `HttpOnly`, `SameSite=Lax`, `Secure` in production, and lasts 30 days;
-  changing the code ends every session. Ten wrong tries per address in ten minutes are allowed.
-  `shortcut:` that count is in one process's memory, so use a long random code.
+  changing the code ends every session. Ten wrong tries per address are allowed in ten minutes,
+  and 100 from all addresses together, because the address comes from a header a caller can
+  fake. Past the total nobody is let in until the window passes. `shortcut:` both counts are in
+  one process's memory, so use a long random code.
 - Service: HMAC on every route; not reachable usefully without the secret.
 - Model input: document text delimited as data; extraction constrained to a schema; facts need a
   verified quote; search uses fixed Cypher with parameters only.
