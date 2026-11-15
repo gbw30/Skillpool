@@ -11,7 +11,7 @@ dependencies = [
     "httpx",
     "neo4j",
     "openai",
-    "pymupdf",
+    "pypdf",
     "uvicorn",
 ]
 

@@ -1,9 +1,11 @@
 """Pure logic. No network, no database."""
+import io
 import time
 
 import httpx
-import pymupdf
 import pytest
+from pypdf import PdfWriter
+from pypdf.generic import DecodedStreamObject, DictionaryObject, NameObject
 
 from skillpool import config, llm, signing, storage
 from skillpool.cli import identity_scores
@@ -34,10 +36,17 @@ def test_a_document_too_long_to_read_cheaply_is_refused(monkeypatch):
 
 
 def _pdf_pages(pages: int, text: str = "Aaron Brown knows Docker") -> bytes:
-    doc = pymupdf.open()
+    doc, font = PdfWriter(), {"/Type": "/Font", "/Subtype": "/Type1", "/BaseFont": "/Helvetica"}
     for _ in range(pages):
-        doc.new_page().insert_text((54, 64), text)
-    return doc.tobytes()
+        page = doc.add_blank_page(612, 792)
+        page[NameObject("/Resources")] = DictionaryObject({NameObject("/Font"): DictionaryObject(
+            {NameObject("/F1"): DictionaryObject({NameObject(k): NameObject(v) for k, v in font.items()})})})
+        stream = DecodedStreamObject()
+        stream.set_data(b"BT /F1 10 Tf 54 728 Td (" + text.encode() + b") Tj ET")
+        page.replace_contents(stream)
+    out = io.BytesIO()
+    doc.write(out)
+    return out.getvalue()
 
 
 def test_a_pdf_is_read_in_a_separate_process_with_limits(monkeypatch):
@@ -86,14 +95,10 @@ def test_chunk_records_the_page():
 
 # --- parsing ----------------------------------------------------------------
 
-def _pdf(text: str) -> bytes:
-    doc = pymupdf.open()
-    doc.new_page().insert_text((50, 60), text)
-    return doc.tobytes()
 
 
 def test_parse_pdf_and_text():
-    text, pages = parse(_pdf("Hello resume"), ".pdf")
+    text, pages = parse(_pdf_pages(1, "Hello resume"), ".pdf")
     assert "Hello resume" in text and pages == [0]
     assert parse("café".encode(), ".md") == ("café", [])
 
@@ -112,7 +117,7 @@ def test_parse_rejects_bad_input(data, ext, reason):
 def test_pdf_text_is_capped_like_a_text_file(monkeypatch):
     monkeypatch.setattr(config, "MAX_TEXT_CHARS", 5)
     with pytest.raises(ParseError, match="too_long"):
-        parse(_pdf("Hello resume"), ".pdf")
+        parse(_pdf_pages(1, "Hello resume"), ".pdf")
 
 
 # --- quote verification -----------------------------------------------------
@@ -361,6 +366,7 @@ def test_an_uncited_sentence_may_connect_the_evidence_but_bring_nothing_in():
     # A capital outside A to Z is still a capital, including look-alike letters from another alphabet.
     assert keep("Élodie Öztürk is the strongest match.") is None and keep("Hire Вob Ѕmith.") is None
     assert keep("He has run the café rota before, as Aaron Brown says.")  # an accent inside a word is not a name
+    assert keep("Hire xMallory xVane.") is None and keep("Aaron Brown and Öztürk fit.") is None
     # With a citation the reader has the passage beside it, so it stays.
     assert keep("Mallory Vane is named in the notes [1].") == "Mallory Vane is named in the notes [1]."
 
