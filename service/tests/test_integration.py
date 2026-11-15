@@ -13,6 +13,7 @@ import pytest
 
 from skillpool import config, graph, llm
 from skillpool.cli import ingest_dir, reembed
+from skillpool.ingest import job
 from skillpool.ingest.extract import (
     Extraction, PersonFacts, PersonProject, ProjectDef, ProjectSkill, RoleFact, SkillFact,
 )
@@ -201,6 +202,18 @@ def test_a_waiting_mention_is_attached_when_a_later_document_settles_it(corpus, 
         for doc_id in ids:
             graph.delete_document(doc_id)
     assert waiting() == 0
+
+
+def test_a_folder_document_uploaded_again_is_served_from_the_bucket(corpus, calls):
+    ingest_dir(corpus)
+    file = next(p for p in sorted(corpus.rglob("*")) if p.is_file())
+    data, doc = file.read_bytes(), hashlib.sha256(file.read_bytes()).hexdigest()
+    assert graph.run(graph.DOCUMENT_KEY, id=doc) == [{"key": None, "path": file.relative_to(corpus).as_posix()}]
+    job.run_job("again", [job.Item("renamed.md", "jobs/again/000/renamed.md", lambda: data)])
+    # The source link must lead to the file that was sent, not to a new name under the published folder.
+    assert graph.run(graph.DOCUMENT_KEY, id=doc) == [{"key": "jobs/again/000/renamed.md", "path": "renamed.md"}]
+    ingest_dir(corpus)  # and the folder again keeps the stored file
+    assert graph.run(graph.DOCUMENT_KEY, id=doc)[0]["key"] == "jobs/again/000/renamed.md"
 
 
 def test_a_second_try_at_a_failed_document_starts_with_nothing_waiting(corpus, calls):

@@ -115,7 +115,9 @@ SET d.path = $path, d.key = $key, d.mime = $mime, d.bytes = $bytes,
     d.jobId = $jobId, d.status = $status, d.error = $error
 """
 
-TOUCH_DOCUMENT = "MATCH (d:Document {id: $id}) SET d.jobId = $jobId, d.path = $path"
+# The same bytes arriving again. The path becomes the sender's, so an upload's key is recorded with
+# it: otherwise a document loaded from a folder would keep no key under a path the sender chose.
+TOUCH_DOCUMENT = "MATCH (d:Document {id: $id}) SET d.jobId = $jobId, d.path = $path, d.key = coalesce($key, d.key)"
 
 SET_DOCUMENT_STATUS = """
 MATCH (d:Document {id: $id})

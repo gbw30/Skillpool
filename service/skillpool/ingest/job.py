@@ -64,7 +64,7 @@ def _prepare(job_id: str, item: Item) -> Prepared | None:
         doc_id = hashlib.sha256(data).hexdigest()
         known = graph.run(graph.DOCUMENT_STATUS, id=doc_id)
         if known and known[0]["status"] == "ingested":
-            graph.run(graph.TOUCH_DOCUMENT, id=doc_id, jobId=job_id, path=item.path)  # unchanged file: no model calls
+            graph.run(graph.TOUCH_DOCUMENT, id=doc_id, jobId=job_id, path=item.path, key=item.key)  # unchanged file: no model calls
             return None
         register("processing")
         # Re-checked here: the manifest the browser sent is not proof of what was uploaded.
