@@ -21,8 +21,8 @@ Built and tested without live model calls:
   showed up in search.
 - Uploads: the upload policy was run against a local S3 emulator (LocalStack 4.4), which
   rejected a wrong size, key, or content type and accepted the exact file.
-- Corpus (`corpus/`): the knowledge base of one made-up company with ten teams. 130 resumes,
-  229 project and company documents, and ground truth, all written by `corpus/generate.py`.
+- Corpus (`corpus/`): the knowledge base of one made-up company with ten teams. 136 resumes,
+  241 project and company documents, and ground truth, all written by `corpus/generate.py`.
 - Access: the whole site asks for one access code (`SITE_ACCESS_CODE`).
 
 - Evaluation: run on 2026-11-14 with Claude Haiku 5.5 and Voyage embeddings. Every target in
@@ -68,9 +68,9 @@ uv run --env-file .env skillpool init-db
 uv run --env-file .env skillpool eval ../corpus
 ```
 
-`eval` ingests the corpus (359 documents) and writes scores to `corpus/eval/`. The first run
-cost $0.29 of Claude calls to ingest and $0.03 for the 43 questions; the default daily cap is
-$5. It is safe to re-run: documents already ingested are skipped. To load documents without
+`eval` ingests the corpus (377 documents) and writes scores to `corpus/eval/`. A first run with
+no cache costs about $0.30 of Claude calls to ingest and $0.04 for the 48 questions; the default
+daily cap is $5. It is safe to re-run: documents already ingested are skipped. To load documents without
 scoring, use `skillpool ingest-dir <folder>`.
 
 Set `EXTRACT_CACHE_DIR=.cache/extract` in `service/.env` before the first run. Ingestion reads
@@ -98,8 +98,9 @@ answers 401. A production build with no code configured lets nobody in, so a dep
 forgot the variable is closed, not public. Use a long random code (`openssl rand -base64 18`):
 wrong tries are limited to ten per address and 100 in total every ten minutes, but those counts
 live in one server process. Past the total the page refuses everyone, the right code included,
-until the ten minutes pass. Changing the code signs everyone out. Uploads still need their own
-`UPLOAD_ACCESS_CODE` on top.
+until the ten minutes pass. Changing the code signs everyone out; "Sign out" in the header signs
+out one browser. Uploads still need their own `UPLOAD_ACCESS_CODE` on top, and wrong upload
+codes are limited the same way.
 
 ### Screens only, without keys
 
@@ -175,9 +176,31 @@ tests against a throwaway Neo4j, plus the web lint and build, on every push and 
 - Service: `service/Dockerfile` on any container host. Run a single instance: batch progress
   and rate limits are held in memory. The daily spend total is stored in the graph, so a
   restart does not reset the cap. Set a spend limit with each model provider as well.
-- Web: Vercel or any Node host, with the variables from `web/.env.example`, including
-  `SITE_ACCESS_CODE`. The rate limit trusts the first `x-forwarded-for` entry, which is only
-  reliable behind a platform proxy that sets it.
+- Web: Vercel, with the variables from `web/.env.example`, including `SITE_ACCESS_CODE`. The
+  per-address limits trust the first `x-forwarded-for` entry, which only a platform proxy that
+  sets it makes reliable, and gated pages are safe from a shared cache only where the proxy runs
+  ahead of it, as on Vercel. On another host, turn off HTML caching at the CDN.
+
+Before it goes on the internet:
+
+- Use three separate long random values for `SITE_ACCESS_CODE`, `UPLOAD_ACCESS_CODE` and
+  `SERVICE_SIGNING_SECRET` (`openssl rand -base64 24`), set for the production environment only.
+- Leave `UPLOADS_ENABLED=false` unless uploads are being shown. Whoever can upload can state
+  anything about a named person (SPEC section 13). With uploads on, set `UPLOAD_ORIGIN` to the
+  bucket's address and run `init-storage --origin https://<the site>`.
+- `SERVICE_URL` must be `https://`. If the container host offers an allowlist or private
+  networking, let only the web app reach the service.
+- Bucket: its own bucket, Block Public Access on, a key limited to that bucket, a lifecycle rule
+  that expires `jobs/` after a few days, and versioning.
+- Spend limits at each provider (Anthropic, Voyage/Atlas) and an AWS budget alarm. The app's
+  daily cap is software.
+- AuraDB has no backup on the free tier. Keep `service/.cache/extract`: with it the whole graph
+  can be rebuilt for under a cent. When the database is paused, search fails and the landing
+  page shows the sample graph.
+- Questions appear in `/search?q=` addresses, so they reach the host's request logs and browser
+  history.
+- PyMuPDF, which reads the PDFs, is AGPL-3.0 or commercial; this repository's code is MIT.
+  Decide whether that fits before hosting the service for others.
 
 ## Demo script
 
