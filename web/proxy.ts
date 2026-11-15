@@ -5,7 +5,8 @@ import { ACCESS_COOKIE, siteGate, uploadsOn } from "@/lib/access";
 export function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
   if (siteGate(request.cookies.get(ACCESS_COOKIE)?.value) !== "locked") {
-    // With uploads off the page is not linked from anywhere, and a typed address goes home.
+    // With uploads off the page is not linked from anywhere, and a typed address goes home. This only
+    // keeps the page out of sight: the upload API refuses by itself (uploadGate in lib/service.ts).
     if (pathname === "/upload" && !uploadsOn()) return NextResponse.redirect(new URL("/", request.url));
     return NextResponse.next();
   }

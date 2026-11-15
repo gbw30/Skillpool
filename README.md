@@ -13,7 +13,7 @@ the design in [docs/SPEC.md](docs/SPEC.md).
 Built and tested without live model calls:
 
 - Service (`service/`): ingestion, quote verification, identity resolution, hybrid search,
-  cited answers, signed API. 91 tests pass, including the whole pipeline against a real Neo4j
+  cited answers, signed API. 92 tests pass, including the whole pipeline against a real Neo4j
   (5.26 and 2026.10) with the model calls replaced by fakes.
 - Web app (`web/`): landing, search, person, and upload screens plus the signed proxy. Builds
   and lints clean. All four screens were checked in headless Chromium, at desktop and phone
