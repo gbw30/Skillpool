@@ -169,6 +169,65 @@ def test_a_name_with_nothing_else_makes_no_second_person(corpus, calls):
         graph.run("MATCH (p:Person {name: 'Zed Okoye'}) DETACH DELETE p")
 
 
+def test_a_waiting_mention_is_attached_when_a_later_document_settles_it(corpus, calls, tmp_path):
+    ingest_dir(corpus)
+    (bea,) = people_named("Bea Wu")
+    docs = lambda: {r["path"] for r in graph.run(
+        "MATCH (:Person {id: $id})<-[:MENTIONS]-(:Chunk)-[:CHUNK_OF]->(d:Document) RETURN DISTINCT d.path AS path", id=bea["id"])}
+    waiting = lambda: graph.run("MATCH (n:Pending) RETURN count(n) AS n")[0]["n"]
+    early, late = tmp_path / "early", tmp_path / "late"
+    for folder, name, text in (
+        (early, "status.md", "# Zeta Launch: status report\nBea Wu, analyst on Zeta Launch, finished the plan.\n"),
+        (late, "staffing.md", "# Zeta Launch: staffing note\nBea Wu (Data Engineer) joins Zeta Launch as analyst.\n"),
+    ):
+        (folder / "zeta").mkdir(parents=True)
+        (folder / "zeta" / name).write_text(text)
+    ids = [hashlib.sha256((f / "zeta" / n).read_bytes()).hexdigest() for f, n in ((early, "status.md"), (late, "staffing.md"))]
+    try:
+        # Only a name: nothing confirms which Bea Wu, so it waits and is no evidence for her.
+        ingest_dir(early)
+        assert "zeta/status.md" not in docs() and waiting() == 1 and len(people_named("Bea Wu")) == 1
+        card = graph.run(graph.PERSON, id=bea["id"])[0]
+        assert [u["path"] for u in card["unconfirmed"]] == ["zeta/status.md"]
+
+        # A later document gives her job title and puts her on the project. The first one follows.
+        made = len(calls)
+        ingest_dir(late)
+        assert {"zeta/status.md", "zeta/staffing.md"} <= docs() and waiting() == 0
+        assert graph.run(graph.PERSON, id=bea["id"])[0]["unconfirmed"] == []
+        assert calls[made:].count("Adjudication") <= 1  # at most the new document's own question, none for the retry
+        assert graph.run("MATCH (d:Document {path: 'zeta/status.md'}) RETURN d.unresolvedMentions AS n")[0]["n"] == 0
+    finally:
+        for doc_id in ids:
+            graph.delete_document(doc_id)
+    assert waiting() == 0
+
+
+def test_an_upload_cannot_take_over_a_person_on_record(corpus, calls, tmp_path):
+    ingest_dir(corpus)
+    (bea,) = people_named("Bea Wu")
+    card = lambda: graph.run(graph.PERSON, id=bea["id"])[0]
+    resumes = {
+        # Her address under another name, and her name and address with a new title.
+        "mallory.txt": "Mallory Vane\nbea@example.com\nTitle: Chief Saboteur\nEmployer: Lake Co\nSkills: Lockpicking (expert)\n",
+        "bea-again.txt": "Bea Wu\nbea@example.com\nTitle: Chief Saboteur\nEmployer: Lake Co\nSkills: Lockpicking (expert)\n",
+    }
+    (tmp_path / "resumes").mkdir()
+    for name, text in resumes.items():
+        (tmp_path / "resumes" / name).write_text(text)
+    try:
+        ingest_dir(tmp_path)
+        after = card()
+        assert (after["name"], after["title"]) == ("Bea Wu", "Data Engineer")  # who she is did not change
+        assert not people_named("Mallory Vane")  # no record made from someone else's address
+        assert {u["path"] for u in after["unconfirmed"]} == {"resumes/mallory.txt"}
+        # The second resume with her own name and address is still hers: its claims are added, with their source.
+        assert "Lockpicking" in {s["name"] for s in after["skills"]}
+    finally:
+        for text in resumes.values():
+            graph.delete_document(hashlib.sha256(text.encode()).hexdigest())
+
+
 def test_resume_projects_and_org_projects_are_scoped(corpus, calls):
     rows = graph.run("MATCH (pr:Project) RETURN pr.id AS id, pr.scope AS scope")
     assert rows == [{"id": "atlas-migration", "scope": "org"}]

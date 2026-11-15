@@ -16,8 +16,8 @@ from dataclasses import dataclass
 from .. import config, graph, llm
 from .chunk import Chunk, chunk
 from .extract import extract
-from .parse import ParseError, parse
-from .upsert import write
+from .parse import ParseError, parse_safely
+from .upsert import reconcile, write
 from .verify import verify
 
 log = logging.getLogger("skillpool.ingest")
@@ -71,7 +71,7 @@ def _prepare(job_id: str, item: Item) -> Prepared | None:
             raise ParseError("unsupported_type")
         if len(data) > config.MAX_FILE_BYTES:
             raise ParseError("too_large")
-        text, pages = parse(data, ext)
+        text, pages = parse_safely(data, ext)
         chunks = chunk(text, doc_id, pages)
         embeddings = llm.embed([c.text for c in chunks])
         graph.run(graph.UPSERT_CHUNKS, docId=doc_id, chunks=[
@@ -100,8 +100,8 @@ def _write_order(p: Prepared) -> tuple[bool, int, int]:
     A mention with only a name cannot be tied to a known person and stays unconfirmed. Writing
     the documents that give an email or a job title first puts those people on their projects,
     and a shared project is what lets a later name-only mention be confirmed.
-    shortcut: this orders one batch. A name-only document uploaded before the documents that
-    would confirm it stays unconfirmed; nothing goes back to it later.
+    Order only matters inside one batch: a mention left unconfirmed is saved and tried again
+    after every later batch (`reconcile` in upsert.py).
     """
     people = p.facts["people"]
     return p.facts["kind"] != "resume", -sum(bool(x["emails"]) for x in people), -sum(bool(x["title"]) for x in people)
@@ -137,6 +137,16 @@ def run_job(job_id: str, items: list[Item]) -> None:
                 graph.SET_DOCUMENT_STATUS, id=p.doc_id, status=status, error=error,
                 kind=p.facts["kind"], dropped=p.facts["dropped"], unresolved=unresolved,
             )
+        try:
+            # Mentions left waiting, by this batch or an earlier one, may be settled by what was just
+            # written. Placing one can settle another, so go round a few times.
+            for _ in range(3):
+                placed = reconcile()
+                if not placed:
+                    break
+                log.info("placed waiting mentions job=%s count=%d", job_id, placed)
+        except Exception:
+            log.exception("reconcile failed job=%s", job_id)
     finally:
         PENDING.pop(job_id, None)
         log.info("job done job=%s spend_today_usd=%.4f", job_id, llm.spent_today())

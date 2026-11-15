@@ -39,12 +39,22 @@ EMBED_MODEL, EMBED_DIM, PRICE_EMBED, _SEARCH_FLOOR, _SKILL_FLOOR = EMBEDDERS[EMB
 # USD per million tokens, for the spend counter. Update when prices change.
 PRICE_IN, PRICE_OUT = 0.10, 0.50
 DAILY_MODEL_BUDGET_USD = _float("DAILY_MODEL_BUDGET_USD", 5.0)
-SEARCH_RATE_PER_MIN = int(os.environ.get("SEARCH_RATE_PER_MIN", "20"))
+SEARCH_RATE_PER_MIN = int(os.environ.get("SEARCH_RATE_PER_MIN", "20"))  # per client address
+# For everyone together. The address is whatever the web host reports, and not every host reports it honestly.
+SEARCH_RATE_TOTAL_PER_MIN = int(os.environ.get("SEARCH_RATE_TOTAL_PER_MIN", "120"))
+MAX_REQUEST_BYTES = 300 * 1024  # the largest upload manifest is about 110 KB
 
 # Chunking: about 600 tokens with 80 overlap at ~4 characters per token.
 CHUNK_CHARS = 2400
 OVERLAP_CHARS = 320
 LONG_DOC_CHARS = 24_000  # above this, extract per window of three chunks
+# About 120 pages. Each window of a long document is a model call, so one upload cannot spend the day's budget.
+MAX_TEXT_CHARS = 300_000
+MAX_PDF_PAGES = 300
+# A PDF is opened in a separate process with these limits: a small file can be built to expand
+# into gigabytes or to take minutes, and the parser would otherwise stall every other request.
+PARSE_SECONDS = 20
+PARSE_MEMORY_BYTES = 1 << 30
 
 # Uploads
 MAX_FILES = 200
@@ -55,13 +65,13 @@ UPLOAD_TTL_SECONDS = 900
 # Identity resolution. Check any change against corpus/truth/people.json with `skillpool eval`.
 MERGE_SCORE_EXACT = _float("MERGE_SCORE_EXACT", 0.30)  # full first and last name match
 # Only a first initial matches, so it needs a little more than a full name does. It was 0.50,
-# which an initial with the same job title (0.2 plus text similarity) could never reach:
+# which an initial with the same job title (then 0.2 plus text similarity) could never reach:
 # "M. Andersson (Partnerships Manager)" in a kickoff email became a second Maria Andersson, and
 # later mentions made a third. Two people on file with the same initial, surname and title
 # still go to the margin check below, not to a merge.
 MERGE_SCORE_INITIAL = _float("MERGE_SCORE_INITIAL", 0.33)
-# Lead required over the runner-up. A matching job title is worth 0.2 and text similarity moves
-# a score by a few hundredths either way, so 0.20 let that noise undo a title match.
+# Lead required over the runner-up. Text similarity moves a score by up to 0.2 either way, so a
+# lead of 0.20 let that noise undo a matching job title (worth 0.3).
 MERGE_MARGIN = _float("MERGE_MARGIN", 0.15)
 
 # Search. The floors come from the embedding model's row above.

@@ -15,6 +15,7 @@ def client(monkeypatch):
     monkeypatch.setenv("SERVICE_SIGNING_SECRET", SECRET)
     monkeypatch.setattr(storage, "presign_upload", lambda key, ctype, size: {"url": "https://bucket", "fields": {"key": key, "Content-Type": ctype}})
     api._hits.clear()
+    api._all.clear()
     return TestClient(api.app)
 
 
@@ -90,3 +91,42 @@ def test_search_validates_input(client):
 def test_unknown_person_is_404(client, monkeypatch):
     monkeypatch.setattr(graph, "run", lambda query, **params: [])
     assert call(client, "GET", "/person/does-not-exist").status_code == 404
+
+
+def test_search_is_limited_for_everyone_together(client, monkeypatch):
+    monkeypatch.setattr(config, "SEARCH_RATE_TOTAL_PER_MIN", 3)
+    # A new address every time, as a caller who fakes the address header would send.
+    assert [api.allow(f"10.0.0.{i}", now=100.0) for i in range(5)] == [True, True, True, False, False]
+    assert api.allow("10.0.0.9", now=161.0)  # a minute later
+    assert len(api._hits) == 1  # addresses that went quiet are forgotten, never all at once
+
+
+def test_a_body_over_the_limit_is_refused_before_the_signature_is_checked(client, monkeypatch):
+    monkeypatch.setattr(config, "MAX_REQUEST_BYTES", 1000)
+    big = b"x" * 1001
+    stated = client.post("/search", content=big, headers={"content-type": "application/json"})
+    assert stated.status_code == 413 and stated.json()["code"] == "payload_too_large"
+
+    def chunks():  # no stated length: counted as it arrives
+        yield b"x" * 600
+        yield b"x" * 600
+
+    streamed = client.post("/search", content=chunks(), headers={"content-type": "application/json"})
+    assert streamed.status_code == 413
+    assert client.post("/search", content=b"x" * 1000, headers={"content-type": "application/json"}).status_code in (400, 401)
+
+
+def test_odd_headers_are_refused_plainly(client):
+    ts = str(int(time.time()))
+    # A signature that is not ASCII is a wrong signature, not a crash.
+    r = client.get("/stats", headers={"x-timestamp": ts, "x-signature": "\u00e9\u00e9".encode("utf-8")})
+    assert r.status_code == 401
+    # A correlation id of the wrong shape is replaced, not echoed back or logged.
+    r = client.get("/healthz", headers={"x-correlation-id": "x" * 500})
+    assert len(r.headers["x-correlation-id"]) == 32
+    assert client.get("/healthz", headers={"x-correlation-id": "abc-123"}).headers["x-correlation-id"] == "abc-123"
+
+
+def test_a_question_of_only_spaces_is_invalid(client):
+    r = call(client, "POST", "/search", {"q": "   "})
+    assert r.status_code == 400 and r.json()["code"] == "invalid_request"
