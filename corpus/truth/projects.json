@@ -876,5 +876,112 @@
    "generated/delta-chat-support-launch/escalation-review.md",
    "generated/delta-chat-support-launch/retrospective.pdf"
   ]
+ },
+ {
+  "name": "Echo Device Refresh",
+  "slug": "echo-device-refresh",
+  "team": "Security and IT",
+  "skills": [],
+  "hopSkill": null,
+  "roster": [
+   "resumes/Gabriela_Ortiz.md",
+   "resumes/Emeka_Sokolov.pdf",
+   "resumes/Aisha_Olsen.md"
+  ],
+  "ghosts": [],
+  "docs": [
+   "generated/echo-device-refresh/kickoff-email.txt",
+   "generated/echo-device-refresh/weekly-update-1.md"
+  ],
+  "settledBy": "newsletter"
+ },
+ {
+  "name": "Fathom Access Review",
+  "slug": "fathom-access-review",
+  "team": "Security and IT",
+  "skills": [],
+  "hopSkill": null,
+  "roster": [
+   "resumes/Emeka_Sokolov.pdf",
+   "resumes/Liam_Abbasi.txt",
+   "resumes/Amara_Olsen.pdf"
+  ],
+  "ghosts": [],
+  "docs": [
+   "generated/fathom-access-review/kickoff-email.txt",
+   "generated/fathom-access-review/weekly-update-1.md"
+  ],
+  "settledBy": "newsletter"
+ },
+ {
+  "name": "Glacier Brand Refresh",
+  "slug": "glacier-brand-refresh",
+  "team": "Marketing",
+  "skills": [],
+  "hopSkill": null,
+  "roster": [
+   "resumes/Victor_Osei.pdf",
+   "resumes/Rafael_Diaz.pdf",
+   "resumes/Beatriz_Wang.md"
+  ],
+  "ghosts": [],
+  "docs": [
+   "generated/glacier-brand-refresh/kickoff-email.txt",
+   "generated/glacier-brand-refresh/weekly-update-1.md"
+  ],
+  "settledBy": "newsletter"
+ },
+ {
+  "name": "Helix Webinar Series",
+  "slug": "helix-webinar-series",
+  "team": "Marketing",
+  "skills": [],
+  "hopSkill": null,
+  "roster": [
+   "resumes/Ingrid_Ng.pdf",
+   "resumes/Maria_Johnson.md",
+   "resumes/Bao_Wang.md"
+  ],
+  "ghosts": [],
+  "docs": [
+   "generated/helix-webinar-series/kickoff-email.txt",
+   "generated/helix-webinar-series/weekly-update-1.md"
+  ],
+  "settledBy": "email"
+ },
+ {
+  "name": "Indigo Partner Program",
+  "slug": "indigo-partner-program",
+  "team": "Sales and Partnerships",
+  "skills": [],
+  "hopSkill": null,
+  "roster": [
+   "resumes/Miguel_Thapa.txt",
+   "resumes/Maria_Jensen.md",
+   "resumes/Layla_Adeyemi.txt"
+  ],
+  "ghosts": [],
+  "docs": [
+   "generated/indigo-partner-program/kickoff-email.txt",
+   "generated/indigo-partner-program/weekly-update-1.md"
+  ],
+  "settledBy": "newsletter"
+ },
+ {
+  "name": "Jasper Renewal Drive",
+  "slug": "jasper-renewal-drive",
+  "team": "Sales and Partnerships",
+  "skills": [],
+  "hopSkill": null,
+  "roster": [
+   "resumes/Ivan_Abbasi.txt",
+   "resumes/Lucia_Barros.pdf",
+   "resumes/Leila_Adeyemi.pdf"
+  ],
+  "ghosts": [],
+  "docs": [
+   "generated/jasper-renewal-drive/kickoff-email.txt"
+  ],
+  "settledBy": "nothing"
  }
 ]

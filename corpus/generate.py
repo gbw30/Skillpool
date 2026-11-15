@@ -284,66 +284,101 @@ def write_doc(path: Path, text: str) -> None:
     doc.close()
 
 
+def new_person(rng: random.Random, team: str, first: str, last: str) -> dict:
+    spec = TEAMS[team]
+    others = sorted({s for t, o in TEAMS.items() if t != team for s in o["skills"]} - set(spec["skills"]))
+    base = rng.choice(spec["titles"])
+    # Skills: mostly the team's own, plus up to two picked up elsewhere.
+    names = rng.sample(spec["skills"], rng.randint(5, 7)) + rng.sample(others, rng.randint(0, 2))
+    skills = {s: rng.choices(LEVELS, weights=[2, 3, 3, 3])[0] for s in names}
+    own = [s for s in skills if s in spec["skills"]]
+    year, until = rng.randint(2018, 2023), "present"
+    # Alternate the team's own bullets with the shared ones, so no bullet repeats in one resume.
+    own_lines, shared = rng.sample(spec["bullets"], 4), rng.sample(SHARED_BULLETS, 5)
+    roles, lines = [], [b for pair in zip(own_lines, shared) for b in pair] + shared[4:]
+    for n in range(rng.randint(2, 3)):
+        title = ("Senior " if rng.random() < 0.3 and not base.startswith("Senior") else "") + base
+        if n > 0:
+            title = rng.choice([base, "Junior " + base, rng.choice(spec["titles"])])
+        picks = [lines.pop(0) for _ in range(rng.randint(2, 3))]
+        roles.append({
+            "org": None, "title": title, "start": year, "end": until,
+            "bullets": [b.format(s=rng.choice(own)) for b in picks],
+        })
+        year, until = year - rng.randint(2, 4), year
+    for role, org in zip(roles, rng.sample(EMPLOYERS, len(roles))):
+        role["org"] = org
+    return {
+        "name": f"{first} {last}", "team": team, "title": roles[0]["title"], "skills": skills, "roles": roles,
+        "city": rng.choice(CITIES), "phone": f"555-01{rng.randint(0, 99):02d}",
+        "school": rng.choice(SCHOOLS), "degree": rng.choice(["BSc", "BA", "MSc"]), "field": spec["field"],
+        "graduated": year, "cert": spec["cert"] if rng.random() < 0.3 else None,
+        "side": rng.choice(SIDE_PROJECTS) if rng.random() < 0.5 else None,
+    }
+
+
+def add_contact(rng: random.Random, p: dict, used_emails: set[str], nth: int) -> None:
+    """Email, resume layout and file name. `nth` is 2 for the second person with the same name."""
+    first, last = name_parts(p["name"])
+    while True:
+        style = rng.choice([f"{first}.{last}", f"{first[0]}{last}{rng.randint(10, 99)}", f"{first}{last[0]}{rng.randint(1, 9)}"])
+        email = f"{style}@example.{rng.choice(['com', 'net', 'org'])}".lower()
+        if email not in used_emails:
+            used_emails.add(email)
+            break
+    p["email"] = email
+    p["layout"] = rng.choice(["classic", "classic", "markdown", "narrative", "profile"])
+    ext = {"classic": "pdf", "markdown": "md", "narrative": "txt", "profile": "pdf"}[p["layout"]]
+    p["key"] = f"resumes/{first}_{last}{f'_{nth}' if nth > 1 else ''}.{ext}"
+
+
 def make_people(rng: random.Random) -> list[dict]:
-    people, used_names, used_emails = [], set(), set()
-    for team, spec in TEAMS.items():
-        others = sorted({s for t, o in TEAMS.items() if t != team for s in o["skills"]} - set(spec["skills"]))
+    people, used_names = [], set()
+    for team in TEAMS:
         for _ in range(PEOPLE_PER_TEAM):
             while True:
                 first, last = rng.choice(FIRST), rng.choice(LAST)
                 if (first, last) not in used_names:
                     used_names.add((first, last))
                     break
-            base = rng.choice(spec["titles"])
-            # Skills: mostly the team's own, plus up to two picked up elsewhere.
-            names = rng.sample(spec["skills"], rng.randint(5, 7)) + rng.sample(others, rng.randint(0, 2))
-            skills = {s: rng.choices(LEVELS, weights=[2, 3, 3, 3])[0] for s in names}
-            own = [s for s in skills if s in spec["skills"]]
-            year, until = rng.randint(2018, 2023), "present"
-            # Alternate the team's own bullets with the shared ones, so no bullet repeats in one resume.
-            own_lines, shared = rng.sample(spec["bullets"], 4), rng.sample(SHARED_BULLETS, 5)
-            roles, lines = [], [b for pair in zip(own_lines, shared) for b in pair] + shared[4:]
-            for n in range(rng.randint(2, 3)):
-                title = ("Senior " if rng.random() < 0.3 and not base.startswith("Senior") else "") + base
-                if n > 0:
-                    title = rng.choice([base, "Junior " + base, rng.choice(spec["titles"])])
-                picks = [lines.pop(0) for _ in range(rng.randint(2, 3))]
-                roles.append({
-                    "org": None, "title": title, "start": year, "end": until,
-                    "bullets": [b.format(s=rng.choice(own)) for b in picks],
-                })
-                year, until = year - rng.randint(2, 4), year
-            for role, org in zip(roles, rng.sample(EMPLOYERS, len(roles))):
-                role["org"] = org
-            people.append({
-                "name": f"{first} {last}", "team": team, "title": roles[0]["title"], "skills": skills, "roles": roles,
-                "city": rng.choice(CITIES), "phone": f"555-01{rng.randint(0, 99):02d}",
-                "school": rng.choice(SCHOOLS), "degree": rng.choice(["BSc", "BA", "MSc"]), "field": spec["field"],
-                "graduated": year, "cert": spec["cert"] if rng.random() < 0.3 else None,
-                "side": rng.choice(SIDE_PROJECTS) if rng.random() < 0.5 else None,
-            })
+            people.append(new_person(rng, team, first, last))
     # Three pairs of different people with the same full name, in different teams.
     for _ in range(3):
         a, b = rng.sample([p for p in people if not p.get("namesake")], 2)
         if a["team"] != b["team"]:
             b["name"] = a["name"]
             a["namesake"] = b["namesake"] = True
-    seen = Counter()
+    seen, used_emails = Counter(), set()
     for p in people:
-        first, last = name_parts(p["name"])
         seen[p["name"]] += 1
-        while True:
-            style = rng.choice([f"{first}.{last}", f"{first[0]}{last}{rng.randint(10, 99)}", f"{first}{last[0]}{rng.randint(1, 9)}"])
-            email = f"{style}@example.{rng.choice(['com', 'net', 'org'])}".lower()
-            if email not in used_emails:
-                used_emails.add(email)
-                break
-        p["email"] = email
-        p["layout"] = rng.choice(["classic", "classic", "markdown", "narrative", "profile"])
-        ext = {"classic": "pdf", "markdown": "md", "narrative": "txt", "profile": "pdf"}[p["layout"]]
-        suffix = f"_{seen[p['name']]}" if seen[p["name"]] > 1 else ""
-        p["key"] = f"resumes/{first}_{last}{suffix}.{ext}"
+        add_contact(rng, p, used_emails, seen[p["name"]])
     return people
+
+
+def make_lookalikes(rng: random.Random, people: list[dict]) -> list[tuple[dict, dict]]:
+    """Three pairs who share a team, a job title, a surname and a first initial.
+
+    "M. Andersson (Partnerships Manager)" fits both halves of such a pair, so nothing in that
+    line says which one is meant. Made with their own random stream, after everyone else, so
+    adding them changes no existing document.
+    """
+    taken = {(name_parts(p["name"])[0][0], name_parts(p["name"])[1]) for p in people}
+    emails = {p["email"] for p in people}
+    pairs = []
+    for team in rng.sample(list(TEAMS), 3):
+        while True:
+            first_a, first_b = rng.sample(FIRST, 2)
+            last = rng.choice(LAST)
+            if first_a[0] == first_b[0] and (first_a[0], last) not in taken:
+                taken.add((first_a[0], last))
+                break
+        a, b = new_person(rng, team, first_a, last), new_person(rng, team, first_b, last)
+        b["title"] = b["roles"][0]["title"] = a["title"]
+        for p in (a, b):
+            add_contact(rng, p, emails, 1)
+            p["lookalike"] = True
+        pairs.append((a, b))
+    return pairs
 
 
 def resume_text(p: dict) -> str:
@@ -402,8 +437,10 @@ def build(seed: int) -> dict:
     rng = random.Random(seed)
     people = make_people(rng)
     by_team = {t: [p for p in people if p["team"] == t] for t in TEAMS}
+    lookalikes = make_lookalikes(random.Random(seed + 1), people)
+    extra_people = [p for pair in lookalikes for p in pair]
     texts: dict[str, str] = {}
-    truth_mentions: dict[str, list[dict]] = {p["key"]: [] for p in people}
+    truth_mentions: dict[str, list[dict]] = {p["key"]: [] for p in people + extra_people}
 
     def emit(rel: str, lines: list[str]) -> str:
         texts[rel] = "\n".join(lines)
@@ -414,7 +451,7 @@ def build(seed: int) -> dict:
         seen = truth_mentions.setdefault(person["key"], [])
         seen.extend(m for s in surfaces if (m := {"doc": doc, "surface": s}) not in seen)
 
-    for p in people:
+    for p in people + extra_people:
         emit(p["key"], resume_text(p).split("\n"))
 
     # Eight contractors who share a full name with someone on file but are different people.
@@ -623,11 +660,11 @@ def build(seed: int) -> dict:
         owned = [p["name"] for p in projects if p["team"] == team_name]
         emit(rel, [
             f"# {COMPANY} {team_name}: team page", "", "## Who is on the team", "",
-            *(f"- {p['name']}, {p['title']}" for p in members), "",
+            *(f"- {p['name']}, {p['title']}" for p in members + [x for x in extra_people if x["team"] == team_name]), "",
             "## What we own", "", *(f"- {n}" for n in owned), "",
             "## How to reach us", "", f"Ask in #{slugify(team_name)} or write to {slugify(team_name)}@{COMPANY.lower()}.example.",
         ])
-        for p in members:
+        for p in members + [x for x in extra_people if x["team"] == team_name]:
             mention(rel, p, [p["name"]])
         # A how-to page: the team's tools in passing, and who owns the page.
         rel = f"generated/_company/wiki/{slugify(team_name)}-how-to.{'pdf' if len(owned[0]) % 2 else 'md'}"
@@ -706,6 +743,68 @@ def build(seed: int) -> dict:
             break
     queries += [{"q": f"Who has {s} experience?", "tag": "none", "expected": []} for s in NOWHERE]
 
+    # Hard cases. Each look-alike joins a project whose kickoff email writes them as an initial
+    # and a job title, which fits both halves of the pair. What settles who is meant differs:
+    # a newsletter line with the full name, title and project (four of them), an email address
+    # beside the initial (one), or nothing at all (one), in which case the mention must stay
+    # unconfirmed and attached to nobody.
+    hard = random.Random(seed + 2)
+    ambiguous, thanks = [], []
+    spare = iter(["Echo", "Fathom", "Glacier", "Helix", "Indigo", "Jasper"])
+    for n, pair in enumerate(lookalikes):
+        for half, person in enumerate(pair):
+            spec = TEAMS[person["team"]]
+            settled_by = "email" if (n, half) == (1, 1) else "nothing" if (n, half) == (2, 1) else "newsletter"
+            name = f"{next(spare)} {hard.choice(spec['themes'])}"
+            slug = slugify(name)
+            lead, mate = hard.sample([p for p in by_team[person["team"]] if not p.get("namesake")], 2)
+            roles = hard.sample(spec["roles"], 3)
+            first, last = name_parts(person["name"])
+            initial = f"{first[0]}. {last}"
+            project = {
+                "name": name, "slug": slug, "team": person["team"], "skills": [], "hopSkill": None,
+                "roster": [lead["key"], mate["key"], person["key"]], "ghosts": [], "docs": [], "settledBy": settled_by,
+            }
+            projects.append(project)
+            rel = f"generated/{slug}/kickoff-email.txt"
+            beside = f", {person['email']}" if settled_by == "email" else ""
+            project["docs"].append(emit(rel, [
+                f"From: {lead['name']} <{lead['email']}>", f"To: {slug}@{COMPANY.lower()}.example",
+                f"Date: 2025-0{hard.randint(1, 9)}-{hard.randint(10, 28)}", f"Subject: {name} kickoff: who is doing what", "",
+                "Hi all,", "", f"We are kicking off {name}. This is who is on it.", "",
+                f"I am the {roles[0]} for {name}.",
+                f"{mate['name']} ({mate['title']}) joins {name} as {roles[1]}.",
+                f"{initial} ({person['title']}{beside}) joins {name} as {roles[2]}.",
+                "", "Thanks,", lead["name"],
+            ]))
+            mention(rel, lead, [lead["name"]])
+            mention(rel, mate, [mate["name"]])
+            if settled_by == "nothing":
+                ambiguous.append({"doc": rel, "surface": initial, "couldBe": sorted(p["key"] for p in pair)})
+                continue
+            mention(rel, person, [initial])
+            rel = f"generated/{slug}/weekly-update-1.md"
+            project["docs"].append(emit(rel, [
+                f"# {name}: weekly update 1", "", f"Progress on {name} this week:",
+                f"{person['name']}, {roles[2]} on {name}, finished {hard.choice(spec['tasks'])}.",
+                f"{mate['name']}, {roles[1]} on {name}, finished {hard.choice(spec['tasks'])}.",
+            ]))
+            mention(rel, person, [person["name"]])
+            mention(rel, mate, [mate["name"]])
+            if settled_by == "newsletter":
+                thanks.append((person, name, hard.choice(spec["tasks"])))
+            queries.append({"q": f"Who worked on {name}?", "tag": "multi_hop", "expected": sorted(project["roster"])})
+    rel = "generated/_company/newsletter-4.md"
+    emit(rel, [
+        f"# {COMPANY} newsletter, issue 4", "", "## Thank you", "",
+        *(f"- {p['name']} ({p['title']}, {p['team']}) for {work} on {project}." for p, project, work in thanks),
+        "", "## Reminders", "", "Badge photos for new joiners are taken on the first Tuesday of the month.",
+    ])
+    for p, _, _ in thanks:
+        mention(rel, p, [p["name"]])
+    for item in ambiguous:
+        assert item["surface"] in texts[item["doc"]]
+
     check(texts, truth_mentions, projects, said_by)
     truth = ROOT / "truth"
     truth.mkdir(exist_ok=True)
@@ -715,9 +814,10 @@ def build(seed: int) -> dict:
     (truth / "projects.json").write_text(json.dumps(projects, indent=1))
     (truth / "queries.json").write_text(json.dumps(queries, indent=1))
     (truth / "injection.json").write_text(json.dumps(planted, indent=1))
+    (truth / "ambiguous.json").write_text(json.dumps(ambiguous, indent=1))
     kinds = Counter(Path(rel).stem.rstrip("-0123456789") if rel.startswith("generated/") else "resume" for rel in texts)
     return {
-        "teams": len(TEAMS), "resumes": len(people), "projects": len(projects), "documents": len(texts),
+        "teams": len(TEAMS), "resumes": len(people) + len(extra_people), "projects": len(projects), "documents": len(texts),
         "byKind": dict(sorted(kinds.items())), "byFormat": dict(Counter(Path(rel).suffix for rel in texts)),
         "labelledMentions": sum(len(m) for m in truth_mentions.values()),
         "queries": dict(Counter(q["tag"] for q in queries)),

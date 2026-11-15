@@ -399,5 +399,50 @@
   "q": "Who has Verilog experience?",
   "tag": "none",
   "expected": []
+ },
+ {
+  "q": "Who worked on Echo Device Refresh?",
+  "tag": "multi_hop",
+  "expected": [
+   "resumes/Aisha_Olsen.md",
+   "resumes/Emeka_Sokolov.pdf",
+   "resumes/Gabriela_Ortiz.md"
+  ]
+ },
+ {
+  "q": "Who worked on Fathom Access Review?",
+  "tag": "multi_hop",
+  "expected": [
+   "resumes/Amara_Olsen.pdf",
+   "resumes/Emeka_Sokolov.pdf",
+   "resumes/Liam_Abbasi.txt"
+  ]
+ },
+ {
+  "q": "Who worked on Glacier Brand Refresh?",
+  "tag": "multi_hop",
+  "expected": [
+   "resumes/Beatriz_Wang.md",
+   "resumes/Rafael_Diaz.pdf",
+   "resumes/Victor_Osei.pdf"
+  ]
+ },
+ {
+  "q": "Who worked on Helix Webinar Series?",
+  "tag": "multi_hop",
+  "expected": [
+   "resumes/Bao_Wang.md",
+   "resumes/Ingrid_Ng.pdf",
+   "resumes/Maria_Johnson.md"
+  ]
+ },
+ {
+  "q": "Who worked on Indigo Partner Program?",
+  "tag": "multi_hop",
+  "expected": [
+   "resumes/Layla_Adeyemi.txt",
+   "resumes/Maria_Jensen.md",
+   "resumes/Miguel_Thapa.txt"
+  ]
  }
 ]

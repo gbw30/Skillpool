@@ -174,6 +174,28 @@
   ]
  },
  {
+  "person": "resumes/Aisha_Olsen.md",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/_company/teams/security-and-it.md",
+    "surface": "Aisha Olsen"
+   },
+   {
+    "doc": "generated/echo-device-refresh/kickoff-email.txt",
+    "surface": "A. Olsen"
+   },
+   {
+    "doc": "generated/echo-device-refresh/weekly-update-1.md",
+    "surface": "Aisha Olsen"
+   },
+   {
+    "doc": "generated/_company/newsletter-4.md",
+    "surface": "Aisha Olsen"
+   }
+  ]
+ },
+ {
   "person": "resumes/Alejandro_Ng.md",
   "resume": true,
   "mentions": [
@@ -234,6 +256,28 @@
    {
     "doc": "generated/_company/teams/security-and-it.md",
     "surface": "Amara Kumar"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Amara_Olsen.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/_company/teams/security-and-it.md",
+    "surface": "Amara Olsen"
+   },
+   {
+    "doc": "generated/fathom-access-review/kickoff-email.txt",
+    "surface": "A. Olsen"
+   },
+   {
+    "doc": "generated/fathom-access-review/weekly-update-1.md",
+    "surface": "Amara Olsen"
+   },
+   {
+    "doc": "generated/_company/newsletter-4.md",
+    "surface": "Amara Olsen"
    }
   ]
  },
@@ -536,6 +580,46 @@
    {
     "doc": "generated/_company/teams/product-and-design.md",
     "surface": "Bao Pereira"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Bao_Wang.md",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/_company/teams/marketing.md",
+    "surface": "Bao Wang"
+   },
+   {
+    "doc": "generated/helix-webinar-series/kickoff-email.txt",
+    "surface": "B. Wang"
+   },
+   {
+    "doc": "generated/helix-webinar-series/weekly-update-1.md",
+    "surface": "Bao Wang"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Beatriz_Wang.md",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/_company/teams/marketing.md",
+    "surface": "Beatriz Wang"
+   },
+   {
+    "doc": "generated/glacier-brand-refresh/kickoff-email.txt",
+    "surface": "B. Wang"
+   },
+   {
+    "doc": "generated/glacier-brand-refresh/weekly-update-1.md",
+    "surface": "Beatriz Wang"
+   },
+   {
+    "doc": "generated/_company/newsletter-4.md",
+    "surface": "Beatriz Wang"
    }
   ]
  },
@@ -1210,6 +1294,18 @@
    {
     "doc": "generated/_company/wiki/security-and-it-how-to.pdf",
     "surface": "Emeka Sokolov"
+   },
+   {
+    "doc": "generated/echo-device-refresh/kickoff-email.txt",
+    "surface": "Emeka Sokolov"
+   },
+   {
+    "doc": "generated/echo-device-refresh/weekly-update-1.md",
+    "surface": "Emeka Sokolov"
+   },
+   {
+    "doc": "generated/fathom-access-review/kickoff-email.txt",
+    "surface": "Emeka Sokolov"
    }
   ]
  },
@@ -1379,6 +1475,10 @@
    },
    {
     "doc": "generated/_company/newsletter-3.md",
+    "surface": "Gabriela Ortiz"
+   },
+   {
+    "doc": "generated/echo-device-refresh/kickoff-email.txt",
     "surface": "Gabriela Ortiz"
    }
   ]
@@ -1660,6 +1760,10 @@
    {
     "doc": "generated/_company/teams/marketing.md",
     "surface": "Ingrid Ng"
+   },
+   {
+    "doc": "generated/helix-webinar-series/kickoff-email.txt",
+    "surface": "Ingrid Ng"
    }
   ]
  },
@@ -1845,6 +1949,10 @@
    },
    {
     "doc": "generated/_company/teams/sales-and-partnerships.md",
+    "surface": "Ivan Abbasi"
+   },
+   {
+    "doc": "generated/jasper-renewal-drive/kickoff-email.txt",
     "surface": "Ivan Abbasi"
    }
   ]
@@ -2680,6 +2788,28 @@
   ]
  },
  {
+  "person": "resumes/Layla_Adeyemi.txt",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/_company/teams/sales-and-partnerships.md",
+    "surface": "Layla Adeyemi"
+   },
+   {
+    "doc": "generated/indigo-partner-program/kickoff-email.txt",
+    "surface": "L. Adeyemi"
+   },
+   {
+    "doc": "generated/indigo-partner-program/weekly-update-1.md",
+    "surface": "Layla Adeyemi"
+   },
+   {
+    "doc": "generated/_company/newsletter-4.md",
+    "surface": "Layla Adeyemi"
+   }
+  ]
+ },
+ {
   "person": "resumes/Layla_Patel.pdf",
   "resume": true,
   "mentions": [
@@ -2706,6 +2836,16 @@
    {
     "doc": "generated/_company/teams/security-and-it.md",
     "surface": "Layla Patel"
+   }
+  ]
+ },
+ {
+  "person": "resumes/Leila_Adeyemi.pdf",
+  "resume": true,
+  "mentions": [
+   {
+    "doc": "generated/_company/teams/sales-and-partnerships.md",
+    "surface": "Leila Adeyemi"
    }
   ]
  },
@@ -2746,6 +2886,14 @@
    {
     "doc": "generated/_company/teams/security-and-it.md",
     "surface": "Liam Abbasi"
+   },
+   {
+    "doc": "generated/fathom-access-review/kickoff-email.txt",
+    "surface": "Liam Abbasi"
+   },
+   {
+    "doc": "generated/fathom-access-review/weekly-update-1.md",
+    "surface": "Liam Abbasi"
    }
   ]
  },
@@ -2755,6 +2903,10 @@
   "mentions": [
    {
     "doc": "generated/_company/teams/sales-and-partnerships.md",
+    "surface": "Lucia Barros"
+   },
+   {
+    "doc": "generated/jasper-renewal-drive/kickoff-email.txt",
     "surface": "Lucia Barros"
    }
   ]
@@ -2928,6 +3080,14 @@
    {
     "doc": "generated/_company/teams/sales-and-partnerships.md",
     "surface": "Maria Jensen"
+   },
+   {
+    "doc": "generated/indigo-partner-program/kickoff-email.txt",
+    "surface": "Maria Jensen"
+   },
+   {
+    "doc": "generated/indigo-partner-program/weekly-update-1.md",
+    "surface": "Maria Jensen"
    }
   ]
  },
@@ -2937,6 +3097,14 @@
   "mentions": [
    {
     "doc": "generated/_company/teams/marketing.md",
+    "surface": "Maria Johnson"
+   },
+   {
+    "doc": "generated/helix-webinar-series/kickoff-email.txt",
+    "surface": "Maria Johnson"
+   },
+   {
+    "doc": "generated/helix-webinar-series/weekly-update-1.md",
     "surface": "Maria Johnson"
    }
   ]
@@ -3107,6 +3275,10 @@
   "mentions": [
    {
     "doc": "generated/_company/teams/sales-and-partnerships.md",
+    "surface": "Miguel Thapa"
+   },
+   {
+    "doc": "generated/indigo-partner-program/kickoff-email.txt",
     "surface": "Miguel Thapa"
    }
   ]
@@ -3594,6 +3766,14 @@
    {
     "doc": "generated/_company/teams/marketing.md",
     "surface": "Rafael Diaz"
+   },
+   {
+    "doc": "generated/glacier-brand-refresh/kickoff-email.txt",
+    "surface": "Rafael Diaz"
+   },
+   {
+    "doc": "generated/glacier-brand-refresh/weekly-update-1.md",
+    "surface": "Rafael Diaz"
    }
   ]
  },
@@ -4055,6 +4235,10 @@
    },
    {
     "doc": "generated/_company/teams/marketing.md",
+    "surface": "Victor Osei"
+   },
+   {
+    "doc": "generated/glacier-brand-refresh/kickoff-email.txt",
     "surface": "Victor Osei"
    }
   ]

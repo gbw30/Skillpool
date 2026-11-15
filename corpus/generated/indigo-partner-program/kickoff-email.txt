@@ -1,0 +1,15 @@
+From: Miguel Thapa <miguel.thapa@example.org>
+To: indigo-partner-program@larkfield.example
+Date: 2025-08-14
+Subject: Indigo Partner Program kickoff: who is doing what
+
+Hi all,
+
+We are kicking off Indigo Partner Program. This is who is on it.
+
+I am the operations analyst for Indigo Partner Program.
+Maria Jensen (Sales Engineer) joins Indigo Partner Program as deal lead.
+L. Adeyemi (Senior Account Executive) joins Indigo Partner Program as sales engineer.
+
+Thanks,
+Miguel Thapa

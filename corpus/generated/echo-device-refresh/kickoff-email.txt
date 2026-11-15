@@ -1,0 +1,15 @@
+From: Gabriela Ortiz <gortiz37@example.com>
+To: echo-device-refresh@larkfield.example
+Date: 2025-01-20
+Subject: Echo Device Refresh kickoff: who is doing what
+
+Hi all,
+
+We are kicking off Echo Device Refresh. This is who is on it.
+
+I am the IT lead for Echo Device Refresh.
+Emeka Sokolov (Senior Systems Administrator) joins Echo Device Refresh as security lead.
+A. Olsen (Systems Administrator) joins Echo Device Refresh as compliance contact.
+
+Thanks,
+Gabriela Ortiz

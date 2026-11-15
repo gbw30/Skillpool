@@ -15,6 +15,8 @@
 - Gabriela Ortiz, IT Administrator
 - Tessa Moreau, Security Engineer
 - Samir Lee, IT Administrator
+- Aisha Olsen, Systems Administrator
+- Amara Olsen, Systems Administrator
 
 ## What we own
 
