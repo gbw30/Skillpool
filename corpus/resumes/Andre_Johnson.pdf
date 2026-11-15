@@ -1,55 +1,63 @@
-%PDF-1.7
-%ÂµÂ¶
-% Written by MuPDF 1.28.6
-
+%PDF-1.3
+%âãÏÓ
 1 0 obj
-<</Type/Catalog/Pages 2 0 R/Info<</Producer(MuPDF 1.28.6)>>>>
+<<
+/Producer (skillpool)
+>>
 endobj
-
 2 0 obj
-<</Type/Pages/Count 1/Kids[4 0 R]>>
+<<
+/Type /Pages
+/Count 1
+/Kids [ 4 0 R ]
+>>
 endobj
-
 3 0 obj
-<</Font<</helv 5 0 R>>>>
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
 endobj
-
 4 0 obj
-<</Type/Page/MediaBox[0 0 595 842]/Rotate 0/Resources 3 0 R/Parent 2 0 R/Contents[6 0 R]>>
+<<
+/Type /Page
+/Resources <<
+/Font <<
+/F1 <<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+>>
+>>
+>>
+/MediaBox [ 0.0 0.0 612 792 ]
+/Parent 2 0 R
+/Contents 5 0 R
+>>
 endobj
-
 5 0 obj
-<</Type/Font/Subtype/Type1/BaseFont/Helvetica/Encoding/WinAnsiEncoding>>
-endobj
-
-6 0 obj
-<</Length 644/Filter/FlateDecode>>
+<<
+/Length 879
+>>
 stream
-xÚuT»1ìï+®FüÞ³„(4tH×!Šä¢€‚†ïgfì$—è”äb{wggf=ü>Íƒ?æ4šMãü{xÿsûõwônœ÷ñû‡äËV’…’ƒK§²—©lñ»ÖàrÎvRÉX­Åp:[øøcþ:¸ñ­ï,9çü8L–Š/ÑR<Wné·r—>9$š°¿š+‹ö™:…%¸˜ù„5ºècˆIåæ7„» 6•YXk9ÿßNbP¯5ˆSgÄ-e±xØ#šÐ0gfò%•uv*qåSÉìGdœªºFÄäBlD˜•-fŸE3
-gTAï8ÐÍtÝõè‚øª%«XS%õzAà±ceç‰#6ˆW±çõîÃžÂ³xœòVŠÁñä†JUÅ‚;«·SÐÃñ6±‡o"jÝl¿§–Qu"„Jè’•ÎdÇZ•4ùô¤3bQIÕ¦†®×Üá«LŸú§ªJÄû
-ÄåÖ±b«}Å5k¿`ÈA;Oæ[oýßö?®lòÔ™jã´Q1èx‡R:MMÖqìÚ’<®„Vh š+œ
-Î&5WædT‹•{——©êñ—ßÛƒF>N—>.šIîÒªl:u•èNT+òóÖç¡¹®"æ‰J™¾NF„âCê*:^h÷îÛÚ»ç|B#En¬Cº5¼X8èöÂÿÏºóe×É[î°·EJëë_qîm–³÷¼¢ønÎçêžß7¹±ûpK°DÅ«ü7‰0ÖÔ•·ÜpqN®÷‰nÒÎ”&[(L,]ÚŒ^„
-êölê§»ÉÖí†<œŒdÄ…]àinhó(×¾ŒSî/óðmøO{vr
+BT /F1 10 Tf 12 TL 54 728 Td (Andre Johnson - UX Designer) Tj T* (Contact: andre.johnson@example.net, 555-0124) Tj T* (Location: Lisbon) Tj T* T* (Core skills) Tj T* (Expert: Roadmapping, Zendesk) Tj T* (Intermediate: SQL, User Research, Usability Testing, Prototyping, Jira, A/B Testing, Java) Tj T* T* (Career history) Tj T* (2020 to present: UX Designer, Ironbark Systems) Tj T* (    Kept three product lines moving, relying on A/B Testing day to day.) Tj T* (    Worked with three other departments on a company-wide deadline and hit it.) Tj T* (2018 to 2020: Product Manager, Redfern Robotics) Tj T* (    Settled arguments that opinion could not, drawing on Prototyping.) Tj T* (    Presented quarterly results to the leadership team.) Tj T* T* (Education: BSc in Human-Computer Interaction, Ashgrove College, 2014) Tj T* (Certification: Scrum Master certification) Tj T* ET
 endstream
 endobj
-
-7 0 obj
-<</CreationDate(D:20250101000000Z)/ModDate(D:20250101000000Z)/Producer(skillpool)>>
-endobj
-
 xref
-0 8
+0 6
 0000000000 65535 f 
-0000000042 00000 n 
-0000000120 00000 n 
-0000000172 00000 n 
-0000000213 00000 n 
-0000000320 00000 n 
-0000000409 00000 n 
-0000001122 00000 n 
-
+0000000015 00000 n 
+0000000058 00000 n 
+0000000117 00000 n 
+0000000166 00000 n 
+0000000374 00000 n 
 trailer
-<</Size 8/Info 7 0 R/Root 1 0 R>>
+<<
+/Size 6
+/Root 3 0 R
+/Info 1 0 R
+>>
 startxref
-1222
+1304
 %%EOF

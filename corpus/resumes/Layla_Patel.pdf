@@ -1,54 +1,63 @@
-%PDF-1.7
-%ÂµÂ¶
-% Written by MuPDF 1.28.6
-
+%PDF-1.3
+%âãÏÓ
 1 0 obj
-<</Type/Catalog/Pages 2 0 R/Info<</Producer(MuPDF 1.28.6)>>>>
+<<
+/Producer (skillpool)
+>>
 endobj
-
 2 0 obj
-<</Type/Pages/Count 1/Kids[4 0 R]>>
+<<
+/Type /Pages
+/Count 1
+/Kids [ 4 0 R ]
+>>
 endobj
-
 3 0 obj
-<</Font<</helv 5 0 R>>>>
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
 endobj
-
 4 0 obj
-<</Type/Page/MediaBox[0 0 595 842]/Rotate 0/Resources 3 0 R/Parent 2 0 R/Contents[6 0 R]>>
+<<
+/Type /Page
+/Resources <<
+/Font <<
+/F1 <<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+>>
+>>
+>>
+/MediaBox [ 0.0 0.0 612 792 ]
+/Parent 2 0 R
+/Contents 5 0 R
+>>
 endobj
-
 5 0 obj
-<</Type/Font/Subtype/Type1/BaseFont/Helvetica/Encoding/WinAnsiEncoding>>
-endobj
-
-6 0 obj
-<</Length 776/Filter/FlateDecode>>
+<<
+/Length 1070
+>>
 stream
-xÚ•U=¯Ó@ìý+\#çûØõIˆAC‡”Q¼8¶(  á÷33wŽ“
-d½'û>vggf7Ã¯áÃi˜Æ€gKÝçñôsxû}ýñ{œÂxÚÆ¯ïòb“WÃÿJÀ{¶bKñ‚ï„÷ÕªmûWòâÑªg¯1ä	»“-^=y~ÿíôyãë)½ñB˜ÆÓÇ	’m¶"ì„Ë9½Ä€×DÉSÊÁŠÏØ¿`}±W&4€‘
-ŸxI!Mø3%9½jÀ7KŠS™‘Kp.Ç©›óIQKžìl,yñt³N$±¡Š…Rã‘ëÀÍrñ½šßÜŸ,»)!QŠ‘7;³rVÒx0CÞJ&)2VÚãßÄ«bt_ûâLq§âå;"™GáÇ··àog¡
-Ø12‘s;£5°Qy¦ª†jTh=‚*‰êtŠu¬@>÷¯Ï™ÙÿÁþ¤L…V"Y¦å<N¥c‚¹‡ÿ¡W ªê¿,IdEyÈ‹EžCU®Ú‰(ðÏ`}=y’*Øo^ô°ÑG¼Ã¯ÔgƒöWžS¥œ³~o–/³Ö³§H&NlÙ‰ÇÈ 4Ä>p[ó]SÕuc½c}ýsqÜÙˆVÎŠËÀ‘\¤><¼,·0ö¾kóÑu/#»ï.¾îrK³)Õ]³]Ã¦VÓl0.{8˜Ië½³¨å¢Ž«OtšÅðÂ¼OTºú®ëc­gnz/ çä½³ß8g¨Y½êQÙÖ9ƒºpÜ®$§À¶Ï¥'Œç–Ÿ‘¨öžçªìÒÉÉx.­÷÷øê±¥õcsG”'®ÉI	G6%”ç	šL?nê—,DeÏ5cû<Q‡pÝ5Wî”¥'À]OW¨“.}âAÇõi‡ÓÙåq"çˆ¥ßU…&‹Ôè]µÏÔÇ>^¤;'FÔŒ 9µ¨û[¨ózº»Ðî&Žf9nòö#®”«~ZÂq£ô™÷¨–ÎÏêý³¢Ì½ÕOœ`úU“êÏ#°rœˆà§ÒÉ;p¢<öW¹¯²K;¿ŸNÃ—á›èÆæ
+BT /F1 10 Tf 12 TL 54 728 Td (Layla Patel - Senior Security Analyst) Tj T* (Contact: lpatel73@example.org, 555-0106) Tj T* (Location: Pune) Tj T* T* (Core skills) Tj T* (Expert: Penetration Testing) Tj T* (Advanced: Okta, Conflict Resolution) Tj T* (Intermediate: AWS) Tj T* (Beginner: Wireshark, Active Directory, Incident Response, Linux, Looker) Tj T* T* (Career history) Tj T* (2021 to present: Senior Security Analyst, Stonebridge Capital) Tj T* (    Automated account cleanup and removed hundreds of stale logins, drawing on Linux.) Tj T* (    Wrote the documentation new joiners still start with.) Tj T* (2019 to 2021: Systems Administrator, Pinebridge Health) Tj T* (    Looked after Okta for a company of two thousand people.) Tj T* (    Took over a stalled project and delivered it within a quarter.) Tj T* (    Closed out an external audit with no major findings.) Tj T* T* (Education: BSc in Information Security, Harborview University, 2016) Tj T* (Certification: CISSP) Tj T* (Side project: Hackathon Entry: a side project I built in my own time.) Tj T* ET
 endstream
 endobj
-
-7 0 obj
-<</CreationDate(D:20250101000000Z)/ModDate(D:20250101000000Z)/Producer(skillpool)>>
-endobj
-
 xref
-0 8
+0 6
 0000000000 65535 f 
-0000000042 00000 n 
-0000000120 00000 n 
-0000000172 00000 n 
-0000000213 00000 n 
-0000000320 00000 n 
-0000000409 00000 n 
-0000001254 00000 n 
-
+0000000015 00000 n 
+0000000058 00000 n 
+0000000117 00000 n 
+0000000166 00000 n 
+0000000374 00000 n 
 trailer
-<</Size 8/Info 7 0 R/Root 1 0 R>>
+<<
+/Size 6
+/Root 3 0 R
+/Info 1 0 R
+>>
 startxref
-1354
+1496
 %%EOF

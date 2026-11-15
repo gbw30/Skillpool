@@ -273,7 +273,7 @@ Per document, in order. Each step is idempotent so a re-sent job resumes where i
 
 1. Fetch from the bucket. Reject if the size or sniffed type disagrees with the manifest.
 2. Hash raw bytes → document id. If a `Document` with that id is `ingested`, skip (R3).
-3. Parse to text: PyMuPDF for PDF, plain read for TXT and MD. Empty text → `failed: no_text`.
+3. Parse to text: pypdf for PDF (BSD licence, pure Python), plain read for TXT and MD. Empty text → `failed: no_text`.
 4. Chunk: about 600 tokens with 80 overlap, split on section headings where present. Keep the
    final short piece. (The original dropped chunks under 80 tokens, which loses short documents
    entirely.)

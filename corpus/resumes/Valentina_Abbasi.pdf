@@ -1,54 +1,63 @@
-%PDF-1.7
-%ÂµÂ¶
-% Written by MuPDF 1.28.6
-
+%PDF-1.3
+%âãÏÓ
 1 0 obj
-<</Type/Catalog/Pages 2 0 R/Info<</Producer(MuPDF 1.28.6)>>>>
+<<
+/Producer (skillpool)
+>>
 endobj
-
 2 0 obj
-<</Type/Pages/Count 1/Kids[4 0 R]>>
+<<
+/Type /Pages
+/Count 1
+/Kids [ 4 0 R ]
+>>
 endobj
-
 3 0 obj
-<</Font<</helv 5 0 R>>>>
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
 endobj
-
 4 0 obj
-<</Type/Page/MediaBox[0 0 595 842]/Rotate 0/Resources 3 0 R/Parent 2 0 R/Contents[6 0 R]>>
+<<
+/Type /Page
+/Resources <<
+/Font <<
+/F1 <<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+>>
+>>
+>>
+/MediaBox [ 0.0 0.0 612 792 ]
+/Parent 2 0 R
+/Contents 5 0 R
+>>
 endobj
-
 5 0 obj
-<</Type/Font/Subtype/Type1/BaseFont/Helvetica/Encoding/WinAnsiEncoding>>
-endobj
-
-6 0 obj
-<</Length 796/Filter/FlateDecode>>
+<<
+/Length 1146
+>>
 stream
-xÚ¥U;ÏÔ@ìó+R#ûðÚY	Q hè®Cwyè+  á÷3žÝ»Üë£A‘¢Í®×{ÆÎð{øtâðÄ±Èh6‡_Ãû—õçŸ1†ñ°ß?Õ¨³]M´êª1‰šðDËZ?þ8|Âø6æw&!„8>¸f¸’`*Š%Ö³n°N¼px×öàZcžÄ­&¬Øã4­¸™ÔR°9…\üIK9bÚnÚlô´íö•”2•€w’*EVÉRöÓ×Ñ&x"€çIIÃ{°ÀWµLìÙr
-iÊ	¸RÆÚqà€ª LÌ1Õ=bZ€: Ëê*°uoˆ‘‚
-ïTø_ƒíþÄð­+lÄÏzÂwðs¯_·1ÖâÄŠzÕ2ÐyÇÓz‡ál}‡Áßí|oÌÝ«Ñ°7ë±´¼#*ˆ¨6rqVÓâ>•5ó7vÕul¾ïˆëYà½>åïhˆ…{›£ø7_Å9Ù<‚&äàÑœeàf×Ý_á\ß÷LAÇçÕnµqFž¸Ÿ®6e\ròØö•ôoÊÆê~“Ìz^Ò«››†©åùž+éõ&c/q¶qï¦:ô2³³¢NJWÐ´#:gáú#¶ê:c.Õïa÷¿yUªÕÙu<Øq•fjØ«”½^…˜õŽ…ðÀB"£Å½é™‡Þ+Öy3Û™`´Ê.”+}ÎÎ©gBå&ç…úE-TÙ3ÏçN’;ê}è£›NïìD+½S<ã™ÌÓ
-ûsg¿÷uË¤s&­ëÙMo¾»¼ÂHŒ5Ì³ˆE•M®¬drût Š7ÏÌ|Š%v„si­‰±eê=D–M;h›õÁýÆ:çÞB?¹Uª³˜ža,YNÀ6Ë\òºëzBž9ÿ	T*X‰‘]S¥Í1¬{X»vNÉf-J-,Îdò™55=Z÷&ü<?ÃÜ°Æý³óë@ÞÀù€¨Í`¯£wªk«ý-Zdi»uú3üO+ÕƒÓ#XÎEnªÇif—Y×5¸é~±›MÏÔ/'“Ýœ{7R÷—~j< 7È4j±R{Õ³éÚûr¾&êÝ­
+BT /F1 10 Tf 12 TL 54 728 Td (Valentina Abbasi) Tj T* (Web Developer) Tj T* (valentinaa8@example.org | 555-0150 | Toronto) Tj T* T* (EXPERIENCE) Tj T* (Web Developer, Northgate Logistics \(2023 to present\)) Tj T* (- Paired with designers to turn mockups into working screens.) Tj T* (- Worked with three other departments on a company-wide deadline and hit it.) Tj T* T* (Junior Web Developer, Stonebridge Capital \(2020 to 2023\)) Tj T* (- Set up the test suite and brought flaky tests under control.) Tj T* (- Mentored two junior colleagues through their first year.) Tj T* T* (Junior Web Developer, Fernhill Insurance \(2016 to 2020\)) Tj T* (- Rebuilt the signup flow and raised completion by a fifth, using Kotlin.) Tj T* (- Presented quarterly results to the leadership team.) Tj T* T* (EDUCATION) Tj T* (MSc in Software Engineering, University of Westmarch, 2012) Tj T* T* (SKILLS) Tj T* (Kotlin \(advanced\), TypeScript \(beginner\), Figma \(expert\), CSS \(expert\), Swift \(expert\),) Tj T* (JavaScript \(intermediate\), Docker \(beginner\)) Tj T* T* (PROJECTS) Tj T* (Capstone Project: a side project I built in my own time.) Tj T* ET
 endstream
 endobj
-
-7 0 obj
-<</CreationDate(D:20250101000000Z)/ModDate(D:20250101000000Z)/Producer(skillpool)>>
-endobj
-
 xref
-0 8
+0 6
 0000000000 65535 f 
-0000000042 00000 n 
-0000000120 00000 n 
-0000000172 00000 n 
-0000000213 00000 n 
-0000000320 00000 n 
-0000000409 00000 n 
-0000001274 00000 n 
-
+0000000015 00000 n 
+0000000058 00000 n 
+0000000117 00000 n 
+0000000166 00000 n 
+0000000374 00000 n 
 trailer
-<</Size 8/Info 7 0 R/Root 1 0 R>>
+<<
+/Size 6
+/Root 3 0 R
+/Info 1 0 R
+>>
 startxref
-1374
+1572
 %%EOF

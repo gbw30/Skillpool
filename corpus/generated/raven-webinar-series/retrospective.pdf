@@ -1,54 +1,63 @@
-%PDF-1.7
-%ÂµÂ¶
-% Written by MuPDF 1.28.6
-
+%PDF-1.3
+%âãÏÓ
 1 0 obj
-<</Type/Catalog/Pages 2 0 R/Info<</Producer(MuPDF 1.28.6)>>>>
+<<
+/Producer (skillpool)
+>>
 endobj
-
 2 0 obj
-<</Type/Pages/Count 1/Kids[4 0 R]>>
+<<
+/Type /Pages
+/Count 1
+/Kids [ 4 0 R ]
+>>
 endobj
-
 3 0 obj
-<</Font<</helv 5 0 R>>>>
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
 endobj
-
 4 0 obj
-<</Type/Page/MediaBox[0 0 595 842]/Rotate 0/Resources 3 0 R/Parent 2 0 R/Contents[6 0 R]>>
+<<
+/Type /Page
+/Resources <<
+/Font <<
+/F1 <<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+>>
+>>
+>>
+/MediaBox [ 0.0 0.0 612 792 ]
+/Parent 2 0 R
+/Contents 5 0 R
+>>
 endobj
-
 5 0 obj
-<</Type/Font/Subtype/Type1/BaseFont/Helvetica/Encoding/WinAnsiEncoding>>
-endobj
-
-6 0 obj
-<</Length 398/Filter/FlateDecode>>
+<<
+/Length 548
+>>
 stream
-xÚ•R±NÄ0Ýó™‘€$NìF:1 XØº¸^#Xø~žÝÜ]…éN•Ú4~¶ß{¶ûv£‹>à‰¾d/2øñËÝÌŸ?>?6¿Ý”ÄQ˜Ï)Á7qåw	ÿÄEô¿Ñ{
-8Éx7!	À’d®šýð6¾¸ào#ÝI!D?>¹íÆ®Çm#< hFm2OO'Ô
-_•Ç2ò€§…"ï@!XvFÅ‚›	HÄ˜xHJj|å	ç¦È$Erí¦*ïBéIk¯ºâ[p·Ghñ&ù¤ÀôrÇ6ÄÉnÈT(˜Ïê^û4°ƒ9‘Ï¢/U .éÐL*·î~áFµ—r²l9:wp˜T©óUl
-i©ÌœæÃ„lV{uV‘bë¢Uurçð·r¨˜²Iêâ°ñ$ímîÚŽ :ª’««¦–¤HŸp;PO5×ódíHÆ¶ZŸ³ÓÉÊdèÛW±iåTÔØÂxù®Tôí³ýYvöoïÐ7 s»bÊ;œï†.Ü5<îÕý?»êb
+BT /F1 10 Tf 12 TL 54 728 Td (Raven Webinar Series: retrospective) Tj T* T* (What went well) Tj T* T* (Yara Hansen kept the launch email on schedule for Raven Webinar Series, and the team did not) Tj T* (have to chase it.) Tj T* T* (What was hard) Tj T* T* (Raven Webinar Series lost two weeks waiting on the campaign brief. Hana Moreau raised this) Tj T* (early, as content owner on Raven Webinar Series, but nobody owned the decision.) Tj T* T* (Next time) Tj T* T* (Name one owner for each decision at the Raven Webinar Series kickoff.) Tj T* ET
 endstream
 endobj
-
-7 0 obj
-<</CreationDate(D:20250101000000Z)/ModDate(D:20250101000000Z)/Producer(skillpool)>>
-endobj
-
 xref
-0 8
+0 6
 0000000000 65535 f 
-0000000042 00000 n 
-0000000120 00000 n 
-0000000172 00000 n 
-0000000213 00000 n 
-0000000320 00000 n 
-0000000409 00000 n 
-0000000876 00000 n 
-
+0000000015 00000 n 
+0000000058 00000 n 
+0000000117 00000 n 
+0000000166 00000 n 
+0000000374 00000 n 
 trailer
-<</Size 8/Info 7 0 R/Root 1 0 R>>
+<<
+/Size 6
+/Root 3 0 R
+/Info 1 0 R
+>>
 startxref
-976
+973
 %%EOF

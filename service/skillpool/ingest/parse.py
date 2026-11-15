@@ -1,8 +1,9 @@
 """Bytes to text. Raises ParseError with a short reason shown to the user."""
+import io
 import multiprocessing
 import unicodedata
 
-import pymupdf
+from pypdf import PdfReader
 
 from .. import config
 
@@ -19,17 +20,19 @@ def parse(data: bytes, ext: str) -> tuple[str, list[int]]:
             raise ParseError("type_mismatch")
         pages, starts, length = [], [], 0
         try:
-            with pymupdf.open(stream=data, filetype="pdf") as doc:
-                if doc.page_count > config.MAX_PDF_PAGES:
+            reader = PdfReader(io.BytesIO(data))
+            if len(reader.pages) > config.MAX_PDF_PAGES:
+                raise ParseError("too_long")
+            for page in reader.pages:
+                raw = page.extract_text()
+                # A small PDF can expand into far more text than a document is allowed to hold.
+                if length + len(raw) > config.MAX_TEXT_CHARS:
                     raise ParseError("too_long")
-                for page in doc:
-                    raw = page.get_text()
-                    # A small PDF can expand into far more text than a document is allowed to hold.
-                    if length + len(raw) > config.MAX_TEXT_CHARS:
-                        raise ParseError("too_long")
-                    starts.append(length)
-                    pages.append(unicodedata.normalize("NFKC", raw) + "\n")
-                    length += len(pages[-1])
+                if not raw.endswith("\n"):
+                    raw += "\n"  # every page ends its last line, whichever way the file was written
+                starts.append(length)
+                pages.append(unicodedata.normalize("NFKC", raw) + "\n")
+                length += len(pages[-1])
         except ParseError:
             raise
         except Exception as exc:
