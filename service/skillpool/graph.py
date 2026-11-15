@@ -334,7 +334,7 @@ ORDER BY best DESC
 
 DIRECT_SKILL = """
 MATCH (p:Person)-[r:HAS_SKILL]->(s:Skill) WHERE s.id IN $skills
-RETURN p.id AS id, collect({skill: s.name, level: r.level, sources: r.sources}) AS matches
+RETURN p.id AS id, p.name AS name, collect({skill: s.name, level: r.level, sources: r.sources}) AS matches
 """
 
 PROJECT_PATH = """
@@ -342,7 +342,7 @@ MATCH (p:Person)-[w:WORKED_ON]->(pr:Project)
 WHERE pr.id IN $projects OR EXISTS { (pr)-[:USED_SKILL]->(s:Skill) WHERE s.id IN $skills }
 OPTIONAL MATCH (pr)-[u:USED_SKILL]->(s:Skill) WHERE s.id IN $skills
 WITH p, pr, w, [x IN collect({skill: s.name, sources: u.sources}) WHERE x.skill IS NOT NULL] AS used
-RETURN p.id AS id, pr.id AS projectId, pr.name AS project, pr.id IN $projects AS named,
+RETURN p.id AS id, p.name AS name, pr.id AS projectId, pr.name AS project, pr.id IN $projects AS named,
        w.sources AS sources, used
 """
 
