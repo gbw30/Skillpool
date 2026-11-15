@@ -1,55 +1,63 @@
-%PDF-1.7
-%ÂµÂ¶
-% Written by MuPDF 1.28.6
-
+%PDF-1.3
+%âãÏÓ
 1 0 obj
-<</Type/Catalog/Pages 2 0 R/Info<</Producer(MuPDF 1.28.6)>>>>
+<<
+/Producer (skillpool)
+>>
 endobj
-
 2 0 obj
-<</Type/Pages/Count 1/Kids[4 0 R]>>
+<<
+/Type /Pages
+/Count 1
+/Kids [ 4 0 R ]
+>>
 endobj
-
 3 0 obj
-<</Font<</helv 5 0 R>>>>
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
 endobj
-
 4 0 obj
-<</Type/Page/MediaBox[0 0 595 842]/Rotate 0/Resources 3 0 R/Parent 2 0 R/Contents[6 0 R]>>
+<<
+/Type /Page
+/Resources <<
+/Font <<
+/F1 <<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+>>
+>>
+>>
+/MediaBox [ 0.0 0.0 612 792 ]
+/Parent 2 0 R
+/Contents 5 0 R
+>>
 endobj
-
 5 0 obj
-<</Type/Font/Subtype/Type1/BaseFont/Helvetica/Encoding/WinAnsiEncoding>>
-endobj
-
-6 0 obj
-<</Length 871/Filter/FlateDecode>>
+<<
+/Length 1292
+>>
 stream
-xÚ…U=¯Ô@ìïW¤FöÃö&¢@ĞĞ!]‡(ŞåCPĞğû™ñnrÉ}<tz§{Y¯=;§?§OçSì>±SéJé»óïÓûŸó¯¿]İyé¾ÉÔ†¤·h‚¾?ş8=…îmÌïŠ„bwş|B(ş¬6[±ßjZ’_8¿A:«éfÛ¥“€ş?•`£)Nq¯H
-eL!+?iÊ!Ç,y¨Oe)7.¯¹¯¿DµW Ğ$ƒ¨Ì’Ew§Oq&dÖŒ³ÅŸ¤’p&ˆPÄ¢ğ¼iˆK}NÀ”2òğ¾â¸è‡kÅ4á~*èÜFïKĞ¿òò¡{tíJng‘QfDe»xË@F–"*©x|ñ¨2“"¶”„;ÌYØX_xâ1|Î>5Ê˜æ”ÔaFÏc­L–[=7ñğÙk%DE¯¾ĞwÏnR¨Zy,¸Á(ÆŞ÷®øöhvz½æjİ×Õ"JvA·¡¨Çj,&äªis¿j¶ix«V.î@ïŸµ‹õ/È—¨*AWj©ÕĞ—ÿjJ.íjøÍ‰h™¹j‡­šzmÓÌ}æÚòĞ‚õtä‡(U¼·K¢âfı˜«KWİ™p«³¼)dR½Wï6Å•«W<g„
-Ñ}Å:wH\ÃªÅ®Âê
-wùÊ§3B,È—w=OÔ‰ˆöS°yÅ<y³Ï##Ùo9F¿çón;i¢ÏjW>Óä‡~™W=5·yêqâö›ãZí|p—ÜE·İ¸KÉÕ¼ÛÇædŸó¢¹2µêÇÉåªZİC®ÛÏİë¦ŞU‡]q³jÓ[[>ßÇ/»o‚¦„G°Võ=ç”\ó9ö	t,mÏN~ñiÕ®u¨ôo²ª>QS+»=âÇ ‹Ì{¥5[¾îºR·Æ^¯ÑuhŞ¯;	tê[§g2>ÇMÕ‡oÍr–QFÍ{¤x¿åêìDF´ylv=«ğ]S´²î{!‘ßŒ_j{€gxs[›kçÊ ¾¡éóWâüî<Ñ7é
-ºnÛÛí^}k„ÿÅ	çÌ'Ñ5M>Ÿ•Á§˜$¦E’cÓı^¸åá!ïĞx'²Êû‰ïí¶³]òËº#ıİ®÷ÛQßÌÛÛºíÀÉ§iÁ¬ÖÉØwsæ—óéÛé¹™Ç
+BT /F1 10 Tf 12 TL 54 728 Td (Mei Haddad) Tj T* (Data Engineer) Tj T* (mei.haddad@example.net | 555-0149 | Osaka) Tj T* T* (EXPERIENCE) Tj T* (Data Engineer, Stonebridge Capital \(2021 to present\)) Tj T* (- Built the pipelines that feed the company's weekly reporting, mostly in SQL.) Tj T* (- Handled a key vendor relationship and renegotiated the contract.) Tj T* T* (Junior Data Engineer, Larkspur Foods \(2018 to 2021\)) Tj T* (- Cut a nightly job from four hours to forty minutes by rewriting it with dbt.) Tj T* (- Took over a stalled project and delivered it within a quarter.) Tj T* (- Trained and shipped a forecasting model that the finance team still uses.) Tj T* T* (Machine Learning Engineer, Northgate Logistics \(2014 to 2018\)) Tj T* (- Ran the weekly planning meeting and kept it to thirty minutes.) Tj T* (- Turned loose questions from other teams into dashboards people trust, using Tableau.) Tj T* T* (EDUCATION) Tj T* (MSc in Statistics, Riverton State University, 2011) Tj T* T* (SKILLS) Tj T* (Excel \(beginner\), BigQuery \(expert\), dbt \(advanced\), PyTorch \(advanced\), Tableau) Tj T* (\(intermediate\), SQL \(intermediate\), Accessibility \(advanced\), A/B Testing \(expert\)) Tj T* T* (PROJECTS) Tj T* (Mapstack: a side project I built in my own time.) Tj T* ET
 endstream
 endobj
-
-7 0 obj
-<</CreationDate(D:20250101000000Z)/ModDate(D:20250101000000Z)/Producer(skillpool)>>
-endobj
-
 xref
-0 8
+0 6
 0000000000 65535 f 
-0000000042 00000 n 
-0000000120 00000 n 
-0000000172 00000 n 
-0000000213 00000 n 
-0000000320 00000 n 
-0000000409 00000 n 
-0000001349 00000 n 
-
+0000000015 00000 n 
+0000000058 00000 n 
+0000000117 00000 n 
+0000000166 00000 n 
+0000000374 00000 n 
 trailer
-<</Size 8/Info 7 0 R/Root 1 0 R>>
+<<
+/Size 6
+/Root 3 0 R
+/Info 1 0 R
+>>
 startxref
-1449
+1718
 %%EOF

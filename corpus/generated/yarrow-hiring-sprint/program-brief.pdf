@@ -1,51 +1,63 @@
-%PDF-1.7
-%ÂµÂ¶
-% Written by MuPDF 1.28.6
-
+%PDF-1.3
+%âãÏÓ
 1 0 obj
-<</Type/Catalog/Pages 2 0 R/Info<</Producer(MuPDF 1.28.6)>>>>
+<<
+/Producer (skillpool)
+>>
 endobj
-
 2 0 obj
-<</Type/Pages/Count 1/Kids[4 0 R]>>
+<<
+/Type /Pages
+/Count 1
+/Kids [ 4 0 R ]
+>>
 endobj
-
 3 0 obj
-<</Font<</helv 5 0 R>>>>
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
 endobj
-
 4 0 obj
-<</Type/Page/MediaBox[0 0 595 842]/Rotate 0/Resources 3 0 R/Parent 2 0 R/Contents[6 0 R]>>
+<<
+/Type /Page
+/Resources <<
+/Font <<
+/F1 <<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+>>
+>>
+>>
+/MediaBox [ 0.0 0.0 612 792 ]
+/Parent 2 0 R
+/Contents 5 0 R
+>>
 endobj
-
 5 0 obj
-<</Type/Font/Subtype/Type1/BaseFont/Helvetica/Encoding/WinAnsiEncoding>>
-endobj
-
-6 0 obj
-<</Length 379/Filter/FlateDecode>>
+<<
+/Length 651
+>>
 stream
-xÚÅ“;O1Ç÷|ŠÌH@öEª,lHÙ*†rw,|~şv®-:u€vàª{Øñãg×6Ÿæ¾o~Şæd™[?ÌíÛüşe½³µÙí&ò8Pc.Tğ]h&H9²ë§¸N¥F0$OSpô4İ½Ô'ãìµ7œœsŞÖ³İ¨º^ı!‚xzèB7v4R>$ßAÕÎË3—^‰d¤fh‹œ)&$"õpQî&¼	‰ÚJ[Â|5¾$;”¾IŞÌğ¶„(%ŒˆiÒz-ªJ°$¡“*Òû¤eîP5¬àÕ»ûtäM¬Ú`çyõ¨¯äXUnŠŒw—'íá´?å¤]°ïq/ÌşËı;ÕÉga‚nÑ£rê¼0!¢°™rx]JvjİúÄ€—2Âİáî£¬Y–{E²T°?=l©TU«›»DèÕJ¯¥ãš+È.Oğ-ZıÏÎh¤Õv÷ÜÕ<›oT—
+BT /F1 10 Tf 12 TL 54 728 Td (Yarrow Hiring Sprint: program brief) Tj T* T* (Yarrow Hiring Sprint is a People project at Larkfield. It ran from 2025-06 to 2025-09.) Tj T* (Yarrow Hiring Sprint relies on Workday, Employee Onboarding, Employee Relations and) Tj T* (Greenhouse.) Tj T* (Yarrow Hiring Sprint uses Workday for day-to-day tracking.) Tj T* (Yarrow Hiring Sprint uses Employee Onboarding for day-to-day tracking.) Tj T* (Yarrow Hiring Sprint uses Employee Relations for the final deliverables.) Tj T* (Yarrow Hiring Sprint uses Greenhouse for handoffs between teams.) Tj T* (The team is listed in the kickoff email for this project.) Tj T* ET
 endstream
 endobj
-
-7 0 obj
-<</CreationDate(D:20250101000000Z)/ModDate(D:20250101000000Z)/Producer(skillpool)>>
-endobj
-
 xref
-0 8
+0 6
 0000000000 65535 f 
-0000000042 00000 n 
-0000000120 00000 n 
-0000000172 00000 n 
-0000000213 00000 n 
-0000000320 00000 n 
-0000000409 00000 n 
-0000000857 00000 n 
-
+0000000015 00000 n 
+0000000058 00000 n 
+0000000117 00000 n 
+0000000166 00000 n 
+0000000374 00000 n 
 trailer
-<</Size 8/Info 7 0 R/Root 1 0 R>>
+<<
+/Size 6
+/Root 3 0 R
+/Info 1 0 R
+>>
 startxref
-957
+1076
 %%EOF

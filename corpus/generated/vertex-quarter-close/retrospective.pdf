@@ -1,52 +1,63 @@
-%PDF-1.7
-%ÂµÂ¶
-% Written by MuPDF 1.28.6
-
+%PDF-1.3
+%âãÏÓ
 1 0 obj
-<</Type/Catalog/Pages 2 0 R/Info<</Producer(MuPDF 1.28.6)>>>>
+<<
+/Producer (skillpool)
+>>
 endobj
-
 2 0 obj
-<</Type/Pages/Count 1/Kids[4 0 R]>>
+<<
+/Type /Pages
+/Count 1
+/Kids [ 4 0 R ]
+>>
 endobj
-
 3 0 obj
-<</Font<</helv 5 0 R>>>>
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
 endobj
-
 4 0 obj
-<</Type/Page/MediaBox[0 0 595 842]/Rotate 0/Resources 3 0 R/Parent 2 0 R/Contents[6 0 R]>>
+<<
+/Type /Page
+/Resources <<
+/Font <<
+/F1 <<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+>>
+>>
+>>
+/MediaBox [ 0.0 0.0 612 792 ]
+/Parent 2 0 R
+/Contents 5 0 R
+>>
 endobj
-
 5 0 obj
-<</Type/Font/Subtype/Type1/BaseFont/Helvetica/Encoding/WinAnsiEncoding>>
-endobj
-
-6 0 obj
-<</Length 400/Filter/FlateDecode>>
+<<
+/Length 551
+>>
 stream
-xÚ•R=O1Ýó+2#ù´/RÅ€`aCº­b ×D0°ðûyvB¤CjU)M|¶ß{~6Ÿæ~6Þ:ü¼ÍÉ2Ovþ0·oõýËzgçf÷»L”9pÂ9—=gòã‚K‘j)Ç×à8 šp"ÂŽ2EäF‡»—ùÉ8{íã'çœ·óƒÙï4<_	Ó„Æ	M…õt[hY³Ö[òTI 2H¼RCuF58:€†Ó	qd(	mBy™ŽTVÄ[kP%=Sj2 ñÜ„5ÊjÅ•,ÄŽø‚APZù#¯	CUM#·á5•AAFÝRÿgZ^UL]ßfö¹
-\¿õÉ¡sd:†`	'(©Ä§Éýh%ePtÚM×ÁÉE‡ú$ÊŽZ/¾étì«#½£8°2×ÞEõ)gZ¸ô9kLýî'{ÒõtV¹8«ðD7%Ex³ðüí'‰ŸQyÅÙt'UAûW 7ÿ“åå[gÜÿ;¢ªÛ§ûƒØÀvc·\> CÄÙ€BCÃãlžÍ7{·ìw
+BT /F1 10 Tf 12 TL 54 728 Td (Vertex Quarter Close: retrospective) Tj T* T* (What went well) Tj T* T* (Andre Johnson kept the board numbers on schedule for Vertex Quarter Close, and the team did) Tj T* (not have to chase it.) Tj T* T* (What was hard) Tj T* T* (Vertex Quarter Close lost two weeks waiting on the variance report. Jasmine Ortiz raised) Tj T* (this early, as controller on Vertex Quarter Close, but nobody owned the decision.) Tj T* T* (Next time) Tj T* T* (Name one owner for each decision at the Vertex Quarter Close kickoff.) Tj T* ET
 endstream
 endobj
-
-7 0 obj
-<</CreationDate(D:20250101000000Z)/ModDate(D:20250101000000Z)/Producer(skillpool)>>
-endobj
-
 xref
-0 8
+0 6
 0000000000 65535 f 
-0000000042 00000 n 
-0000000120 00000 n 
-0000000172 00000 n 
-0000000213 00000 n 
-0000000320 00000 n 
-0000000409 00000 n 
-0000000878 00000 n 
-
+0000000015 00000 n 
+0000000058 00000 n 
+0000000117 00000 n 
+0000000166 00000 n 
+0000000374 00000 n 
 trailer
-<</Size 8/Info 7 0 R/Root 1 0 R>>
+<<
+/Size 6
+/Root 3 0 R
+/Info 1 0 R
+>>
 startxref
-978
+976
 %%EOF

@@ -17,7 +17,8 @@ import textwrap
 from collections import Counter
 from pathlib import Path
 
-import pymupdf
+from pypdf import PdfWriter
+from pypdf.generic import DecodedStreamObject, DictionaryObject, NameObject
 
 ROOT = Path(__file__).parent
 COMPANY = "Larkfield"
@@ -26,6 +27,11 @@ PROJECTS_PER_TEAM = 3
 LEVELS = ["beginner", "intermediate", "advanced", "expert"]
 NOWHERE = ["COBOL", "Fortran", "ABAP", "LabVIEW", "Verilog"]  # in no document at all
 WRITTEN_AS = {"Kubernetes": "k8s", "JavaScript": "JS", "PostgreSQL": "Postgres"}
+# The one font every PDF page uses. It is built into every reader, so nothing is embedded.
+PDF_FONT = DictionaryObject({NameObject("/Font"): DictionaryObject({NameObject("/F1"): DictionaryObject({
+    NameObject(k): NameObject(v) for k, v in
+    {"/Type": "/Font", "/Subtype": "/Type1", "/BaseFont": "/Helvetica", "/Encoding": "/WinAnsiEncoding"}.items()
+})})})
 
 # Per team: job titles, the skills its resumes draw on, project themes, tools named only in a
 # project brief (`hop`), a tool only credited to a person in a chat or meeting note (`said`),
@@ -275,13 +281,18 @@ def write_doc(path: Path, text: str) -> None:
         return
     plain = re.sub(r"^#+ ", "", text, flags=re.M).replace("**", "")
     lines = [w for para in plain.split("\n") for w in (textwrap.wrap(para, 92) or [""])]
-    doc = pymupdf.open()
+    # No dates and no id are written, so the same seed gives the same bytes and the same document id.
+    doc = PdfWriter()
     for i in range(0, len(lines), 52):
-        doc.new_page().insert_text((54, 64), "\n".join(lines[i : i + 52]), fontsize=10)
-    # Fixed dates and no fresh id, so the same seed gives the same bytes and the same document id.
-    doc.set_metadata({"creationDate": "D:20250101000000Z", "modDate": "D:20250101000000Z", "producer": "skillpool"})
-    doc.save(path, no_new_id=True, deflate=True)
-    doc.close()
+        page = doc.add_blank_page(612, 792)
+        page[NameObject("/Resources")] = PDF_FONT
+        shown = (re.sub(rb"([\\()])", rb"\\\1", line.encode("cp1252")) for line in lines[i : i + 52])
+        stream = DecodedStreamObject()
+        # Ten-point text from the top left, a line every 12 points; an empty line only moves down.
+        stream.set_data(b"BT /F1 10 Tf 12 TL 54 728 Td " + b" ".join(b"(" + t + b") Tj T*" if t else b"T*" for t in shown) + b" ET")
+        page.replace_contents(stream)
+    doc.add_metadata({"/Producer": "skillpool"})
+    doc.write(path)
 
 
 def new_person(rng: random.Random, team: str, first: str, last: str) -> dict:

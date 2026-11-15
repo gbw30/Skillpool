@@ -1,52 +1,63 @@
-%PDF-1.7
-%ÂµÂ¶
-% Written by MuPDF 1.28.6
-
+%PDF-1.3
+%âãÏÓ
 1 0 obj
-<</Type/Catalog/Pages 2 0 R/Info<</Producer(MuPDF 1.28.6)>>>>
+<<
+/Producer (skillpool)
+>>
 endobj
-
 2 0 obj
-<</Type/Pages/Count 1/Kids[4 0 R]>>
+<<
+/Type /Pages
+/Count 1
+/Kids [ 4 0 R ]
+>>
 endobj
-
 3 0 obj
-<</Font<</helv 5 0 R>>>>
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
 endobj
-
 4 0 obj
-<</Type/Page/MediaBox[0 0 595 842]/Rotate 0/Resources 3 0 R/Parent 2 0 R/Contents[6 0 R]>>
+<<
+/Type /Page
+/Resources <<
+/Font <<
+/F1 <<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+>>
+>>
+>>
+/MediaBox [ 0.0 0.0 612 792 ]
+/Parent 2 0 R
+/Contents 5 0 R
+>>
 endobj
-
 5 0 obj
-<</Type/Font/Subtype/Type1/BaseFont/Helvetica/Encoding/WinAnsiEncoding>>
-endobj
-
-6 0 obj
-<</Length 389/Filter/FlateDecode>>
+<<
+/Length 473
+>>
 stream
-xÚmR=OÄ0İó+2#‰ãØ­tb@°°!u;1pı,ü~êÚ“ª“®í‹í÷á„ßğ<„~9Vª]~Âã×üısŠÃÏ'%+ÉEDz©2
-SâiÅª2ĞY”’*Ş.Ò—OJÒÉ¢«ş•QÃèÅ::GĞIş{Q™f‡<}o!Åû\”SJ9/á|rx¸ƒ¨jmm8ˆ0¼*1ğOˆÕŠÎN(Qw$™MV–QQ«Lı6ßM–ĞSÕ­›3™n’+A4;‡Ì[ïöV²UTÌ1n›& •E¦-<«Ç`Œìzãæ<[°XüîhÇWÈuLHÂ£JÖ~øò%,æ¼-B¸ ×Nƒß—0.Ö*…õ_5¤ïÓŒ·f'@×¼²Ø&*Ô•İe—ßí|òj\6÷ÓTvø&diœ¾»(î¬n¬ZÜ£cvé°YÏ¡íÛj”QÓï¯â5ã½:öİ¥kª®‚Š_}¿VÕj=]Æ&Â:õuïá­ÈÇÄ
+BT /F1 10 Tf 12 TL 54 728 Td (Larkfield Marketing wiki: how we handle the campaign brief) Tj T* T* (Page owner: Bao Fischer \(Marketing Analyst\)) Tj T* (Last reviewed by: E. Chen) Tj T* T* (1. Start from the template in the team folder.) Tj T* (2. Most of this work happens in Email Marketing. Ask the page owner if you need access.) Tj T* (3. Check the result in HubSpot before you share anything outside the team.) Tj T* (4. Post in #marketing when it is done.) Tj T* ET
 endstream
 endobj
-
-7 0 obj
-<</CreationDate(D:20250101000000Z)/ModDate(D:20250101000000Z)/Producer(skillpool)>>
-endobj
-
 xref
-0 8
+0 6
 0000000000 65535 f 
-0000000042 00000 n 
-0000000120 00000 n 
-0000000172 00000 n 
-0000000213 00000 n 
-0000000320 00000 n 
-0000000409 00000 n 
-0000000867 00000 n 
-
+0000000015 00000 n 
+0000000058 00000 n 
+0000000117 00000 n 
+0000000166 00000 n 
+0000000374 00000 n 
 trailer
-<</Size 8/Info 7 0 R/Root 1 0 R>>
+<<
+/Size 6
+/Root 3 0 R
+/Info 1 0 R
+>>
 startxref
-967
+898
 %%EOF
