@@ -108,7 +108,9 @@ def score(title: str, emails: list[str], ctx: Context, cand: dict) -> float:
         # The weakest signal, so it carries the least weight: it must not outvote a matching role or email.
         s += 0.2 * min(1.0, max(0.0, (cosine(ctx.embedding, cand["embedding"]) - 0.25) / 0.35))
     if title and cand["title"] and title.casefold() == cand["title"].casefold():
-        s += 0.2
+        # Enough with a full name to merge by itself (MERGE_SCORE_EXACT). At 0.2 it needed help from
+        # text similarity, which a page naming many people does not give.
+        s += 0.3
     return s
 
 
@@ -167,8 +169,10 @@ def _adjudicate(person: dict, ctx: Context, cands: list[dict]) -> tuple[str, lis
 def _merge(pid: str, person: dict) -> str:
     card = graph.run(graph.PEOPLE_CARDS, ids=[pid])[0]
     name = better_name(card["name"], person["name"])
-    # A resume states its owner's title; other documents only fill a gap.
-    title = person["title"] if person["isSubject"] and person["title"] else card["title"] or person["title"]
+    # A person's first resume states their title. Every later document only fills a gap, so an
+    # upload that reuses someone's email or name cannot rewrite the title on record.
+    first_resume = person["isSubject"] and person["title"] and not card["hasResume"]
+    title = person["title"] if first_resume else card["title"] or person["title"]
     aliases = [a for a in dict.fromkeys([person["name"], *person["aliases"]]) if a and a != name]
     graph.run(graph.UPDATE_PERSON, id=pid, name=name, title=title or None, aliases=aliases, emails=person["emails"])
     return pid
@@ -185,17 +189,31 @@ def _create(person: dict, name: Name) -> str:
     return pid
 
 
-def resolve(person: dict, ctx: Context, doc_people: list[tuple[Name, str]]) -> str | None:
+def resolve(person: dict, ctx: Context, doc_people: list[tuple[Name, str]], ask: bool = True) -> str | None:
     """Person id for this mention, creating the person if needed. None when it cannot be placed:
     nobody fits, or the name fits someone on record and nothing else confirms it.
 
     doc_people holds the people already placed from this document. Two people a document lists
     separately are two people, so those are never candidates for each other.
+    ask=False leaves an unclear case unconfirmed without putting it to the model: used when an
+    old mention is tried again, so that waiting mentions cost nothing.
     """
     if person["emails"]:
-        hit = graph.run(graph.PEOPLE_BY_EMAIL, emails=person["emails"])
-        if hit:
-            return _merge(hit[0]["id"], person)
+        hits = graph.run(graph.PEOPLE_BY_EMAIL, emails=person["emails"])
+        if hits:
+            mine, theirs = parse_name(person["name"]), parse_name(hits[0]["name"])
+            # An address written with no name stands for its owner. Written with a name, the name
+            # must agree: the surname and first name or initial, or the first name when that is all
+            # there is. An address on record under another name, or the addresses of two people at
+            # once, is a shared mailbox, a mistake or an attempt to take over a record. Left unconfirmed.
+            agrees = mine is None or theirs and (name_match(mine, theirs) if mine.last else mine.first == theirs.first)
+            if len(hits) == 1 and agrees:
+                return _merge(hits[0]["id"], person)
+            graph.run(
+                graph.LINK_UNCONFIRMED, mentions=person["mentions"], people=[h["id"] for h in hits],
+                reason="same email address, different name",
+            )
+            return None
 
     name = parse_name(person["name"])
     if name is None:
@@ -218,9 +236,11 @@ def resolve(person: dict, ctx: Context, doc_people: list[tuple[Name, str]]) -> s
 
     action, ids = decide([(c["id"], kind, score(person["title"], person["emails"], ctx, c)) for c, kind in cands])
     reason = "name matches, nothing else does"
-    if action == "ask":
+    if action == "ask" and ask:
         action, ids = _adjudicate(person, ctx, [c for c, _ in cands if c["id"] in ids])
         reason = "model could not tell"
+    elif action == "ask":
+        action, reason = "flag", "more than the name fits, not enough to be sure"
     if action == "merge":
         return _merge(ids[0], person)
     if action == "new":

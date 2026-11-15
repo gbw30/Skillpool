@@ -15,6 +15,8 @@
 - Lucia Barros, Partnerships Manager
 - Fatima Martins, Sales Operations Analyst
 - Miguel Thapa, Sales Engineer
+- Layla Adeyemi, Senior Account Executive
+- Leila Adeyemi, Senior Account Executive
 
 ## What we own
 

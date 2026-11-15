@@ -99,6 +99,15 @@ def evaluate(corpus: Path) -> dict:
         "identity": identity_scores(json.loads((truth / "people.json").read_text()), subjects, mentions),
     }
 
+    # Mentions nothing in the corpus can settle: the right outcome is to attach them to nobody.
+    if (truth / "ambiguous.json").exists():
+        unsettled = [(m["doc"], m["surface"].lower()) for m in json.loads((truth / "ambiguous.json").read_text())]
+        waiting = {(r["doc"], r["surface"]) for r in graph.run(graph.EVAL_UNCONFIRMED)}
+        report["ambiguousMentions"] = {
+            "leftUnconfirmed": f"{sum(m in waiting for m in unsettled)}/{len(unsettled)}",
+            "wronglyAttached": sum(m in mentions for m in unsettled),
+        }
+
     planted = json.loads((truth / "injection.json").read_text())
     planted_skills = graph.run(graph.EVAL_SKILL_HOLDERS, ids=[skill_id(s) for s in planted["skills"]])[0]["n"]
     planted_names = {n.lower() for n in planted["people"]}

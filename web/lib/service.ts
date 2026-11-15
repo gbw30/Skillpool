@@ -30,7 +30,12 @@ export async function callService(
 ): Promise<Response> {
   if (MOCK) return mockService(method, path, body);
   const timestamp = Math.floor(Date.now() / 1000).toString();
-  return fetch(env("SERVICE_URL").replace(/\/$/, "") + path, {
+  const base = env("SERVICE_URL").replace(/\/$/, "");
+  // The signature proves who is calling. It does not hide the question or the passages on the way.
+  if (process.env.NODE_ENV === "production" && !/^(https:\/\/|http:\/\/(localhost|127\.0\.0\.1)(:|$))/.test(base)) {
+    throw new Error("SERVICE_URL must use https unless the service runs on this machine");
+  }
+  return fetch(base + path, {
     method,
     body: method === "GET" ? undefined : body,
     cache: "no-store",

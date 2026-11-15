@@ -7,11 +7,12 @@ import time
 import uuid
 from collections import deque
 from functools import partial
+from typing import Annotated
 
 from fastapi import BackgroundTasks, Depends, FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse, StreamingResponse
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, StringConstraints
 
 from . import config, graph, llm, signing, storage
 from .ingest import job
@@ -23,7 +24,8 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name
 log = logging.getLogger("skillpool.api")
 app = FastAPI(title="SkillPool service", docs_url=None, redoc_url=None, openapi_url=None)
 
-_ID = re.compile(r"^[A-Za-z0-9-]{1,80}$")
+_ID = re.compile(r"[A-Za-z0-9-]{1,80}")
+_TOO_LARGE = {"code": "payload_too_large", "message": "Request body is too large."}
 
 
 class ApiError(Exception):
@@ -49,9 +51,51 @@ async def _unexpected(_: Request, exc: Exception) -> JSONResponse:
     return JSONResponse({"code": "internal_error", "message": "Something went wrong."}, status_code=500)
 
 
+class _BodyLimit:
+    """Refuse a request body over MAX_REQUEST_BYTES, by its stated length and by the bytes that arrive.
+
+    Runs before the signature check, which has to read the whole body: without this, anyone who
+    can reach the service could make it buffer any amount without knowing the secret.
+    """
+
+    def __init__(self, inner):
+        self.inner = inner
+
+    async def __call__(self, scope, receive, send):
+        if scope["type"] != "http":
+            return await self.inner(scope, receive, send)
+        stated = dict(scope["headers"]).get(b"content-length", b"0")
+        if not stated.isdigit() or int(stated) > config.MAX_REQUEST_BYTES:
+            return await JSONResponse(_TOO_LARGE, status_code=413)(scope, receive, send)
+        seen, over = 0, False
+
+        async def counted():
+            nonlocal seen, over
+            message = await receive()
+            if message["type"] == "http.request":
+                seen += len(message.get("body", b""))
+                if seen > config.MAX_REQUEST_BYTES:
+                    over = True  # stop reading here; whatever the app answers is replaced below
+                    raise ApiError(413, _TOO_LARGE["code"], _TOO_LARGE["message"])
+            return message
+
+        async def reply(message):
+            if not over:
+                await send(message)
+            elif message["type"] == "http.response.start":
+                await JSONResponse(_TOO_LARGE, status_code=413)(scope, receive, send)
+
+        await self.inner(scope, counted, reply)
+
+
+app.add_middleware(_BodyLimit)
+
+
 @app.middleware("http")
 async def _trace(request: Request, call_next):
-    cid = request.headers.get("x-correlation-id") or uuid.uuid4().hex
+    # Only an id of the expected shape is echoed and logged; anything else is replaced.
+    sent = request.headers.get("x-correlation-id", "")
+    cid = sent if re.fullmatch(r"[A-Za-z0-9-]{1,64}", sent) else uuid.uuid4().hex
     started = time.monotonic()
     response = await call_next(request)
     response.headers["x-correlation-id"] = cid
@@ -74,25 +118,31 @@ async def signed(request: Request) -> None:
 
 
 def _id(value: str) -> str:
-    if not _ID.match(value):
+    if not _ID.fullmatch(value):
         raise ApiError(400, "invalid_request", "Malformed id.")
     return value
 
 
 # shortcut: per-process memory, reset on restart; use a shared store with more than one instance.
 _hits: dict[str, deque] = {}
+_all: deque = deque()
 
 
 def allow(ip: str, now: float | None = None) -> bool:
+    """One more search for this address? Limited per address and for everyone together."""
     now = time.monotonic() if now is None else now
-    if len(_hits) > 10_000:
-        _hits.clear()
+    while _all and now - _all[0] > 60:
+        _all.popleft()
+    # Addresses seen in the last minute only: at most SEARCH_RATE_TOTAL_PER_MIN of them, never cleared wholesale.
+    for stale in [key for key, times in _hits.items() if not times or now - times[-1] > 60]:
+        del _hits[stale]
     window = _hits.setdefault(ip, deque())
     while window and now - window[0] > 60:
         window.popleft()
-    if len(window) >= config.SEARCH_RATE_PER_MIN:
+    if len(window) >= config.SEARCH_RATE_PER_MIN or len(_all) >= config.SEARCH_RATE_TOTAL_PER_MIN:
         return False
     window.append(now)
+    _all.append(now)
     return True
 
 
@@ -155,7 +205,7 @@ def job_status(job_id: str) -> dict:
 
 
 class SearchRequest(BaseModel):
-    q: str = Field(min_length=1, max_length=500)
+    q: Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=500)]
     mode: str = Field(default="hybrid", pattern="^(hybrid|vector)$")
 
 
@@ -167,7 +217,7 @@ def _event(name: str, data: dict) -> str:
 def search_route(body: SearchRequest, request: Request) -> StreamingResponse:
     if not allow(request.headers.get("x-client-ip", "unknown")):
         raise ApiError(429, "rate_limited", "Too many searches. Try again in a minute.")
-    question = body.q.strip()
+    question = body.q
 
     def events():
         try:

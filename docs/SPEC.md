@@ -11,23 +11,25 @@ headless Chromium (desktop and phone width) against the service with faked model
 local S3 emulator: search with a streamed, cited answer, the person page, the no-match case,
 a folder upload that became searchable, and the access page.
 
-Measured on 2026-11-14 by `skillpool eval` on the generated corpus (359 documents, 43
-questions), with Claude Haiku 5.5 and Voyage `voyage-4-lite`:
+Measured on 2026-11-14 by `skillpool eval` with Claude Haiku 5.5 and Voyage `voyage-4-lite`.
+The first run was on 359 documents and 43 questions. The last column is the corpus as it is
+now, with the look-alike pairs added: 377 documents and 48 questions.
 
-| Measure (PRD section 8) | Target | First run | After the changes below |
+| Measure (PRD section 8) | Target | First run | Now |
 |---|---|---|---|
-| Recall@10, all questions | at least 0.80 | 0.85 | 0.90 |
-| Recall@10, multi-hop | at least 0.70 | 0.81 | 0.84 (text similarity alone: 0.26) |
+| Recall@10, all questions | at least 0.80 | 0.85 | 0.92 |
+| Recall@10, multi-hop | at least 0.70 | 0.81 | 0.87 (text similarity alone: 0.44) |
 | Recall@10, unstructured (chat or meeting note only) | none set | 0.75 | 0.95 (text similarity alone: 0.30) |
-| Recall@10, direct (resume) | none set | 0.98 | 0.94 |
+| Recall@10, direct (resume) | none set | 0.98 | 0.96 |
 | Citations that do not resolve | 0 | 0 | 0 |
 | Identity precision | at least 0.98 | 1.00 | 1.00 |
 | Identity recall | at least 0.90 | 0.69 | 0.98 |
-| People in the graph, against 137 in the truth files | 137 | 179 | 137 |
+| People in the graph, against the truth files | equal | 179 for 137 | 143 for 143 |
+| Mentions nothing can settle: left unconfirmed, attached to nobody | all | not in the corpus | 1 of 1 |
 | "No one qualifies" answered as such | not in the PRD | 0 of 5 | 5 of 5 |
 | Planted instructions that took effect (R20) | 0 | 0 | 0 |
-| Time to ranked results, p95 | under 3 s | 2.6 s | 1.9 s |
-| Time to complete answer, p95 | under 10 s | 8.9 s | 8.7 s |
+| Time to ranked results, p95 | under 3 s | 2.6 s | 2.8 s |
+| Time to complete answer, p95 | under 10 s | 8.9 s | 9.0 s |
 | Model cost to ingest the corpus | under $2 | $0.29 | under $0.01 from the cache |
 
 The first run missed two measures. These changes followed, each checked by a further run that
@@ -46,20 +48,27 @@ read its extractions from the cache:
     mention (`MAY_MENTION`) on the people it might mean.
   - When the model lists one person twice in a document, by initial and in full, the two
     entries are folded into one unless a job title or an email address differs (`verify.py`).
+  - What a document said about an unplaced person is saved and tried again after every later
+    batch, without a model call (`reconcile` in `upsert.py`). On the look-alike pairs this
+    attached all five mentions that a later document settles and left alone the one that
+    nothing settles.
+  - A full name with the same job title is enough to merge (the title is worth 0.3, up from
+    0.2). Before, it also needed help from text similarity, which a page naming many people
+    does not give.
 - No "no one qualifies" question was answered as such. Both similarity floors had been chosen
   for OpenAI's vectors: an unknown skill name resolved to the nearest known one ("COBOL" to
   "Java"). The floors now belong to the embedding model (`EMBEDDERS` in `config.py`).
 
 Limits of these numbers:
 
-- The thresholds were tuned on the same 359 documents they are scored on. The corpus has no
-  two people who share an initial, a surname and a job title, so it cannot show whether 0.33
-  is too loose for a larger company. A false merge is the costlier mistake (PRD section 10).
+- The thresholds were tuned on the same documents they are scored on. A false merge is the
+  costlier mistake (PRD section 10); the three look-alike pairs are the only cases in the
+  corpus built to provoke one, and none occurred.
 - A line that gives a name and nothing else ("Last reviewed by: Erin Novak") is not tied to
   anyone. The first design made a second person for it, which showed 11 people twice. It is
   now kept as an unconfirmed mention on the person it might mean (`MAY_MENTION`), shown on
-  their page and not counted as evidence. Nothing goes back to confirm it later.
-- 43 questions is a small set: one question moves a category's recall by several points.
+  their page and not counted as evidence, and tried again after every later batch.
+- 48 questions is a small set: one question moves a category's recall by several points.
 
 Not verified: a real AWS bucket, a deployment, and the OpenAI embedding path (never run live;
 its floors are untuned).
@@ -162,9 +171,9 @@ service/
 docker-compose.yml    local Neo4j for development and tests
 corpus/
   generate.py         writes everything below from a seed; calls no model
-  resumes/            130 generated resumes (PDF, Markdown, plain text)
+  resumes/            136 generated resumes (PDF, Markdown, plain text)
   generated/          project folders, plus _company/ (team pages, wiki, newsletters, handbook)
-  truth/              people.json, projects.json, queries.json, injection.json
+  truth/              people.json, projects.json, queries.json, injection.json, ambiguous.json
 docs/                 PRD.md, SPEC.md
 ```
 
@@ -180,7 +189,7 @@ from a seed and calls no model: the text is templated and the structure is decid
 the ground truth is exact. The generator checks its own output (every labelled name is written
 in its document; every planted tool appears only where the truth says) and fails otherwise.
 
-- 130 people, 13 per team, each with a resume in one of four layouts: a classic sectioned PDF,
+- 136 people (13 per team, plus the three look-alike pairs below), each with a resume in one of four layouts: a classic sectioned PDF,
   a skills-first profile PDF, a Markdown resume with a skills table, and a plain-text resume
   written in the first person. Every layout states each skill's level.
 - 30 projects, three per team, each staffed mostly from its own team with up to two people
@@ -194,6 +203,10 @@ in its document; every planted tool appears only where the truth says) and fails
     name alone after a full mention, an email address in place of the name.
   - Eight contractors who share a full name with someone on file, and three pairs of employees
     with the same full name in different teams. Told apart by email, employer, title, or project.
+  - Three pairs who share a team, a job title, a surname and a first initial. Each joins a
+    project whose kickoff email writes them as "L. Adeyemi (Senior Account Executive)", which
+    fits both. Four are settled by a later newsletter line, one by an email address beside the
+    initial, and one by nothing: that mention must stay unconfirmed (`truth/ambiguous.json`).
   - Tools a project used that no resume mentions (the multi-hop cases): named only in the brief.
   - Tools credited to one person only in a chat line or a meeting note (the unstructured cases).
   - Skill synonyms: "k8s"/"Kubernetes", "JS"/"JavaScript", "Postgres"/"PostgreSQL".
@@ -202,7 +215,7 @@ in its document; every planted tool appears only where the truth says) and fails
 Ground truth:
 - `people.json`: canonical person → every (document, mention string).
 - `projects.json`: project → roster, skills, documents.
-- `queries.json`: 43 questions with expected people, tagged `direct` (answerable from resumes),
+- `queries.json`: 48 questions with expected people, tagged `direct` (answerable from resumes),
   `multi_hop` (needs a project document), `unstructured` (stated only in a chat or meeting
   note), or `none` (no one qualifies).
 
@@ -232,6 +245,7 @@ Relationships
 | `(Person)-[:WORKED_ON]->(Project)` | `role`, `contribution`, `sources[]` |
 | `(Project)-[:USED_SKILL]->(Skill)` | `sources[]` |
 | `(Chunk)-[:MAY_MENTION]->(Person)` | `surface`, `reason`: the name fits and nothing confirms it. Not evidence, not a merge |
+| `(:Pending)` | `docId`, `facts`, `context`: what a document said about someone who could not be placed, kept so it can be tried again |
 
 `sources[]` holds chunk ids. It is how a fact reached by a graph walk still produces a citation,
 and how deletion (R9) knows which facts lose their support.
@@ -313,6 +327,11 @@ a new person.
    - `unsure`, or name-only match with no corroboration → no merge and no new person, which
      would show one person twice. The mention is kept as `MAY_MENTION` on the people it might
      mean and shown on their page as unconfirmed.
+5. Try again later. What the document said about an unplaced person is saved (`Pending`).
+   After every batch, each waiting mention is scored again against the graph as it now stands,
+   without asking the model. If one candidate now clears the merge rule, usually because a
+   later document put that person on the project the mention came from, the mention and its
+   facts are attached and the unconfirmed marker is removed.
 
 A name match alone never merges. Thresholds are set by sweeping against `truth/people.json` and
 picking the point that meets the precision target first, then the best recall there.
@@ -445,19 +464,48 @@ Haiku 5.5 constraints that affect the code:
 - Uploads: manifest validated before presigning; each POST policy pins the key, content type,
   and exact size and expires in 15 minutes; keys are generated server-side under the job prefix,
   never taken from the client path; the service re-checks size and sniffed type on fetch.
-- Bucket: private, encrypted at rest, CORS limited to the web origin for POST.
+- Bucket: private and encrypted at rest by AWS's defaults for a new bucket; `init-storage` sets
+  only the CORS rule (POST from the web origin). An upload policy can be used more than once
+  until it expires, and nothing removes stored files: set a lifecycle rule and versioning on the
+  bucket (README, Deploy).
+- Files: a PDF is opened in a separate process with a memory limit and a 20-second deadline,
+  and refused over 300 pages; a document is refused over 300,000 characters of text. Without
+  these a small file could expand into gigabytes, or cost a model call per page.
 - Site access (R22): `proxy.ts` redirects every page request without a valid cookie to `/access`
   and answers API requests with 401; the API route handler repeats the check. The cookie holds a
   hash of the code, is `HttpOnly`, `SameSite=Lax`, `Secure` in production, and lasts 30 days;
   changing the code ends every session. Ten wrong tries per address are allowed in ten minutes,
   and 100 from all addresses together, because the address comes from a header a caller can
   fake. Past the total nobody is let in until the window passes. `shortcut:` both counts are in
-  one process's memory, so use a long random code.
-- Service: HMAC on every route; not reachable usefully without the secret.
+  one process's memory, so use a long random code. Wrong upload codes are counted the same way.
+  `DELETE /api/access` signs a browser out.
+- Browser: every response carries a content security policy (no other site's scripts, frames or
+  requests; this site cannot be framed), `nosniff`, `no-referrer`, `noindex`, and HSTS in
+  production (`web/next.config.ts`). Inline scripts and styles are allowed because prerendered
+  pages cannot carry a nonce. A POST to the API must be JSON and must not be labelled by the
+  browser as coming from another site. A link to `/search?q=...` fills the box and waits; only
+  a question handed over by this site's own landing page is asked on arrival, so a link cannot
+  spend the search budget.
+- Service: HMAC on every route; not reachable usefully without the secret. A request body over
+  300 KB is refused before the signature is checked. In production the web app refuses a
+  `SERVICE_URL` that is not https, since the signature does not hide what is sent.
 - Model input: document text delimited as data; extraction constrained to a schema; facts need a
-  verified quote; search uses fixed Cypher with parameters only.
-- Model output: rendered as text. Citations are validated server-side before they reach the UI.
-- Spend: per-IP rate limit and a daily budget counter in the service. The budget total is
+  verified quote; search uses fixed Cypher with parameters only. Names, titles and other stored
+  fields are capped in length and may hold no control characters, because they are later placed
+  inside other prompts. The answer prompt treats the question as data too.
+- Model output: rendered as text. Citations are validated server-side before they reach the UI,
+  and a sentence with no citation is shown only if it brings in no link, no markup and no name
+  that the evidence lacks. A question can therefore not make the answer recommend someone or
+  point somewhere of the asker's choosing. It can still make the asker's own answer say an
+  ordinary sentence.
+- Uploads are trusted input. Whoever holds the upload code can state anything about a named
+  person, and a real quote will back it, because the document says so. No prompt or check can
+  tell a false document from a true one. What limits the damage: an upload cannot change a
+  person's name or title on record, cannot claim someone's email under another name, every
+  claim shows the document it came from, and a document can be deleted. Keep uploads off on a
+  hosted demo unless they are being shown.
+- Spend: a rate limit per address and for everyone together, and a daily budget counter in the
+  service. An answer the reader abandons is charged like a finished one. The budget total is
   stored in the graph and survives restarts. `shortcut:` the rate limit is in memory, and each
   process reads the stored total once a day; use a shared store and read the total on every
   check if the service runs more than one instance. The client address is the first

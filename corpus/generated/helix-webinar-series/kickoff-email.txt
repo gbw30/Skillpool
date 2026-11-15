@@ -1,0 +1,15 @@
+From: Ingrid Ng <ing58@example.com>
+To: helix-webinar-series@larkfield.example
+Date: 2025-07-18
+Subject: Helix Webinar Series kickoff: who is doing what
+
+Hi all,
+
+We are kicking off Helix Webinar Series. This is who is on it.
+
+I am the campaign lead for Helix Webinar Series.
+Maria Johnson (Growth Marketer) joins Helix Webinar Series as content owner.
+B. Wang (Growth Marketer, bwang84@example.net) joins Helix Webinar Series as marketing analyst.
+
+Thanks,
+Ingrid Ng

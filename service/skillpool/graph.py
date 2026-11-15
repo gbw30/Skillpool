@@ -179,6 +179,48 @@ MERGE (c)-[r:MAY_MENTION {surface: m.surface}]->(p)
 SET r.reason = $reason
 """
 
+# What a document said about someone who could not be placed, kept so that it can be tried again
+# when a later document settles who was meant.
+SAVE_PENDING = """
+MERGE (n:Pending {id: $id})
+SET n.docId = $docId, n.facts = $facts, n.context = $context
+"""
+
+PENDING = "MATCH (n:Pending) RETURN n.id AS id, n.docId AS docId, n.facts AS facts, n.context AS context ORDER BY n.id"
+
+CLEAR_PENDING = """
+MATCH (n:Pending {id: $id})
+OPTIONAL MATCH (c:Chunk)-[:CHUNK_OF]->(d:Document {id: n.docId})
+OPTIONAL MATCH (c)-[r:MAY_MENTION]->(:Person) WHERE r.surface IN $surfaces
+DELETE r
+WITH DISTINCT n, d
+SET d.unresolvedMentions = CASE WHEN d.unresolvedMentions > 0 THEN d.unresolvedMentions - 1 ELSE 0 END
+DETACH DELETE n
+"""
+
+# People a document has already been tied to: a later mention in it cannot be one of them.
+# What an earlier, failed write of this document left waiting. A second try decides again.
+CLEAR_DOC_PENDING = """
+MATCH (d:Document {id: $id})
+OPTIONAL MATCH (c:Chunk)-[:CHUNK_OF]->(d)
+OPTIONAL MATCH (c)-[r:MAY_MENTION]->(:Person)
+DELETE r
+WITH DISTINCT d
+OPTIONAL MATCH (n:Pending {docId: d.id})
+DETACH DELETE n
+"""
+
+DOC_PEOPLE = """
+MATCH (d:Document {id: $docId})
+OPTIONAL MATCH (d)<-[:CHUNK_OF]-(:Chunk)-[:MENTIONS]->(m:Person)
+OPTIONAL MATCH (d)-[:ABOUT]->(a:Person)
+WITH collect(DISTINCT m) + collect(DISTINCT a) AS people
+UNWIND people AS p
+RETURN DISTINCT p.id AS id, p.name AS name
+"""
+
+CHUNK_VECTORS = "MATCH (c:Chunk) WHERE c.id IN $ids RETURN c.id AS id, c.text AS text, c.embedding AS embedding"
+
 LINK_ABOUT = "MATCH (d:Document {id: $docId}), (p:Person {id: $personId}) MERGE (d)-[:ABOUT]->(p)"
 
 LINK_MENTIONS = """
@@ -304,7 +346,10 @@ RETURN p.id AS id, pr.id AS projectId, pr.name AS project, pr.id IN $projects AS
        w.sources AS sources, used
 """
 
-PEOPLE_CARDS = "MATCH (p:Person) WHERE p.id IN $ids RETURN p.id AS id, p.name AS name, p.title AS title"
+PEOPLE_CARDS = """
+MATCH (p:Person) WHERE p.id IN $ids
+RETURN p.id AS id, p.name AS name, p.title AS title, EXISTS { (:Document)-[:ABOUT]->(p) } AS hasResume
+"""
 
 CHUNKS_BY_ID = """
 MATCH (c:Chunk)-[:CHUNK_OF]->(d:Document) WHERE c.id IN $ids
@@ -382,6 +427,11 @@ MATCH (d:Document)<-[:CHUNK_OF]-(:Chunk)-[m:MENTIONS]->(p:Person)
 RETURN DISTINCT d.path AS doc, toLower(m.surface) AS surface, p.id AS person
 """
 
+EVAL_UNCONFIRMED = """
+MATCH (d:Document)<-[:CHUNK_OF]-(:Chunk)-[m:MAY_MENTION]->(:Person)
+RETURN DISTINCT d.path AS doc, toLower(m.surface) AS surface
+"""
+
 EVAL_SUBJECTS = "MATCH (d:Document)-[:ABOUT]->(p:Person) RETURN d.path AS doc, p.id AS person"
 
 EVAL_SKILL_HOLDERS = """
@@ -410,7 +460,8 @@ DELETE r
 _DELETE_DOC = """
 MATCH (d:Document {id: $id})
 OPTIONAL MATCH (c:Chunk)-[:CHUNK_OF]->(d)
-DETACH DELETE c, d
+OPTIONAL MATCH (n:Pending {docId: $id})
+DETACH DELETE c, d, n
 """
 
 _DELETE_ORPHANS = """

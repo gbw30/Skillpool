@@ -1,10 +1,22 @@
 """Keep only facts whose quote is in the document, and record which chunks hold it (PRD R6)."""
 import re
+import unicodedata
 
 from ..text import squash
 from .chunk import Chunk
 from .extract import Extraction
 from .resolve import parse_name
+
+
+# Names and titles are short. A long one is not a name: it is text trying to ride into the prompts
+# these values are later placed in, or into the page.
+MAX_NAME_CHARS = 80
+MAX_FIELD_CHARS = 200
+MAX_PROSE_CHARS = 600  # a contribution or a project description
+
+
+def _plain(value: str, limit: int) -> bool:
+    return len(value) <= limit and not any(unicodedata.category(ch).startswith("C") for ch in value)
 
 
 def index(text: str) -> tuple[str, list[int]]:
@@ -70,8 +82,8 @@ def verify(ex: Extraction, text: str, chunks: list[Chunk]) -> dict:
         out = []
         for item in items:
             src = loc.sources(item.quote)
-            if src:
-                row = {k: squash(v) for k, v in item.model_dump(exclude={"quote"}).items()}
+            row = {k: squash(v) for k, v in item.model_dump(exclude={"quote"}).items()}
+            if src and all(_plain(v, MAX_PROSE_CHARS if k == "contribution" else MAX_FIELD_CHARS) for k, v in row.items()):
                 out.append({**row, "sources": src})
             else:
                 dropped += 1
@@ -80,7 +92,7 @@ def verify(ex: Extraction, text: str, chunks: list[Chunk]) -> dict:
     people = []
     for p in ex.people:
         written = [s for s in dict.fromkeys(squash(x) for x in (p.name, *p.aliases)) if s and loc.sources(s)]
-        surfaces = [s for s in written if "@" not in s]
+        surfaces = [s for s in written if "@" not in s and _plain(s, MAX_NAME_CHARS)]
         # An email address written in place of a name counts as an email, not as a name.
         given = dict.fromkeys(x.strip().lower() for x in (*p.emails, *(s for s in written if "@" in s)))
         emails = [e for e in given if e and loc.sources(e, ignore_case=True)]
@@ -97,7 +109,7 @@ def verify(ex: Extraction, text: str, chunks: list[Chunk]) -> dict:
                 "name": surfaces[0] if surfaces else "",
                 "aliases": surfaces[1:],
                 "emails": emails,
-                "title": squash(p.title),
+                "title": title if _plain(title := squash(p.title), MAX_FIELD_CHARS) else "",
                 "isSubject": p.isSubject,
                 "skills": keep(p.skills),
                 "roles": keep(p.roles),
@@ -132,6 +144,7 @@ def verify(ex: Extraction, text: str, chunks: list[Chunk]) -> dict:
         for key in ("skills", "roles", "education", "projects", "mentions"):
             full[key] += short[key]
         people.remove(short)
+        names = [parse_name(p["name"]) for p in people]  # keep the pairs below in step
 
     # A first name on its own ("Bao, can you look at this?") means the one person this document
     # names in full with that first name. The model is asked to list these as aliases and often
@@ -155,13 +168,13 @@ def verify(ex: Extraction, text: str, chunks: list[Chunk]) -> dict:
     projects = []
     for pr in ex.projects:
         src = loc.sources(pr.name)
-        if not src:
+        if not src or not _plain(squash(pr.name), MAX_FIELD_CHARS):
             dropped += 1
             continue
         projects.append(
             {
                 "name": squash(pr.name),
-                "description": squash(pr.description),
+                "description": text if _plain(text := squash(pr.description), MAX_PROSE_CHARS) else "",
                 "start": squash(pr.start),
                 "end": squash(pr.end),
                 "sources": src,

@@ -24,9 +24,17 @@ def _bucket() -> str:
     return config.require("S3_BUCKET")
 
 
+def _clip(segment: str, limit: int = 120) -> str:
+    """Shorten a long name from the middle of its stem, so the extension that says what the file is survives."""
+    stem, dot, ext = segment.rpartition(".")
+    if len(segment) <= limit or not dot or len(ext) > 10:
+        return segment[:limit]
+    return stem[: limit - len(ext) - 1] + "." + ext
+
+
 def safe_path(path: str) -> str:
     """A relative path that is safe to use inside an object key. Raises ValueError if nothing is left."""
-    parts = [re.sub(r"[^A-Za-z0-9._ -]", "_", seg).strip()[:120] for seg in path.replace("\\", "/").split("/")]
+    parts = [_clip(re.sub(r"[^A-Za-z0-9._ -]", "_", seg).strip()) for seg in path.replace("\\", "/").split("/")]
     parts = [p for p in parts if p and set(p) != {"."}]
     if not parts:
         raise ValueError("empty path")

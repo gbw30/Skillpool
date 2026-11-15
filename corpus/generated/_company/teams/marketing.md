@@ -15,6 +15,8 @@
 - Nadia Jensen, Marketing Analyst
 - Bao Fischer, Marketing Analyst
 - Ingrid Ng, Marketing Analyst
+- Beatriz Wang, Growth Marketer
+- Bao Wang, Growth Marketer
 
 ## What we own
 

@@ -1,0 +1,15 @@
+From: Emeka Sokolov <emekas1@example.com>
+To: fathom-access-review@larkfield.example
+Date: 2025-03-24
+Subject: Fathom Access Review kickoff: who is doing what
+
+Hi all,
+
+We are kicking off Fathom Access Review. This is who is on it.
+
+I am the security lead for Fathom Access Review.
+Liam Abbasi (Systems Administrator) joins Fathom Access Review as IT lead.
+A. Olsen (Systems Administrator) joins Fathom Access Review as security reviewer.
+
+Thanks,
+Emeka Sokolov

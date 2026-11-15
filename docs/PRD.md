@@ -77,7 +77,7 @@ Priority: P0 = needed for the demo to be honest, P1 = planned, P2 = later.
 | R4 | One bad file does not stop the batch. | P0 |
 | R5 | From each document the system extracts people, skills (with level if stated), roles and employers, education, and projects, and records which passage supports each fact. | P0 |
 | R6 | A fact is stored only if its supporting quote is found verbatim in the source document. | P0 |
-| R7 | Mentions of the same person across documents are resolved to one person. A merge needs corroboration beyond the name. An uncertain mention is neither merged nor made into a second person; it is kept as unconfirmed on the people it might mean. | P0 |
+| R7 | Mentions of the same person across documents are resolved to one person. A merge needs corroboration beyond the name. An uncertain mention is neither merged nor made into a second person; it is kept as unconfirmed on the people it might mean, and attached later if a later document settles who was meant. | P0 |
 | R8 | DOCX support. | P1 |
 | R9 | Delete a document and every fact that only it supported. | P1 |
 

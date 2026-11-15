@@ -9,6 +9,7 @@ every step is idempotent. Add a queue when one request can no longer re-drive a 
 import hashlib
 import logging
 import os
+import threading
 from collections.abc import Callable
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
@@ -16,8 +17,8 @@ from dataclasses import dataclass
 from .. import config, graph, llm
 from .chunk import Chunk, chunk
 from .extract import extract
-from .parse import ParseError, parse
-from .upsert import write
+from .parse import ParseError, parse_safely
+from .upsert import reconcile, write
 from .verify import verify
 
 log = logging.getLogger("skillpool.ingest")
@@ -71,7 +72,7 @@ def _prepare(job_id: str, item: Item) -> Prepared | None:
             raise ParseError("unsupported_type")
         if len(data) > config.MAX_FILE_BYTES:
             raise ParseError("too_large")
-        text, pages = parse(data, ext)
+        text, pages = parse_safely(data, ext)
         chunks = chunk(text, doc_id, pages)
         embeddings = llm.embed([c.text for c in chunks])
         graph.run(graph.UPSERT_CHUNKS, docId=doc_id, chunks=[
@@ -94,14 +95,17 @@ def _prepare(job_id: str, item: Item) -> Prepared | None:
     return None
 
 
+_WRITING = threading.Lock()
+
+
 def _write_order(p: Prepared) -> tuple[bool, int, int]:
     """Resumes first, then the documents that say most about who their people are.
 
     A mention with only a name cannot be tied to a known person and stays unconfirmed. Writing
     the documents that give an email or a job title first puts those people on their projects,
     and a shared project is what lets a later name-only mention be confirmed.
-    shortcut: this orders one batch. A name-only document uploaded before the documents that
-    would confirm it stays unconfirmed; nothing goes back to it later.
+    Order only matters inside one batch: a mention left unconfirmed is saved and tried again
+    after every later batch (`reconcile` in upsert.py).
     """
     people = p.facts["people"]
     return p.facts["kind"] != "resume", -sum(bool(x["emails"]) for x in people), -sum(bool(x["title"]) for x in people)
@@ -120,23 +124,35 @@ def run_job(job_id: str, items: list[Item]) -> None:
     try:
         with ThreadPoolExecutor(config.INGEST_CONCURRENCY) as pool:
             prepared = [p for p in pool.map(lambda i: _safe_prepare(job_id, i), items) if p]
-        for p in sorted(prepared, key=_write_order):
-            status, error, unresolved = "ingested", None, 0
-            try:
-                unresolved = write(p.doc_id, p.facts, p.chunks, p.embeddings)
-                log.info(
-                    "ingested job=%s path=%s kind=%s dropped_facts=%d unresolved_mentions=%d",
-                    job_id, p.path, p.facts["kind"], p.facts["dropped"], unresolved,
+        # One batch writes at a time: two at once could each decide the same mention is a new person.
+        with _WRITING:
+            for p in sorted(prepared, key=_write_order):
+                status, error, unresolved = "ingested", None, 0
+                try:
+                    unresolved = write(p.doc_id, p.facts, p.chunks, p.embeddings)
+                    log.info(
+                        "ingested job=%s path=%s kind=%s dropped_facts=%d unresolved_mentions=%d",
+                        job_id, p.path, p.facts["kind"], p.facts["dropped"], unresolved,
+                    )
+                except llm.BudgetExceeded:
+                    status, error = "failed", "budget_exceeded"
+                except Exception:
+                    log.exception("write failed job=%s path=%s", job_id, p.path)
+                    status, error = "failed", "internal_error"
+                graph.run(
+                    graph.SET_DOCUMENT_STATUS, id=p.doc_id, status=status, error=error,
+                    kind=p.facts["kind"], dropped=p.facts["dropped"], unresolved=unresolved,
                 )
-            except llm.BudgetExceeded:
-                status, error = "failed", "budget_exceeded"
+            try:
+                # Mentions left waiting, by this batch or an earlier one, may be settled by what was just
+                # written. Placing one can settle another, so go round a few times.
+                for _ in range(3):
+                    placed = reconcile()
+                    if not placed:
+                        break
+                    log.info("placed waiting mentions job=%s count=%d", job_id, placed)
             except Exception:
-                log.exception("write failed job=%s path=%s", job_id, p.path)
-                status, error = "failed", "internal_error"
-            graph.run(
-                graph.SET_DOCUMENT_STATUS, id=p.doc_id, status=status, error=error,
-                kind=p.facts["kind"], dropped=p.facts["dropped"], unresolved=unresolved,
-            )
+                log.exception("reconcile failed job=%s", job_id)
     finally:
         PENDING.pop(job_id, None)
         log.info("job done job=%s spend_today_usd=%.4f", job_id, llm.spent_today())

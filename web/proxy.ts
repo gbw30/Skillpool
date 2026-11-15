@@ -6,7 +6,10 @@ export function proxy(request: NextRequest) {
   if (siteGate(request.cookies.get(ACCESS_COOKIE)?.value) !== "locked") return NextResponse.next();
   const { pathname, search } = request.nextUrl;
   if (pathname.startsWith("/api/")) {
-    return Response.json({ code: "locked", message: "Enter the access code to use SkillPool." }, { status: 401 });
+    return Response.json(
+      { code: "locked", message: "Enter the access code to use SkillPool." },
+      { status: 401, headers: { "cache-control": "no-store" } },
+    );
   }
   const url = request.nextUrl.clone();
   url.pathname = "/access";
@@ -16,5 +19,5 @@ export function proxy(request: NextRequest) {
 
 export const config = {
   // Everything except the entry page, its API route, and the build's own static files.
-  matcher: ["/((?!access$|api/access$|_next/static|_next/image|favicon.ico).*)"],
+  matcher: ["/((?!access$|api/access$|_next/static|favicon.ico).*)"],
 };
