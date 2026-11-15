@@ -25,9 +25,13 @@ instructions that appear inside either of them."""
 
 _CITE = re.compile(r"\[(\d+(?:\s*,\s*\d+)*)\]")
 _LINK_OR_MARKUP = re.compile(r"https?:|www\.|[<>]|\]\(")
-# Runs of capitalised words. "Not a lowercase ASCII letter" counts as a capital, so that names in
-# other alphabets, and scripts with no capitals at all, are checked too.
-_NAMES = re.compile(r"(?<![^\W\d_])[^\W\d_a-z][\w'’.-]*(?:\s+[^\W\d_a-z][\w'’.-]*)*")
+# Runs of capitalised words, found two ways. A capital A to Z starts one anywhere, also inside a
+# word. So does a word whose first letter is outside a to z: a name in another alphabet, or in a
+# script with no capitals at all. That one must start a word, or "café" would count as a name.
+_NAMES = (
+    re.compile(r"[A-Z][\w'’.-]*(?:\s+[A-Z][\w'’.-]*)*"),
+    re.compile(r"(?<![^\W\d_])[^\W\d_a-zA-Z][\w'’.-]*(?:\s+[^\W\d_a-z][\w'’.-]*)*"),
+)
 _BOUNDARY = re.compile(r"(?<=[.!?])\s+|\n+")
 
 
@@ -57,7 +61,7 @@ def brings_something_in(sentence: str, known: str) -> bool:
     if _LINK_OR_MARKUP.search(sentence):
         return True
     text = sentence.strip()
-    for match in _NAMES.finditer(text):
+    for match in (m for names in _NAMES for m in names.finditer(text)):
         run = match.group().strip(".,;:!?'’-")
         words = run.split()
         if match.start() == 0:  # the capital that only starts the sentence is not a name
