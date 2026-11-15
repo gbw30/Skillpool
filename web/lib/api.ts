@@ -75,6 +75,16 @@ export async function openSource(docId: string): Promise<string | null> {
   }
 }
 
+/** Where the landing page leaves the question it is handing to the search page. */
+export const ASKED_KEY = "skillpool:asked";
+
+/** Call just before going to /search?q=...: marks the question as asked on this site, by this visitor. */
+export function handOver(question: string): void {
+  try {
+    sessionStorage.setItem(ASKED_KEY, question);
+  } catch {} // storage blocked: the search page fills the box and waits for Enter
+}
+
 export const FAILURE_REASONS: Record<string, string> = {
   no_text: "No readable text (a scanned PDF?)",
   type_mismatch: "The file is not the type its name says",
@@ -82,6 +92,8 @@ export const FAILURE_REASONS: Record<string, string> = {
   not_utf8: "The text file is not UTF-8",
   unsupported_type: "Unsupported file type",
   too_large: "Larger than 10 MB",
+  too_long: "Too long to read (over about 120 pages of text)",
+  too_slow: "Took too long to open",
   fetch_failed: "The upload did not arrive",
   refused: "The model declined to read this document",
   budget_exceeded: "Today's processing budget is used up",

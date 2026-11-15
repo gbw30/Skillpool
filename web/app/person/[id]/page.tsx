@@ -61,7 +61,8 @@ function Person() {
           <Alert className="mt-0.5 shrink-0 text-skill" />
           <span>
             {unconfirmed.length === 1 ? "One more document uses" : `${unconfirmed.length} more documents use`} the name{" "}
-            {person.name}: <span className="wrap-anywhere font-mono text-xs">{unconfirmed.join(", ")}</span>. Nothing beyond
+            {person.name}: <span className="wrap-anywhere font-mono text-xs">{unconfirmed.slice(0, 3).join(", ")}</span>
+            {unconfirmed.length > 3 && ` and ${unconfirmed.length - 3} more`}. Nothing beyond
             the name confirmed it is this person, so {unconfirmed.length === 1 ? "it is" : "they are"} not counted as evidence.
           </span>
         </p>

@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type FormEvent } from "react";
 import { Minus, Plus } from "@/components/icons";
 import { Glyph } from "@/components/path-graph";
-import { api, type GraphData } from "@/lib/api";
+import { api, handOver, type GraphData } from "@/lib/api";
 import { buildGraph, sampleGraph, type Graph, type Kind } from "@/lib/graph";
 import { BrainLoader } from "./brain-loader";
 import type { GraphControls } from "./graph-canvas";
@@ -208,7 +208,9 @@ export function Landing() {
 
   function submit(event: FormEvent) {
     event.preventDefault();
-    router.push(`/search?q=${encodeURIComponent(question.trim() || ask)}`);
+    const asked = question.trim() || ask;
+    handOver(asked);
+    router.push(`/search?q=${encodeURIComponent(asked)}`);
   }
 
   // The text waits for the loading screen, then comes in one piece after another, just behind the brain.
@@ -300,7 +302,7 @@ export function Landing() {
 
             <motion.p {...rise(3)} className="mt-3 flex max-w-xl flex-wrap items-center gap-x-2 gap-y-1.5 font-mono text-xs text-muted">
               Or ask about
-              {others.map((name) => <Link key={name} className="chip" href={`/search?q=${encodeURIComponent(asking(name))}`}>{name}</Link>)}
+              {others.map((name) => <Link key={name} className="chip" href={`/search?q=${encodeURIComponent(asking(name))}`} onClick={() => handOver(asking(name))}>{name}</Link>)}
             </motion.p>
 
             <motion.p {...rise(4)} className="mt-6 max-w-md text-sm text-muted">

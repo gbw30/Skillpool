@@ -5,7 +5,7 @@ import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { EvidenceList } from "@/components/evidence-list";
 import { Alert, Search } from "@/components/icons";
 import { PathGraph } from "@/components/path-graph";
-import type { PersonResult, SearchResults } from "@/lib/api";
+import { ASKED_KEY, type PersonResult, type SearchResults } from "@/lib/api";
 
 const EXAMPLES = [
   "Who has hands-on experience with Kafka?",
@@ -119,13 +119,21 @@ export default function SearchPage() {
     }
   }
 
-  // The landing page hands a question over as /search?q=...; ask it once on arrival.
+  // The landing page hands a question over as /search?q=... and it is asked once on arrival.
+  // A link from anywhere else only fills the box and waits for Enter: every search costs money,
+  // and a link must not be able to spend it for whoever follows it.
   const arrived = useRef(false);
   useEffect(() => {
     if (arrived.current) return;
     arrived.current = true;
     const asked = new URLSearchParams(location.search).get("q");
-    if (asked) queueMicrotask(() => run(asked)); // after this render, not during the effect
+    if (!asked) return;
+    let ours = false;
+    try {
+      ours = sessionStorage.getItem(ASKED_KEY) === asked;
+      sessionStorage.removeItem(ASKED_KEY);
+    } catch {}
+    queueMicrotask(() => (ours ? run(asked) : setQuestion(asked))); // after this render, not during the effect
   });
 
   const count = results?.people.length ?? 0;

@@ -20,6 +20,7 @@ export const Sun = (p: Props) => (
   </Icon>
 );
 export const Monitor = (p: Props) => <Icon {...p}><rect x="3" y="4" width="18" height="12" rx="2" /><path d="M8 20h8M12 16v4" /></Icon>;
+export const Exit = (p: Props) => <Icon {...p}><path d="M10 4H6a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h4M15 8l4 4-4 4M19 12H10" /></Icon>;
 export const Search = (p: Props) => <Icon {...p}><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></Icon>;
 export const ArrowUpRight = (p: Props) => <Icon {...p}><path d="M7 17 17 7M8 7h9v9" /></Icon>;
 export const Alert = (p: Props) => (

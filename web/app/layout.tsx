@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import { Backdrop } from "@/components/backdrop";
 import { Logo } from "@/components/icons";
+import { SignOut } from "@/components/sign-out";
 import { ThemeToggle } from "@/components/theme-toggle";
 import "./globals.css";
 
@@ -12,6 +13,7 @@ const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" });
 export const metadata: Metadata = {
   title: "SkillPool",
   description: "Find the right people for a project, with the evidence for each one.",
+  robots: { index: false, follow: false }, // a private demo
 };
 
 // Runs before first paint so a saved light or system choice never flashes dark. A fixed string.
@@ -33,17 +35,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to content
         </a>
         <header className="border-b border-line">
-          <div className="mx-auto flex h-14 max-w-6xl items-center gap-4 px-4 sm:gap-6 sm:px-6">
+          <div className="mx-auto flex h-14 max-w-6xl items-center gap-3 px-4 sm:gap-6 sm:px-6">
             <Link href="/" className="flex items-center gap-2 font-semibold tracking-tight text-ink no-underline">
               <Logo className="text-accent" width={20} height={20} />
               SkillPool
             </Link>
-            <nav aria-label="Main" className="ml-auto flex items-center gap-4 text-sm sm:gap-6">
+            <nav aria-label="Main" className="ml-auto flex items-center gap-3 text-sm sm:gap-6">
               <Link className="text-muted no-underline hover:text-ink" href="/search">Search</Link>
               <Link className="text-muted no-underline hover:text-ink" href="/upload">
                 <span className="sm:hidden">Upload</span>
                 <span className="max-sm:hidden">Add documents</span>
               </Link>
+              <SignOut />
             </nav>
             <ThemeToggle />
           </div>
