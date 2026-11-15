@@ -199,6 +199,17 @@ DETACH DELETE n
 """
 
 # People a document has already been tied to: a later mention in it cannot be one of them.
+# What an earlier, failed write of this document left waiting. A second try decides again.
+CLEAR_DOC_PENDING = """
+MATCH (d:Document {id: $id})
+OPTIONAL MATCH (c:Chunk)-[:CHUNK_OF]->(d)
+OPTIONAL MATCH (c)-[r:MAY_MENTION]->(:Person)
+DELETE r
+WITH DISTINCT d
+OPTIONAL MATCH (n:Pending {docId: d.id})
+DETACH DELETE n
+"""
+
 DOC_PEOPLE = """
 MATCH (d:Document {id: $docId})
 OPTIONAL MATCH (d)<-[:CHUNK_OF]-(:Chunk)-[:MENTIONS]->(m:Person)

@@ -58,6 +58,9 @@ def write(doc_id: str, facts: dict, chunks: list[Chunk], embeddings: list[list[f
     resume = facts["kind"] == "resume"
     by_chunk = dict(zip((c.id for c in chunks), embeddings))
     text_of = {c.id: c.text for c in chunks}
+    # A mention an earlier, failed write left waiting would be tried again beside this write's own
+    # answer for it, and could then become a second person.
+    graph.run(graph.CLEAR_DOC_PENDING, id=doc_id)
 
     # Projects a resume names are personal to its owner unless an organization project
     # with the same name already exists. shortcut: an org project created later does not
@@ -125,6 +128,8 @@ def reconcile() -> int:
     A mention waits when its name fits someone on record and nothing else confirmed it. A later
     document can supply what was missing, most often by putting that person on the project the
     mention came from. Nothing here asks the model, so waiting mentions cost nothing.
+    shortcut: a resume's own project descriptions and dates are not stored when its subject is
+    placed here instead of in `write`; that takes an email conflict on a resume. Re-ingest it then.
     shortcut: every waiting mention is tried after every batch; fine for hundreds, look them up
     by surname if a deployment ever holds many thousands.
     """

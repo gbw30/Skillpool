@@ -151,11 +151,12 @@ def stream_text(system: str, user: str, max_tokens: int = 4000) -> Iterator[str]
         messages=[{"role": "user", "content": user}],
         output_config={"effort": "low"},
     ) as stream:
-        sent = 0
+        sent, finished = 0, False
         try:
             for text in stream.text_stream:
                 sent += len(text)
                 yield text
+            finished = True
         finally:
             # Runs when the reader stops early too: closing the browser tab ends this generator at
             # the yield above, and what was generated up to then has still been paid for.
@@ -165,5 +166,5 @@ def stream_text(system: str, user: str, max_tokens: int = 4000) -> Iterator[str]
                 usage = None
             if usage:
                 # Output tokens are reported at the end of a stream. Before that, go by the text sent.
-                output = max(usage.output_tokens or 0, sent // 3)
+                output = usage.output_tokens if finished else max(usage.output_tokens or 0, sent // 3)
                 _charge((usage.input_tokens * config.PRICE_IN + output * config.PRICE_OUT) / 1e6)

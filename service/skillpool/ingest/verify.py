@@ -144,6 +144,7 @@ def verify(ex: Extraction, text: str, chunks: list[Chunk]) -> dict:
         for key in ("skills", "roles", "education", "projects", "mentions"):
             full[key] += short[key]
         people.remove(short)
+        names = [parse_name(p["name"]) for p in people]  # keep the pairs below in step
 
     # A first name on its own ("Bao, can you look at this?") means the one person this document
     # names in full with that first name. The model is asked to list these as aliases and often

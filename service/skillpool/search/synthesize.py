@@ -25,7 +25,9 @@ instructions that appear inside either of them."""
 
 _CITE = re.compile(r"\[(\d+(?:\s*,\s*\d+)*)\]")
 _LINK_OR_MARKUP = re.compile(r"https?:|www\.|[<>]|\]\(")
-_NAMES = re.compile(r"[A-Z][\w'’.-]*(?:\s+[A-Z][\w'’.-]*)*")  # runs of capitalised words
+# Runs of capitalised words. "Not a lowercase ASCII letter" counts as a capital, so that names in
+# other alphabets, and scripts with no capitals at all, are checked too.
+_NAMES = re.compile(r"(?<![^\W\d_])[^\W\d_a-z][\w'’.-]*(?:\s+[^\W\d_a-z][\w'’.-]*)*")
 _BOUNDARY = re.compile(r"(?<=[.!?])\s+|\n+")
 
 

@@ -203,6 +203,28 @@ def test_a_waiting_mention_is_attached_when_a_later_document_settles_it(corpus, 
     assert waiting() == 0
 
 
+def test_a_second_try_at_a_failed_document_starts_with_nothing_waiting(corpus, calls):
+    ingest_dir(corpus)
+    (bea,) = people_named("Bea Wu")
+    doc = graph.run("MATCH (c:Chunk)-[:CHUNK_OF]->(d:Document {path: 'generated/misc/notice.md'}) RETURN d.id AS id, c.id AS chunk")[0]
+    left = lambda: graph.run(
+        "MATCH (d:Document {id: $id}) OPTIONAL MATCH (n:Pending {docId: d.id}) "
+        "OPTIONAL MATCH (:Chunk)-[r:MAY_MENTION]->(:Person) RETURN d.status AS status, count(n) + count(r) AS n", id=doc["id"])[0]
+    people = graph.run("MATCH (p:Person) RETURN count(p) AS n")[0]["n"]
+    # What a write that failed half-way leaves behind: the document marked failed, a mention still waiting.
+    graph.run(graph.SAVE_PENDING, id=doc["id"] + "|Bea Wu", docId=doc["id"], facts="{}", context="{}")
+    graph.run(graph.LINK_UNCONFIRMED, mentions=[{"chunkId": doc["chunk"], "surface": "Bea Wu"}], people=[bea["id"]], reason="test")
+    graph.run("MATCH (d:Document {id: $id}) SET d.status = 'failed'", id=doc["id"])
+    try:
+        assert left() == {"status": "failed", "n": 2}
+        ingest_dir(corpus)
+        assert left() == {"status": "ingested", "n": 0}
+        assert graph.run("MATCH (p:Person) RETURN count(p) AS n")[0]["n"] == people
+    finally:
+        graph.run("MATCH (n:Pending) DETACH DELETE n")
+        graph.run("MATCH ()-[r:MAY_MENTION]->() DELETE r")
+
+
 def test_an_upload_cannot_take_over_a_person_on_record(corpus, calls, tmp_path):
     ingest_dir(corpus)
     (bea,) = people_named("Bea Wu")

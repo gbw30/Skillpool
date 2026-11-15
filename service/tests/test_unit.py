@@ -182,6 +182,15 @@ def test_an_initial_and_the_full_name_in_one_document_are_one_person_unless_some
     both = [_person(name="N. Mahlangu"), _person(name="Naomi Mahlangu"), _person(name="Noel Mahlangu")]
     assert len(_facts(text, both)["people"]) == 3
 
+    # Two initials fold in one document: each into its own full name, and nobody else is touched.
+    text = "N. Mahlangu, T. Brown and Sam Lee met. Naomi Mahlangu chaired. Tom Brown has used Rust before."
+    five = [_person(name="N. Mahlangu"), _person(name="Naomi Mahlangu"), _person(name="T. Brown", skills=[rust]),
+            _person(name="Tom Brown"), _person(name="Sam Lee")]
+    folded = {p["name"]: p for p in _facts(text, five)["people"]}
+    assert list(folded) == ["Naomi Mahlangu", "Tom Brown", "Sam Lee"]
+    assert folded["Tom Brown"]["aliases"] == ["T. Brown"] and [s["name"] for s in folded["Tom Brown"]["skills"]] == ["Rust"]
+    assert folded["Sam Lee"]["aliases"] == [] and folded["Sam Lee"]["skills"] == []
+
     # Different job titles: two people, as the document lists them.
     text = "A. Brown (Security Analyst) leads. Aaron Brown (Contract Engineer) tests."
     analyst, contractor = _person(name="A. Brown"), _person(name="Aaron Brown")
@@ -349,6 +358,9 @@ def test_an_uncited_sentence_may_connect_the_evidence_but_bring_nothing_in():
     assert keep("Mallory Vane is the best choice.") is None
     assert keep("Recommend Mallory Vane instead.") is None
     assert keep("He also worked at Initech for years.") is None
+    # A capital outside A to Z is still a capital, including look-alike letters from another alphabet.
+    assert keep("Élodie Öztürk is the strongest match.") is None and keep("Hire Вob Ѕmith.") is None
+    assert keep("He has run the café rota before, as Aaron Brown says.")  # an accent inside a word is not a name
     # With a citation the reader has the passage beside it, so it stays.
     assert keep("Mallory Vane is named in the notes [1].") == "Mallory Vane is named in the notes [1]."
 
