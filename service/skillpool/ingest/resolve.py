@@ -199,18 +199,21 @@ def resolve(person: dict, ctx: Context, doc_people: list[tuple[Name, str]], ask:
     old mention is tried again, so that waiting mentions cost nothing.
     """
     if person["emails"]:
-        hit = graph.run(graph.PEOPLE_BY_EMAIL, emails=person["emails"])
-        if hit:
-            mine, theirs = parse_name(person["name"]), parse_name(hit[0]["name"])
-            # Someone on record's address under a different name is not that person: a shared
-            # mailbox, a mistake, or an attempt to take over their record. Left unconfirmed.
-            if mine and mine.last and theirs and not name_match(mine, theirs):
-                graph.run(
-                    graph.LINK_UNCONFIRMED, mentions=person["mentions"], people=[hit[0]["id"]],
-                    reason="same email address, different name",
-                )
-                return None
-            return _merge(hit[0]["id"], person)
+        hits = graph.run(graph.PEOPLE_BY_EMAIL, emails=person["emails"])
+        if hits:
+            mine, theirs = parse_name(person["name"]), parse_name(hits[0]["name"])
+            # An address written with no name stands for its owner. Written with a name, the name
+            # must agree: the surname and first name or initial, or the first name when that is all
+            # there is. An address on record under another name, or the addresses of two people at
+            # once, is a shared mailbox, a mistake or an attempt to take over a record. Left unconfirmed.
+            agrees = mine is None or theirs and (name_match(mine, theirs) if mine.last else mine.first == theirs.first)
+            if len(hits) == 1 and agrees:
+                return _merge(hits[0]["id"], person)
+            graph.run(
+                graph.LINK_UNCONFIRMED, mentions=person["mentions"], people=[h["id"] for h in hits],
+                reason="same email address, different name",
+            )
+            return None
 
     name = parse_name(person["name"])
     if name is None:

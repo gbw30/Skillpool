@@ -210,6 +210,8 @@ def test_an_upload_cannot_take_over_a_person_on_record(corpus, calls, tmp_path):
     resumes = {
         # Her address under another name, and her name and address with a new title.
         "mallory.txt": "Mallory Vane\nbea@example.com\nTitle: Chief Saboteur\nEmployer: Lake Co\nSkills: Lockpicking (expert)\n",
+        # Her address under a first name that is not hers.
+        "mallory-first-name.txt": "Mallory\nbea@example.com\nTitle: Chief Saboteur\nEmployer: Lake Co\nSkills: Forgery (expert)\n",
         "bea-again.txt": "Bea Wu\nbea@example.com\nTitle: Chief Saboteur\nEmployer: Lake Co\nSkills: Lockpicking (expert)\n",
     }
     (tmp_path / "resumes").mkdir()
@@ -220,9 +222,10 @@ def test_an_upload_cannot_take_over_a_person_on_record(corpus, calls, tmp_path):
         after = card()
         assert (after["name"], after["title"]) == ("Bea Wu", "Data Engineer")  # who she is did not change
         assert not people_named("Mallory Vane")  # no record made from someone else's address
-        assert {u["path"] for u in after["unconfirmed"]} == {"resumes/mallory.txt"}
-        # The second resume with her own name and address is still hers: its claims are added, with their source.
-        assert "Lockpicking" in {s["name"] for s in after["skills"]}
+        assert {u["path"] for u in after["unconfirmed"]} == {"resumes/mallory.txt", "resumes/mallory-first-name.txt"}
+        # The resume with her own name and address is still hers: its claims are added, with their source.
+        skills = {s["name"] for s in after["skills"]}
+        assert "Lockpicking" in skills and "Forgery" not in skills
     finally:
         for text in resumes.values():
             graph.delete_document(hashlib.sha256(text.encode()).hexdigest())
