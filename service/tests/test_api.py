@@ -130,3 +130,13 @@ def test_odd_headers_are_refused_plainly(client):
 def test_a_question_of_only_spaces_is_invalid(client):
     r = call(client, "POST", "/search", {"q": "   "})
     assert r.status_code == 400 and r.json()["code"] == "invalid_request"
+
+
+def test_a_document_with_no_stored_file_opens_where_the_corpus_is_published(client, monkeypatch):
+    doc = "ab" * 32
+    monkeypatch.setattr(graph, "run", lambda query, **params: [{"key": None, "path": "resumes/Ana Lima.pdf"}])
+    assert call(client, "GET", f"/documents/{doc}/url").status_code == 404
+    monkeypatch.setattr(config, "SOURCE_BASE_URL", "https://example.org/corpus/")
+    assert call(client, "GET", f"/documents/{doc}/url").json()["url"] == "https://example.org/corpus/resumes/Ana%20Lima.pdf"
+    monkeypatch.setattr(graph, "run", lambda query, **params: [])
+    assert call(client, "GET", f"/documents/{doc}/url").status_code == 404

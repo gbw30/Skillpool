@@ -87,4 +87,7 @@ GRAPH_VIEW_LINKS = 600  # most links of each kind sent to the landing page's gra
 INGEST_CONCURRENCY = 4
 # A folder that keeps each document's extraction, so repeating an ingest costs nothing. Off when unset.
 EXTRACT_CACHE_DIR = os.environ.get("EXTRACT_CACHE_DIR", "")
+# Where the documents loaded with `ingest-dir` can be read, for example the corpus folder of the
+# public repository. Those files are not in the bucket, so "Open source" links here instead.
+SOURCE_BASE_URL = os.environ.get("SOURCE_BASE_URL", "")
 SIGNATURE_SKEW_SECONDS = 300
