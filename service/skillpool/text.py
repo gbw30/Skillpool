@@ -16,6 +16,11 @@ SKILL_ALIASES = {
     "react.js": "react",
     "gcp": "google-cloud",
     "amazon-web-services": "aws",
+    # The model's "canonical" name for these carries the vendor. As text they score no closer to
+    # the plain name than COBOL does to Java (0.90), so the vector fallback cannot join them.
+    "apache-kafka": "kafka",
+    "apache-airflow": "airflow",
+    "microsoft-excel": "excel",
     "ci-cd-pipelines": "ci-cd",
 }
 

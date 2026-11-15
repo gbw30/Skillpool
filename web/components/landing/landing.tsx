@@ -127,7 +127,7 @@ function Word({ text }: { text: string }) {
   );
 }
 
-export function Landing() {
+export function Landing({ uploads }: { uploads: boolean }) {
   const stage = useRef<HTMLDivElement>(null);
   const graphControls = useRef<GraphControls | null>(null);
   const router = useRouter();
@@ -307,7 +307,7 @@ export function Landing() {
 
             <motion.p {...rise(4)} className="mt-6 max-w-md text-sm text-muted">
               SkillPool reads resumes and project reports into one graph. Ask in plain words and it answers with
-              names, and quotes the lines that back each one. <Link href="/upload">Add documents</Link>
+              names, and quotes the lines that back each one.{uploads && <> <Link href="/upload">Add documents</Link></>}
             </motion.p>
           </div>
         </section>
@@ -330,7 +330,7 @@ export function Landing() {
             {view && !indexed && <p className="mt-3 font-mono text-sm">{view.source === "empty" ? "Nothing is indexed yet" : "The graph could not be loaded"}</p>}
             <p className="mt-4 text-sm text-muted">
               {!view ? "Loading the graph…"
-                : !indexed ? <>The graph shown here is a made-up sample. <Link href="/upload">Add documents</Link> to see the real graph. Point at a node to trace its links, and drag to move around.</>
+                : !indexed ? <>The graph shown here is a made-up sample. {uploads && <><Link href="/upload">Add documents</Link> to see the real graph. </>}Point at a node to trace its links, and drag to move around.</>
                 : drawable ? "Every answer walks these links: a person worked on a project, and the project used a skill. Point at a node to trace its links, and click a person to open their page. Drag to move around."
                 : "This browser cannot draw the 3D graph, so here it is as a list."}
             </p>

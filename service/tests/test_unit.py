@@ -17,6 +17,7 @@ from skillpool.ingest.parse import ParseError, parse, parse_safely
 from skillpool.ingest.resolve import Context, Name, better_name, decide, name_match, parse_name, score
 from skillpool.ingest.verify import Locator, verify
 from skillpool.search.fuse import rrf
+from skillpool.search.retrieve import _ranked, _skill_strength
 from skillpool.search.synthesize import NO_SUMMARY, check_sentence, validated
 from skillpool.text import skill_id, slug, snippet
 
@@ -320,6 +321,7 @@ def test_identity_scores():
 def test_skill_ids_keep_distinct_skills_apart():
     assert skill_id("JS") == skill_id("JavaScript") == "javascript"
     assert skill_id("k8s") == "kubernetes"
+    assert skill_id("Apache Kafka") == "kafka" and skill_id("Microsoft Excel") == "excel"
     assert skill_id("Java") != skill_id("JavaScript")
     assert {slug("C++"), slug("C#"), slug("C")} == {"c++", "c#", "c"}
     assert slug("CI/CD") == "ci-cd" and slug("Node.js") == "node.js"
@@ -332,6 +334,16 @@ def test_snippet_centres_on_the_term():
 
 
 # --- search -----------------------------------------------------------------
+
+def test_equally_strong_people_are_ordered_the_same_way_in_every_rebuild():
+    rows = [{"id": "a", "name": "Zoe", "n": 1}, {"id": "z", "name": "Amy", "n": 1}, {"id": "m", "name": "Bo", "n": 1},
+            {"id": "q", "name": "Cy", "n": 2}]
+    # Strongest first; then the one the question's text is closest to; then by name, whatever the ids.
+    assert _ranked(rows, {"m": 0}, lambda r: (r["n"],)) == ["q", "m", "z", "a"]
+    has = lambda *levels: {"matches": [{"level": x} for x in levels]}
+    assert _skill_strength(has("expert", "intermediate")) > _skill_strength(has("advanced", "advanced"))
+    assert _skill_strength(has("beginner", None)) > _skill_strength(has("expert"))  # both skills beat one
+
 
 def test_rrf_rewards_agreement():
     assert rrf([["a", "b", "c"], ["c", "a"], ["c"]], k=60)[:2] == ["c", "a"]

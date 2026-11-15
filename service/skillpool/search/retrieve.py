@@ -15,6 +15,21 @@ def _interleave(*lists: list[str]) -> list[str]:
     return list(dict.fromkeys(merged))
 
 
+def _ranked(rows: list[dict], text_rank: dict[str, int], strength) -> list[str]:
+    """Ids, strongest first. Equals go by how close the question's text is to them, then by name.
+    Never by id alone: ids are random, so the same corpus rebuilt would rank its people differently."""
+    return [r["id"] for r in sorted(rows, key=lambda r: (
+        *(-x for x in strength(r)), text_rank.get(r["id"], len(text_rank)), r["name"], r["id"],
+    ))]
+
+
+def _skill_strength(row: dict) -> tuple[int, int, int]:
+    """Most of the skills asked for, then the highest total level, then the highest single level:
+    expert in one and intermediate in the other comes before advanced in both."""
+    levels = [_LEVELS.get((m["level"] or "").lower(), 0) for m in row["matches"]]
+    return len(levels), sum(levels), max(levels, default=0)
+
+
 def search(question: str, mode: str = "hybrid") -> dict:
     vector, skills, projects = understand(question, mode)
     skill_ids = [s["id"] for s in skills]
@@ -24,21 +39,18 @@ def search(question: str, mode: str = "hybrid") -> dict:
         graph.VECTOR_PEOPLE, k=config.VECTOR_K, embedding=vector, floor=config.VECTOR_FLOOR
     )
     direct = graph.run(graph.DIRECT_SKILL, skills=skill_ids) if skill_ids else []
-    direct.sort(key=lambda r: (
-        -len(r["matches"]), -sum(_LEVELS.get((m["level"] or "").lower(), 0) for m in r["matches"]), r["id"],
-    ))
     path_rows = graph.run(graph.PROJECT_PATH, projects=project_ids, skills=skill_ids) if skill_ids or project_ids else []
     paths: dict[str, list[dict]] = {}
     for row in path_rows:
         paths.setdefault(row["id"], []).append(row)
 
-    def path_strength(pid: str) -> tuple[int, int]:
-        rows = paths[pid]
-        return sum(r["named"] for r in rows), len({u["skill"] for r in rows for u in r["used"]})
+    text_rank = {r["id"]: i for i, r in enumerate(by_text)}
+    by_skill = _ranked(direct, text_rank, _skill_strength)
+    by_path = _ranked([rows[0] for rows in paths.values()], text_rank, lambda r: (
+        sum(x["named"] for x in paths[r["id"]]), len({u["skill"] for x in paths[r["id"]] for u in x["used"]}),
+    ))
 
-    by_path = sorted(paths, key=lambda pid: (*(-x for x in path_strength(pid)), pid))
-
-    top = rrf([[r["id"] for r in by_text], [r["id"] for r in direct], by_path], config.RRF_K)
+    top = rrf([[r["id"] for r in by_text], by_skill, by_path], config.RRF_K)
     top = top[: config.TOP_PEOPLE]
     if not top:
         return {"confidence": "none", "skills": skills, "projects": projects, "people": []}

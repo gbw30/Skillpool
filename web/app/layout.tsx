@@ -5,6 +5,7 @@ import { Backdrop } from "@/components/backdrop";
 import { Logo } from "@/components/icons";
 import { SignOut } from "@/components/sign-out";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { uploadsOn } from "@/lib/access";
 import "./globals.css";
 
 const sans = Geist({ subsets: ["latin"], variable: "--font-geist-sans" });
@@ -42,10 +43,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             </Link>
             <nav aria-label="Main" className="ml-auto flex items-center gap-3 text-sm sm:gap-6">
               <Link className="text-muted no-underline hover:text-ink" href="/search">Search</Link>
-              <Link className="text-muted no-underline hover:text-ink" href="/upload">
-                <span className="sm:hidden">Upload</span>
-                <span className="max-sm:hidden">Add documents</span>
-              </Link>
+              {uploadsOn() && (
+                <Link className="text-muted no-underline hover:text-ink" href="/upload">
+                  <span className="sm:hidden">Upload</span>
+                  <span className="max-sm:hidden">Add documents</span>
+                </Link>
+              )}
               <SignOut />
             </nav>
             <ThemeToggle />

@@ -8,6 +8,7 @@ import uuid
 from collections import deque
 from functools import partial
 from typing import Annotated
+from urllib.parse import quote
 
 from fastapi import BackgroundTasks, Depends, FastAPI, Request
 from fastapi.exceptions import RequestValidationError
@@ -248,9 +249,11 @@ def person(person_id: str) -> dict:
 @app.get("/documents/{doc_id}/url", dependencies=[Depends(signed)])
 def document_url(doc_id: str) -> dict:
     rows = graph.run(graph.DOCUMENT_KEY, id=_id(doc_id))
-    if not rows or not rows[0]["key"]:
-        raise ApiError(404, "not_found", "The source file for this document is not stored.")
-    return {"url": storage.presign_get(rows[0]["key"]), "path": rows[0]["path"]}
+    if rows and rows[0]["key"]:
+        return {"url": storage.presign_get(rows[0]["key"]), "path": rows[0]["path"]}
+    if rows and config.SOURCE_BASE_URL:  # loaded with ingest-dir: read it where the folder is published
+        return {"url": f"{config.SOURCE_BASE_URL.rstrip('/')}/{quote(rows[0]['path'])}", "path": rows[0]["path"]}
+    raise ApiError(404, "not_found", "The source file for this document is not stored.")
 
 
 @app.delete("/documents/{doc_id}", dependencies=[Depends(signed)])
