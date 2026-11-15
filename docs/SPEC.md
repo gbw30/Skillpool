@@ -12,15 +12,15 @@ local S3 emulator: search with a streamed, cited answer, the person page, the no
 a folder upload that became searchable, and the access page.
 
 Measured on 2026-11-14 by `skillpool eval` with Claude Haiku 5.5 and Voyage `voyage-4-lite`.
-The first run was on 359 documents and 43 questions. The last column is the corpus as it is
-now, with the look-alike pairs added: 377 documents and 48 questions.
+The first run was on 359 documents and 43 questions. The last column is the run of 2026-11-15
+on the corpus as it is now, with the look-alike pairs added: 377 documents and 48 questions.
 
 | Measure (PRD section 8) | Target | First run | Now |
 |---|---|---|---|
-| Recall@10, all questions | at least 0.80 | 0.85 | 0.92 |
-| Recall@10, multi-hop | at least 0.70 | 0.81 | 0.87 (text similarity alone: 0.44) |
+| Recall@10, all questions | at least 0.80 | 0.85 | 0.95 |
+| Recall@10, multi-hop | at least 0.70 | 0.81 | 0.97 (text similarity alone: 0.44) |
 | Recall@10, unstructured (chat or meeting note only) | none set | 0.75 | 0.95 (text similarity alone: 0.30) |
-| Recall@10, direct (resume) | none set | 0.98 | 0.96 |
+| Recall@10, direct (resume) | none set | 0.98 | 0.92 |
 | Citations that do not resolve | 0 | 0 | 0 |
 | Identity precision | at least 0.98 | 1.00 | 1.00 |
 | Identity recall | at least 0.90 | 0.69 | 0.98 |
@@ -28,9 +28,25 @@ now, with the look-alike pairs added: 377 documents and 48 questions.
 | Mentions nothing can settle: left unconfirmed, attached to nobody | all | not in the corpus | 1 of 1 |
 | "No one qualifies" answered as such | not in the PRD | 0 of 5 | 5 of 5 |
 | Planted instructions that took effect (R20) | 0 | 0 | 0 |
-| Time to ranked results, p95 | under 3 s | 2.6 s | 2.8 s |
-| Time to complete answer, p95 | under 10 s | 8.9 s | 9.0 s |
+| Time to ranked results, p95 | under 3 s | 2.6 s | 2.7 s |
+| Time to complete answer, p95 | under 10 s | 8.9 s | 8.5 s |
 | Model cost to ingest the corpus | under $2 | $0.29 | under $0.01 from the cache |
+
+The four recall figures in the last column were measured after two changes that the 2026-11-15
+run led to, on the same 48 questions and a rebuilt database, without written answers. The run
+itself scored 0.90 on all questions, 0.87 on multi-hop and 0.90 on resume questions.
+
+- The questions about Kafka and Airflow found nobody, in this run and the one before. The model
+  that reads the question wrote "Apache Kafka", which names no skill in the graph, and as text
+  it is no closer to "Kafka" than COBOL is to Java (0.90 against a floor of 0.96). Asking about
+  each of the 98 skills in turn found three such names, now aliases in `text.py`: Apache Kafka,
+  Apache Airflow and Microsoft Excel. Multi-hop recall went from 0.87 to 0.97.
+- Recall on resume questions had moved from 0.96 to 0.90 between two builds of the same corpus.
+  People who matched a question equally well were ordered by their record id, which is random
+  and new on every rebuild, and four of the twelve resume questions have an expected person at
+  rank 10 to 12. Equals are now ordered by their highest single skill level, then by how close
+  the question's text is to them, then by name (`_ranked` in `retrieve.py`), so a rebuild gives
+  the same ranking. That order scores 0.92.
 
 The first run missed two measures. These changes followed, each checked by a further run that
 read its extractions from the cache:
@@ -70,8 +86,8 @@ Limits of these numbers:
   their page and not counted as evidence, and tried again after every later batch.
 - 48 questions is a small set: one question moves a category's recall by several points.
 
-Not verified: a real AWS bucket, a deployment, and the OpenAI embedding path (never run live;
-its floors are untuned).
+Not verified: a deployment, and the OpenAI embedding path (never run live; its floors are
+untuned). A real AWS bucket took a browser upload on 2026-11-15 (section 14, item 5).
 
 Changes from the first draft of this spec, made during implementation:
 
@@ -349,6 +365,9 @@ picking the point that meets the precision target first, then the best recall th
      they have, then stated level.
    - Project path: people with `WORKED_ON` to an org project that `USED_SKILL` a resolved skill,
      or that is named in the question. This is the multi-hop leg.
+   - Equals in the direct list go by their highest single level. Then, in both the direct and
+     the project-path list, by their place in the vector list, then by name. Never by id: ids
+     are random, so a rebuild would reorder them.
 3. Fuse with reciprocal rank fusion (k = 60). Take the top 10. Text hits below a similarity floor
    are discarded before fusion; if that leaves all three lists empty, return an empty list with
    `confidence: none` and a fixed "no one matches" answer, with no model call (R14).
@@ -455,7 +474,8 @@ Haiku 5.5 constraints that affect the code:
 | `SERVICE_SIGNING_SECRET` | web, service | same value in both |
 | `SKILLPOOL_MODEL`, `NEO4J_DATABASE` | service | optional overrides; defaults `claude-haiku-5-5` and `neo4j` |
 | `SITE_ACCESS_CODE` | web | R22. Unset: a development server is open, a production build is locked |
-| `UPLOADS_ENABLED`, `UPLOAD_ACCESS_CODE` | web | R18 |
+| `UPLOADS_ENABLED`, `UPLOAD_ACCESS_CODE` | web | R18. Unless `true`, `/upload` redirects to the landing page and nothing links to it |
+| `SOURCE_BASE_URL` | service | optional: where documents loaded with `ingest-dir` are published, so "Open source" can link to them |
 | `DAILY_MODEL_BUDGET_USD`, `SEARCH_RATE_PER_MIN` | service | R19 |
 | `EXTRACT_CACHE_DIR` | service | optional, local runs: a folder that keeps each document's extraction so a repeated ingest makes no second Claude call |
 
@@ -521,12 +541,13 @@ Haiku 5.5 constraints that affect the code:
 1. Neo4j vector index DDL and `db.index.vector.queryNodes(index, k, vector)`: confirmed by the
    pipeline test on Neo4j 5.26 and 2026.10.2 Community. `db.index.vector.queryNodes` is
    deprecated since 2026.04 in favour of the Cypher `SEARCH` clause but still works; move to
-   `SEARCH` once the local and Aura versions both support it. Not yet run on AuraDB itself.
+   `SEARCH` once the local and Aura versions both support it. Run on AuraDB Free on
+   2026-11-15 (it reported Neo4j 5.27): the indexes built and every query worked.
 2. AuraDB Free limits, from the Aura docs (checked 2026-11-10): 200,000 nodes, 400,000
    relationships, 1 GB storage, one database. The estimated graph (roughly 5k nodes and 40k
    relationships) fits with room to spare. An instance pauses after 72 hours of inactivity and
-   is deleted after 30 days paused. The docs do not say whether vector indexes are available
-   on Free, nor which Neo4j version it runs: confirm with `init-db` on the first connection.
+   is deleted after 30 days paused. Confirmed on 2026-11-15: Free has vector indexes, and the
+   whole corpus is 1,163 nodes and 3,704 relationships, far less than the estimate.
 3. Anthropic Python SDK structured-output call shape: confirmed against SDK 2.7 with a mock
    transport (`messages.parse` with `output_format` and `output_config.effort`). Whether the live
    API accepts every field for `claude-haiku-5-5` is confirmed only by the first real call.
@@ -535,7 +556,9 @@ Haiku 5.5 constraints that affect the code:
    300,000 tokens per request. The service sends 64 inputs of about 600 tokens, well inside.
 5. Pinning upload size: resolved by using POST policy uploads with `content-length-range`.
    Run against LocalStack 4.4's S3: a wrong size, key, or content type is rejected, the
-   exact file is accepted, and CORS allows only the web origin. Not yet run against AWS S3.
+   exact file is accepted, and CORS allows only the web origin. On AWS S3 (2026-11-15) a
+   browser upload of three files was accepted, ingested and served back; the refusals were
+   not repeated there.
 
 ## 15. Milestones
 
