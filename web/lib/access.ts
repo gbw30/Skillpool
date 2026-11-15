@@ -27,3 +27,9 @@ export function tokenFor(code: string): string | null {
   const expected = process.env.SITE_ACCESS_CODE;
   return expected && same(code, expected) ? accessToken(expected) : null;
 }
+
+/**
+ * Uploads are offered only when switched on. The proxy asks on every request. The header and the
+ * landing page ask when the site is built, since they are prerendered: rebuild after changing it.
+ */
+export const uploadsOn = () => process.env.UPLOADS_ENABLED === "true";

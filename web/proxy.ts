@@ -1,10 +1,14 @@
 // Runs before every page and API request: without the access cookie there is only /access.
 import { NextResponse, type NextRequest } from "next/server";
-import { ACCESS_COOKIE, siteGate } from "@/lib/access";
+import { ACCESS_COOKIE, siteGate, uploadsOn } from "@/lib/access";
 
 export function proxy(request: NextRequest) {
-  if (siteGate(request.cookies.get(ACCESS_COOKIE)?.value) !== "locked") return NextResponse.next();
   const { pathname, search } = request.nextUrl;
+  if (siteGate(request.cookies.get(ACCESS_COOKIE)?.value) !== "locked") {
+    // With uploads off the page is not linked from anywhere, and a typed address goes home.
+    if (pathname === "/upload" && !uploadsOn()) return NextResponse.redirect(new URL("/", request.url));
+    return NextResponse.next();
+  }
   if (pathname.startsWith("/api/")) {
     return Response.json(
       { code: "locked", message: "Enter the access code to use SkillPool." },
