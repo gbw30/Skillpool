@@ -18,7 +18,7 @@ Run, test, deploy: README.md. Read those before planning; don't duplicate them h
   resumes, 241 project and company documents, ground truth in truth/. Never hand-edit the output.
 
 ## Commands
-- Tests: `cd service && uv run pytest` (88 pass). Pipeline tests need
+- Tests: `cd service && uv run pytest` (89 pass). Pipeline tests need
   `SKILLPOOL_TEST_NEO4J_URI=bolt://127.0.0.1:17687 SKILLPOOL_TEST_NEO4J_PASSWORD=skillpool-dev` and
   wipe that database, including the day's spend record.
 - Local Neo4j: `docker compose up -d neo4j` (ports 17474/17687, auth neo4j/skillpool-dev).

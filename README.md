@@ -13,7 +13,7 @@ the design in [docs/SPEC.md](docs/SPEC.md).
 Built and tested without live model calls:
 
 - Service (`service/`): ingestion, quote verification, identity resolution, hybrid search,
-  cited answers, signed API. 70 tests pass, including the whole pipeline against a real Neo4j
+  cited answers, signed API. 89 tests pass, including the whole pipeline against a real Neo4j
   (5.26 and 2026.10) with the model calls replaced by fakes.
 - Web app (`web/`): landing, search, person, and upload screens plus the signed proxy. Builds
   and lints clean. All four screens were checked in headless Chromium, at desktop and phone
@@ -199,8 +199,6 @@ Before it goes on the internet:
   page shows the sample graph.
 - Questions appear in `/search?q=` addresses, so they reach the host's request logs and browser
   history.
-- PyMuPDF, which reads the PDFs, is AGPL-3.0 or commercial; this repository's code is MIT.
-  Decide whether that fits before hosting the service for others.
 
 ## Demo script
 
@@ -220,6 +218,22 @@ the resumes inherited from the original hackathon repository were removed becaus
 was unknown.
 
 The landing page credits the original team at the bottom.
+
+### Third-party software
+
+No third-party source is copied into this repository; dependencies are installed from the lock
+files (`service/uv.lock`, `web/package-lock.json`) and stay under their own licences. The Python
+ones are MIT, BSD, Apache-2.0, PSF-2.0 and, for `certifi`, MPL-2.0. None is GPL or AGPL.
+
+PDFs are read with [pypdf](https://github.com/py-pdf/pypdf) (BSD-3-Clause, copyright Mathieu
+Fenniak and the pypdf contributors). What that licence asks, and how it is met:
+
+- **Keep the copyright notice with any copy.** Every installed package carries its licence file
+  (`pypdf-*.dist-info/licenses/LICENSE`), and the service image built from `service/Dockerfile`
+  keeps it. Do not strip `*.dist-info` folders from an image or bundle you hand to someone else.
+- **Do not use the authors' names to endorse this project.** Nothing here does.
+
+Running the service for others is not redistribution, so nothing more is needed to host it.
 
 ## Notes
 
