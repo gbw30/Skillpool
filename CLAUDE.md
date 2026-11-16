@@ -46,6 +46,9 @@ Run, test, deploy: README.md. Read those before planning; don't duplicate them h
   project list by projects named, then skills used. Whoever is still equal goes by text
   similarity, then name (`_ranked` in `retrieve.py`), never by id: ids are random, so a rebuild
   would otherwise change the ranking.
+- After fusion, people are reordered by evidence (`_by_evidence`): own skills matched plus named
+  projects, then skills reached through projects too, then levels. The written answer sees only
+  the top 5 and is told this order; change the two together, or the answer contradicts the list.
 - A name alone never merges, and never creates a second person either: the mention is kept as
   unconfirmed (`MAY_MENTION`), shown on the person's page and not counted as evidence. It is saved
   (`Pending`) and tried again after every later batch, without a model call.

@@ -2,20 +2,32 @@
 import re
 from collections.abc import Iterator
 
-from .. import llm
+from .. import config, llm
 
 NO_MATCH = "Nothing in the indexed documents clearly matches this question, so no one is recommended."
 # Shown when the model wrote nothing that cites a passage. The ranked people and their passages still show.
 NO_SUMMARY = "No summary could be tied to the passages found, so none is shown. The passages for each person are listed as found."
 
 _SYSTEM = """You help a manager decide who to staff. You get a question and numbered evidence \
-passages about candidates that a retrieval system has already ranked.
+passages about candidates that a retrieval system has already ranked. Candidates are listed \
+strongest first. The ranking puts first whoever has more of the asked-for skills as their own \
+skills, or is on a project the question names; then whoever reaches more of those skills, \
+counting the skills their projects used; then higher skill levels; then the closest wording.
 
-Write a short recommendation: lead with the strongest one to three candidates, with one or two \
-sentences each on why, then one sentence on gaps or caveats if there are any.
+Write a short recommendation: lead with the strongest one to three candidates, in ranked order, \
+with one or two sentences each on why, then one sentence on gaps or caveats if there are any.
 
 Rules:
 - Use only the evidence. Add no facts about anyone.
+- Keep the ranked order. Lead with candidate 1 and discuss candidates in the order listed. Never \
+call a lower-ranked candidate stronger or a better fit than a higher-ranked one. If a passage seems \
+to favour a lower-ranked candidate, say what it shows as a caveat, without reordering.
+- "Own skills" are skills on the person's own record. A "Project" line means the person worked on \
+a project that used those skills: count it as project experience, weaker than an own skill, and \
+call it that. Say a person used a skill themselves only when a passage says so.
+- Project experience is still evidence of fit. Say no one fits only when no candidate has an own \
+skill, a project line, or a passage that matches the question.
+- Two candidates can share a name. They are different people: tell them apart by job title.
 - Every sentence that states a fact about a person ends with the numbers of the passages that \
 support it, like [2] or [2][5], placed before the full stop.
 - If the evidence does not show that anyone fits, say so plainly and recommend no one.
@@ -40,10 +52,14 @@ def prompt(question: str, people: list[dict]) -> str:
     for rank, p in enumerate(people, 1):
         lines = [f"Candidate {rank}: {p['name']}" + (f", {p['title']}" if p["title"] else "")]
         if p["matchedSkills"]:
-            lines.append("Matched skills: " + ", ".join(
+            lines.append("Own skills: " + ", ".join(
                 m["name"] + (f" ({m['level']})" if m["level"] else "") for m in p["matchedSkills"]
             ))
-        lines += [f"Relationship: {path}" for path in p["paths"]]
+        lines += [
+            f"Project: worked on {link['project']}"
+            + (f", a project that used {', '.join(link['skills'])}" if link["skills"] else "")
+            for link in p["links"]
+        ]
         lines += [f"[{e['n']}] ({e['path']}) {e['text']}" for e in p["evidence"]]
         blocks.append("\n".join(lines))
     return f"Question: {question}\n\n" + "\n\n".join(blocks)
@@ -117,6 +133,8 @@ def answer(question: str, results: dict) -> Iterator[str]:
     if results["confidence"] == "none":
         yield NO_MATCH
         return
-    valid = {e["n"] for p in results["people"] for e in p["evidence"]}
-    evidence = prompt("", results["people"])  # what the model is shown, without the question
-    yield from validated(llm.stream_text(_SYSTEM, prompt(question, results["people"])), valid, evidence.lower())
+    # Only the top of the ranking. The model never sees anyone lower, and their passages are not valid citations.
+    shown = results["people"][: config.ANSWER_PEOPLE]
+    valid = {e["n"] for p in shown for e in p["evidence"]}
+    evidence = prompt("", shown)  # what the model is shown, without the question
+    yield from validated(llm.stream_text(_SYSTEM, prompt(question, shown)), valid, evidence.lower())
