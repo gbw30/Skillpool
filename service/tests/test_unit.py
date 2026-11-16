@@ -424,7 +424,7 @@ def test_the_answer_sees_only_the_top_of_the_ranking(monkeypatch):
 
     monkeypatch.setattr(llm, "stream_text", stream)
     text = "".join(synthesize.answer("Who knows Kafka?", {"confidence": "ok", "people": people}))
-    assert text.strip() == "Ann One fits [1]."  # rank 6 and 7 cannot be championed, cited or not
+    assert text.strip() == "Ann One fits [1]."  # rank 6 and 7: not shown, and their passages are not citable
     assert "Candidate 5: Eve Five" in prompts[0] and "Fay Six" not in prompts[0]
     assert "Project: worked on Atlas, a project that used Kafka" in prompts[0]
 

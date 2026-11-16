@@ -49,7 +49,8 @@ itself scored 0.90 on all questions, 0.87 on multi-hop and 0.90 on resume questi
   the same ranking. That order scores 0.92.
 - 2026-11-16: the written answer called the 9th-ranked person the strongest fit. She reached
   all the skills asked for only through her projects, and the answer was free to reorder.
-  Measured on 48 questions plus 8 edge cases: the answer's first-named person was the top-ranked
+  Measured live on 48 questions plus 8 edge cases, outside `skillpool eval` and with each
+  question parsed once and reused for both rankings: the answer's first-named person was the top-ranked
   one in 29 of 49 answers, and it obeyed a question telling it to recommend the last candidate.
   Fusion now ends with a reorder by the evidence the answer weighs (`_by_evidence` in
   `retrieve.py`, step 3 in section 8), and the answer sees only the top 5, in order, with

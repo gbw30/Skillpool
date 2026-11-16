@@ -54,7 +54,8 @@ Run, test, deploy: README.md. Read those before planning; don't duplicate them h
   (`Pending`) and tried again after every later batch, without a model call.
 
 ## Not done yet (needs the owner)
-- Evaluated live on 2026-11-14 and again on 2026-11-15; results and what changed are in
+- Evaluated live on 2026-11-14 and again on 2026-11-15, and the ranking and answers alone on
+  2026-11-16 (not a full `skillpool eval`); results and what changed are in
   docs/SPEC.md section 0. Keep spend low: set `EXTRACT_CACHE_DIR` (README) before any ingest, and never call the paid APIs
   from tests or UI checks (use the fakes and `npm run dev:mock`).
 - Browser upload passed against a real AWS S3 bucket on 2026-11-15 (upload, ingest, search,
