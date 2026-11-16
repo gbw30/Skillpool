@@ -27,7 +27,7 @@ function Node({ kind, style, name, note }: { kind: Kind; style: CSSProperties; n
   return (
     <div
       style={style} title={note ? `${name} · ${note}` : name}
-      className="absolute flex -translate-y-1/2 items-center gap-1.5 rounded-md border border-line bg-raised px-1.5 py-1 text-[11px] leading-tight sm:px-2 sm:text-xs"
+      className="absolute flex -translate-y-1/2 items-center gap-1.5 rounded-[2px] border border-line bg-surface px-1.5 py-1 text-[11px] leading-tight sm:px-2 sm:text-xs"
     >
       <Glyph kind={kind} />
       <span className="line-clamp-2 min-w-0 wrap-anywhere">
@@ -92,7 +92,7 @@ export function PathGraph({ name, links, matched }: Props) {
         {links.map((link, i) => <Node key={link.project} kind="project" style={at(MIDDLE_START, MIDDLE_END, y(middle, i))} name={link.project} />)}
         {levels.size > 0 && (
           <div className="label absolute -translate-y-1/2 text-center" style={at(MIDDLE_START, MIDDLE_END, laneY)}>
-            <span className="bg-surface px-1.5">lists</span>
+            <span className="bg-bg px-1.5">lists</span>
           </div>
         )}
         {skills.map((skill) => <Node key={skill} kind="skill" style={at(SKILL_START, 100, skillY(skill))} name={skill} note={levels.get(skill)} />)}

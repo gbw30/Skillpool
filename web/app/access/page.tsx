@@ -44,13 +44,14 @@ export default function AccessPage() {
 
   return (
     <div className="page">
-      <div className="mx-auto max-w-sm pt-8 sm:pt-16">
-        <h1>Enter the access code</h1>
-        <p className="mt-2 text-muted">SkillPool is a private demo. Use the code you were given to open it.</p>
-        <form className="panel mt-6 p-4 sm:p-5" onSubmit={submit}>
+      <div className="mx-auto max-w-md pt-8 text-center sm:pt-20">
+        <p className="label">A private demo</p>
+        <h1 className="mt-4">Enter the <em>access code</em></h1>
+        <p className="mt-4 text-muted">Use the code you were given to open SkillPool.</p>
+        <form className="ruled mt-10 text-left" onSubmit={submit}>
           <label className="label mb-1.5 block" htmlFor="access-code">Access code</label>
           <input
-            id="access-code" className="input" type="password" autoComplete="current-password" autoFocus required
+            id="access-code" className="input h-14 border-accent/55 px-5 text-base" type="password" autoComplete="current-password" autoFocus required
             value={code} disabled={checking} aria-invalid={error ? true : undefined} aria-describedby={error ? "access-error" : undefined}
             onChange={(event) => setCode(event.target.value)}
           />
@@ -59,7 +60,7 @@ export default function AccessPage() {
               <Alert className="mt-0.5 shrink-0" /> {error}
             </p>
           )}
-          <button className="btn mt-4 w-full" type="submit" disabled={checking || !code}>
+          <button className="btn mt-4 h-14 w-full" type="submit" disabled={checking || !code}>
             {checking ? "Checking…" : "Open SkillPool"}
           </button>
         </form>

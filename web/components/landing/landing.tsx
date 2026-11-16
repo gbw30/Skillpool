@@ -70,7 +70,7 @@ function GraphList({ data, linked }: { data: GraphData; linked: boolean }) {
               <li key={person}>{linked ? <Link href={`/person/${person}`}>{name(data.people, person)}</Link> : name(data.people, person)}</li>
             ))}
           </ul>
-          <p className="mt-1 font-mono text-xs text-muted">
+          <p className="mt-1 text-xs text-muted">
             {data.used.filter(([id]) => id === project.id).map(([, skill]) => name(data.skills, skill)).join(" · ")}
           </p>
         </li>
@@ -79,18 +79,18 @@ function GraphList({ data, linked }: { data: GraphData; linked: boolean }) {
   );
 }
 
-const ANSWER = "flex flex-wrap items-center gap-x-2 gap-y-1.5 font-mono text-sm text-muted";
+const ANSWER = "flex flex-wrap items-baseline gap-x-3 gap-y-1.5 text-[0.9375rem] text-ink";
 
 /** The answer under the headline: someone on a project that used the skill. */
 function Answer({ example, linked = false }: { example: Example; linked?: boolean }) {
   return (
     <>
-      <span aria-hidden>↳</span>
+      <span aria-hidden className="connector">↳</span>
       {linked ? <Link className="chip" href={`/person/${example.person.id}`}><Glyph kind="person" /> {example.person.name}</Link>
         : <span className="chip"><Glyph kind="person" /> {example.person.name}</span>}
-      worked on
+      <span className="connector">worked on</span>
       <span className="chip"><Glyph kind="project" /> {example.project}</span>
-      which used
+      <span className="connector">which used</span>
       <span className="chip"><Glyph kind="skill" /> {example.skill}</span>
     </>
   );
@@ -229,7 +229,7 @@ export function Landing({ uploads }: { uploads: boolean }) {
     <div ref={stage} className="relative">
       {/* The scene stays pinned while the hero and the graph section scroll over it. */}
       <div className="sticky top-0 h-svh overflow-hidden" aria-hidden>
-        <div className="absolute inset-0 bg-[radial-gradient(55%_55%_at_72%_42%,color-mix(in_oklab,var(--color-accent)_7%,transparent),transparent)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(52%_56%_at_72%_46%,color-mix(in_oklab,var(--color-accent)_15%,transparent),transparent_72%),radial-gradient(26%_30%_at_86%_24%,color-mix(in_oklab,var(--color-skill)_9%,transparent),transparent_70%)]" />
         {view && drawable && (
           <GraphCanvas
             graph={view.graph} interactive stage={stage} trace={example?.path ?? null} controlsRef={graphControls}
@@ -243,7 +243,7 @@ export function Landing({ uploads }: { uploads: boolean }) {
         <section className="relative mx-auto flex min-h-[calc(100svh-3.5rem)] max-w-6xl flex-col px-4 pb-16 pt-8 sm:px-6 lg:justify-center lg:pt-0">
           {/* Beside the brain on a wide screen, over it on a narrow one. Type sizes follow this column's width. */}
           <div className="@container max-w-2xl lg:max-w-[54%]">
-            <motion.p {...rise(0)} className="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-xs text-muted">
+            <motion.p {...rise(0)} className="label flex flex-wrap items-center gap-x-5 gap-y-1">
               <span className="flex items-center gap-2 text-ink">
                 <span className={`size-1.5 rounded-full ${indexed ? "pulse bg-accent" : "bg-edge"}`} />
                 {!view ? "Reading the index" : indexed ? "Indexed" : view.source === "empty" ? "Nothing indexed yet · showing a sample" : "Index unreachable · showing a sample"}
@@ -258,16 +258,16 @@ export function Landing({ uploads }: { uploads: boolean }) {
             </motion.p>
 
             {/* The headline is the question the product answers, asked about a real skill from the index. */}
-            <motion.h1 {...rise(1)} aria-label="Who here has used the skill you need?" className="mt-6 text-[clamp(2.5rem,min(15cqw,13svh),6.5rem)] leading-[0.94] tracking-[-0.045em]">
-              <span aria-hidden className="block font-light text-ink/80">Who here</span>
-              <span aria-hidden className="block font-light text-ink/80">has used</span>
-              <span aria-hidden className="block min-h-[0.94em] font-semibold text-accent"><Word text={`${skill}?`} /></span>
+            <motion.h1 {...rise(1)} aria-label="Who here has used the skill you need?" className="mt-6 text-[clamp(3rem,min(18cqw,15.5svh),8.25rem)] leading-[0.9] tracking-[-0.02em]">
+              <span aria-hidden className="block">Who here</span>
+              <span aria-hidden className="block">has used</span>
+              <span aria-hidden className="block min-h-[0.9em] font-normal italic text-accent"><Word text={`${skill}?`} /></span>
             </motion.h1>
 
             {/* The answer, read off the graph: someone on a project that used the skill. */}
             {/* Every example's answer is laid out unseen in the same cell, so the row is always as tall as
                 the longest one and nothing below it moves when the example changes. */}
-            <div className="mt-6 grid min-h-9">
+            <div className="mt-7 grid min-h-9">
               {shown.map((other) => (
                 <p key={other.skill} aria-hidden className={`invisible col-start-1 row-start-1 ${ANSWER}`}><Answer example={other} /></p>
               ))}
@@ -290,17 +290,16 @@ export function Landing({ uploads }: { uploads: boolean }) {
 
             <motion.form {...rise(2)} className="mt-8 flex max-w-xl gap-2" onSubmit={submit}>
               <div className="relative min-w-0 flex-1">
-                <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 font-mono text-accent" aria-hidden>&gt;</span>
                 <input
-                  className="input h-12 bg-surface/80 pl-9 backdrop-blur-sm" type="text" maxLength={500} autoComplete="off"
+                  className="input h-14 border-accent/55 px-5 text-base backdrop-blur-sm" type="text" maxLength={500} autoComplete="off"
                   aria-label="Ask a staffing question" placeholder={ask} value={question}
                   onChange={(event) => setQuestion(event.target.value)} onFocus={() => setTyping(true)} onBlur={() => setTyping(false)}
                 />
               </div>
-              <button className="btn h-12 px-6" type="submit">Ask</button>
+              <button className="btn h-14 px-7" type="submit">Ask <span aria-hidden>→</span></button>
             </motion.form>
 
-            <motion.p {...rise(3)} className="mt-3 flex max-w-xl flex-wrap items-center gap-x-2 gap-y-1.5 font-mono text-xs text-muted">
+            <motion.p {...rise(3)} className="mt-4 flex max-w-xl flex-wrap items-baseline gap-x-4 gap-y-2 text-[0.8125rem] text-muted">
               Or ask about
               {others.map((name) => <Link key={name} className="chip" href={`/search?q=${encodeURIComponent(asking(name))}`} onClick={() => handOver(asking(name))}>{name}</Link>)}
             </motion.p>
@@ -315,14 +314,14 @@ export function Landing({ uploads }: { uploads: boolean }) {
         <section aria-labelledby="graph-title">
           <div className="mx-auto flex min-h-svh max-w-6xl flex-col px-4 py-8 sm:px-6">
           {/* A soft panel behind the text, so it stays readable when the graph is zoomed in underneath it. */}
-          <div className="-m-3 max-w-md rounded-[10px] bg-bg/65 p-3 backdrop-blur-[3px]">
-            <h2 id="graph-title" className="label text-accent">The graph behind the answers</h2>
+          <div className="-m-3 max-w-md rounded-[2px] bg-bg/65 p-3 backdrop-blur-[3px]">
+            <h2 id="graph-title" className="label !font-sans !text-accent">The graph behind the answers</h2>
             {view && (
-              <dl className="mt-4 flex gap-6 font-mono">
+              <dl className="mt-5 flex gap-10">
                 {([["person", "people", view.data.people.length], ["project", "projects", view.data.projects.length], ["skill", "skills", view.data.skills.length]] as const).map(([kind, name, count]) => (
                   <div key={kind}>
-                    <dd className="text-3xl font-medium tabular-nums tracking-tight">{count}</dd>
-                    <dt className="mt-1 flex items-center gap-1.5 text-xs text-muted"><Glyph kind={kind} /> {name}</dt>
+                    <dd className="font-serif text-5xl font-light leading-none tabular-nums">{count}</dd>
+                    <dt className="label mt-2 flex items-center gap-1.5"><Glyph kind={kind} /> {name}</dt>
                   </div>
                 ))}
               </dl>
@@ -346,10 +345,10 @@ export function Landing({ uploads }: { uploads: boolean }) {
               {drawable && (
                 <div className="flex items-center gap-3">
                   <p className="label max-lg:hidden">Ctrl + scroll to zoom · Shift + drag to turn</p>
-                  <div role="group" aria-label="Graph zoom" className="flex items-center rounded-md border border-line bg-surface/85 p-0.5 backdrop-blur-sm">
+                  <div role="group" aria-label="Graph zoom" className="flex items-center rounded-[2px] border border-line bg-surface/85 p-0.5 backdrop-blur-sm">
                     <button type="button" aria-label="Zoom out" title="Zoom out" className="grid size-9 cursor-pointer place-items-center rounded text-muted hover:bg-raised hover:text-ink" onClick={() => graphControls.current?.zoomBy(1 / 1.6)}><Minus /></button>
                     <button type="button" aria-label="Zoom in" title="Zoom in" className="grid size-9 cursor-pointer place-items-center rounded text-muted hover:bg-raised hover:text-ink" onClick={() => graphControls.current?.zoomBy(1.6)}><Plus /></button>
-                    <button type="button" className="h-9 cursor-pointer rounded px-2.5 font-mono text-xs text-muted hover:bg-raised hover:text-ink" onClick={() => graphControls.current?.reset()}>Reset</button>
+                    <button type="button" className="h-9 cursor-pointer rounded-[1px] px-2.5 text-xs text-muted hover:bg-raised hover:text-ink" onClick={() => graphControls.current?.reset()}>Reset</button>
                   </div>
                 </div>
               )}

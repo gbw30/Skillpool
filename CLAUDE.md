@@ -12,6 +12,7 @@ Run, test, deploy: README.md. Read those before planning; don't duplicate them h
 - web/ — Next.js 16 (App Router, cacheComponents) UI + signed proxy (`app/api/[...path]`).
   The whole site sits behind `SITE_ACCESS_CODE` (`proxy.ts`, `lib/access.ts`, `/access`).
   Tailwind 4 with tokens in `app/globals.css`, Motion springs, three.js only on the landing page.
+  The look is "Nocturne": warm black, cream serif headlines, one brass accent; the 3D brain is the hero.
   Design decisions: `.plans/frontend-revamp-spec.md`.
   Read web/AGENTS.md and current Next.js docs before writing web code.
 - "Open source" serves uploads from the bucket; documents loaded with `ingest-dir` link to

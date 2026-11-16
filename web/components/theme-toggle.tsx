@@ -39,12 +39,12 @@ function choose(theme: Theme) {
 export function ThemeToggle() {
   const theme = useSyncExternalStore(subscribe, current, () => "dark" as Theme);
   return (
-    <div role="group" aria-label="Theme" className="flex rounded-md border border-line p-0.5">
+    <div role="group" aria-label="Theme" className="flex rounded-[2px] border border-line p-0.5">
       {THEMES.map(({ id, name, Icon }) => (
         <button
           key={id} type="button" aria-label={name} title={name} aria-pressed={theme === id}
           onClick={() => choose(id)}
-          className="grid size-7 cursor-pointer place-items-center rounded text-muted hover:text-ink aria-pressed:bg-raised aria-pressed:text-ink"
+          className="grid size-6 cursor-pointer place-items-center rounded-[1px] text-muted sm:size-7 hover:text-ink aria-pressed:bg-raised aria-pressed:text-ink"
         >
           <Icon />
         </button>

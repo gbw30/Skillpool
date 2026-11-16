@@ -15,7 +15,7 @@ function Level({ level }: { level: string | null }) {
   const filled = LEVELS[level?.toLowerCase() ?? ""] ?? 0;
   if (!level) return null;
   return (
-    <span className="flex items-center gap-1.5 font-mono text-[11px] text-muted">
+    <span className="flex items-center gap-1.5 text-xs text-muted">
       {filled > 0 && (
         <span className="flex gap-0.5" aria-hidden>
           {[1, 2, 3].map((bar) => <span key={bar} className={`h-2.5 w-1 rounded-sm ${bar <= filled ? "bg-skill" : "bg-line"}`} />)}
@@ -42,17 +42,17 @@ function Person() {
   }, [id]);
 
   if (error) return <p className="panel flex items-start gap-2 border-danger/50 p-4 text-danger" role="alert"><Alert className="mt-1 shrink-0" /> {error}</p>;
-  if (!person) return <p className="pulse font-mono text-xs text-muted" role="status">Loading…</p>;
+  if (!person) return <p className="label pulse" role="status">Loading…</p>;
 
   const aliases = (person.aliases ?? []).filter((a) => a !== person.name);
   const unconfirmed = [...new Set(person.unconfirmed.map((u) => u.path))]; // one line per document, not per passage
   return (
     <>
       <p className="label flex items-center gap-2"><Glyph kind="person" /> Person</p>
-      <h1 className="mt-3 wrap-anywhere">{person.name}</h1>
-      <p className="mt-2 text-lg text-muted">{person.title ?? "No title on record"}</p>
+      <h1 className="mt-4 text-[clamp(2.75rem,7vw,5.5rem)] wrap-anywhere">{person.name}</h1>
+      <p className="mt-4 font-serif text-2xl italic text-muted">{person.title ?? "No title on record"}</p>
       {aliases.length > 0 && (
-        <p className="mt-3 flex flex-wrap items-center gap-2 font-mono text-xs text-muted">
+        <p className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-sm text-muted">
           Also written as {aliases.map((alias) => <span key={alias} className="chip">{alias}</span>)}
         </p>
       )}
@@ -68,8 +68,8 @@ function Person() {
         </p>
       )}
 
-      <div className="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-3">
-        <section className="panel p-4 sm:p-5" aria-labelledby="skills">
+      <div className="mt-12 grid grid-cols-1 gap-x-12 gap-y-10 lg:grid-cols-3">
+        <section className="ruled" aria-labelledby="skills">
           <h2 id="skills" className="label mb-4 flex items-center gap-2"><Glyph kind="skill" /> Skills</h2>
           {person.skills.length === 0 ? none : (
             <ul className="grid gap-2">
@@ -82,7 +82,7 @@ function Person() {
           )}
         </section>
 
-        <section className="panel p-4 sm:p-5" aria-labelledby="roles">
+        <section className="ruled" aria-labelledby="roles">
           <h2 id="roles" className="label mb-4">Roles</h2>
           {person.roles.length === 0 ? none : (
             <ul className="grid gap-3">
@@ -90,7 +90,7 @@ function Person() {
                 <li key={i} className="border-l border-line pl-3 text-sm">
                   <span className="block font-medium">{r.title || "Role"}</span>
                   <span className="block text-muted">{r.org}</span>
-                  {(r.start || r.end) && <span className="mt-0.5 block font-mono text-[11px] text-muted">{r.start ?? "?"} to {r.end ?? "now"}</span>}
+                  {(r.start || r.end) && <span className="mt-0.5 block text-xs text-muted">{r.start ?? "?"} to {r.end ?? "now"}</span>}
                 </li>
               ))}
             </ul>
@@ -110,13 +110,13 @@ function Person() {
           )}
         </section>
 
-        <section className="panel p-4 sm:p-5" aria-labelledby="projects">
+        <section className="ruled" aria-labelledby="projects">
           <h2 id="projects" className="label mb-4 flex items-center gap-2"><Glyph kind="project" /> Projects</h2>
           {person.projects.length === 0 ? none : (
             <ul className="grid gap-4">
               {person.projects.map((p) => (
                 <li key={p.id} className="text-sm">
-                  <span className="block font-medium">{p.name}</span>
+                  <span className="block font-serif text-xl leading-tight">{p.name}</span>
                   {p.role && <span className="block text-muted">{p.role}</span>}
                   {p.collaborators.length > 0 && (
                     <span className="mt-1 block text-muted">
@@ -133,7 +133,7 @@ function Person() {
         </section>
       </div>
 
-      <section className="panel mt-4 p-4 sm:p-5" aria-labelledby="evidence">
+      <section className="ruled mt-12 max-w-3xl" aria-labelledby="evidence">
         <h2 id="evidence" className="label mb-4">Evidence</h2>
         {person.evidence.length === 0
           ? <p className="text-sm text-muted">No passages on record.</p>
@@ -147,7 +147,7 @@ function Person() {
 export default function PersonPage() {
   return (
     <div className="page">
-      <Suspense fallback={<p className="pulse font-mono text-xs text-muted" role="status">Loading…</p>}>
+      <Suspense fallback={<p className="label pulse" role="status">Loading…</p>}>
         <Person />
       </Suspense>
     </div>

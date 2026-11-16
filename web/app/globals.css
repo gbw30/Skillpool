@@ -6,28 +6,34 @@
 :root[data-theme="system"] { color-scheme: light dark; }
 
 @theme inline {
-  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-sans: var(--font-text), system-ui, sans-serif;
+  --font-serif: var(--font-display), Georgia, serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }
 
 /* Every colour is light-dark(light, dark) and follows the color-scheme above, so components
    use these tokens and need no per-theme classes. */
 @theme {
-  --color-bg: light-dark(#dfe4de, #0a0d0c);
-  --color-surface: light-dark(#e9ede8, #111614);
-  --color-raised: light-dark(#d3d9d2, #171d1a);
-  --color-line: light-dark(#bcc5bd, #232b27);
+  /* "Nocturne": warm black, cream type and one brass accent. Light is the same family by day. */
+  --color-bg: light-dark(#ece4d4, #0f0d0b);
+  --color-surface: light-dark(#f4eee1, #15120f);
+  --color-raised: light-dark(#e0d6c2, #1e1a15);
+  --color-line: light-dark(#cfc4ae, #2b251e);
   /* Input borders and graph links: at least 3:1 against the surface. */
-  --color-edge: light-dark(#6f7b73, #5d6a63);
-  --color-ink: light-dark(#18201b, #e6ebe8);
-  --color-muted: light-dark(#48534c, #8d9892);
-  --color-accent: light-dark(#0a6233, #4ade80);
-  --color-accent-ink: light-dark(#ffffff, #04140b);
-  --color-danger: light-dark(#9b2318, #f87171);
-  /* Graph node kinds. Shape and label carry the meaning too. */
-  --color-person: light-dark(#0a6233, #4ade80);
-  --color-project: light-dark(#075a86, #38bdf8);
-  --color-skill: light-dark(#7d4c05, #fbbf24);
+  --color-edge: light-dark(#7a6e5c, #7d7161);
+  --color-ink: light-dark(#221c15, #efe6d6);
+  --color-muted: light-dark(#5a5042, #a69b8c);
+  --color-accent: light-dark(#7a4d0c, #d8a657);
+  --color-accent-ink: light-dark(#fff7e8, #17110a);
+  --color-danger: light-dark(#9b2c1c, #f0907f);
+  /* Graph node kinds, one warm family. Shape and label carry the meaning too. */
+  --color-person: light-dark(#221c15, #efe6d6);
+  --color-project: light-dark(#7a4d0c, #d8a657);
+  --color-skill: light-dark(#a03e16, #e8804a);
+  /* The sheet a quoted passage is read on: paper in both themes. */
+  --color-paper: light-dark(#fbf7ee, #efe7d8);
+  --color-paper-ink: #221c15;
+  --color-paper-muted: #665b4c;
 }
 
 /* The spring from lib/spring.ts (0.3s, no bounce) sampled as a CSS easing, for the small state
@@ -45,28 +51,37 @@
     ::-webkit-scrollbar-thumb { border: 3px solid transparent; border-radius: 999px; background: color-mix(in oklab, var(--color-accent) 45%, var(--color-line)) content-box; }
   }
   body { background: var(--color-bg); color: var(--color-ink); font-family: var(--font-sans); line-height: 1.55; }
-  h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); line-height: 1.1; letter-spacing: -0.03em; font-weight: 600; text-wrap: balance; }
-  h2 { font-size: 1.125rem; font-weight: 600; letter-spacing: -0.01em; }
+  h1 { font-family: var(--font-serif); font-size: clamp(2.25rem, 5vw, 4rem); line-height: 1; letter-spacing: -0.015em; font-weight: 300; text-wrap: balance; }
+  h2 { font-family: var(--font-serif); font-size: 1.625rem; line-height: 1.1; font-weight: 400; }
+  em { color: var(--color-accent); }
   a { color: var(--color-accent); text-underline-offset: 3px; }
   :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
   ::selection { background: color-mix(in oklab, var(--color-accent) 30%, transparent); }
 }
 
 @layer components {
-  /* Small monospace caption: section names, column heads, status lines. */
-  .label { font-family: var(--font-mono); font-size: 0.6875rem; line-height: 1rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-muted); }
+  /* Small widely spaced caption: section names, column heads, status lines. */
+  .label { font-family: var(--font-sans); font-size: 0.65625rem; line-height: 1rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--color-muted); }
+  /* The words between two names: "worked on", "which used". */
+  .connector { font-family: var(--font-serif); font-style: italic; font-size: 1.2em; line-height: 1; color: var(--color-muted); }
 
   /* The centred column every screen except the landing page sits in. */
   .page { max-width: 72rem; margin-inline: auto; padding: 2rem 1rem; }
   @media (min-width: 40rem) { .page { padding: 3rem 1.5rem; } }
 
-  .panel { border: 1px solid var(--color-line); border-radius: 10px; background: var(--color-surface); }
+  /* A framed box, for the few things that are one: an alert, the drop zone, a menu. */
+  .panel { border: 1px solid var(--color-line); border-radius: 2px; background: color-mix(in oklab, var(--color-surface) 70%, transparent); }
+  /* A section set off by a rule above it. Most content sits on the page, not in a box. */
+  .ruled { border-top: 1px solid var(--color-line); padding-top: 1.25rem; }
+  /* The paper a quoted passage is read on. */
+  .sheet { background: var(--color-paper); color: var(--color-paper-ink); border-radius: 2px; box-shadow: 0 30px 70px rgb(0 0 0 / 0.35); }
+  .sheet mark { background: color-mix(in oklab, var(--color-skill) 24%, transparent); box-shadow: 0 2px 0 var(--color-skill); color: inherit; }
 
   .btn {
     display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    height: 40px; padding: 0 16px; border: 1px solid transparent; border-radius: 6px;
+    height: 44px; padding: 0 22px; border: 1px solid transparent; border-radius: 1px;
     background: var(--color-accent); color: var(--color-accent-ink);
-    font-size: 0.9375rem; font-weight: 500; text-decoration: none; white-space: nowrap; cursor: pointer;
+    font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; white-space: nowrap; cursor: pointer;
     transition: background-color var(--spring-time) var(--spring), border-color var(--spring-time) var(--spring);
     -webkit-tap-highlight-color: transparent;
   }
@@ -82,17 +97,17 @@
   }
 
   .input {
-    width: 100%; height: 40px; padding: 0 12px; border: 1px solid var(--color-edge); border-radius: 6px;
-    background: var(--color-surface); color: var(--color-ink);
+    width: 100%; height: 44px; padding: 0 16px; border: 1px solid var(--color-edge); border-radius: 2px;
+    background: color-mix(in oklab, var(--color-bg) 88%, transparent); color: var(--color-ink);
   }
   .input::placeholder { color: var(--color-muted); }
 
-  /* A named node in running text: a small framed tag with its shape. */
+  /* A named node in running text: its shape, then the name on a fine rule. No box. */
   .chip {
-    display: inline-flex; align-items: center; gap: 6px; padding: 3px 8px; border: 1px solid var(--color-line); border-radius: 6px;
-    background: color-mix(in oklab, var(--color-surface) 80%, transparent); color: var(--color-ink); text-decoration: none;
+    display: inline-flex; align-items: center; gap: 6px; padding: 0 0 2px; border-bottom: 1px solid color-mix(in oklab, var(--color-ink) 45%, transparent);
+    color: var(--color-ink); font-weight: 500; text-decoration: none;
   }
-  @media (hover: hover) { a.chip:hover { border-color: var(--color-accent); } }
+  @media (hover: hover) { a.chip:hover { border-color: var(--color-accent); color: var(--color-accent); } }
 
   /* A button that reads as a link. */
   .link { color: var(--color-accent); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
@@ -106,10 +121,10 @@
 /* The pointer, in the page's colours and the system arrow's size. Colours cannot come from the
    tokens inside an image, so each theme has its own pair. Unlayered, so it wins over utilities. */
 :root {
-  --cursor-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M4 2v17l4.5-4 3 7 2.5-1-3-7h6z' fill='%230a0d0c' stroke='%234ade80' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 4 2, auto;
-  --cursor-link: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M4 2v17l4.5-4 3 7 2.5-1-3-7h6z' fill='%234ade80' stroke='%230a0d0c' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 4 2, pointer;
-  --cursor-arrow-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M4 2v17l4.5-4 3 7 2.5-1-3-7h6z' fill='%23e9ede8' stroke='%230a6233' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 4 2, auto;
-  --cursor-link-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M4 2v17l4.5-4 3 7 2.5-1-3-7h6z' fill='%230a6233' stroke='%23e9ede8' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 4 2, pointer;
+  --cursor-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M4 2v17l4.5-4 3 7 2.5-1-3-7h6z' fill='%230f0d0b' stroke='%23d8a657' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 4 2, auto;
+  --cursor-link: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M4 2v17l4.5-4 3 7 2.5-1-3-7h6z' fill='%23d8a657' stroke='%230f0d0b' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 4 2, pointer;
+  --cursor-arrow-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M4 2v17l4.5-4 3 7 2.5-1-3-7h6z' fill='%23f4eee1' stroke='%237a4d0c' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 4 2, auto;
+  --cursor-link-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M4 2v17l4.5-4 3 7 2.5-1-3-7h6z' fill='%237a4d0c' stroke='%23f4eee1' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 4 2, pointer;
 }
 :root[data-theme="light"] { --cursor-arrow: var(--cursor-arrow-light); --cursor-link: var(--cursor-link-light); }
 @media (prefers-color-scheme: light) { :root[data-theme="system"] { --cursor-arrow: var(--cursor-arrow-light); --cursor-link: var(--cursor-link-light); } }
@@ -148,7 +163,7 @@ a, button, summary, label[for], .cursor-pointer { cursor: var(--cursor-link); }
 /* A block cursor after streaming text. */
 @utility caret {
   &::after {
-    content: ""; display: inline-block; width: 0.5em; height: 1.05em; margin-left: 2px;
+    content: ""; display: inline-block; width: 2px; height: 1em; margin-left: 3px;
     vertical-align: text-bottom; background: var(--color-accent);
     @media (prefers-reduced-motion: no-preference) { animation: blink 1s steps(1) infinite; }
   }

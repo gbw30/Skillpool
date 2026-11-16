@@ -5,6 +5,31 @@ All four steps are done. The polish pass found three places that differ from the
 checklist (a slight spring bounce, the landing text's entrance timing, thinner icon strokes); the
 owner chose to keep all three.
 
+## Fourth revision, 2026-11-15 ("Nocturne")
+
+The owner compared the site with premium designs on Dribbble, found it still read as machine-made,
+and chose the "Nocturne" direction from three rendered options. The brain, the loading screen, the
+scroll into the graph and every other motion stay as they were. These replace the matching parts
+below where they differ.
+
+| Topic | Now |
+|---|---|
+| Palette | Warm black `#0f0d0b`, cream text `#efe6d6`, one brass accent `#d8a657`. Replaces near-black with signal green |
+| Node kinds | One warm family: person cream, project brass, skill ember `#e8804a`. Shapes are unchanged and still carry the meaning |
+| Light theme | The same family by day: paper `#ece4d4`, ink `#221c15`, bronze accent `#7a4d0c` |
+| Type | Cormorant Garamond (light) for headlines, names and the written answer, with italics in the accent for emphasis. Hanken Grotesk for everything else. Geist Mono only for file paths and quoted source text |
+| Labels | Small, widely spaced capitals in the text face, no longer monospace |
+| Boxes | Content sits on the page between fine rules (`.ruled`). A frame (`.panel`) is kept for alerts, the drop zone and controls. Corners are 1 to 2px |
+| Chips | A name on a fine rule with its shape, no box. The words between names ("worked on") are italic serif |
+| Header | The wordmark in spaced capitals at the centre, links to the left, sign-out and theme to the right |
+| Background | The wall of documents stays, fainter |
+| Search | The written answer comes first, in the serif. People follow as ruled rows. On a wide screen each passage is one line, and the chosen one is read on a sheet of paper that stays beside the list (`Reader` in `web/app/search/page.tsx`), with the person's name marked. A citation number in the answer opens its passage there. On a narrow screen passages are shown in place, as before |
+| Contrast | Every text pair measured again at WCAG AA or better in both themes |
+
+Not changed: the 3D scene's code, the loading screen, the motion rules, the mini graph's layout,
+the upload flow, and all behaviour. Checked in mock mode in headless Chromium at 1440px, 390px and
+360px, with no sideways scroll.
+
 ## Third revision, 2026-11-11 (loading screen, credit, sample)
 
 | Topic | Now |
