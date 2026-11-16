@@ -5,6 +5,25 @@ All four steps are done. The polish pass found three places that differ from the
 checklist (a slight spring bounce, the landing text's entrance timing, thinner icon strokes); the
 owner chose to keep all three.
 
+## Fifth revision, 2026-11-15 ("Horizon")
+
+The owner asked for home pages where the brain is not the centrepiece but still matters, saw six
+rendered options, and chose "Horizon". It applies at 1024px and wider. Narrower screens keep the
+brain behind the text, as before.
+
+| Topic | Now |
+|---|---|
+| Hero text | Centred. The headline is two lines: "Who here has used", then the skill in italic brass. The answer, the question box and the other skills follow |
+| Brain | Wider than the window, with its middle below the bottom edge, so only its top rises into view. Its top sits 28px under the end of the text, which the scene measures (`above` in `graph-canvas.tsx`), kept between 50% and 74% of the height |
+| Traced path | The nodes the hero traces take points on the part of the brain that shows (`featured`), so the lit path and its three names are on screen |
+| Description | The two sentences about what SkillPool does moved from the hero to the graph section, so the brain has the room |
+| Scroll cue | "Scroll · the brain opens into the graph" at the bottom edge, a link to the graph section |
+
+Not changed: the scroll into the graph, the loading screen, the graph view, and all behaviour.
+Checked in mock mode in headless Chromium at 1440x900, 1366x650, 1920x1080, 2200x800, 1024x768 and
+390x844, dark theme only, with no sideways scroll. The entrance from the loading screen and the
+light theme were not looked at again.
+
 ## Fourth revision, 2026-11-15 ("Nocturne")
 
 The owner compared the site with premium designs on Dribbble, found it still read as machine-made,

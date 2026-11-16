@@ -41,10 +41,15 @@ type Props = {
   sketch: RefObject<HTMLElement | null>;
   /** Called once the scene has drawn its first frame. */
   onReady: () => void;
+  /** The hero's text. On a wide screen the brain rises from the bottom edge to just under it. */
+  above: RefObject<HTMLElement | null>;
+  /** Every node the hero will trace. On a wide screen they sit on the part of the brain that shows. */
+  featured: number[];
 };
 
 const KINDS: Kind[] = ["person", "project", "skill"];
 const FOV = 40;
+const BRAIN_TOP = 0.84; // how far above its middle the brain's top is, in RADIUS, seen from the hero's side
 const LABELS = 10;
 const PULSES = 36; // few and slow: many quick signals read as flicker
 const PICK_RADIUS = 16; // px around the pointer that counts as on a node
@@ -96,7 +101,7 @@ function dotMaterial() {
   });
 }
 
-export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onOpen, onUnsupported, held, sketch, onReady }: Props) {
+export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onOpen, onUnsupported, held, sketch, onReady, above, featured }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const labelsRef = useRef<HTMLDivElement>(null);
@@ -298,22 +303,36 @@ export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onO
 
     function build() {
       // Give each real node the nearest free point of the brain, so its trip to the graph is short.
+      // On a wide screen only the brain's top shows, so the nodes the hero traces choose first, and
+      // from the points that are in view there, on the side the camera sees.
       const cloud = brainPoints(total);
+      const w = container!.clientWidth, h = container!.clientHeight;
+      measure();
+      const away = horizonAway(w / h), middle = horizonY(away, h);
+      /** Whether a point of the brain stays on screen in the wide hero, clear of the bottom edge, at both ends of the sway. */
+      const showing = (j: number) => [-0.3, 0, 0.3].every((sway) => {
+        const turned = -Math.PI / 2 + 0.4 + sway;
+        const depth = -cloud[j * 3] * Math.sin(turned) + cloud[j * 3 + 2] * Math.cos(turned); // towards the camera
+        return depth > -RADIUS * 0.2 && (middle + cloud[j * 3 + 1] - 0.1 * depth) / (slope * (away - depth)) > -0.68;
+      });
       const taken = new Uint8Array(total);
-      const order: number[] = [];
-      for (let i = 0; i < n; i++) {
+      const order: number[] = new Array(n);
+      const first = w >= 1024 ? [...new Set(featured)].filter((i) => i >= 0 && i < n) : [];
+      const turns = [...first, ...nodes.map((_, i) => i).filter((i) => !first.includes(i))];
+      turns.forEach((i, turn) => {
         let best = 0, nearest = Infinity;
         for (let j = 0; j < total; j++) {
           if (taken[j]) continue;
-          const gap = (cloud[j * 3] - graphAt[i * 3]) ** 2 + (cloud[j * 3 + 1] - graphAt[i * 3 + 1]) ** 2 + (cloud[j * 3 + 2] - graphAt[i * 3 + 2]) ** 2;
+          const hidden = turn < first.length && !showing(j);
+          const gap = (cloud[j * 3] - graphAt[i * 3]) ** 2 + (cloud[j * 3 + 1] - graphAt[i * 3 + 1]) ** 2 + (cloud[j * 3 + 2] - graphAt[i * 3 + 2]) ** 2 + (hidden ? 1e9 : 0);
           if (gap < nearest) {
             nearest = gap;
             best = j;
           }
         }
         taken[best] = 1;
-        order.push(best);
-      }
+        order[i] = best;
+      });
       for (let j = 0; j < total; j++) if (!taken[j]) order.push(j);
       home = new Float32Array(total * 3);
       order.forEach((from, to) => home.set(cloud.subarray(from * 3, from * 3 + 3), to * 3));
@@ -391,6 +410,28 @@ export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onO
 
     const onScreen = (i: number) => point.set(here[i * 3], here[i * 3 + 1], here[i * 3 + 2]).applyMatrix4(inner.matrixWorld).project(camera);
     let width = 0, height = 0;
+
+    // Where the hero's text ends, in px below the stage's top. Read from offsets, not a bounding
+    // box: the text slides in on a transform, which must not move the brain.
+    const aboveEl = above.current;
+    let textEnd = 0;
+    function measure() {
+      if (!aboveEl) return;
+      textEnd = aboveEl.offsetHeight;
+      for (let el: HTMLElement | null = aboveEl; el && el !== stageEl; el = el.offsetParent as HTMLElement | null) textEnd += el.offsetTop;
+    }
+    const watching = new ResizeObserver(measure);
+    if (aboveEl) watching.observe(aboveEl);
+
+    // The wide hero ("Horizon"): the brain is wider than the window and its middle is below the
+    // bottom edge, so only its top rises into view, just under the hero's text.
+    const slope = Math.tan((FOV / 2) * (Math.PI / 180));
+    /** The camera's distance. The height share stops a very wide, short window from bringing it into the brain. */
+    const horizonAway = (aspect: number) => (RADIUS / slope) * Math.max(1 / (1.04 * aspect), 1 / 1.75);
+    /** The share of the view's height at which the hero's text ends. */
+    const textShareOf = (h: number) => (aboveEl ? Math.min(1, textEnd / h) : 0.55);
+    /** How high the brain's middle is, for its top to sit a little under the text. */
+    const horizonY = (away: number, h: number) => slope * away * (1 - 2 * clamp(textShareOf(h) + 28 / h, 0.5, 0.74)) - RADIUS * BRAIN_TOP;
 
     // --- the entrance: the picture starts small, at `enter`, and grows into its place ----------
     const arrive = new Spring(1, 1.15, 0.1); // 0 where the entrance starts, 1 in place
@@ -594,6 +635,7 @@ export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onO
         camera.aspect = w / h;
         camera.updateProjectionMatrix();
         pathMat.resolution.set(w, h);
+        measure(); // the text's place follows the window's height even when its own size does not change
       }
 
       const range = box.height - innerHeight;
@@ -620,19 +662,19 @@ export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onO
       }
 
       // --- where the camera and the shape are ---
-      // Two layouts, switching at the same width as the page's own (Tailwind's lg). Wide: the brain
-      // fills the right-hand side, beside the headline. Narrow: it sits behind the text, centred and
-      // dimmed. Formed, the graph is centred, lower on a narrow screen to clear the heading.
+      // Two layouts, switching at the same width as the page's own (Tailwind's lg). Wide: only the
+      // brain's top shows, rising from the bottom edge (see horizonY). Narrow: it sits behind the
+      // text, centred and dimmed. Formed, the graph is centred, lower on a narrow screen to clear the heading.
       const aspect = width / height, wide = width >= 1024;
-      const slope = Math.tan((FOV / 2) * (Math.PI / 180));
       // The distance at which the shape, 2 * RADIUS across, takes up these shares of the view's width and height.
       const distance = (ofWidth: number, ofHeight: number) => (RADIUS / slope) * Math.max(1 / (ofWidth * aspect), 1 / ofHeight);
-      const away = wide ? distance(0.6, 0.95) : distance(1.05, 0.8);
+      const away = wide ? horizonAway(aspect) : distance(1.05, 0.8);
       const close = wide ? distance(0.7, 0.92) : distance(0.96, 0.66);
       camera.position.z = mix(away, close, e);
+      const textShare = textShareOf(height);
       outer.position.set(
-        wide ? slope * aspect * mix(away * 0.44, close * 0.1, e) : 0,
-        slope * mix(wide ? away * 0.02 : -away * 0.08, -close * (wide ? 0.04 : 0.16), e),
+        wide ? slope * aspect * mix(0, close * 0.1, e) : 0,
+        mix(wide ? horizonY(away, height) : slope * -away * 0.08, slope * -close * (wide ? 0.04 : 0.16), e),
         0,
       );
       rest.x = outer.position.x;
@@ -796,10 +838,11 @@ export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onO
         announced = true;
         latest.current.onReady();
       }
-      // Behind the text the brain is dimmed: all of it on a narrow screen, its left side on a wide one.
+      // Behind the text the brain is dimmed: all of it on a narrow screen. On a wide one only what
+      // reaches above the end of the text, which happens when the window is too short to clear it.
       const seen = (clamp((t - shownAt) / (enter.drawn ? 0.3 : 0.8)) * Math.max(0, veil) * (wide ? 1 : mix(mix(0.4, 1, fresh), 1, e))).toFixed(3);
       if (canvas!.style.opacity !== seen) canvas!.style.opacity = seen;
-      const mask = wide && e < 0.999 ? `linear-gradient(to right, rgb(0 0 0 / ${mix(mix(0.25, 1, fresh), 1, e).toFixed(3)}) 34%, #000 60%)` : "";
+      const mask = wide && e < 0.999 ? `linear-gradient(to bottom, rgb(0 0 0 / ${mix(mix(0.25, 1, fresh), 1, e).toFixed(3)}) ${(textShare * 100 - 4).toFixed(1)}%, #000 ${(textShare * 100 + 5).toFixed(1)}%)` : "";
       if (canvas!.style.maskImage !== mask) canvas!.style.maskImage = mask;
 
       // No names on the small picture: they come in as the brain reaches its place.
@@ -820,6 +863,7 @@ export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onO
       canvas.style.opacity = "0"; // a page kept alive in the background comes back with its last picture; hide it until the new scene draws
       scene.current = null;
       themeWatcher.disconnect();
+      watching.disconnect();
       systemTheme.removeEventListener("change", applyTheme);
       stageEl.removeEventListener("pointermove", onPointerMove);
       stageEl.removeEventListener("pointerdown", onPointerDown);
@@ -837,7 +881,7 @@ export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onO
       for (const item of solids) item.dispose();
       renderer.dispose();
     };
-  }, [graph, interactive, stage, controlsRef, sketch]);
+  }, [graph, interactive, stage, controlsRef, sketch, above, featured]);
 
   return (
     <div ref={containerRef} className="absolute inset-0">

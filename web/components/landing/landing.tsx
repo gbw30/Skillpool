@@ -79,7 +79,8 @@ function GraphList({ data, linked }: { data: GraphData; linked: boolean }) {
   );
 }
 
-const ANSWER = "flex flex-wrap items-baseline gap-x-3 gap-y-1.5 text-[0.9375rem] text-ink";
+const ABOUT = "SkillPool reads resumes and project reports into one graph. Ask in plain words and it answers with names, and quotes the lines that back each one.";
+const ANSWER = "flex flex-wrap items-baseline gap-x-3 gap-y-1.5 text-[0.9375rem] text-ink lg:justify-center";
 
 /** The answer under the headline: someone on a project that used the skill. */
 function Answer({ example, linked = false }: { example: Example; linked?: boolean }) {
@@ -138,6 +139,7 @@ export function Landing({ uploads }: { uploads: boolean }) {
   const [question, setQuestion] = useState("");
   const [typing, setTyping] = useState(false);
   const sketch = useRef<HTMLDivElement>(null);
+  const heroText = useRef<HTMLDivElement>(null);
   const played = useSyncExternalStore(never, () => loaderPlayed, () => false);
   const [sceneReady, setSceneReady] = useState(false);
   const [waited, setWaited] = useState(false);
@@ -189,6 +191,7 @@ export function Landing({ uploads }: { uploads: boolean }) {
   // With nothing indexed the hero still plays, on the sample graph, and says it is a sample.
   const shown = useMemo(() => (view ? examples(view) : []), [view]);
   const example = shown.length ? shown[turn % shown.length] : null;
+  const featured = useMemo(() => shown.flatMap((one) => one.path), [shown]);
   const skill = example?.skill ?? FALLBACK_SKILLS[turn % FALLBACK_SKILLS.length];
   const asking = (about: string) => `Who has hands-on experience with ${about}?`;
   const ask = asking(skill);
@@ -229,21 +232,22 @@ export function Landing({ uploads }: { uploads: boolean }) {
     <div ref={stage} className="relative">
       {/* The scene stays pinned while the hero and the graph section scroll over it. */}
       <div className="sticky top-0 h-svh overflow-hidden" aria-hidden>
-        <div className="absolute inset-0 bg-[radial-gradient(52%_56%_at_72%_46%,color-mix(in_oklab,var(--color-accent)_15%,transparent),transparent_72%),radial-gradient(26%_30%_at_86%_24%,color-mix(in_oklab,var(--color-skill)_9%,transparent),transparent_70%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(52%_56%_at_72%_46%,color-mix(in_oklab,var(--color-accent)_15%,transparent),transparent_72%),radial-gradient(26%_30%_at_86%_24%,color-mix(in_oklab,var(--color-skill)_9%,transparent),transparent_70%)] lg:bg-[radial-gradient(75%_60%_at_50%_100%,color-mix(in_oklab,var(--color-accent)_17%,transparent),transparent_72%)]" />
         {view && drawable && (
           <GraphCanvas
             graph={view.graph} interactive stage={stage} trace={example?.path ?? null} controlsRef={graphControls}
             onOpen={(person) => indexed && router.push(`/person/${person.id}`)} onUnsupported={() => setDrawable(false)}
-            held={!revealed} sketch={sketch} onReady={() => setSceneReady(true)}
+            held={!revealed} sketch={sketch} onReady={() => setSceneReady(true)} above={heroText} featured={featured}
           />
         )}
       </div>
 
       <div className="relative -mt-[100svh]">
-        <section className="relative mx-auto flex min-h-[calc(100svh-3.5rem)] max-w-6xl flex-col px-4 pb-16 pt-8 sm:px-6 lg:justify-center lg:pt-0">
-          {/* Beside the brain on a wide screen, over it on a narrow one. Type sizes follow this column's width. */}
-          <div className="@container max-w-2xl lg:max-w-[54%]">
-            <motion.p {...rise(0)} className="label flex flex-wrap items-center gap-x-5 gap-y-1">
+        <section className="relative mx-auto flex min-h-[calc(100svh-3.5rem)] max-w-6xl flex-col px-4 pb-16 pt-8 sm:px-6 lg:items-center lg:pt-[5svh] lg:text-center">
+          {/* Above the brain on a wide screen ("Horizon": the scene measures where this ends), over it on a
+              narrow one. Type sizes follow this column's width. */}
+          <div ref={heroText} className="@container max-w-2xl lg:w-full lg:max-w-5xl">
+            <motion.p {...rise(0)} className="label flex flex-wrap items-center gap-x-5 gap-y-1 lg:justify-center">
               <span className="flex items-center gap-2 text-ink">
                 <span className={`size-1.5 rounded-full ${indexed ? "pulse bg-accent" : "bg-edge"}`} />
                 {!view ? "Reading the index" : indexed ? "Indexed" : view.source === "empty" ? "Nothing indexed yet · showing a sample" : "Index unreachable · showing a sample"}
@@ -258,16 +262,17 @@ export function Landing({ uploads }: { uploads: boolean }) {
             </motion.p>
 
             {/* The headline is the question the product answers, asked about a real skill from the index. */}
-            <motion.h1 {...rise(1)} aria-label="Who here has used the skill you need?" className="mt-6 text-[clamp(3rem,min(18cqw,15.5svh),8.25rem)] leading-[0.9] tracking-[-0.02em]">
-              <span aria-hidden className="block">Who here</span>
-              <span aria-hidden className="block">has used</span>
+            <motion.h1 {...rise(1)} aria-label="Who here has used the skill you need?" className="mt-6 text-[clamp(3rem,min(18cqw,15.5svh),8.25rem)] leading-[0.9] tracking-[-0.02em] lg:mt-5 lg:text-[clamp(3rem,min(9.5cqw,10.5svh),6.75rem)]">
+              {/* Three lines on a narrow screen, two on a wide one. */}
+              <span aria-hidden className="block lg:inline">Who here</span>{" "}
+              <span aria-hidden className="block lg:inline">has used</span>
               <span aria-hidden className="block min-h-[0.9em] font-normal italic text-accent"><Word text={`${skill}?`} /></span>
             </motion.h1>
 
             {/* The answer, read off the graph: someone on a project that used the skill. */}
             {/* Every example's answer is laid out unseen in the same cell, so the row is always as tall as
                 the longest one and nothing below it moves when the example changes. */}
-            <div className="mt-7 grid min-h-9">
+            <div className="mt-7 grid min-h-9 lg:mt-6">
               {shown.map((other) => (
                 <p key={other.skill} aria-hidden className={`invisible col-start-1 row-start-1 ${ANSWER}`}><Answer example={other} /></p>
               ))}
@@ -288,7 +293,7 @@ export function Landing({ uploads }: { uploads: boolean }) {
               </div>
             </div>
 
-            <motion.form {...rise(2)} className="mt-8 flex max-w-xl gap-2" onSubmit={submit}>
+            <motion.form {...rise(2)} className="mt-8 flex max-w-xl gap-2 lg:mx-auto lg:mt-7 lg:max-w-2xl" onSubmit={submit}>
               <div className="relative min-w-0 flex-1">
                 <input
                   className="input h-14 border-accent/55 px-5 text-base backdrop-blur-sm" type="text" maxLength={500} autoComplete="off"
@@ -299,16 +304,20 @@ export function Landing({ uploads }: { uploads: boolean }) {
               <button className="btn h-14 px-7" type="submit">Ask <span aria-hidden>→</span></button>
             </motion.form>
 
-            <motion.p {...rise(3)} className="mt-4 flex max-w-xl flex-wrap items-baseline gap-x-4 gap-y-2 text-[0.8125rem] text-muted">
+            <motion.p {...rise(3)} className="mt-4 flex max-w-xl flex-wrap items-baseline gap-x-4 gap-y-2 text-[0.8125rem] text-muted lg:mx-auto lg:max-w-2xl lg:justify-center">
               Or ask about
               {others.map((name) => <Link key={name} className="chip" href={`/search?q=${encodeURIComponent(asking(name))}`} onClick={() => handOver(asking(name))}>{name}</Link>)}
             </motion.p>
 
-            <motion.p {...rise(4)} className="mt-6 max-w-md text-sm text-muted">
-              SkillPool reads resumes and project reports into one graph. Ask in plain words and it answers with
-              names, and quotes the lines that back each one.{uploads && <> <Link href="/upload">Add documents</Link></>}
+            {/* On a wide screen this sits with the graph instead, so the brain has the room under the question. */}
+            <motion.p {...rise(4)} className="mt-6 max-w-md text-sm text-muted lg:hidden">
+              {ABOUT}{uploads && <> <Link href="/upload">Add documents</Link></>}
             </motion.p>
           </div>
+          {/* What scrolling does, said once at the bottom edge, where the brain rises from. */}
+          <a href="#graph-title" className="label absolute bottom-5 left-1/2 -translate-x-1/2 bg-bg/85 px-4 py-1.5 no-underline max-lg:hidden">
+            <span className="text-ink">Scroll</span> · the brain opens into the graph <span aria-hidden>↓</span>
+          </a>
         </section>
 
         <section aria-labelledby="graph-title">
@@ -327,7 +336,8 @@ export function Landing({ uploads }: { uploads: boolean }) {
               </dl>
             )}
             {view && !indexed && <p className="mt-3 font-mono text-sm">{view.source === "empty" ? "Nothing is indexed yet" : "The graph could not be loaded"}</p>}
-            <p className="mt-4 text-sm text-muted">
+            <p className="mt-4 text-sm max-lg:hidden">{ABOUT}</p>
+            <p className="mt-4 text-sm text-muted lg:mt-2">
               {!view ? "Loading the graph…"
                 : !indexed ? <>The graph shown here is a made-up sample. {uploads && <><Link href="/upload">Add documents</Link> to see the real graph. </>}Point at a node to trace its links, and drag to move around.</>
                 : drawable ? "Every answer walks these links: a person worked on a project, and the project used a skill. Point at a node to trace its links, and click a person to open their page. Drag to move around."
