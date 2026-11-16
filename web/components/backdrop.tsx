@@ -72,9 +72,9 @@ export function Backdrop() {
 
   return (
     <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden>
-      <div className="absolute inset-0 opacity-35"><Pages id="pages" lit={false} /></div>
+      <div className="absolute inset-0 opacity-[0.13]"><Pages id="pages" lit={false} /></div>
       <motion.div
-        className="absolute left-0 top-0 overflow-hidden opacity-45 [mask-image:radial-gradient(closest-side,black,transparent)]"
+        className="absolute left-0 top-0 overflow-hidden opacity-30 [mask-image:radial-gradient(closest-side,black,transparent)]"
         style={{ width: LIGHT, height: LIGHT, transform: box }}
       >
         <motion.div className="absolute left-0 top-0 h-screen w-screen" style={{ transform: inside }}>

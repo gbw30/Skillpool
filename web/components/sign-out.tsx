@@ -14,7 +14,7 @@ export function SignOut() {
   }
   return (
     <button
-      className="flex cursor-pointer items-center whitespace-nowrap text-sm text-muted hover:text-ink max-[359px]:hidden"
+      className="flex cursor-pointer items-center whitespace-nowrap text-[0.8125rem] text-ink/80 hover:text-ink max-[359px]:hidden"
       type="button" aria-label="Sign out" title="Sign out" onClick={leave}
     >
       <Exit className="text-base sm:hidden" />

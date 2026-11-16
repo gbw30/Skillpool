@@ -36,10 +36,3 @@ export const Upload = (p: Props) => <Icon {...p}><path d="M12 15V4M7.5 8.5 12 4l
 export const Folder = (p: Props) => <Icon {...p}><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" /></Icon>;
 export const Check = (p: Props) => <Icon {...p}><path d="m5 12.5 4.5 4.5L19 7.5" /></Icon>;
 
-/** The SkillPool mark: one node linked to two. */
-export const Logo = (p: Props) => (
-  <Icon strokeWidth={2} {...p}>
-    <path d="M8 12h3c3 0 2-6 5-6M11 12c3 0 2 6 5 6" />
-    <circle cx="5.5" cy="12" r="2.5" /><circle cx="18.5" cy="6" r="2.5" /><circle cx="18.5" cy="18" r="2.5" />
-  </Icon>
-);

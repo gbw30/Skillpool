@@ -5,6 +5,50 @@ All four steps are done. The polish pass found three places that differ from the
 checklist (a slight spring bounce, the landing text's entrance timing, thinner icon strokes); the
 owner chose to keep all three.
 
+## Fifth revision, 2026-11-15 ("Horizon")
+
+The owner asked for home pages where the brain is not the centrepiece but still matters, saw six
+rendered options, and chose "Horizon". It applies at 1024px and wider. Narrower screens keep the
+brain behind the text, as before.
+
+| Topic | Now |
+|---|---|
+| Hero text | Centred. The headline is two lines: "Who here has used", then the skill in italic brass. The answer, the question box and the other skills follow |
+| Brain | Wider than the window, with its middle below the bottom edge, so only its top rises into view. Its top sits 28px under the end of the text, which the scene measures (`above` in `graph-canvas.tsx`), kept between 50% and 74% of the height |
+| Traced path | The nodes the hero traces take points on the part of the brain that shows (`featured`), so the lit path and its three names are on screen |
+| Description | The two sentences about what SkillPool does moved from the hero to the graph section, so the brain has the room |
+| Scroll cue | "Scroll · the brain opens into the graph" at the bottom edge, a link to the graph section |
+
+Not changed: the scroll into the graph, the loading screen, the graph view, and all behaviour.
+Checked in mock mode in headless Chromium at 1440x900, 1366x650, 1920x1080, 2200x800, 1024x768 and
+390x844, dark theme only, with no sideways scroll. The entrance from the loading screen and the
+light theme were not looked at again.
+
+## Fourth revision, 2026-11-15 ("Nocturne")
+
+The owner compared the site with premium designs on Dribbble, found it still read as machine-made,
+and chose the "Nocturne" direction from three rendered options. The brain, the loading screen, the
+scroll into the graph and every other motion stay as they were. These replace the matching parts
+below where they differ.
+
+| Topic | Now |
+|---|---|
+| Palette | Warm black `#0f0d0b`, cream text `#efe6d6`, one brass accent `#d8a657`. Replaces near-black with signal green |
+| Node kinds | One warm family: person cream, project brass, skill ember `#e8804a`. Shapes are unchanged and still carry the meaning |
+| Light theme | The same family by day: paper `#ece4d4`, ink `#221c15`, bronze accent `#7a4d0c` |
+| Type | Cormorant Garamond (light) for headlines, names and the written answer, with italics in the accent for emphasis. Hanken Grotesk for everything else. Geist Mono only for file paths and quoted source text |
+| Labels | Small, widely spaced capitals in the text face, no longer monospace |
+| Boxes | Content sits on the page between fine rules (`.ruled`). A frame (`.panel`) is kept for alerts, the drop zone and controls. Corners are 1 to 2px |
+| Chips | A name on a fine rule with its shape, no box. The words between names ("worked on") are italic serif |
+| Header | The wordmark in spaced capitals at the centre, links to the left, sign-out and theme to the right |
+| Background | The wall of documents stays, fainter |
+| Search | The written answer comes first, in the serif. People follow as ruled rows. On a wide screen each passage is one line, and the chosen one is read on a sheet of paper that stays beside the list (`Reader` in `web/app/search/page.tsx`), with the person's name marked. A citation number in the answer opens its passage there. On a narrow screen passages are shown in place, as before |
+| Contrast | Every text pair measured again at WCAG AA or better in both themes |
+
+Not changed: the 3D scene's code, the loading screen, the motion rules, the mini graph's layout,
+the upload flow, and all behaviour. Checked in mock mode in headless Chromium at 1440px, 390px and
+360px, with no sideways scroll.
+
 ## Third revision, 2026-11-11 (loading screen, credit, sample)
 
 | Topic | Now |
