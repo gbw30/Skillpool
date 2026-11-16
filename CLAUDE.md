@@ -61,9 +61,10 @@ Run, test, deploy: README.md. Read those before planning; don't duplicate them h
 - Browser upload passed against a real AWS S3 bucket on 2026-11-15 (upload, ingest, search,
   "Open source"). The refusals (wrong size, key, type) were only run against LocalStack. The
   bucket's rule allows `http://localhost:*`; a deployment needs `init-storage --origin <site>`.
-- Not deployed. An AuraDB Free instance holds the corpus (loaded 2026-11-15; rebuild it after any
-  change to skill aliases or the corpus, 35 minutes from the cache). The production build was
-  walked through against it live; other screen checks used faked model calls.
+- Deployed 2026-11-16 by the owner: service on Render Free (Docker), site on Vercel Hobby,
+  uploads off; steps in docs/DEPLOY.md. AuraDB Free holds the corpus (loaded 2026-11-15; rebuild
+  it after any change to skill aliases or the corpus, 35 minutes from the cache). Scripts run
+  against AuraDB add to the same daily spend record the live site's cap reads.
 - OpenAI embeddings were never run live; their search floors in `config.py` are untuned.
 - Remote: github.com/gbw30/Skillpool (public). CI passes on `main`; it runs on pushes to `main`
   and on pull requests only.
