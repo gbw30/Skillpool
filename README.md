@@ -196,6 +196,9 @@ tests against a throwaway Neo4j, plus the web lint and build, on every push and 
 
 ## Deploy
 
+Step-by-step for the hosted demo (Render, Vercel, AuraDB Free, $5 spend limits): [docs/DEPLOY.md](docs/DEPLOY.md).
+The rules below say why each setting is what it is.
+
 - Database: Neo4j AuraDB. Set `NEO4J_URI` to the `neo4j+s://` address and run `init-db` once.
   The Free tier allows 200,000 nodes, 400,000 relationships, and 1 GB, far more than the corpus
   needs. It pauses after 72 hours without activity and is deleted after 30 days paused, so
