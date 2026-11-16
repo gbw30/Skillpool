@@ -17,7 +17,8 @@ from skillpool.ingest.parse import ParseError, parse, parse_safely
 from skillpool.ingest.resolve import Context, Name, better_name, decide, name_match, parse_name, score
 from skillpool.ingest.verify import Locator, verify
 from skillpool.search.fuse import rrf
-from skillpool.search.retrieve import _ranked, _skill_strength
+from skillpool.search import synthesize
+from skillpool.search.retrieve import _by_evidence, _ranked, _skill_strength
 from skillpool.search.synthesize import NO_SUMMARY, check_sentence, validated
 from skillpool.text import skill_id, slug, snippet
 
@@ -388,6 +389,44 @@ def test_stream_is_validated_sentence_by_sentence():
     assert "".join(validated(iter(deltas), {1, 2})) == "Aaron knows Docker [1]. Cal fits [2]."
     # Nothing survives: a fixed line is shown, never the words that were refused.
     assert "".join(validated(iter(["Visit http://evil.example. ", "Hire Mallory Vane [9]."]), {1, 2})) == NO_SUMMARY
+
+
+def test_people_are_ordered_by_the_evidence_the_answer_weighs():
+    own = lambda skill, level: {"skill": skill, "level": level, "sources": []}
+    project = lambda name, used, named=False: {"projectId": slug(name), "named": named, "used": [{"skill": s} for s in used]}
+    direct = {
+        "naomi": [own("Kubernetes", "expert"), own("Docker", "intermediate")],
+        "samir": [own("Docker", "expert")],
+        "chloe": [own("Docker", "beginner")],
+    }
+    paths = {
+        # Reaches all three skills, but only through projects: below everyone with an own skill.
+        "maria": [project("Atlas", ["Docker", "Kafka"]), project("Borealis", ["Docker", "Kubernetes"])],
+        "chloe": [project("Atlas", ["Docker", "Kafka"]), project("Borealis", ["Docker", "Kubernetes"])],
+        "lead": [project("Cinder", [], named=True)],  # on a project the question names
+    }
+    fused = ["text-b", "maria", "samir", "text-a", "chloe", "naomi", "lead"]
+    assert _by_evidence(fused, direct, paths) == ["naomi", "chloe", "samir", "lead", "maria", "text-b", "text-a"]
+
+
+def test_the_answer_sees_only_the_top_of_the_ranking(monkeypatch):
+    names = ["Ann One", "Ben Two", "Cal Three", "Dee Four", "Eve Five", "Fay Six", "Gus Seven"]
+    people = [
+        {"name": name, "title": "", "matchedSkills": [], "links": [{"project": "Atlas", "skills": ["Kafka"]}],
+         "evidence": [{"n": n, "path": "a.md", "text": f"{name} ran Kafka."}]}
+        for n, name in enumerate(names, 1)
+    ]
+    prompts = []
+
+    def stream(system, user, max_tokens=0):
+        prompts.append(user)
+        return iter(["Ann One fits [1]. ", "Gus Seven is stronger [7]. ", "Fay Six is stronger."])
+
+    monkeypatch.setattr(llm, "stream_text", stream)
+    text = "".join(synthesize.answer("Who knows Kafka?", {"confidence": "ok", "people": people}))
+    assert text.strip() == "Ann One fits [1]."  # rank 6 and 7: not shown, and their passages are not citable
+    assert "Candidate 5: Eve Five" in prompts[0] and "Fay Six" not in prompts[0]
+    assert "Project: worked on Atlas, a project that used Kafka" in prompts[0]
 
 
 # --- signing and storage ----------------------------------------------------

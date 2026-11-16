@@ -80,6 +80,7 @@ SKILL_VECTOR_FLOOR = _float("SKILL_VECTOR_FLOOR", _SKILL_FLOOR)
 VECTOR_K = 50
 RRF_K = 60
 TOP_PEOPLE = 10
+ANSWER_PEOPLE = 5  # the written answer sees only these; lower-ranked people's passages are not valid citations
 EVIDENCE_PER_PERSON = 3
 
 GRAPH_VIEW_LINKS = 600  # most links of each kind sent to the landing page's graph

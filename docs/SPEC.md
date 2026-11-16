@@ -47,6 +47,16 @@ itself scored 0.90 on all questions, 0.87 on multi-hop and 0.90 on resume questi
   rank 10 to 12. Equals are now ordered by their highest single skill level, then by how close
   the question's text is to them, then by name (`_ranked` in `retrieve.py`), so a rebuild gives
   the same ranking. That order scores 0.92.
+- 2026-11-16: the written answer called the 9th-ranked person the strongest fit. She reached
+  all the skills asked for only through her projects, and the answer was free to reorder.
+  Measured live on 48 questions plus 8 edge cases, outside `skillpool eval` and with each
+  question parsed once and reused for both rankings: the answer's first-named person was the top-ranked
+  one in 29 of 49 answers, and it obeyed a question telling it to recommend the last candidate.
+  Fusion now ends with a reorder by the evidence the answer weighs (`_by_evidence` in
+  `retrieve.py`, step 3 in section 8), and the answer sees only the top 5, in order, with
+  project links labelled as project experience. Then: top-ranked first in 49 of 50, never below
+  third, and the planted instruction refused. Recall@10 went from 0.95 to 0.99 (resume questions
+  0.92 to 1.00, multi-hop 0.97 to 1.00, unstructured unchanged at 0.95).
 
 The first run missed two measures. These changes followed, each checked by a further run that
 read its extractions from the cache:
@@ -368,15 +378,21 @@ picking the point that meets the precision target first, then the best recall th
    - Equals in the direct list go by their highest single level. Then, in both the direct and
      the project-path list, by their place in the vector list, then by name. Never by id: ids
      are random, so a rebuild would reorder them.
-3. Fuse with reciprocal rank fusion (k = 60). Take the top 10. Text hits below a similarity floor
+3. Fuse with reciprocal rank fusion (k = 60). Then reorder by evidence, keeping the fused order
+   among equals: first the number of asked-for skills the person holds plus projects the
+   question names that they are on; then the number of asked-for skills they reach, counting
+   their projects' skills; then total and highest level; then matching projects. The written
+   answer is told the same order, so the two agree. Take the top 10. Text hits below a similarity floor
    are discarded before fusion; if that leaves all three lists empty, return an empty list with
    `confidence: none` and a fixed "no one matches" answer, with no model call (R14).
 4. Build the evidence pack: for each person up to 3 passages, preferring chunks listed in the
    `sources[]` of the relationships that matched, then their best vector chunks. Number them.
    Attach the path when the project leg contributed, e.g.
    `Aaron Brown → worked on → Atlas Migration → used → Kubernetes`.
-5. Synthesize (Haiku, streamed): given the question and the numbered evidence, write a short
-   recommendation citing `[n]` for every claim, and say so when evidence is insufficient.
+5. Synthesize (Haiku, streamed): given the question and the numbered evidence of the top 5
+   people, write a short recommendation citing `[n]` for every claim, in ranked order, and say
+   so when evidence is insufficient. A project link is described as project experience, never
+   as the person's own skill. Citations of anyone ranked lower do not resolve, so step 6 drops them.
 6. Validate: strip any `[n]` not in the pack; if a sentence loses all its citations, drop the
    sentence (R13).
 

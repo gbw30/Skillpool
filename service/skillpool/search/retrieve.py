@@ -30,6 +30,22 @@ def _skill_strength(row: dict) -> tuple[int, int, int]:
     return len(levels), sum(levels), max(levels, default=0)
 
 
+def _by_evidence(fused: list[str], direct: dict[str, list[dict]], paths: dict[str, list[dict]]) -> list[str]:
+    """The fused list, reordered by the evidence the written answer is told to weigh, so the two agree.
+    First whoever has more of the asked-for skills as their own, or is on a project the question
+    names. Then whoever reaches more of the skills, counting their projects' skills too. Then total
+    and highest level, then how many matching projects. Equals keep their fused order."""
+    def strength(pid: str) -> tuple[int, ...]:
+        rows = paths.get(pid, [])
+        named = len({r["projectId"] for r in rows if r["named"]})
+        own = {m["skill"] for m in direct.get(pid, [])}
+        reached = own | {u["skill"] for r in rows for u in r["used"]}
+        _, total, highest = _skill_strength({"matches": direct.get(pid, [])})
+        return len(own) + named, len(reached) + named, total, highest, len(rows)
+
+    return sorted(fused, key=lambda pid: tuple(-x for x in strength(pid)))
+
+
 def search(question: str, mode: str = "hybrid") -> dict:
     vector, skills, projects = understand(question, mode)
     skill_ids = [s["id"] for s in skills]
@@ -50,13 +66,13 @@ def search(question: str, mode: str = "hybrid") -> dict:
         sum(x["named"] for x in paths[r["id"]]), len({u["skill"] for x in paths[r["id"]] for u in x["used"]}),
     ))
 
-    top = rrf([[r["id"] for r in by_text], by_skill, by_path], config.RRF_K)
+    direct_hits = {r["id"]: r["matches"] for r in direct}
+    top = _by_evidence(rrf([[r["id"] for r in by_text], by_skill, by_path], config.RRF_K), direct_hits, paths)
     top = top[: config.TOP_PEOPLE]
     if not top:
         return {"confidence": "none", "skills": skills, "projects": projects, "people": []}
 
     text_hits = {r["id"]: r["chunkIds"] for r in by_text}
-    direct_hits = {r["id"]: r["matches"] for r in direct}
     wanted: dict[str, list[str]] = {}
     for pid in top:
         from_paths = [s for r in paths.get(pid, []) for s in (*(r["sources"] or []), *(x for u in r["used"] for x in u["sources"] or []))]

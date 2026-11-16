@@ -24,7 +24,7 @@ Run, test, deploy: README.md. Read those before planning; don't duplicate them h
   resumes, 241 project and company documents, ground truth in truth/. Never hand-edit the output.
 
 ## Commands
-- Tests: `cd service && uv run pytest` (92 pass). Pipeline tests need
+- Tests: `cd service && uv run pytest` (94 pass). Pipeline tests need
   `SKILLPOOL_TEST_NEO4J_URI=bolt://127.0.0.1:17687 SKILLPOOL_TEST_NEO4J_PASSWORD=skillpool-dev` and
   wipe that database, including the day's spend record.
 - Local Neo4j: `docker compose up -d neo4j` (ports 17474/17687, auth neo4j/skillpool-dev).
@@ -46,12 +46,16 @@ Run, test, deploy: README.md. Read those before planning; don't duplicate them h
   project list by projects named, then skills used. Whoever is still equal goes by text
   similarity, then name (`_ranked` in `retrieve.py`), never by id: ids are random, so a rebuild
   would otherwise change the ranking.
+- After fusion, people are reordered by evidence (`_by_evidence`): own skills matched plus named
+  projects, then skills reached through projects too, then levels. The written answer sees only
+  the top 5 and is told this order; change the two together, or the answer contradicts the list.
 - A name alone never merges, and never creates a second person either: the mention is kept as
   unconfirmed (`MAY_MENTION`), shown on the person's page and not counted as evidence. It is saved
   (`Pending`) and tried again after every later batch, without a model call.
 
 ## Not done yet (needs the owner)
-- Evaluated live on 2026-11-14 and again on 2026-11-15; results and what changed are in
+- Evaluated live on 2026-11-14 and again on 2026-11-15, and the ranking and answers alone on
+  2026-11-16 (not a full `skillpool eval`); results and what changed are in
   docs/SPEC.md section 0. Keep spend low: set `EXTRACT_CACHE_DIR` (README) before any ingest, and never call the paid APIs
   from tests or UI checks (use the fakes and `npm run dev:mock`).
 - Browser upload passed against a real AWS S3 bucket on 2026-11-15 (upload, ingest, search,
