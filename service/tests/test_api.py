@@ -187,6 +187,6 @@ def test_reads_are_rate_limited_per_address(client, monkeypatch):
 def test_health_check_asks_the_database_at_most_every_30_seconds(client, monkeypatch):
     asked = []
     monkeypatch.setattr(graph, "run", lambda query, **params: asked.append(query) or [{"ok": 1}])
-    monkeypatch.setattr(api, "_health", [0.0, False])
+    monkeypatch.setattr(api, "_health", [float("-inf"), False])
     assert [client.get("/healthz").json()["database"] for _ in range(3)] == [True, True, True]
     assert len(asked) == 1

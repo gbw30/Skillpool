@@ -178,7 +178,7 @@ def _until_tomorrow() -> int:
     return int((datetime.datetime.combine(now.date() + datetime.timedelta(days=1), datetime.time()) - now).total_seconds()) + 1
 
 
-_health = [0.0, False]  # when the database was last asked, and its answer
+_health = [float("-inf"), False]  # when the database was last asked (never, at start), and its answer
 
 
 @app.get("/healthz")
