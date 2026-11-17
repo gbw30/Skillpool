@@ -492,7 +492,8 @@ Haiku 5.5 constraints that affect the code:
 | `SITE_ACCESS_CODE` | web | R22. Unset: a development server is open, a production build is locked |
 | `UPLOADS_ENABLED`, `UPLOAD_ACCESS_CODE` | web | R18. Unless `true`, `/upload` redirects to the landing page and nothing links to it |
 | `SOURCE_BASE_URL` | service | optional: where documents loaded with `ingest-dir` are published, so "Open source" can link to them |
-| `DAILY_MODEL_BUDGET_USD`, `SEARCH_RATE_PER_MIN` | service | R19 |
+| `DAILY_MODEL_BUDGET_USD`, `SEARCH_RATE_PER_MIN`, `SEARCH_RATE_TOTAL_PER_MIN`, `SEARCH_RATE_PER_DAY` | service | R19 |
+| `READ_RATE_PER_MIN`, `READ_RATE_TOTAL_PER_MIN` | service | limits on signed GET requests; defaults 60 and 600 |
 | `EXTRACT_CACHE_DIR` | service | optional, local runs: a folder that keeps each document's extraction so a repeated ingest makes no second Claude call |
 
 ## 13. Security
@@ -508,12 +509,15 @@ Haiku 5.5 constraints that affect the code:
   and refused over 300 pages; a document is refused over 300,000 characters of text. Without
   these a small file could expand into gigabytes, or cost a model call per page.
 - Site access (R22): `proxy.ts` redirects every page request without a valid cookie to `/access`
-  and answers API requests with 401; the API route handler repeats the check. The cookie holds a
-  hash of the code, is `HttpOnly`, `SameSite=Lax`, `Secure` in production, and lasts 30 days;
-  changing the code ends every session. Ten wrong tries per address are allowed in ten minutes,
+  and answers API requests with 401; the API route handler repeats the check. The cookie holds
+  the time it was issued, sealed with an HMAC keyed by the code, so it stops working after 30
+  days even if copied, and changing the code ends every session. It is `HttpOnly`,
+  `SameSite=Lax`, and in production `Secure` and named `__Host-skillpool_access`, so no other
+  host can set it. After the code is accepted, the page goes only to an address on this site. Ten wrong tries per address are allowed in ten minutes,
   and 100 from all addresses together, because the address comes from a header a caller can
   fake. Past the total nobody is let in until the window passes. `shortcut:` both counts are in
   one process's memory, so use a long random code. Wrong upload codes are counted the same way.
+  A refusal carries `Retry-After`.
   `DELETE /api/access` signs a browser out.
 - Browser: every response carries a content security policy (no other site's scripts, frames or
   requests; this site cannot be framed), `nosniff`, `no-referrer`, `noindex`, and HSTS in
@@ -540,13 +544,22 @@ Haiku 5.5 constraints that affect the code:
   person's name or title on record, cannot claim someone's email under another name, every
   claim shows the document it came from, and a document can be deleted. Keep uploads off on a
   hosted demo unless they are being shown.
-- Spend: a rate limit per address and for everyone together, and a daily budget counter in the
-  service. An answer the reader abandons is charged like a finished one. The budget total is
+- Spend: a rate limit per address and for everyone together, a daily search limit per address
+  (`SEARCH_RATE_PER_DAY`), and a daily budget counter in the service. The daily count is stored
+  in the graph under the day and an HMAC of the address keyed with the signing secret, never the
+  address itself, and earlier days are deleted. Signed GET requests have their own per-minute
+  limits; every 429 carries `Retry-After`. `/healthz` is unsigned, so it asks the database at
+  most every 30 seconds. An answer the reader abandons is charged like a finished one. The budget total is
   stored in the graph and survives restarts. `shortcut:` the rate limit is in memory, and each
   process reads the stored total once a day; use a shared store and read the total on every
   check if the service runs more than one instance. The client address is the first
   `x-forwarded-for` entry, which Vercel overwrites itself; behind any other proxy, confirm it
   does the same or the per-IP limit can be bypassed (the daily budget still holds).
+- Notices and standards: `/privacy` (what is kept and who receives questions), a footer that
+  says the people are fictional and the answers come from AI, a label under every answer,
+  `/robots.txt`, `/.well-known/security.txt` (RFC 9116) and `/third-party-notices.txt`. These
+  open without the access code. A header control pauses everything that moves by itself
+  (WCAG 2.2.2) and is remembered like the theme.
 - TLS: strict certificate verification to Neo4j. The original's fallback to relaxed verification
   (`+ssc`) is not carried over.
 - Data: synthetic only. Real resumes are personal data and would need the non-goals in the PRD

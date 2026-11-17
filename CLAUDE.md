@@ -24,11 +24,12 @@ Run, test, deploy: README.md. Read those before planning; don't duplicate them h
   resumes, 241 project and company documents, ground truth in truth/. Never hand-edit the output.
 
 ## Commands
-- Tests: `cd service && uv run pytest` (94 pass). Pipeline tests need
+- Tests: `cd service && uv run pytest` (98 pass). Pipeline tests need
   `SKILLPOOL_TEST_NEO4J_URI=bolt://127.0.0.1:17687 SKILLPOOL_TEST_NEO4J_PASSWORD=skillpool-dev` and
   wipe that database, including the day's spend record.
 - Local Neo4j: `docker compose up -d neo4j` (ports 17474/17687, auth neo4j/skillpool-dev).
-- Web: `cd web && npm run lint && npm run build`.
+- Web: `cd web && npm run lint && npm test && npm run build` (`npm test`: the access cookie and
+  the client address, with Node's own test runner).
 - UI without keys or services: `cd web && npm run dev:mock` (canned data from `web/lib/mock.ts`).
 
 ## Invariants
@@ -49,6 +50,8 @@ Run, test, deploy: README.md. Read those before planning; don't duplicate them h
 - After fusion, people are reordered by evidence (`_by_evidence`): own skills matched plus named
   projects, then skills reached through projects too, then levels. The written answer sees only
   the top 5 and is told this order; change the two together, or the answer contradicts the list.
+- The privacy page (`web/app/privacy/page.tsx`) says what the site keeps, for how long, and who
+  receives questions. Change it with any change to cookies, logging, limits or providers.
 - A name alone never merges, and never creates a second person either: the mention is kept as
   unconfirmed (`MAY_MENTION`), shown on the person's page and not counted as evidence. It is saved
   (`Pending`) and tried again after every later batch, without a model call.

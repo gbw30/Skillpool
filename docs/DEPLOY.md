@@ -24,7 +24,9 @@ Do this first, so nothing can run up a bill while you deploy.
 2. **Voyage (MongoDB Atlas).** Atlas documents no hard spending cap for model API keys. Set a
    **billing alert** instead: in Atlas, open the organization, then **Alerts**, and add a
    billing alert for an amount above **$5**. Embedding a search question costs a tiny fraction
-   of a cent, so this is a guard against a leaked key, not against normal use.
+   of a cent, so this is a guard against a leaked key, not against normal use. Also check
+   whether your plan lets Voyage use API inputs to train its models, and turn that off if it
+   does: the privacy page tells visitors that their questions go to Voyage.
 3. **AWS.** In **Billing and Cost Management**, open **Budgets** and create a monthly cost
    budget of **$5** with email alerts at 80% and 100%. A budget only sends alerts. It does not
    stop spending. With uploads off the hosted demo does not use AWS at all; the alert covers
@@ -50,6 +52,13 @@ AuraDB Free pauses after 72 hours with no activity and is deleted after 30 days 
 [Aura console](https://console.neo4j.io), make sure the instance is **Running**, and resume it
 if not. The service's connection details are in the credentials file you downloaded when the
 instance was made (`NEO4J_URI`, `NEO4J_USERNAME`, `NEO4J_PASSWORD`).
+
+Once per database, and again after an update that adds a database rule (the daily search count
+did, on 2026-11-16), run from `service/`. It changes no data:
+
+```bash
+uv run --env-file .env --env-file <aura file> skillpool init-db
+```
 
 ## 4. Deploy the service on Render (owner)
 
@@ -80,6 +89,7 @@ and take about a minute to start again; step 6 keeps the service awake.
    | `DAILY_MODEL_BUDGET_USD` | `0.50` |
    | `SEARCH_RATE_PER_MIN` | `5` (searches per visitor per minute) |
    | `SEARCH_RATE_TOTAL_PER_MIN` | `20` (searches per minute for everyone together) |
+   | `SEARCH_RATE_PER_DAY` | `20` (searches per visitor per day, counted in AuraDB; the default) |
 
    Leave the `S3_*` and `AWS_*` variables out: they are only used for uploads.
 4. Create the service and wait for the first deploy. Open
@@ -107,11 +117,20 @@ public. Only the web app holds the signing secret.
 
 4. Deploy. Changing a variable later needs a **Redeploy** to take effect.
 
+An update that changes the access cookie (2026-11-16 did) signs everyone out once.
+
+## 5b. Turn on security reports (owner)
+
+On GitHub, open the repository's **Settings**, then **Advanced Security** (or **Code security**),
+and enable **Private vulnerability reporting**. The site's `/.well-known/security.txt`, the
+footer and `SECURITY.md` send reports there; without it, the link shows a 404. The
+`security.txt` file expires on 2027-11-16: move its `Expires` date forward before then.
+
 ## 6. Keep the service awake (owner, optional)
 
-A free Render service that has been idle answers its first request about a minute late. If
-that happens on the home page, it shows the made-up sample graph instead of the real one. To
-avoid it, have a free uptime monitor (for example UptimeRobot or cron-job.org) request
+A free Render service that has been idle answers its first request about a minute late. The
+home page then says "Waking the index" and waits up to a minute; only if the service is still
+not answering does it show the made-up sample graph. To skip the wait, have a free uptime monitor (for example UptimeRobot or cron-job.org) request
 `https://<your-service>.onrender.com/healthz` every 10 minutes.
 
 - **Hours:** one service awake all month uses about 744 of Render's 750 free hours. Do not add
@@ -131,7 +150,9 @@ Without the monitor, open the site a minute before a demo to wake it.
    the short answer is written out.
 4. Click **Open source** on a passage. It opens the document in the corpus folder on GitHub.
 5. Open `/upload`. It sends you back to the home page.
-6. In the Claude Console, check the usage for the day: a few searches cost under a cent.
+6. In a private window, without the code, open `/privacy`, `/robots.txt` and
+   `/.well-known/security.txt`. Each loads; any other page sends you to the access page.
+7. In the Claude Console, check the usage for the day: a few searches cost under a cent.
 
 Give recruiters the Vercel address, the access code, and the corpus link
 (`https://github.com/gbw30/Skillpool/tree/main/corpus`), so they can read the documents the
