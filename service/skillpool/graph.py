@@ -50,6 +50,7 @@ SCHEMA = [
         for label in ("Person", "Skill", "Project", "Organization", "Document", "Chunk", "Meta")
     ),
     "CREATE CONSTRAINT spend_day IF NOT EXISTS FOR (n:Spend) REQUIRE n.day IS UNIQUE",
+    "CREATE CONSTRAINT search_count_key IF NOT EXISTS FOR (n:SearchCount) REQUIRE n.key IS UNIQUE",
     "CREATE INDEX person_surname IF NOT EXISTS FOR (n:Person) ON (n.surnameKey)",
     "CREATE INDEX document_job IF NOT EXISTS FOR (n:Document) ON (n.jobId)",
 ]
@@ -421,6 +422,14 @@ RETURN p.id AS person, s.id AS skill ORDER BY person, skill LIMIT $limit
 SPEND_ON = "MATCH (s:Spend {day: $day}) RETURN sum(s.usd) AS usd"
 
 ADD_SPEND = "MERGE (s:Spend {day: $day}) ON CREATE SET s.usd = $usd ON MATCH SET s.usd = s.usd + $usd"
+
+# Searches per address per day. `key` is the day plus a keyed hash of the address; no address is stored.
+COUNT_SEARCH = """
+MERGE (c:SearchCount {key: $key}) ON CREATE SET c.day = $day, c.n = 1 ON MATCH SET c.n = c.n + 1
+RETURN c.n AS n
+"""
+
+FORGET_SEARCH_COUNTS = "MATCH (c:SearchCount) WHERE c.day <> $day DELETE c"
 
 # --- evaluation ------------------------------------------------------------
 

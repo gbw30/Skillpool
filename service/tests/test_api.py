@@ -14,8 +14,11 @@ SECRET = "test-secret"
 def client(monkeypatch):
     monkeypatch.setenv("SERVICE_SIGNING_SECRET", SECRET)
     monkeypatch.setattr(storage, "presign_upload", lambda key, ctype, size: {"url": "https://bucket", "fields": {"key": key, "Content-Type": ctype}})
-    api._hits.clear()
-    api._all.clear()
+    for hits, everyone in api._windows.values():
+        hits.clear()
+        everyone.clear()
+    counts: dict[str, int] = {}  # the daily count lives in the graph; see the test of searches_today
+    monkeypatch.setattr(api, "searches_today", lambda ip: counts.__setitem__(ip, counts.get(ip, 0) + 1) or counts[ip])
     return TestClient(api.app)
 
 
@@ -98,7 +101,7 @@ def test_search_is_limited_for_everyone_together(client, monkeypatch):
     # A new address every time, as a caller who fakes the address header would send.
     assert [api.allow(f"10.0.0.{i}", now=100.0) for i in range(5)] == [True, True, True, False, False]
     assert api.allow("10.0.0.9", now=161.0)  # a minute later
-    assert len(api._hits) == 1  # addresses that went quiet are forgotten, never all at once
+    assert len(api._windows["search"][0]) == 1  # addresses that went quiet are forgotten, never all at once
 
 
 def test_a_body_over_the_limit_is_refused_before_the_signature_is_checked(client, monkeypatch):
@@ -140,3 +143,50 @@ def test_a_document_with_no_stored_file_opens_where_the_corpus_is_published(clie
     assert call(client, "GET", f"/documents/{doc}/url").json()["url"] == "https://example.org/corpus/resumes/Ana%20Lima.pdf"
     monkeypatch.setattr(graph, "run", lambda query, **params: [])
     assert call(client, "GET", f"/documents/{doc}/url").status_code == 404
+
+
+def test_search_is_limited_per_address_per_day(client, monkeypatch):
+    monkeypatch.setattr(api, "search", lambda q, mode: {"confidence": "none", "skills": [], "projects": [], "people": []})
+    monkeypatch.setattr(config, "SEARCH_RATE_PER_DAY", 2)
+    monkeypatch.setattr(config, "SEARCH_RATE_PER_MIN", 100)
+    ip = {"x-client-ip": "203.0.113.20"}
+    assert [call(client, "POST", "/search", {"q": "x"}, headers=ip).status_code for _ in range(3)] == [200, 200, 429]
+    refused = call(client, "POST", "/search", {"q": "x"}, headers=ip)
+    assert refused.json()["code"] == "daily_limit" and 0 < int(refused.headers["retry-after"]) <= 86_401
+    assert call(client, "POST", "/search", {"q": "x"}, headers={"x-client-ip": "203.0.113.21"}).status_code == 200
+
+
+def test_the_daily_count_keeps_no_address_and_forgets_earlier_days(monkeypatch):
+    monkeypatch.setenv("SERVICE_SIGNING_SECRET", SECRET)
+    stored: dict[str, dict] = {"2000-01-01|old": {"day": "2000-01-01", "n": 4}}
+
+    def run(query, **p):
+        if query == graph.FORGET_SEARCH_COUNTS:
+            for key in [k for k, row in stored.items() if row["day"] != p["day"]]:
+                del stored[key]
+            return []
+        row = stored.setdefault(p["key"], {"day": p["day"], "n": 0})
+        row["n"] += 1
+        return [{"n": row["n"]}]
+
+    monkeypatch.setattr(graph, "run", run)
+    monkeypatch.setattr(api, "_counted_day", "")
+    assert [api.searches_today("198.51.100.7") for _ in range(3)] == [1, 2, 3]
+    assert api.searches_today("198.51.100.8") == 1
+    assert len(stored) == 2 and not any("198.51" in key for key in stored)  # yesterday's row is gone
+
+
+def test_reads_are_rate_limited_per_address(client, monkeypatch):
+    monkeypatch.setattr(graph, "run", lambda query, **params: [{"documents": 1}])
+    monkeypatch.setattr(config, "READ_RATE_PER_MIN", 3)
+    ip = {"x-client-ip": "203.0.113.30"}
+    assert [call(client, "GET", "/stats", headers=ip).status_code for _ in range(4)] == [200, 200, 200, 429]
+    assert call(client, "GET", "/stats", headers=ip).headers["retry-after"] == "60"
+
+
+def test_health_check_asks_the_database_at_most_every_30_seconds(client, monkeypatch):
+    asked = []
+    monkeypatch.setattr(graph, "run", lambda query, **params: asked.append(query) or [{"ok": 1}])
+    monkeypatch.setattr(api, "_health", [float("-inf"), False])
+    assert [client.get("/healthz").json()["database"] for _ in range(3)] == [True, True, True]
+    assert len(asked) == 1

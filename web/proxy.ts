@@ -23,6 +23,6 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  // Everything except the entry page, its API route, and the build's own static files.
-  matcher: ["/((?!access$|api/access$|_next/static|favicon.ico).*)"],
+  // Everything except the entry page, its API route, the public notices, and the build's own static files.
+  matcher: ["/((?!access$|api/access$|privacy$|robots\\.txt$|\\.well-known/security\\.txt$|third-party-notices\\.txt$|_next/static|favicon.ico).*)"],
 };

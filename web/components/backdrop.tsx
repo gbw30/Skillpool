@@ -2,9 +2,11 @@
 
 // The site's background: a faint wall of resumes and reports, and a soft light that passes over
 // it and shows, on each page it touches, the one line that matched. The light follows the pointer
-// on a spring; left alone, or on a touch screen, it wanders. It never moves under reduced motion.
+// on a spring; left alone, or on a touch screen, it wanders. It never moves under reduced motion,
+// or once the visitor pauses the motion.
 import { motion, useMotionTemplate, useMotionValue, useReducedMotion, useSpring, useTransform } from "motion/react";
 import { useEffect } from "react";
+import { useMotionPaused } from "@/lib/motion";
 
 const LIGHT = 460; // px across
 const RESUME = [62, 54, 62, 40, 58, 30], REPORT = [60, 52, 60, 46, 56, 28]; // line lengths
@@ -39,7 +41,8 @@ function Pages({ id, lit }: { id: string; lit: boolean }) {
 }
 
 export function Backdrop() {
-  const still = useReducedMotion();
+  const reduced = useReducedMotion(), paused = useMotionPaused();
+  const still = reduced || paused;
   const x = useSpring(useMotionValue(0), { stiffness: 50, damping: 16 });
   const y = useSpring(useMotionValue(0), { stiffness: 50, damping: 16 });
   // The light is a small box that moves; the pages inside it move the other way by the same
@@ -50,7 +53,10 @@ export function Backdrop() {
   useEffect(() => {
     x.jump(innerWidth * 0.72);
     y.jump(innerHeight * 0.3);
-    if (still) return;
+  }, [x, y]);
+
+  useEffect(() => {
+    if (still) return; // paused, the light stays where it is
     let moved = 0;
     const follow = (event: PointerEvent) => {
       moved = performance.now();

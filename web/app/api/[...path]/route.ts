@@ -25,8 +25,8 @@ const ROUTES: Route[] = [
   { method: "GET", pattern: /^stats$/, to: () => "/stats" },
 ];
 
-const error = (status: number, code: string, message: string) =>
-  Response.json({ code, message }, { status, headers: { "cache-control": "no-store" } });
+const error = (status: number, code: string, message: string, headers: Record<string, string> = {}) =>
+  Response.json({ code, message }, { status, headers: { "cache-control": "no-store", ...headers } });
 
 async function handle(request: NextRequest, ctx: RouteContext<"/api/[...path]">) {
   // proxy.ts already turns these away; checked again here so the API never depends on it alone.
@@ -57,7 +57,7 @@ async function handle(request: NextRequest, ctx: RouteContext<"/api/[...path]">)
     }
   }
   if (gated) {
-    if (uploadTries.locked(ip)) return error(429, "rate_limited", "Too many tries. Wait ten minutes and try again.");
+    if (uploadTries.locked(ip)) return error(429, "rate_limited", "Too many tries. Wait ten minutes and try again.", { "retry-after": "600" });
     const gate = uploadGate(request.headers.get("x-access-code"));
     if (gate === "disabled") return error(403, "uploads_disabled", "Uploads are switched off on this deployment.");
     if (gate === "denied") {
@@ -87,6 +87,7 @@ async function handle(request: NextRequest, ctx: RouteContext<"/api/[...path]">)
       "content-type": upstream.headers.get("content-type") ?? "application/json",
       "cache-control": "no-store",
       "x-correlation-id": upstream.headers.get("x-correlation-id") ?? "",
+      ...(upstream.headers.has("retry-after") ? { "retry-after": upstream.headers.get("retry-after")! } : {}),
     },
   });
 }

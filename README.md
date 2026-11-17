@@ -13,7 +13,7 @@ the design in [docs/SPEC.md](docs/SPEC.md).
 Built and tested without live model calls:
 
 - Service (`service/`): ingestion, quote verification, identity resolution, hybrid search,
-  cited answers, signed API. 94 tests pass, including the whole pipeline against a real Neo4j
+  cited answers, signed API. 98 tests pass, including the whole pipeline against a real Neo4j
   (5.26 and 2026.10) with the model calls replaced by fakes.
 - Web app (`web/`): landing, search, person, and upload screens plus the signed proxy. Builds
   and lints clean. All four screens were checked in headless Chromium, at desktop and phone
@@ -192,7 +192,8 @@ SKILLPOOL_TEST_NEO4J_URI=bolt://127.0.0.1:17687 SKILLPOOL_TEST_NEO4J_PASSWORD=sk
 ```
 
 Do not point that at a database you care about. `.github/workflows/ci.yml` runs the same
-tests against a throwaway Neo4j, plus the web lint and build, on every push and pull request.
+tests against a throwaway Neo4j, plus the web lint, tests (`cd web && npm test`) and build, on
+every push to `main` and every pull request.
 
 ## Deploy
 
@@ -207,8 +208,9 @@ The rules below say why each setting is what it is.
   in a file outside the repository and add it after the usual one:
   `uv run --env-file .env --env-file <aura file> skillpool ingest-dir ../corpus`.
 - Service: `service/Dockerfile` on any container host. Run a single instance: batch progress
-  and rate limits are held in memory. The daily spend total is stored in the graph, so a
-  restart does not reset the cap. Set a spend limit with each model provider as well. Set
+  and the per-minute rate limits are held in memory. The daily spend total and each address's
+  daily search count (`SEARCH_RATE_PER_DAY`, default 20) are stored in the graph, so a restart
+  does not reset them. Set a spend limit with each model provider as well. Set
   `SOURCE_BASE_URL` (see [Source documents](#source-documents)) so quotes link to their files.
 - Web: Vercel, with the variables from `web/.env.example`, including `SITE_ACCESS_CODE`. The
   per-address limits trust the first `x-forwarded-for` entry, which only a platform proxy that
@@ -233,6 +235,19 @@ Before it goes on the internet:
   page shows the sample graph.
 - Questions appear in `/search?q=` addresses, so they reach the host's request logs and browser
   history.
+- The privacy page (`/privacy`) names the operator and the providers. Change both if you run
+  your own copy.
+
+### Using it with real people
+
+SkillPool is a demo on made-up people. Ranking real people for work is a different matter:
+
+- Under the EU AI Act, a system that allocates work or informs hiring or promotion is high-risk
+  (Annex III, point 4), with duties for whoever deploys it.
+- Anthropic's Usage Policy treats employment decisions as a high-risk use: a qualified person
+  must review each output, and the people affected must be told that AI was used.
+- Resumes are personal data: the GDPR and similar laws need a legal basis, notice, retention
+  limits and a way to delete a person. The PRD lists these as non-goals of this demo.
 
 ## Demo script
 
@@ -268,6 +283,11 @@ Fenniak and the pypdf contributors). What that licence asks, and how it is met:
 - **Do not use the authors' names to endorse this project.** Nothing here does.
 
 Running the service for others is not redistribution, so nothing more is needed to host it.
+
+The web app is different: its pages send the code of React, Next.js, Motion and three.js to
+every visitor, and the build strips their licence comments. The footer therefore links to
+`/third-party-notices.txt`, made by `npm run notices` in `web/` from the installed packages. Run
+it again after adding or upgrading a package that reaches the browser.
 
 ## Notes
 

@@ -2,8 +2,15 @@
 import type { NextRequest } from "next/server";
 
 /** The caller's address as the hosting platform's proxy reports it. A caller can fake it elsewhere. */
-export function clientAddress(request: NextRequest): string {
-  return request.headers.get("x-forwarded-for")?.split(",")[0].trim() || "unknown";
+export function clientAddress(request: Pick<NextRequest, "headers">): string {
+  const address = request.headers.get("x-forwarded-for")?.split(",")[0].trim() || "unknown";
+  if (/\d+\.\d+\.\d+\.\d+$/.test(address)) return address.slice(address.lastIndexOf(":") + 1); // IPv4, or IPv4 inside IPv6
+  if (!address.includes(":")) return address;
+  // One IPv6 visitor is given a whole /64 and can take a new address in it at will: count the /64.
+  const [head, tail = ""] = address.toLowerCase().split("::");
+  const left = head ? head.split(":") : [], right = tail ? tail.split(":") : [];
+  const groups = address.includes("::") ? [...left, ...Array(Math.max(0, 8 - left.length - right.length)).fill("0"), ...right] : left;
+  return `${groups.slice(0, 4).map((group) => group.replace(/^0+(?=.)/, "")).join(":")}::/64`;
 }
 
 /**

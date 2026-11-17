@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type FormEvent } from "react";
 import { Minus, Plus } from "@/components/icons";
+import { useMotionPaused } from "@/lib/motion";
 import { Glyph } from "@/components/path-graph";
 import { api, handOver, type GraphData } from "@/lib/api";
 import { buildGraph, sampleGraph, type Graph, type Kind } from "@/lib/graph";
@@ -17,8 +18,11 @@ const loadCanvas = () => import("./graph-canvas").then((module) => module.GraphC
 const GraphCanvas = dynamic(loadCanvas, { ssr: false });
 
 // The loading screen stays until the graph, the 3D scene and the fonts are ready, and at least
-// until its own drawing has finished. After GIVE_UP_MS the page shows whatever it has.
-const DRAWN_MS = 1000, GIVE_UP_MS = 7000;
+// until its own drawing has finished, so the brain is drawn when it leaves. A sleeping service
+// can take a minute to answer: after SLOW_MS the screen says so, and after GRAPH_WAIT_MS the
+// sample graph is drawn instead. Once the graph is in, a scene that has not drawn within
+// SCENE_WAIT_MS is not waited for.
+const DRAWN_MS = 1000, SLOW_MS = 4000, GRAPH_WAIT_MS = 60_000, SCENE_WAIT_MS = 8000;
 // The loading screen plays once per visit. Coming back to this page from another one skips it:
 // the text and the brain still wait for each other, but under the page's header, not a full screen.
 let loaderPlayed = false;
@@ -144,8 +148,11 @@ export function Landing({ uploads }: { uploads: boolean }) {
   const [sceneReady, setSceneReady] = useState(false);
   const [waited, setWaited] = useState(false);
   const [gaveUp, setGaveUp] = useState(false);
+  const [slow, setSlow] = useState(false);
+  const paused = useMotionPaused(); // the visitor stopped the motion (the header's control)
+  const calm = still || paused;
   // Everything is in place: the loading screen leaves, the brain sets off, and the text comes in.
-  const revealed = gaveUp || (waited && view !== null && (sceneReady || !drawable));
+  const revealed = waited && view !== null && (sceneReady || !drawable || gaveUp);
 
   useEffect(() => {
     let current = true;
@@ -166,14 +173,15 @@ export function Landing({ uploads }: { uploads: boolean }) {
       loaderPlayed = true;
       return;
     }
-    const limit = setTimeout(() => setGaveUp(true), GIVE_UP_MS);
+    // The graph is the slow part; the scene's own time limit starts once it is in.
+    const limit = view ? setTimeout(() => setGaveUp(true), SCENE_WAIT_MS) : setTimeout(() => setSlow(true), SLOW_MS);
     return () => clearTimeout(limit);
-  }, [revealed]);
+  }, [revealed, view]);
 
   useEffect(() => {
     let current = true;
     void loadCanvas(); // fetch the scene's code while the graph is on its way
-    api<GraphData>("graph")
+    api<GraphData>("graph", { signal: AbortSignal.timeout(GRAPH_WAIT_MS) })
       .then((data): View["source"] | GraphData => (data.people.length + data.projects.length > 0 ? data : "empty"))
       .catch((): View["source"] => "failed")
       .then((result) => {
@@ -204,10 +212,10 @@ export function Landing({ uploads }: { uploads: boolean }) {
 
   // Move to the next example every few seconds, unless the visitor is typing or wants no motion.
   useEffect(() => {
-    if (still || typing || !revealed) return;
+    if (calm || typing || !revealed) return;
     const timer = setInterval(() => !document.hidden && setTurn((n) => n + 1), 9000);
     return () => clearInterval(timer);
-  }, [still, typing, revealed]);
+  }, [calm, typing, revealed]);
 
   function submit(event: FormEvent) {
     event.preventDefault();
@@ -228,7 +236,7 @@ export function Landing({ uploads }: { uploads: boolean }) {
 
   return (
     <>
-    <AnimatePresence>{!revealed && !played && <BrainLoader key="loader" sketchRef={sketch} />}</AnimatePresence>
+    <AnimatePresence>{!revealed && !played && <BrainLoader key="loader" sketchRef={sketch} slow={slow} />}</AnimatePresence>
     <div ref={stage} className="relative">
       {/* The scene stays pinned while the hero and the graph section scroll over it. */}
       <div className="sticky top-0 h-svh overflow-hidden" aria-hidden>
@@ -237,7 +245,7 @@ export function Landing({ uploads }: { uploads: boolean }) {
           <GraphCanvas
             graph={view.graph} interactive stage={stage} trace={example?.path ?? null} controlsRef={graphControls}
             onOpen={(person) => indexed && router.push(`/person/${person.id}`)} onUnsupported={() => setDrawable(false)}
-            held={!revealed} sketch={sketch} onReady={() => setSceneReady(true)} above={heroText} featured={featured}
+            held={!revealed} sketch={sketch} onReady={() => setSceneReady(true)} above={heroText} featured={featured} paused={paused}
           />
         )}
       </div>

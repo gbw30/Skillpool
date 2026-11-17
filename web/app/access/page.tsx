@@ -8,8 +8,9 @@ function destination(): string {
   const next = new URLSearchParams(window.location.search).get("next") ?? "/";
   try {
     // Parsed the way the browser will parse it, so "//host", "/\host" and "/<tab>/host" are all caught.
+    // The full address is returned: a path alone can still lead away, as "/.//host" becomes "//host".
     const url = new URL(next, window.location.origin);
-    return url.origin === window.location.origin ? url.pathname + url.search + url.hash : "/";
+    return url.origin === window.location.origin ? url.href : "/";
   } catch {
     return "/";
   }
@@ -48,6 +49,7 @@ export default function AccessPage() {
         <p className="label">A private demo</p>
         <h1 className="mt-4">Enter the <em>access code</em></h1>
         <p className="mt-4 text-muted">Use the code you were given to open SkillPool.</p>
+        <p className="mt-2 text-sm text-muted">Everyone in it is fictional, and its answers are written by AI.</p>
         <form className="ruled mt-10 text-left" onSubmit={submit}>
           <label className="label mb-1.5 block" htmlFor="access-code">Access code</label>
           <input

@@ -1,4 +1,7 @@
 """HTTP API. Only the web app calls it; every route except /healthz needs a valid signature."""
+import datetime
+import hashlib
+import hmac
 import json
 import logging
 import os
@@ -30,13 +33,14 @@ _TOO_LARGE = {"code": "payload_too_large", "message": "Request body is too large
 
 
 class ApiError(Exception):
-    def __init__(self, status: int, code: str, message: str):
-        self.status, self.code, self.message = status, code, message
+    def __init__(self, status: int, code: str, message: str, retry_after: int | None = None):
+        self.status, self.code, self.message, self.retry_after = status, code, message, retry_after
 
 
 @app.exception_handler(ApiError)
 async def _api_error(_: Request, exc: ApiError) -> JSONResponse:
-    return JSONResponse({"code": exc.code, "message": exc.message}, status_code=exc.status)
+    headers = {"Retry-After": str(exc.retry_after)} if exc.retry_after else None
+    return JSONResponse({"code": exc.code, "message": exc.message}, status_code=exc.status, headers=headers)
 
 
 @app.exception_handler(RequestValidationError)
@@ -116,6 +120,9 @@ async def signed(request: Request) -> None:
     )
     if not ok:
         raise ApiError(401, "unauthorized", "Missing or invalid request signature.")
+    # Reads need no model call but each reaches the database, so they get a limit of their own.
+    if request.method == "GET" and not allow(request.headers.get("x-client-ip", "unknown"), kind="read"):
+        raise ApiError(429, "rate_limited", "Too many requests. Try again in a minute.", retry_after=60)
 
 
 def _id(value: str) -> str:
@@ -125,12 +132,15 @@ def _id(value: str) -> str:
 
 
 # shortcut: per-process memory, reset on restart; use a shared store with more than one instance.
-_hits: dict[str, deque] = {}
-_all: deque = deque()
+# Per kind of request: the addresses seen in the last minute, and everyone's requests together.
+_windows: dict[str, tuple[dict[str, deque], deque]] = {"search": ({}, deque()), "read": ({}, deque())}
 
 
-def allow(ip: str, now: float | None = None) -> bool:
-    """One more search for this address? Limited per address and for everyone together."""
+def allow(ip: str, now: float | None = None, kind: str = "search") -> bool:
+    """One more request of this kind for this address? Limited per address and for everyone together."""
+    per, total = ((config.SEARCH_RATE_PER_MIN, config.SEARCH_RATE_TOTAL_PER_MIN) if kind == "search"
+                  else (config.READ_RATE_PER_MIN, config.READ_RATE_TOTAL_PER_MIN))
+    _hits, _all = _windows[kind]
     now = time.monotonic() if now is None else now
     while _all and now - _all[0] > 60:
         _all.popleft()
@@ -140,21 +150,49 @@ def allow(ip: str, now: float | None = None) -> bool:
     window = _hits.setdefault(ip, deque())
     while window and now - window[0] > 60:
         window.popleft()
-    if len(window) >= config.SEARCH_RATE_PER_MIN or len(_all) >= config.SEARCH_RATE_TOTAL_PER_MIN:
+    if len(window) >= per or len(_all) >= total:
         return False
     window.append(now)
     _all.append(now)
     return True
 
 
+_counted_day = ""
+
+
+def searches_today(ip: str) -> int:
+    """Count one more search for this address today, and return the day's total. Stored in the
+    graph, so the free host's sleep and restart do not reset it. The address is kept only as a
+    hash keyed with the signing secret and the day, and earlier days are deleted."""
+    global _counted_day
+    day = datetime.date.today().isoformat()  # the server's day, as the spend cap counts it
+    if day != _counted_day:
+        graph.run(graph.FORGET_SEARCH_COUNTS, day=day)
+        _counted_day = day
+    digest = hmac.new(config.require("SERVICE_SIGNING_SECRET").encode(), f"{day}|{ip}".encode(), hashlib.sha256)
+    return graph.run(graph.COUNT_SEARCH, key=f"{day}|{digest.hexdigest()[:32]}", day=day)[0]["n"]
+
+
+def _until_tomorrow() -> int:
+    now = datetime.datetime.now()
+    return int((datetime.datetime.combine(now.date() + datetime.timedelta(days=1), datetime.time()) - now).total_seconds()) + 1
+
+
+_health = [float("-inf"), False]  # when the database was last asked (never, at start), and its answer
+
+
 @app.get("/healthz")
 def healthz() -> dict:
-    try:
-        graph.run("RETURN 1 AS ok")
-        return {"ok": True, "database": True}
-    except Exception:
-        log.exception("database check failed")
-        return {"ok": False, "database": False}
+    # Unsigned, so anyone can call it: ask the database at most every 30 seconds. The question asked
+    # also deletes earlier days' search counts, so they go even on a day nobody searches.
+    if time.monotonic() - _health[0] > 30:
+        try:
+            graph.run(graph.FORGET_SEARCH_COUNTS, day=datetime.date.today().isoformat())
+            _health[:] = [time.monotonic(), True]
+        except Exception:
+            log.exception("database check failed")
+            _health[:] = [time.monotonic(), False]
+    return {"ok": _health[1], "database": _health[1]}
 
 
 class FileEntry(BaseModel):
@@ -216,8 +254,12 @@ def _event(name: str, data: dict) -> str:
 
 @app.post("/search", dependencies=[Depends(signed)])
 def search_route(body: SearchRequest, request: Request) -> StreamingResponse:
-    if not allow(request.headers.get("x-client-ip", "unknown")):
-        raise ApiError(429, "rate_limited", "Too many searches. Try again in a minute.")
+    ip = request.headers.get("x-client-ip", "unknown")
+    if not allow(ip):
+        raise ApiError(429, "rate_limited", "Too many searches. Try again in a minute.", retry_after=60)
+    if searches_today(ip) > config.SEARCH_RATE_PER_DAY:
+        raise ApiError(429, "daily_limit", f"You have used today's {config.SEARCH_RATE_PER_DAY} searches. "
+                       "They start again at midnight UTC.", retry_after=_until_tomorrow())
     question = body.q
 
     def events():
