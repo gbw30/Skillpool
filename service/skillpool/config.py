@@ -42,6 +42,12 @@ DAILY_MODEL_BUDGET_USD = _float("DAILY_MODEL_BUDGET_USD", 5.0)
 SEARCH_RATE_PER_MIN = int(os.environ.get("SEARCH_RATE_PER_MIN", "20"))  # per client address
 # For everyone together. The address is whatever the web host reports, and not every host reports it honestly.
 SEARCH_RATE_TOTAL_PER_MIN = int(os.environ.get("SEARCH_RATE_TOTAL_PER_MIN", "120"))
+# Per address per day, kept in the graph so it survives a restart. A recruiter tries 5 to 15
+# questions; 20 leaves room for people who share an office address.
+SEARCH_RATE_PER_DAY = int(os.environ.get("SEARCH_RATE_PER_DAY", "20"))
+# Every signed GET (graph, person, documents, stats): no model call, but each reaches the database.
+READ_RATE_PER_MIN = int(os.environ.get("READ_RATE_PER_MIN", "60"))
+READ_RATE_TOTAL_PER_MIN = int(os.environ.get("READ_RATE_TOTAL_PER_MIN", "600"))
 MAX_REQUEST_BYTES = 300 * 1024  # the largest upload manifest is about 110 KB
 
 # Chunking: about 600 tokens with 80 overlap at ~4 characters per token.
