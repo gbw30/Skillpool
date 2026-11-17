@@ -4,17 +4,22 @@
 // the 3D scene, the graph and the fonts load behind it. When they are ready it fades out over the
 // real brain, which starts where this drawing stands (graph-canvas.tsx) and travels to its place.
 import { motion, useIsPresent } from "motion/react";
-import type { CSSProperties, RefObject } from "react";
+import { useEffect, useRef, type CSSProperties, type RefObject } from "react";
 import { brainSketch } from "@/lib/brain";
 
 const SKETCH = brainSketch();
 const TINT = ["var(--color-person)", "var(--color-project)", "var(--color-skill)"];
 
-/** `sketchRef`: the drawing itself, which the 3D scene measures to know where to start. */
-export function BrainLoader({ sketchRef }: { sketchRef: RefObject<HTMLDivElement | null> }) {
+/** `sketchRef`: the drawing itself, which the 3D scene measures to know where to start.
+ *  `slow`: the graph is taking long, most likely because the service is waking up. */
+export function BrainLoader({ sketchRef, slow }: { sketchRef: RefObject<HTMLDivElement | null>; slow: boolean }) {
   const present = useIsPresent();
+  const screen = useRef<HTMLDivElement>(null);
+  // The stylesheet hides this screen after 10 s in case no script runs. A running script decides.
+  useEffect(() => { screen.current?.setAttribute("data-live", ""); }, []);
   return (
     <motion.div
+      ref={screen}
       className={`loader fixed inset-0 z-50 grid place-items-center bg-bg ${present ? "" : "pointer-events-none"}`}
       role="status" exit={{ opacity: 0 }} transition={{ duration: 0.45, ease: "easeOut" }}
     >
@@ -39,7 +44,10 @@ export function BrainLoader({ sketchRef }: { sketchRef: RefObject<HTMLDivElement
             </svg>
           ))}
         </div>
-        <p className="label sketch-label">Reading the index</p>
+        <div className="flex flex-col items-center gap-2 text-center">
+          <p className="label sketch-label">{slow ? "Waking the index" : "Reading the index"}</p>
+          {slow && <p className="max-w-64 text-sm text-muted">The free server sleeps when idle, so this can take up to a minute.</p>}
+        </div>
       </div>
     </motion.div>
   );

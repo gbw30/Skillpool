@@ -6,9 +6,9 @@ import { readBody } from "@/lib/body";
 
 const tries = attemptLimit();
 
-const error = (status: number, code: string, message: string) =>
-  Response.json({ code, message }, { status, headers: { "cache-control": "no-store" } });
-const tooMany = () => error(429, "rate_limited", "Too many tries. Wait ten minutes and try again.");
+const error = (status: number, code: string, message: string, headers: Record<string, string> = {}) =>
+  Response.json({ code, message }, { status, headers: { "cache-control": "no-store", ...headers } });
+const tooMany = () => error(429, "rate_limited", "Too many tries. Wait ten minutes and try again.", { "retry-after": "600" });
 
 export async function POST(request: NextRequest) {
   if (crossSite(request)) return error(403, "cross_site", "This request did not come from SkillPool.");

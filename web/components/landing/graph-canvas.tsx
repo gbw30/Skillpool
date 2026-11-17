@@ -41,6 +41,8 @@ type Props = {
   sketch: RefObject<HTMLElement | null>;
   /** Called once the scene has drawn its first frame. */
   onReady: () => void;
+  /** The visitor paused the motion: no drift, sway or travelling light (WCAG 2.2.2). */
+  paused: boolean;
   /** The hero's text. On a wide screen the brain rises from the bottom edge to just under it. */
   above: RefObject<HTMLElement | null>;
   /** Every node the hero will trace. On a wide screen they sit on the part of the brain that shows. */
@@ -101,15 +103,15 @@ function dotMaterial() {
   });
 }
 
-export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onOpen, onUnsupported, held, sketch, onReady, above, featured }: Props) {
+export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onOpen, onUnsupported, held, sketch, onReady, above, featured, paused }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const labelsRef = useRef<HTMLDivElement>(null);
   // The latest props the scene reads, so a change in them does not rebuild it.
-  const latest = useRef({ onOpen, onUnsupported, onReady, held, trace });
+  const latest = useRef({ onOpen, onUnsupported, onReady, held, trace, paused });
   const scene = useRef<{ trace: (path: number[] | null) => void } | null>(null);
   useEffect(() => {
-    latest.current = { onOpen, onUnsupported, onReady, held, trace };
+    latest.current = { onOpen, onUnsupported, onReady, held, trace, paused };
     scene.current?.trace(trace);
   });
 
@@ -597,7 +599,7 @@ export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onO
     // --- one frame -------------------------------------------------------------------------
     let frame = 0, last = performance.now() / 1000;
     const scrolled = new Spring(0, 0.7); // follows the page from the hero (0) to the graph view (1)
-    let drift = 0, view = 0, veil = 1, wasFormed = false, drawn = -1, posed = "";
+    let drift = 0, swayed = 0, view = 0, veil = 1, wasFormed = false, drawn = -1, posed = "";
     // Writing a style the element already has still costs a style pass, so remember what was written.
     const written = new Map<HTMLElement, string>();
     const style = (el: HTMLElement, key: "opacity" | "transform" | "maskImage", value: string) => {
@@ -691,9 +693,12 @@ export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onO
       fog.far = camera.position.z + RADIUS * 1.5;
 
       // The brain is seen from its side and sways; formed, the graph drifts round unless something is held.
-      if (!reduced && !drag && hovered === -1 && zoom.target === 1) drift += dt * 0.025 * e;
+      // Paused, both hold where they are, and resume from there.
+      const moving = !reduced && !latest.current.paused;
+      if (moving && !drag && hovered === -1 && zoom.target === 1) drift += dt * 0.025 * e;
       // The sway starts from rest when the scene is shown, which is the pose the loading screen draws.
-      const sway = reduced || shownAt === Infinity ? 0 : Math.sin((t - shownAt) * 0.22) * 0.3;
+      if (moving && shownAt !== Infinity) swayed += dt;
+      const sway = reduced || shownAt === Infinity ? 0 : Math.sin(swayed * 0.22) * 0.3;
       inner.rotation.set(0.1 + pitch, (-Math.PI / 2 + 0.4 + sway) * (1 - e) + drift + yaw, 0);
       outer.rotation.set(reduced ? 0 : leanX.value(t) * (1 - e), reduced ? 0 : leanY.value(t) * (1 - e), 0);
 
@@ -773,7 +778,7 @@ export function GraphCanvas({ graph, interactive, stage, trace, controlsRef, onO
       const onGraph = e > 0.6;
       for (let k = 0; k < pulseCount; k++) {
         if ((pulseOnGraph[k] === 1) !== onGraph) launch(k, onGraph);
-        pulsePhase[k] += dt * pulseSpeed[k];
+        if (!latest.current.paused) pulsePhase[k] += dt * pulseSpeed[k];
         if (pulsePhase[k] >= 1) {
           warmth[pulseTo[k]] = 1; // the point it reaches warms up
           const next = onGraph ? nodes[pulseTo[k]]?.neighbours ?? [] : meshNext[pulseTo[k]];

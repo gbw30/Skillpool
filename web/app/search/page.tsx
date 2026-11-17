@@ -289,6 +289,7 @@ export default function SearchPage() {
               <p className={`whitespace-pre-wrap font-serif text-[1.625rem] leading-[1.3]${phase === "writing" ? " caret" : ""}`}>
                 {answer ? <Answer text={answer} onCite={setCited} onPick={setPicked} /> : <span className="text-muted">Writing</span>}
               </p>
+              <p className="mt-3 text-sm text-muted">Written by AI (Anthropic&rsquo;s Claude) from the cited passages. It can be wrong: check the sources.</p>
             </section>
             <section className="mt-12" aria-label="Candidates">
               <h2 className="label pb-3">Ranked people</h2>

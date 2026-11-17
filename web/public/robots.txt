@@ -1,0 +1,4 @@
+# A private demo behind an access code. Pages also send "noindex"; they are not blocked here, so
+# crawlers can read that. The API is not for crawlers at all.
+User-agent: *
+Disallow: /api/

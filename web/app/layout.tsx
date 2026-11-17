@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Geist_Mono, Hanken_Grotesk } from "next/font/google";
 import Link from "next/link";
 import { Backdrop } from "@/components/backdrop";
+import { MotionToggle } from "@/components/motion-toggle";
 import { SignOut } from "@/components/sign-out";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { uploadsOn } from "@/lib/access";
@@ -18,8 +19,9 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false }, // a private demo
 };
 
-// Runs before first paint so a saved light or system choice never flashes dark. A fixed string.
-const APPLY_THEME = `try{var t=localStorage.getItem("theme");if(t==="light"||t==="system")document.documentElement.dataset.theme=t}catch(e){}`;
+// Runs before first paint so a saved light or system choice never flashes dark, and paused motion
+// never starts. A fixed string.
+const APPLY_THEME = `try{var t=localStorage.getItem("theme");if(t==="light"||t==="system")document.documentElement.dataset.theme=t;if(localStorage.getItem("motion")==="paused")document.documentElement.dataset.motion="paused"}catch(e){}`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
@@ -51,11 +53,27 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <Link href="/" className="font-serif text-sm font-medium tracking-[0.12em] text-ink no-underline max-lg:order-1 max-lg:mr-auto sm:text-xl sm:tracking-[0.3em] lg:pl-[0.3em]">SKILLPOOL</Link>
             <div className="flex items-center justify-end gap-3 text-[0.8125rem] max-lg:order-3 sm:gap-5">
               <SignOut />
+              <MotionToggle />
               <ThemeToggle />
             </div>
           </div>
         </header>
         <main id="main">{children}</main>
+        <footer className="border-t border-line">
+          <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-6 text-sm text-muted sm:px-6">
+            <p>
+              A portfolio demo. Every person, company and document in it is fictional, made by a script; any
+              resemblance to real people is coincidental. Answers are written by AI (Anthropic&rsquo;s Claude) and can
+              be wrong. Not for hiring, staffing or any other decision about real people.
+            </p>
+            <nav aria-label="About this site" className="flex flex-wrap gap-x-5 gap-y-1">
+              <Link href="/privacy">Privacy</Link>
+              <a href="/third-party-notices.txt">Third-party notices</a>
+              <a href="https://github.com/gbw30/Skillpool">Source code</a>
+              <a href="https://github.com/gbw30/Skillpool/security/advisories/new">Report a security issue</a>
+            </nav>
+          </div>
+        </footer>
       </body>
     </html>
   );
