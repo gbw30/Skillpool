@@ -235,8 +235,8 @@ Before it goes on the internet:
   page shows the sample graph.
 - Questions appear in `/search?q=` addresses, so they reach the host's request logs and browser
   history.
-- The privacy page (`/privacy`) names the operator and the providers. Change both if you run
-  your own copy.
+- The privacy page (`/privacy`) names the operator, their contact address and the providers.
+  Change all three if you run your own copy.
 
 ### Using it with real people
 

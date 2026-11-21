@@ -150,8 +150,9 @@ Without the monitor, open the site a minute before a demo to wake it.
    the short answer is written out.
 4. Click **Open source** on a passage. It opens the document in the corpus folder on GitHub.
 5. Open `/upload`. It sends you back to the home page.
-6. In a private window, without the code, open `/privacy`, `/robots.txt` and
-   `/.well-known/security.txt`. Each loads; any other page sends you to the access page.
+6. In a private window, without the code, open `/privacy`, `/robots.txt`,
+   `/.well-known/security.txt` and `/.well-known/gpc.json`. Each loads; any other page sends you
+   to the access page.
 7. In the Claude Console, check the usage for the day: a few searches cost under a cent.
 
 Give recruiters the Vercel address, the access code, and the corpus link
