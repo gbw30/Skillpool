@@ -94,8 +94,8 @@ export default function PrivacyPage() {
         <Part title="Why, and your rights">
           <p>
             These steps are what it takes to run the demo and to protect it from abuse and runaway costs. For visitors in the EU
-            and UK, that is a legitimate interest (GDPR Article 6(1)(f)). The rankings are about fictional people: the site makes
-            no decision about you, automated or otherwise, and builds no profile of you.
+            and UK, that is a legitimate interest (GDPR Article 6(1)(f)). The rankings are about fictional people. Apart from the
+            request limits above, the site makes no automated decision about you and builds no profile of you.
           </p>
           <p>
             You can ask what is held about you, and ask for it to be corrected, deleted or limited, by writing to{" "}
