@@ -557,7 +557,12 @@ Haiku 5.5 constraints that affect the code:
   does the same or the per-IP limit can be bypassed (the daily budget still holds).
 - Notices and standards: `/privacy` (what is kept and who receives questions), a footer that
   says the people are fictional and the answers come from AI, a label under every answer,
-  `/robots.txt`, `/.well-known/security.txt` (RFC 9116) and `/third-party-notices.txt`. These
+  `/robots.txt`, `/.well-known/security.txt` (RFC 9116), `/.well-known/gpc.json` (Global Privacy
+  Control: nothing is sold or shared, so the site honours it for everyone) and
+  `/third-party-notices.txt`. The footer's link to `/privacy` carries `rel="privacy-policy"`. The
+  privacy page covers what GDPR Article 13 asks for (operator and contact, purposes and legal
+  basis, recipients, transfers to the US, retention, rights including objection and complaint, no
+  automated decisions) and CalOPPA's points on changes and Do Not Track. These
   open without the access code. A header control pauses everything that moves by itself
   (WCAG 2.2.2) and is remembered like the theme.
 - TLS: strict certificate verification to Neo4j. The original's fallback to relaxed verification

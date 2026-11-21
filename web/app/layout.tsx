@@ -67,7 +67,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               be wrong. Not for hiring, staffing or any other decision about real people.
             </p>
             <nav aria-label="About this site" className="flex flex-wrap gap-x-5 gap-y-1">
-              <Link href="/privacy">Privacy</Link>
+              <Link href="/privacy" rel="privacy-policy">Privacy</Link>
               <a href="/third-party-notices.txt">Third-party notices</a>
               <a href="https://github.com/gbw30/Skillpool">Source code</a>
               <a href="https://github.com/gbw30/Skillpool/security/advisories/new">Report a security issue</a>
